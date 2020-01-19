@@ -11,7 +11,7 @@ const Banner = () => (
             <div className="content">
                 <p>Traveler, tech enthusiastic, open-source lover, and Developer Advocate by position.</p>
                 <ul className="actions">
-                    <li><a href="https://twitter.com/ChrastinaOndrej" className="button next scrolly">Follow me!</a></li>
+                    <li><a href="https://twitter.com/ChrastinaOndrej" className="button next scrolly"><span className="icon fa-twitter">Follow me!</span></a></li>
                 </ul>
             </div>
         </div>
