@@ -1,4 +1,4 @@
-# Personal portfolio site
+# Personal site
 
 ## Installation
 
