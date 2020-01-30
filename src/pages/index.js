@@ -12,21 +12,22 @@ import Banner from '../components/Banner'
 // import pic06 from '../assets/images/pic06.jpg'
 
 class HomeIndex extends React.Component {
-    render() {
+  render() {
+    return (
+      <Layout>
+        <Helmet
+          title="Ondřej Chrastina - personal site"
+          meta={[
+            {
+              name: 'description',
+              content: "Ondřej Chrastina's personal site",
+            },
+            { name: 'keywords', content: 'personal site, Ondřej Chrastina' },
+          ]}
+        ></Helmet>
 
-        return (
-            <Layout>
-                <Helmet
-                    title="Ondřej Chrastina - personal site"
-                    meta={[
-                        { name: 'description', content: 'Ondřej Chrastina\'s personal site' },
-                        { name: 'keywords', content: 'personal site, Ondřej Chrastina' },
-                    ]}
-                >
-                </Helmet>
-
-                <Banner />
-{/* 
+        <Banner />
+        {/* 
                 <div id="main">
                     <section id="one" className="tiles">
                         <article style={{backgroundImage: `url(${pic01})`}}>
@@ -84,10 +85,9 @@ class HomeIndex extends React.Component {
                         </div>
                     </section>
                 </div> */}
-
-            </Layout>
-        )
-    }
+      </Layout>
+    )
+  }
 }
 
 export default HomeIndex

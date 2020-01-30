@@ -1,15 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: "Ondřej Chrastina",
-    author: "Ondřej Chrastina",
-    description: "Ondřej Chrastina's personal site."
+    title: 'Ondřej Chrastina',
+    author: 'Ondřej Chrastina',
+    description: "Ondřej Chrastina's personal site.",
   },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Ondřej Chtastina\'s personal site.',
+        name: "Ondřej Chtastina's personal site.",
         short_name: 'chrastina',
         start_url: '/',
         background_color: '#242943',
@@ -19,6 +19,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-sass',
-    'gatsby-plugin-offline'
+    'gatsby-plugin-offline',
   ],
 }
