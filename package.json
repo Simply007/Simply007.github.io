@@ -3,18 +3,23 @@
   "description": "Ondřej Chrastina's personal site.",
   "version": "0.0.1",
   "author": "Ondřej Chrastina",
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run format"
+    }
+  },
   "dependencies": {
-    "gatsby": "^2.18.25",
+    "gatsby": "^2.19.10",
     "gatsby-plugin-manifest": "^2.2.37",
     "gatsby-plugin-offline": "^3.0.32",
     "gatsby-plugin-react-helmet": "^3.1.21",
@@ -25,6 +30,7 @@
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "husky": "^4.2.1",
     "prettier": "^1.19.1"
   },
   "repository": {
