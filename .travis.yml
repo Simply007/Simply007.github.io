@@ -1,0 +1,18 @@
+dist: trusty
+language: node_js
+node_js:
+- "stable"
+before_script:
+- npm install
+script:
+- npm run build
+deploy:
+  local-dir: public
+  target-branch: master
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  verbose: true
+  on:
+    branch: source
