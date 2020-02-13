@@ -1,5 +1,7 @@
 # Personal site
 
+Source of the site is stored in the [source branch](/tree/source).
+
 ## Installation
 
 Install required modules by `npm install` command.
