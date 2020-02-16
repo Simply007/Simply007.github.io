@@ -24,10 +24,8 @@ module.exports = {
         deliveryClientConfig: {
           projectId: '8943c689-e357-019c-2f0e-083610ce3e6b',
         },
-        languageCodenames: [
-          'en-US',
-        ],
-        enableLogging : true,
+        languageCodenames: ['en-US'],
+        enableLogging: true,
       },
     },
     'gatsby-plugin-sass',

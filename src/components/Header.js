@@ -4,11 +4,11 @@ import { Link } from 'gatsby'
 import get from 'lodash.get'
 
 const Header = props => {
-  const titleLink = get(props.data,'elements.title_link.linked_items[0]');
-  const menuCaption = get(props.data,'elements.menu_caption.value', 'Menu');
+  const titleLink = get(props.data, 'elements.title_link.linked_items[0]')
+  const menuCaption = get(props.data, 'elements.menu_caption.value', 'Menu')
 
-  const titleText = get(titleLink,'elements.text.value');
-  const titleURL = get(titleLink,'elements.url.value', '/');
+  const titleText = get(titleLink, 'elements.text.value')
+  const titleURL = get(titleLink, 'elements.url.value', '/')
   return (
     <header id="header" className="alt">
       <Link to={titleURL} className="logo">
@@ -23,7 +23,7 @@ const Header = props => {
           onKeyDown={props.onToggleMenu}
         >
           {menuCaption}
-      </span>
+        </span>
       </nav>
     </header>
   )
