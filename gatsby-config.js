@@ -21,11 +21,8 @@ module.exports = {
     {
       resolve: '@kentico/gatsby-source-kontent',
       options: {
-        deliveryClientConfig: {
-          projectId: '8943c689-e357-019c-2f0e-083610ce3e6b',
-        },
+        projectId: '75653ec1-36a2-01e0-0d25-a64799947697',
         languageCodenames: ['en-US'],
-        enableLogging: true,
       },
     },
     'gatsby-plugin-sass',

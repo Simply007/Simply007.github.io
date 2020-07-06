@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import get from 'lodash.get'
 
 const Header = props => {
-  const titleLink = get(props.data, 'elements.title_link.linked_items[0]')
+  const titleLink = get(props.data, 'elements.title_link.value[0]')
   const menuCaption = get(props.data, 'elements.menu_caption.value', 'Menu')
 
   const titleText = get(titleLink, 'elements.text.value')

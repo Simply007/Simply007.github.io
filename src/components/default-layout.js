@@ -43,110 +43,112 @@ class DefaultLayout extends React.Component {
     return (
       <StaticQuery
         query={graphql`
-          {
-            kontentItemLayout(
-              system: { codename: { eq: "default_layout" } }
-              preferred_language: { eq: "en-US" }
-            ) {
-              elements {
-                title {
-                  value
+{
+  kontentItemLayout(system: {codename: {eq: "default_layout"}}, preferred_language: {eq: "en-US"}) {
+    elements {
+      title {
+        value
+      }
+      meta_description {
+        value
+      }
+      keywords {
+        value {
+          ... on kontent_item_keyword {
+            elements {
+              keyword {
+                value
+              }
+            }
+          }
+        }
+      }
+      image {
+        value {
+          url
+          description
+          name
+        }
+      }
+      header {
+        value {
+          ... on kontent_item_header {
+            elements {
+              menu_caption {
+                value
+              }
+              menu {
+                value {
+                  system {
+                    name
+                    codename
+                  }
                 }
-                meta_description {
-                  value
-                }
-                keywords {
-                  linked_items {
-                    ... on KontentItemKeyword {
-                      elements {
-                        keyword {
-                          value
-                        }
+              }
+              title_link {
+                value {
+                  ... on kontent_item_link {
+                    id
+                    elements {
+                      text {
+                        value
+                      }
+                      url {
+                        value
                       }
                     }
                   }
                 }
-                image {
-                  value {
+              }
+              menu {
+                value {
+                  ... on kontent_item_navigation_item {
                     url
-                    description
-                    name
+                    elements {
+                      title {
+                        value
+                      }
+                    }
                   }
                 }
-                header {
-                  linked_items {
-                    ... on KontentItemHeader {
-                      elements {
-                        menu_caption {
-                          value
-                        }
-                        menu {
-                          linked_items {
-                            system {
-                              name
-                              codename
-                            }
-                          }
-                        }
-                        title_link {
-                          linked_items {
-                            ... on KontentItemLink {
-                              id
-                              elements {
-                                text {
-                                  value
-                                }
-                                url {
-                                  value
+              }
+            }
+          }
+        }
+      }
+      footer {
+        value {
+          ... on kontent_item_footer {
+            id
+            elements {
+              footer_text {
+                value
+              }
+              social_media_accounts {
+                value {
+                  ... on kontent_item_social_media_account {
+                    id
+                    elements {
+                      account_handle {
+                        value
+                      }
+                      social_media_type {
+                        value {
+                          ... on kontent_item_social_media_type {
+                            id
+                            elements {
+                              account_icon {
+                                value {
+                                  url
+                                  description
+                                  name
                                 }
                               }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-                footer {
-                  linked_items {
-                    ... on KontentItemFooter {
-                      id
-                      elements {
-                        footer_text {
-                          resolvedData {
-                            html
-                          }
-                        }
-                        social_media_accounts {
-                          linked_items {
-                            ... on KontentItemSocialMediaAccount {
-                              id
-                              elements {
-                                account_handle {
-                                  value
-                                }
-                                social_media_type {
-                                  linked_items {
-                                    ... on KontentItemSocialMediaType {
-                                      id
-                                      elements {
-                                        account_icon {
-                                          value {
-                                            url
-                                            description
-                                            name
-                                          }
-                                        }
-                                        account_icon_code {
-                                          value
-                                        }
-                                        account_pattern {
-                                          value
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
+                              account_icon_code {
+                                value
+                              }
+                              account_pattern {
+                                value
                               }
                             }
                           }
@@ -158,17 +160,22 @@ class DefaultLayout extends React.Component {
               }
             }
           }
+        }
+      }
+    }
+  }
+}
         `}
         render={data => {
           const headerData = get(
             data,
-            'kontentItemLayout.elements.header.linked_items[0]'
+            'kontentItemLayout.elements.header.value[0]'
           )
           return (
             <div
               className={`body ${this.state.loading} ${
                 this.state.isMenuVisible ? 'is-menu-visible' : ''
-              }`}
+                }`}
             >
               <div id="wrapper">
                 <Header
@@ -178,7 +185,7 @@ class DefaultLayout extends React.Component {
                 {children}
                 <Footer />
               </div>
-              <Menu onToggleMenu={this.handleToggleMenu} />
+              <Menu onToggleMenu={this.handleToggleMenu} data={get(data, 'kontentItemLayout.elements.header.value[0].elements.menu.value')} />
             </div>
           )
         }}
