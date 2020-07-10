@@ -1,5 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
+import Helmet from 'react-helmet'
 
 import '../assets/scss/main.scss'
 import Header from './Header'
@@ -188,13 +189,23 @@ class DefaultLayout extends React.Component {
             <div
               className={`body ${this.state.loading} ${
                 this.state.isMenuVisible ? 'is-menu-visible' : ''
-              }`}
+                }`}
             >
               <div id="wrapper">
                 <Header
                   onToggleMenu={this.handleToggleMenu}
                   data={headerData}
                 />
+                <Helmet
+                  title="Ondřej Chrastina"
+                  meta={[
+                    {
+                      name: 'description',
+                      content: "Ondřej Chrastina's personal site",
+                    },
+                    { name: 'keywords', content: 'personal site, Ondřej Chrastina' },
+                  ]}
+                ></Helmet>
                 {children}
                 {/* <Contact /> */}
                 <Footer data={footerData} />

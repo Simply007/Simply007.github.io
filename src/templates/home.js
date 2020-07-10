@@ -1,10 +1,11 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
+import Banner from '../components/Banner'
 
 const Home = ({ data }) => (
   <Layout>
-    <pre>{JSON.stringify(data, null, 4)}</pre>
+    <Banner data={data.kontentItemHomePage} />
   </Layout>
 )
 
