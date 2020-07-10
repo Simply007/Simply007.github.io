@@ -1,6 +1,7 @@
 # Personal site
 
-Source of the site is stored in the [source branch](/tree/source).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e7dcc33b-8c8b-46e0-bd0f-8b85daa859cc/deploy-status)](https://app.netlify.com/sites/chrastina/deploys)
+
 
 ## Installation
 
