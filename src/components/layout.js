@@ -1,12 +1,16 @@
 import React from 'react'
+import { StaticQuery, graphql } from 'gatsby'
+import Helmet from 'react-helmet'
 
 import '../assets/scss/main.scss'
 import Header from './Header'
 import Menu from './Menu'
-// import Contact from './Contact'
 import Footer from './Footer'
+import get from 'lodash.get'
 
-class Layout extends React.Component {
+//TODO: Footer
+
+class DefaultLayout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -38,21 +42,190 @@ class Layout extends React.Component {
     const { children } = this.props
 
     return (
-      <div
-        className={`body ${this.state.loading} ${
-          this.state.isMenuVisible ? 'is-menu-visible' : ''
-        }`}
-      >
-        <div id="wrapper">
-          <Header onToggleMenu={this.handleToggleMenu} />
-          {children}
-          {/* <Contact /> */}
-          <Footer />
-        </div>
-        <Menu onToggleMenu={this.handleToggleMenu} />
-      </div>
+      <StaticQuery
+        query={graphql`
+          {
+            kontentItemLayout(
+              system: { codename: { eq: "default_layout" } }
+              preferred_language: { eq: "en-US" }
+            ) {
+              elements {
+                title {
+                  value
+                }
+                meta_description {
+                  value
+                }
+                keywords {
+                  value {
+                    ... on kontent_item_keyword {
+                      elements {
+                        keyword {
+                          value
+                        }
+                      }
+                    }
+                  }
+                }
+                image {
+                  value {
+                    url
+                    description
+                    name
+                  }
+                }
+                header {
+                  value {
+                    ... on kontent_item_header {
+                      elements {
+                        menu_caption {
+                          value
+                        }
+                        menu {
+                          value {
+                            system {
+                              name
+                              codename
+                            }
+                          }
+                        }
+                        title_link {
+                          value {
+                            ... on kontent_item_link {
+                              id
+                              elements {
+                                text {
+                                  value
+                                }
+                                url {
+                                  value
+                                }
+                              }
+                            }
+                          }
+                        }
+                        menu {
+                          value {
+                            ... on kontent_item_navigation_item {
+                              url
+                              elements {
+                                title {
+                                  value
+                                }
+                                external_url {
+                                  value
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                footer {
+                  value {
+                    ... on kontent_item_footer {
+                      id
+                      elements {
+                        footer_text {
+                          value
+                        }
+                        social_media_accounts {
+                          value {
+                            ... on kontent_item_social_media_account {
+                              id
+                              elements {
+                                account_handle {
+                                  value
+                                }
+                                social_media_type {
+                                  value {
+                                    ... on kontent_item_social_media_type {
+                                      id
+                                      elements {
+                                        label {
+                                          value
+                                        }
+                                        account_icon {
+                                          value {
+                                            url
+                                            description
+                                            name
+                                          }
+                                        }
+                                        account_icon_code {
+                                          value
+                                        }
+                                        account_pattern {
+                                          value
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `}
+        render={data => {
+          const headerData = get(
+            data,
+            'kontentItemLayout.elements.header.value[0]'
+          )
+          const footerData = get(
+            data,
+            'kontentItemLayout.elements.footer.value[0]'
+          )
+          return (
+            <div
+              className={`body ${this.state.loading} ${
+                this.state.isMenuVisible ? 'is-menu-visible' : ''
+              }`}
+            >
+              <div id="wrapper">
+                <Header
+                  onToggleMenu={this.handleToggleMenu}
+                  data={headerData}
+                />
+                <Helmet
+                  title="Ondřej Chrastina"
+                  meta={[
+                    {
+                      name: 'description',
+                      content: "Ondřej Chrastina's personal site",
+                    },
+                    {
+                      name: 'keywords',
+                      content: 'personal site, Ondřej Chrastina',
+                    },
+                  ]}
+                ></Helmet>
+                {children}
+                {/* <Contact /> */}
+                <Footer data={footerData} />
+              </div>
+              <Menu
+                onToggleMenu={this.handleToggleMenu}
+                data={get(
+                  data,
+                  'kontentItemLayout.elements.header.value[0].elements.menu.value'
+                )}
+              />
+            </div>
+          )
+        }}
+      ></StaticQuery>
     )
   }
 }
 
-export default Layout
+export default DefaultLayout

@@ -1,11 +1,11 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import Layout from '../components/layout'
+import Layout from '../../components/layout'
 
-import pic03 from '../assets/images/pic03.jpg'
-import pic08 from '../assets/images/pic08.jpg'
-import pic09 from '../assets/images/pic09.jpg'
-import pic10 from '../assets/images/pic10.jpg'
+import pic03 from '../../assets/images/pic03.jpg'
+import pic08 from '../../assets/images/pic08.jpg'
+import pic09 from '../../assets/images/pic09.jpg'
+import pic10 from '../../assets/images/pic10.jpg'
 
 const Elements = props => (
   <Layout>
