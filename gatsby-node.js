@@ -40,7 +40,7 @@ exports.createSchemaCustomization = async api => {
             parent = allNavigationItems.find(
               item =>
                 item.preferred_language ===
-                currentContextItem.preferred_language &&
+                  currentContextItem.preferred_language &&
                 item.elements['sub_items'].value.includes(
                   currentContextItem.system.codename
                 )
@@ -63,42 +63,44 @@ exports.createSchemaCustomization = async api => {
   createTypes(extendedType)
 }
 
-
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage } = actions
 
   const { data } = await graphql(`
-  query localPagesQuery {
-    allKontentItemNavigationItem(filter: {elements: {external_url: {value: {eq: ""}}}}) {
-      nodes {
-        url
-        elements {
-          content_page {
-            value {
-              __typename
-              preferred_language
-              system {
-                codename
+    query localPagesQuery {
+      allKontentItemNavigationItem(
+        filter: { elements: { external_url: { value: { eq: "" } } } }
+      ) {
+        nodes {
+          url
+          elements {
+            content_page {
+              value {
+                __typename
+                preferred_language
+                system {
+                  codename
+                }
               }
             }
           }
         }
       }
     }
-  }  
   `)
 
-  data.allKontentItemNavigationItem.nodes.forEach(page =>{
+  data.allKontentItemNavigationItem.nodes.forEach(page => {
     const contentPage = page.elements.content_page.value[0]
-    contentPageType = contentPage.__typename;
-    const templatePath = contentPageType === "kontent_item_home_page" 
-      ? "./src/templates/home.js"
-      : contentPageType === "kontent_item_sections_page" 
-        ? "./src/templates/sections-page.js"
-        : null;
+    contentPageType = contentPage.__typename
+    const templatePath =
+      contentPageType === 'kontent_item_home_page'
+        ? './src/templates/home.js'
+        : contentPageType === 'kontent_item_sections_page'
+        ? './src/templates/sections-page.js'
+        : null
 
-    if(!templatePath) {
-      return;
+    if (!templatePath) {
+      return
     }
 
     createPage({
@@ -106,9 +108,8 @@ exports.createPages = async ({ graphql, actions }) => {
       component: require.resolve(templatePath),
       context: {
         language: contentPage.preferred_language,
-        codename: contentPage.system.codename
-      }
+        codename: contentPage.system.codename,
+      },
     })
-  });
-
+  })
 }
