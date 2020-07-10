@@ -8,7 +8,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build && npm run copy",
+    "copy": "cpx ./src/CNAME public",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -32,6 +33,7 @@
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "cpx": "^1.5.0",
     "husky": "^4.2.1",
     "prettier": "^1.19.1"
   },
