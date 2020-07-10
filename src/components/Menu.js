@@ -3,27 +3,37 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 const Menu = props => {
-  let menuItems = props.data && props.data.map(menuItem => (
-    <li key={menuItem.url}>
-      <Link onClick={props.onToggleMenu} to={menuItem.url}>
-        {menuItem.elements.title.value}
-      </Link>
-    </li>
-  ));
+  let menuItems =
+    props.data &&
+    props.data.map(menuItem => (
+      <li key={menuItem.url}>
+        <Link
+          onClick={props.onToggleMenu}
+          to={menuItem.elements.external_url.value || menuItem.url}
+          className={
+            menuItem.elements.external_url.value ? 'button special' : ''
+          }
+        >
+          {menuItem.elements.title.value}
+        </Link>
+      </li>
+    ))
 
   if (!props.data) {
-    menuItems = <>
-      <li>
-        <Link onClick={props.onToggleMenu} to="/">
-          Home
+    menuItems = (
+      <>
+        <li>
+          <Link onClick={props.onToggleMenu} to="/">
+            Home
           </Link>
-      </li>
-      <li>
-        <Link onClick={props.onToggleMenu} to="/pwas">
-          PWA series
+        </li>
+        <li>
+          <Link onClick={props.onToggleMenu} to="/pwas">
+            PWA series
           </Link>
-      </li>
-    </>
+        </li>
+      </>
+    )
   }
 
   return (
@@ -34,13 +44,6 @@ const Menu = props => {
           {/* <li><Link onClick={props.onToggleMenu} to="/generic">Generic</Link></li>
                 <li><Link onClick={props.onToggleMenu} to="/elements">Elements</Link></li> */}
         </ul>
-        <ul className="actions vertical">
-          <li>
-            <a href="https://github.com/Simply007" className="button special fit">
-              GitHub
-          </a>
-          </li>
-        </ul>
       </div>
       <span
         role="button"
@@ -50,7 +53,7 @@ const Menu = props => {
         onKeyDown={props.onToggleMenu}
       >
         Close
-    </span>
+      </span>
     </nav>
   )
 }
