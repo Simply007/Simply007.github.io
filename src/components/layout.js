@@ -189,7 +189,7 @@ class DefaultLayout extends React.Component {
             <div
               className={`body ${this.state.loading} ${
                 this.state.isMenuVisible ? 'is-menu-visible' : ''
-                }`}
+              }`}
             >
               <div id="wrapper">
                 <Header
@@ -203,7 +203,10 @@ class DefaultLayout extends React.Component {
                       name: 'description',
                       content: "Ondřej Chrastina's personal site",
                     },
-                    { name: 'keywords', content: 'personal site, Ondřej Chrastina' },
+                    {
+                      name: 'keywords',
+                      content: 'personal site, Ondřej Chrastina',
+                    },
                   ]}
                 ></Helmet>
                 {children}

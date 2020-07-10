@@ -6,8 +6,7 @@ const BannerLanding = props => (
       <header className="major">
         <h1>{props.title}</h1>
       </header>
-      <div className="content">
-        <p>{props.content}</p>
+      <div className="content" dangerouslySetInnerHTML={{__html: props.content}}>
       </div>
     </div>
   </section>
