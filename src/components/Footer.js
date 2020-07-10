@@ -1,55 +1,34 @@
 import React from 'react'
 
-const Footer = props => (
-  <footer id="footer">
-    <div className="inner">
-      <ul className="icons">
-        <li>
-          <a
-            href="https://twitter.com/ChrastinaOndrej"
-            className="icon alt fa-twitter"
-          >
-            <span className="label">Twitter</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.facebook.com/0ndrejek"
-            className="icon alt fa-facebook"
-          >
-            <span className="label">Facebook</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.instagram.com/0.ndrej"
-            className="icon alt fa-instagram"
-          >
-            <span className="label">Instagram</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/Simply007" className="icon alt fa-github">
-            <span className="label">GitHub</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.linkedin.com/in/ondrejchrastina"
-            className="icon alt fa-linkedin"
-          >
-            <span className="label">LinkedIn</span>
-          </a>
-        </li>
-      </ul>
-      <ul className="copyright">
-        <li>&copy; Ondřej Chrastina 2020</li>
-        <li>
-          Design: <a href="https://html5up.net">HTML5 UP</a>
-        </li>
-      </ul>
-    </div>
-  </footer>
-)
+const Footer = props => {
+
+  const icons = props.data.elements.social_media_accounts.value.map(social_media_account => {
+    const handle = social_media_account.elements.account_handle.value;
+    const mediaType = social_media_account.elements.social_media_type.value[0];
+    const url = mediaType.elements.account_pattern.value.replace("%s", handle);
+    return (
+      <li key={url}>
+        <a
+          href={url}
+          className={`icon alt ${mediaType.elements.account_icon_code.value}`}>
+          <span className="label">{mediaType.elements.label.value}</span>
+        </a>
+      </li >
+    );
+  })
+
+  return (
+    <footer id="footer">
+      <div className="inner">
+        <ul className="icons">
+          {icons}
+        </ul>
+        <ul className="copyright" dangerouslySetInnerHTML={{__html: props.data.elements.footer_text.value}}>
+          
+        </ul>
+      </div>
+    </footer>
+  );
+}
 
 export default Footer
