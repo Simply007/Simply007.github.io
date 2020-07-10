@@ -1,19 +1,19 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
-
+import React from 'react'
+import { graphql } from 'gatsby'
+import Layout from '../components/layout'
 
 const SectionsPage = ({ data }) => (
   <Layout>
-    <pre>
-      {JSON.stringify(data, null, 4)}
-    </pre>
+    <pre>{JSON.stringify(data, null, 4)}</pre>
   </Layout>
-);
+)
 
 export const query = graphql`
   query SectionsPageQuery($language: String!, $codename: String!) {
-    kontentItemSectionsPage(preferred_language: {eq: $language}, system: {codename: {eq: $codename}}) {
+    kontentItemSectionsPage(
+      preferred_language: { eq: $language }
+      system: { codename: { eq: $codename } }
+    ) {
       elements {
         header {
           value

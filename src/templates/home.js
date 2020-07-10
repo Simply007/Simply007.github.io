@@ -49,8 +49,4 @@ export const query = graphql`
   }
 `
 
-<<<<<<< HEAD
-export default Home
-=======
 export default Home;
->>>>>>> 8f7fb3703459556ecfbb5de5b5b16011ea85f58b

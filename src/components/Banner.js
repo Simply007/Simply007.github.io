@@ -1,7 +1,7 @@
 import React from 'react'
 import profilePhoto from '../assets/images/website-icon.png'
 
-const Banner = (props) => (
+const Banner = props => (
   <section id="banner" className="major">
     <div className="inner">
       <img src={profilePhoto} alt="Ondřej Chrastina's profile." width="150px" />
