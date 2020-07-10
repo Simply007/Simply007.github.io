@@ -52,12 +52,12 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
               <h3>
                 How to create a progressive web app featuring Angular and
                 headless CMS
-                </h3>
+              </h3>
             </header>
             <p>
               Have you ever wondered how a headless Content Management System
               fits in with Progressive Web Apps?
-              </p>
+            </p>
             <ul className="actions">
               <li>
                 <a
@@ -65,7 +65,7 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
                   className="button"
                 >
                   Learn more
-                  </a>
+                </a>
               </li>
             </ul>
           </div>
@@ -84,13 +84,13 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
               <h3>
                 How to tune up your Progressive Web App to get a perfect audit
                 score
-                </h3>
+              </h3>
             </header>
             <p>
-              Progressive Web Apps (PWAs) quickly became the hottest
-              development platform during the last year. Let’s take a look at
-              what you need to do to adhere to the PWA standards.
-              </p>
+              Progressive Web Apps (PWAs) quickly became the hottest development
+              platform during the last year. Let’s take a look at what you need
+              to do to adhere to the PWA standards.
+            </p>
             <ul className="actions">
               <li>
                 <a
@@ -98,7 +98,7 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
                   className="button"
                 >
                   Learn more
-                  </a>
+                </a>
               </li>
             </ul>
           </div>
@@ -117,13 +117,13 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
               <h3>
                 How to make sure your Progressive Web App keeps its Lighthouse
                 audit
-                </h3>
+              </h3>
             </header>
             <p>
               The hint how to check the PWA compliance automatically by
               embedding the Lighthouse PWA audit into your continuous
               integration pipeline.
-              </p>
+            </p>
             <ul className="actions">
               <li>
                 <a
@@ -131,7 +131,7 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
                   className="button"
                 >
                   Learn more
-                  </a>
+                </a>
               </li>
             </ul>
           </div>
