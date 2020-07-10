@@ -40,7 +40,11 @@ exports.createSchemaCustomization = async api => {
             parent = allNavigationItems.find(
               item =>
                 item.preferred_language ===
+<<<<<<< HEAD
                   currentContextItem.preferred_language &&
+=======
+                currentContextItem.preferred_language &&
+>>>>>>> 8f7fb3703459556ecfbb5de5b5b16011ea85f58b
                 item.elements['sub_items'].value.includes(
                   currentContextItem.system.codename
                 )
@@ -63,6 +67,7 @@ exports.createSchemaCustomization = async api => {
   createTypes(extendedType)
 }
 
+<<<<<<< HEAD
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
@@ -81,12 +86,31 @@ exports.createPages = async ({ graphql, actions }) => {
                 system {
                   codename
                 }
+=======
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+
+  const { data } = await graphql(`
+  query localPagesQuery {
+    allKontentItemNavigationItem(filter: {elements: {external_url: {value: {eq: ""}}}}) {
+      nodes {
+        url
+        elements {
+          content_page {
+            value {
+              __typename
+              preferred_language
+              system {
+                codename
+>>>>>>> 8f7fb3703459556ecfbb5de5b5b16011ea85f58b
               }
             }
           }
         }
       }
     }
+<<<<<<< HEAD
   `)
 
   data.allKontentItemNavigationItem.nodes.forEach(page => {
@@ -113,3 +137,32 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
+=======
+  }  
+  `)
+
+  data.allKontentItemNavigationItem.nodes.forEach(page =>{
+    const contentPage = page.elements.content_page.value[0]
+    contentPageType = contentPage.__typename;
+    const templatePath = contentPageType === "kontent_item_home_page" 
+      ? "./src/templates/home.js"
+      : contentPageType === "kontent_item_sections_page" 
+        ? "./src/templates/sections-page.js"
+        : null;
+
+    if(!templatePath) {
+      return;
+    }
+
+    createPage({
+      path: page.url,
+      component: require.resolve(templatePath),
+      context: {
+        language: contentPage.preferred_language,
+        codename: contentPage.system.codename
+      }
+    })
+  });
+
+}
+>>>>>>> 8f7fb3703459556ecfbb5de5b5b16011ea85f58b
