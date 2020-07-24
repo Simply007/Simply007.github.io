@@ -30,5 +30,12 @@ module.exports = {
     },
     'gatsby-plugin-sass',
     'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-173472499-1',
+        exclude: ["/style-guide/**"],
+      }
+    }
   ],
 }

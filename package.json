@@ -23,6 +23,7 @@
     "@kentico/gatsby-kontent-components": "^6.0.0",
     "@kentico/gatsby-source-kontent": "^6.0.1",
     "gatsby": "^2.23.21",
+    "gatsby-plugin-google-analytics": "^2.3.13",
     "gatsby-plugin-manifest": "^2.2.37",
     "gatsby-plugin-offline": "^3.0.32",
     "gatsby-plugin-react-helmet": "^3.1.21",
