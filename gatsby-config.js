@@ -1,9 +1,4 @@
 module.exports = {
-  siteMetadata: {
-    title: 'Ondřej Chrastina',
-    author: 'Ondřej Chrastina',
-    description: "Ondřej Chrastina's personal site.",
-  },
   plugins: [
     'gatsby-plugin-react-helmet',
     {

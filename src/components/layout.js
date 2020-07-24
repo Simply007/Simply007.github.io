@@ -56,6 +56,9 @@ class DefaultLayout extends React.Component {
                 meta_description {
                   value
                 }
+                site_url {
+                  value
+                }
                 keywords {
                   value {
                     ... on kontent_item_keyword {
@@ -72,6 +75,8 @@ class DefaultLayout extends React.Component {
                     url
                     description
                     name
+                    width
+                    height
                   }
                 }
                 header {
@@ -185,11 +190,17 @@ class DefaultLayout extends React.Component {
             data,
             'kontentItemLayout.elements.footer.value[0]'
           )
+
+          const otherData = get(
+            data,
+            'kontentItemLayout.elements'
+          )
+
           return (
             <div
               className={`body ${this.state.loading} ${
                 this.state.isMenuVisible ? 'is-menu-visible' : ''
-              }`}
+                }`}
             >
               <div id="wrapper">
                 <Header
@@ -197,16 +208,27 @@ class DefaultLayout extends React.Component {
                   data={headerData}
                 />
                 <Helmet
-                  title="Ondřej Chrastina"
+                  title={otherData.title.value}
                   meta={[
+                    { property: 'og:title', content: otherData.title.value },
                     {
                       name: 'description',
-                      content: "Ondřej Chrastina's personal site",
+                      content: otherData.meta_description.value,
                     },
                     {
                       name: 'keywords',
-                      content: 'personal site, Ondřej Chrastina',
+                      content: otherData.keywords.value.map(keyword => keyword.elements.keyword.value).join(","),
                     },
+                    { property: 'og:type', content: 'website' },
+                    { property: 'og:url', content: otherData.site_url.value },
+                    { property: 'og:description', content: otherData.meta_description.value },
+                    { property: 'og:image', content: otherData.image.value[0].url },
+                    { property: 'og:image:width', content: otherData.image.value[0].width },
+                    { property: 'og:image:height', content: otherData.image.value[0].height },
+                    { name: 'twitter:card', content: 'summary_large_image' },
+                    { name: 'twitter:title', content: otherData.title.value },
+                    { name: 'twitter:description', content: otherData.meta_description.value },
+                    { name: 'twitter:image', content: otherData.image.value[0].url },
                   ]}
                 ></Helmet>
                 {children}
