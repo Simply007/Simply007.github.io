@@ -7,6 +7,7 @@ const Menu = props => {
     props.data &&
     props.data.map(menuItem => (
       <li key={menuItem.url}>
+        {/* TODO - do not use Link for external URLs */}
         <Link
           onClick={props.onToggleMenu}
           to={menuItem.elements.external_url.value || menuItem.url}
