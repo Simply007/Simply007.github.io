@@ -40,7 +40,7 @@ exports.createSchemaCustomization = async api => {
             parent = allNavigationItems.find(
               item =>
                 item.preferred_language ===
-                currentContextItem.preferred_language &&
+                  currentContextItem.preferred_language &&
                 item.elements['sub_items'].value.includes(
                   currentContextItem.system.codename
                 )
@@ -67,22 +67,25 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const { data } = await graphql(`
-  query localPagesQuery {
-    allKontentItemNavigationItem(filter: {elements: {external_url: {value: {eq: ""}}}}) {
-      nodes {
-        url
-        elements {
-          content_page {
-            value {
-              __typename
-              preferred_language
-              system {
-                codename
-              }
-              ... on kontent_item_listing_page {
-                elements {
-                  list_types {
-                    value
+    query localPagesQuery {
+      allKontentItemNavigationItem(
+        filter: { elements: { external_url: { value: { eq: "" } } } }
+      ) {
+        nodes {
+          url
+          elements {
+            content_page {
+              value {
+                __typename
+                preferred_language
+                system {
+                  codename
+                }
+                ... on kontent_item_listing_page {
+                  elements {
+                    list_types {
+                      value
+                    }
                   }
                 }
               }
@@ -91,7 +94,6 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  }
   `)
 
   data.allKontentItemNavigationItem.nodes.forEach(page => {
@@ -101,23 +103,22 @@ exports.createPages = async ({ graphql, actions }) => {
       contentPageType === 'kontent_item_home_page'
         ? './src/templates/home.js'
         : contentPageType === 'kontent_item_sections_page'
-          ? './src/templates/sections-page.js'
-          : contentPageType === 'kontent_item_listing_page'
-            ? './src/templates/listing-page.js'
-            : null;
+        ? './src/templates/sections-page.js'
+        : contentPageType === 'kontent_item_listing_page'
+        ? './src/templates/listing-page.js'
+        : null
 
     if (!templatePath) {
       return
     }
 
-    const listTypes = [];
+    const listTypes = []
     if (contentPage.elements && contentPage.elements.list_types) {
-      JSON
-        .parse(contentPage.elements.list_types.value)
+      JSON.parse(contentPage.elements.list_types.value)
         .map(type => type.codename)
         .forEach(codename => {
           listTypes.push(codename)
-        });
+        })
     }
 
     createPage({
@@ -126,11 +127,10 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         language: contentPage.preferred_language,
         codename: contentPage.system.codename,
-        listTypes
+        listTypes,
       },
     })
-  });
-
+  })
 
   const { data: journalItems } = await graphql(`
     query JournalItemQuery {
@@ -148,12 +148,12 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `);
+  `)
 
   journalItems.allKontentItemJournalItem.nodes.forEach(journalItem =>
     createPage({
       path: `/journal/${journalItem.elements.url_slug.value}`,
-      component: require.resolve("./src/templates/journal-item.js"),
+      component: require.resolve('./src/templates/journal-item.js'),
       context: {
         language: journalItem.preferred_language,
         codename: journalItem.system.codename,
