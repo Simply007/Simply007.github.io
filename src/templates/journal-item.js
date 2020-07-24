@@ -23,9 +23,9 @@ const JournalItem = ({ data: { kontentItemJournalItem } }) => (
                 case 'kontent_item_code_snippet':
                   return (
                     <div className="box">
-                      <pre>
+                      <code>
                         {JSON.parse(linkedItem.elements.code.value).code}
-                      </pre>
+                      </code>
                     </div>
                   )
                 default:
