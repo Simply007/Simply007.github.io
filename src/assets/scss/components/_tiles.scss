@@ -29,8 +29,6 @@
 			background-repeat: no-repeat;
 			background-size: cover;
 			cursor: default;
-			height: 40vh;
-			max-height: 40em;
 			min-height: 23em;
 			overflow: hidden;
 			position: relative;
@@ -43,6 +41,11 @@
 			header {
 				position: relative;
 				z-index: 3;
+
+				.actions {
+					padding-bottom: 0;
+					margin-bottom: 0;
+				}
 			}
 
 			h3 {
@@ -147,8 +150,6 @@
 		@include breakpoint(large) {
 			article {
 				@include padding(4em, 3em);
-				height: 30vh;
-				max-height: 30em;
 				min-height: 20em;
 			}
 		}
@@ -162,8 +163,6 @@
 		@include breakpoint(small) {
 			article {
 				@include padding(3em, 1.5em);
-				height: 16em;
-				max-height: none;
 				min-height: 0;
 
 				h3 {
@@ -176,7 +175,6 @@
 			display: block;
 
 			article {
-				height: 20em;
 				width: 100% !important;
 			}
 		}
