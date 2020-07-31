@@ -34,6 +34,7 @@ module.exports = {
         languageCodenames: process.env.KONTENT_LANGUAGE_CODENAMES.split(
           ','
         ).map(lang => lang.trim()),
+        includeTaxonomies: true, // opt-out by default
       },
     },
     'gatsby-plugin-sass',

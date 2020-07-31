@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 
 const ListingPage = ({
-  data: { kontentItemListingPage: pageData, allKontentItem: listingData },
+  data: { kontentItemListingPage: pageData, allKontentItem: listingData, gotchaCategories },
 }) => {
   const gotchas = listingData.nodes.filter(
     node =>
@@ -30,6 +30,11 @@ const ListingPage = ({
     </article>
   ))
 
+  const categories = gotchaCategories.terms.map(gotchaCategory => (
+    <li className="button">{gotchaCategory.name}</li>
+  ));
+  categories.unshift(<li className="button special">ALL</li>);
+
   return (
     <Layout>
       <BannerLanding
@@ -40,6 +45,11 @@ const ListingPage = ({
         <div class="inner">
           <header class="major">
             <h2>My Gotchas</h2>
+            {categories.length && (
+              <ul className="categories">
+                {categories}
+              </ul>
+            )}
           </header>
         </div>
         <section className="tiles">{journalOverview}</section>
@@ -90,6 +100,12 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    gotchaCategories : kontentTaxonomy(system: {codename: {eq: "gotcha_category"}}) {
+      terms {
+        name
+        codename
       }
     }
   }
