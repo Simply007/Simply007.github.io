@@ -1,4 +1,7 @@
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://ondrej.chrastina.tech`,
+  },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
@@ -32,5 +35,15 @@ module.exports = {
         exclude: ['/style-guide/**'],
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [
+          '/style-guide',
+          '/style-guide/*'
+        ],
+        
+      }
+    }
   ],
 }

@@ -28,6 +28,7 @@
     "gatsby-plugin-offline": "^3.0.32",
     "gatsby-plugin-react-helmet": "^3.1.21",
     "gatsby-plugin-sass": "^2.1.27",
+    "gatsby-plugin-sitemap": "^2.4.11",
     "lodash.get": "^4.4.2",
     "node-sass": "^4.14.1",
     "react": "^16.12.0",
