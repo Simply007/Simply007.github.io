@@ -4,19 +4,19 @@ import { RichTextElement } from '@kentico/gatsby-kontent-components'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 
-const JournalItem = ({ data: { kontentItemJournalItem } }) => (
+const JournalItem = ({ data: { kontentItemGotcha } }) => (
   <Layout>
     <BannerLanding
-      title={kontentItemJournalItem.elements.title.value}
-      content={kontentItemJournalItem.elements.summary.value}
+      title={kontentItemGotcha.elements.title.value}
+      content={kontentItemGotcha.elements.summary.value}
     />
     <div id="main" className="alt">
       <section>
         <div className="inner">
           <RichTextElement
-            value={kontentItemJournalItem.elements.content.value}
+            value={kontentItemGotcha.elements.content.value}
             linkedItems={
-              kontentItemJournalItem.elements.content.modular_content
+              kontentItemGotcha.elements.content.modular_content
             }
             resolveLinkedItem={linkedItem => {
               switch (linkedItem.__typename) {
@@ -40,11 +40,11 @@ const JournalItem = ({ data: { kontentItemJournalItem } }) => (
 )
 
 export const query = graphql`
-  query JournalItemQuery(
+  query GotchaQuery(
     $preferred_language: StringQueryOperatorInput = {}
     $codename: String = ""
   ) {
-    kontentItemJournalItem(
+    kontentItemGotcha(
       preferred_language: $preferred_language
       system: { codename: { eq: $codename } }
     ) {

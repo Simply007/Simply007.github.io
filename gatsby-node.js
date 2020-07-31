@@ -133,8 +133,8 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   const { data: journalItems } = await graphql(`
-    query JournalItemQuery {
-      allKontentItemJournalItem {
+    query GotchaQuery {
+      allKontentItemGotcha {
         nodes {
           elements {
             url_slug {
@@ -150,7 +150,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  journalItems.allKontentItemJournalItem.nodes.forEach(journalItem =>
+  journalItems.allKontentItemGotcha.nodes.forEach(journalItem =>
     createPage({
       path: `/journal/${journalItem.elements.url_slug.value}`,
       component: require.resolve('./src/templates/journal-item.js'),

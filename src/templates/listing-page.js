@@ -6,15 +6,15 @@ import BannerLanding from '../components/BannerLanding'
 const ListingPage = ({
   data: { kontentItemListingPage: pageData, allKontentItem: listingData },
 }) => {
-  const journalItems = listingData.nodes.filter(
+  const gotchas = listingData.nodes.filter(
     node =>
-      node.__typename === 'kontent_item_journal_item' &&
+      node.__typename === 'kontent_item_gotcha' &&
       node.elements.channel_purpose.value
         .map(i => i.codename)
         .includes('website')
   )
 
-  const journalOverview = journalItems.map(item => (
+  const journalOverview = gotchas.map(item => (
     <article key={item.elements.url_slug.value}>
       <header class="major">
         <h3>{item.elements.title.value}</h3>
@@ -72,7 +72,7 @@ export const query = graphql`
     }
     allKontentItem(filter: { system: { type: { in: $listTypes } } }) {
       nodes {
-        ... on kontent_item_journal_item {
+        ... on kontent_item_gotcha {
           elements {
             title {
               value
