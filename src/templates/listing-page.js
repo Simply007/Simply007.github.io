@@ -9,7 +9,7 @@ const ListingPage = ({
   const journalItems = listingData.nodes.filter(
     node =>
       node.__typename === 'kontent_item_journal_item' &&
-      node.elements.ready_for_preview_on.value
+      node.elements.channel_purpose.value
         .map(i => i.codename)
         .includes('website')
   )
@@ -83,7 +83,7 @@ export const query = graphql`
             summary {
               value
             }
-            ready_for_preview_on {
+            channel_purpose {
               value {
                 codename
               }
