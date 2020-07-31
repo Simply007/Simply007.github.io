@@ -14,7 +14,8 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
       <section>
         <div className="inner">
           <RichTextElement
-            value={kontentItemGotcha.elements.content.value} linkedItems={kontentItemGotcha.elements.content.modular_content}
+            value={kontentItemGotcha.elements.content.value}
+            linkedItems={kontentItemGotcha.elements.content.modular_content}
             resolveLinkedItem={linkedItem => {
               switch (linkedItem.__typename) {
                 case 'kontent_item_code_snippet':
