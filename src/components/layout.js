@@ -247,6 +247,9 @@ class DefaultLayout extends React.Component {
                       content: otherData.image.value[0].url,
                     },
                   ]}
+                  htmlAttributes = {{
+                    lang: 'en'
+                  }}
                 ></Helmet>
                 {children}
                 {/* <Contact /> */}
