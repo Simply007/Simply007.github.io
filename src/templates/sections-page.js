@@ -13,7 +13,10 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
         >
           <img
             src={section.elements.image.value[0].url}
-            alt={section.elements.image.value[0].description || section.elements.image.value[0].name}
+            alt={
+              section.elements.image.value[0].description ||
+              section.elements.image.value[0].name
+            }
           />
         </a>
       ) : null

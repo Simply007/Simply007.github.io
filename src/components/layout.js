@@ -247,8 +247,8 @@ class DefaultLayout extends React.Component {
                       content: otherData.image.value[0].url,
                     },
                   ]}
-                  htmlAttributes = {{
-                    lang: 'en'
+                  htmlAttributes={{
+                    lang: 'en',
                   }}
                 ></Helmet>
                 {children}
