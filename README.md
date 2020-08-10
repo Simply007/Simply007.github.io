@@ -10,6 +10,9 @@ This is my personal website build using [Gatsby](https://gatsbyjs.org) and [Kent
 
 Install required modules by `npm install` command.
 
+Copy [`.env.template`](`./.env.template`) and name it `.env`.
+That file will be used to load environment variables.
+
 Run `gatsby develop` in the terminal to start the dev site.
 
 ## CSS Grid
@@ -62,7 +65,7 @@ You could find out the style guide on:
 
 ### Join codebase and content data
 
-Copy [`.env.template`](`./.env.template`) and name it `.env` then set the `KONTENT_PROJECT_ID` environment variable to value from Kontent -> "Project Settings" ->  API keys -> Project ID.
+Adjust `.env` file by setting the `KONTENT_PROJECT_ID` environment variable to value from your kontent project -> "Project Settings" ->  API keys -> Project ID.
 
 **You are now ready to use the site as your own!**
 
