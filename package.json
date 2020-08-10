@@ -9,7 +9,6 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build && npm run copy",
-    "build-gatsby": "cp .emv.template .env && npm run build",
     "copy": "cpx ./src/CNAME public",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.js\"",
