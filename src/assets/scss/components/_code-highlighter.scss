@@ -1,0 +1,11 @@
+.code-highlighter {
+  :not(pre) > code[class*='language-'],
+  pre[class*='language-'] {
+    background: none;
+    padding: 0;
+  }
+}
+
+.code-highlighter.box {
+  padding: 0;
+}
