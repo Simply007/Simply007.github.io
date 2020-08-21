@@ -3,9 +3,9 @@ import Helmet from 'react-helmet'
 import Layout from '../../components/layout'
 import BannerLanding from '../../components/BannerLanding'
 
-import angularHeadless from '../../assets/images/pwas/PWA-Angular+headless-cms.png'
-import lighthouseAudit from '../../assets/images/pwas/PWA-Lighthouse-audit.png'
-import lighthouseInCI from '../../assets/images/pwas/PWA-Lighthouse-in-CI.png'
+import angularHeadless from '../../assets/images/style-guide/pwas/PWA-Angular+headless-cms.png'
+import lighthouseAudit from '../../assets/images/style-guide/pwas/PWA-Lighthouse-audit.png'
+import lighthouseInCI from '../../assets/images/style-guide/pwas/PWA-Lighthouse-in-CI.png'
 
 const Landing = () => (
   <Layout>
