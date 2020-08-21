@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 
-const CodeHighlighter = ({ language, code }) => {
+import "prismjs/components/prism-java"
+import "prismjs/components/prism-typescript"
 
+
+
+const CodeHighlighter = ({ language, code }) => {
   useEffect(() => {
-    Prism.highlightAll();
-  }, []);
+    Prism.highlightAll()
+  }, [])
 
   return (
     <div className="code-highlighter">
       <pre>
-        <code className={`language-${language}`}>
-          {code}
-        </code>
+        <code className={`language-${language}`}>{code}</code>
       </pre>
     </div>
-  );
-};
+  )
+}
 
-export default CodeHighlighter;
+export default CodeHighlighter

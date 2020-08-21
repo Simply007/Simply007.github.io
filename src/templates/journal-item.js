@@ -20,9 +20,14 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
             resolveLinkedItem={linkedItem => {
               switch (linkedItem.__typename) {
                 case 'kontent_item_code_snippet':
-                  const codeComponent = JSON.parse(linkedItem.elements.code.value);
+                  const codeComponent = JSON.parse(
+                    linkedItem.elements.code.value
+                  )
                   return (
-                    <CodeHighlighter language={codeComponent.language} code={codeComponent.code} />
+                    <CodeHighlighter
+                      language={codeComponent.language}
+                      code={codeComponent.code}
+                    />
                   )
                 default:
                   return <div>Component not supported</div>
