@@ -2,10 +2,9 @@ import React, { useEffect } from 'react'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 
-import "prismjs/components/prism-java"
-import "prismjs/components/prism-typescript"
-
-
+import 'prismjs/components/prism-java'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-powershell'
 
 const CodeHighlighter = ({ language, code }) => {
   useEffect(() => {
