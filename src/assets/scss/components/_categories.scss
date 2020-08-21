@@ -1,0 +1,32 @@
+
+
+.categories {
+  @include vendor('display', 'flex');
+  @include vendor('flex-wrap', 'wrap');
+  @include vendor('justify-content', 'center');
+
+  border-top: 0 !important;
+
+  & + * {
+    border-top: 0 !important;
+  }
+  
+  & > .button {
+    margin: .5em ;
+  }
+
+  &:before {
+    @include vendor('transition', 'opacity 0.5s ease');
+  }
+
+  &:after {
+    background-color: transparentize(_palette(bg), 0.75);
+    content: '';
+  }
+
+  &:hover {
+    &:before {
+      opacity: 0;
+    }
+  }
+}

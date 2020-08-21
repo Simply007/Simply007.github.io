@@ -123,6 +123,21 @@
 			}
 		}
 
+		&.toggle {
+			background-color: _palette(fg-bold);
+			box-shadow: none;
+			color: _palette(bg);
+
+			&:hover, &:active {
+				background-color: _palette(highlight);
+				color: _palette(bg) !important;
+			}
+
+			&:active {
+				background-color: desaturate(darken(_palette(highlight), 15), 5);
+			}
+		}
+
 		&.disabled,
 		&:disabled {
 			@include vendor('pointer-events', 'none');
