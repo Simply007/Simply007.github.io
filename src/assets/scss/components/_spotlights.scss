@@ -103,7 +103,6 @@
 
 
 			&:nth-child(2n) {
-				@include vendor('flex-direction', 'row-reverse');
 				background-color: desaturate(lighten(_palette(bg-alt), 4), 2);
 
 				> .content {
