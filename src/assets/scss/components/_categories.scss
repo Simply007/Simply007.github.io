@@ -11,9 +11,14 @@
     border-top: 0 !important;
   }
   
-  & > .button {
+  & li {
+    list-style: none;
+  }
+
+  &  > .button {
     margin: .5em ;
   }
+
 
   &:before {
     @include vendor('transition', 'opacity 0.5s ease');

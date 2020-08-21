@@ -8,8 +8,6 @@ import Menu from './Menu'
 import Footer from './Footer'
 import get from 'lodash.get'
 
-//TODO: Footer
-
 class DefaultLayout extends React.Component {
   constructor(props) {
     super(props)

@@ -38,9 +38,9 @@ const ListingPage = ({
       selectedCategories.size === 0
         ? true
         : categorySuits(
-            selectedCategories,
-            gotcha.elements.listing_category.value.map(c => c.codename)
-          )
+          selectedCategories,
+          gotcha.elements.listing_category.value.map(c => c.codename)
+        )
     )
     .map(item => (
       <article key={item.elements.url_slug.value}>
@@ -61,39 +61,43 @@ const ListingPage = ({
     ))
 
   const categoriesComponents = categories.terms.map(category => (
-    <li
-      key={category.codename}
-      className={`button${
-        selectedCategories.has(category.codename) ? ' toggle' : ''
-      }`}
-      data-category-codename={category.codename}
-      onClick={() =>
-        setSelectedCategories(selectedCategories => {
-          if (selectedCategories.has(category.codename)) {
-            const result = new Set(selectedCategories)
-            result.delete(category.codename)
-            return result
-          } else {
-            return new Set(selectedCategories.add(category.codename))
-          }
-        })
-      }
-    >
-      {category.name}
+    <li>
+      <button
+        key={category.codename}
+        className={`button${
+          selectedCategories.has(category.codename) ? ' toggle' : ''
+          }`}
+        data-category-codename={category.codename}
+        onClick={() =>
+          setSelectedCategories(selectedCategories => {
+            if (selectedCategories.has(category.codename)) {
+              const result = new Set(selectedCategories)
+              result.delete(category.codename)
+              return result
+            } else {
+              return new Set(selectedCategories.add(category.codename))
+            }
+          })
+        }
+      >
+        {category.name}
+      </button>
     </li>
   ))
 
   categoriesComponents.unshift(
-    <li
-      key="#ALL"
-      onClick={() => setSelectedCategories(new Set())}
-      className={`button${
-        selectedCategories.size === 0
-          ? ' disabled toggle'
-          : ' icon fa-times-circle'
-      }`}
-    >
-      {selectedCategories.size === 0 ? 'ALL' : 'CLEAR'}
+    <li>
+      <button
+        key="#ALL"
+        onClick={() => setSelectedCategories(new Set())}
+        className={`button${
+          selectedCategories.size === 0
+            ? ' disabled toggle'
+            : ' icon fa-times-circle'
+          }`}
+      >
+        {selectedCategories.size === 0 ? 'ALL' : 'CLEAR'}
+      </button>
     </li>
   )
 
