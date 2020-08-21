@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import { RichTextElement } from '@kentico/gatsby-kontent-components'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
+import CodeHighlighter from '../components/CodeHighlighter'
 
 const JournalItem = ({ data: { kontentItemGotcha } }) => (
   <Layout>
@@ -19,12 +20,9 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
             resolveLinkedItem={linkedItem => {
               switch (linkedItem.__typename) {
                 case 'kontent_item_code_snippet':
+                  const codeComponent = JSON.parse(linkedItem.elements.code.value);
                   return (
-                    <div className="box">
-                      <code>
-                        {JSON.parse(linkedItem.elements.code.value).code}
-                      </code>
-                    </div>
+                    <CodeHighlighter language={codeComponent.language} code={codeComponent.code} />
                   )
                 default:
                   return <div>Component not supported</div>
