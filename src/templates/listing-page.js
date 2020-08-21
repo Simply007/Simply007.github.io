@@ -38,9 +38,9 @@ const ListingPage = ({
       selectedCategories.size === 0
         ? true
         : categorySuits(
-          selectedCategories,
-          gotcha.elements.listing_category.value.map(c => c.codename)
-        )
+            selectedCategories,
+            gotcha.elements.listing_category.value.map(c => c.codename)
+          )
     )
     .map(item => (
       <article key={item.elements.url_slug.value}>
@@ -66,7 +66,7 @@ const ListingPage = ({
         key={category.codename}
         className={`button${
           selectedCategories.has(category.codename) ? ' toggle' : ''
-          }`}
+        }`}
         data-category-codename={category.codename}
         onClick={() =>
           setSelectedCategories(selectedCategories => {
@@ -94,7 +94,7 @@ const ListingPage = ({
           selectedCategories.size === 0
             ? ' disabled toggle'
             : ' icon fa-times-circle'
-          }`}
+        }`}
       >
         {selectedCategories.size === 0 ? 'ALL' : 'CLEAR'}
       </button>
