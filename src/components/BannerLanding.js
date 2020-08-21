@@ -2,7 +2,10 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 const BannerLanding = props => (
-  <section id="banner" className={`style${Math.floor(Math.random() * 6) + 1} alt`}>
+  <section
+    id="banner"
+    className={`style${Math.floor(Math.random() * 6) + 1} alt`}
+  >
     <div className="inner">
       <header className="major">
         <h1>{props.title}</h1>
