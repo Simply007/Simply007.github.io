@@ -12,7 +12,7 @@
 		@include vendor('display', 'flex');
 		@include padding(4em, 0, (2em, 0, 0, 0));
 		background-attachment: fixed;
-		background-position: center;
+		background-position: 75% 50%;
 		background-repeat: no-repeat;
 		background-size: cover;
 		border-bottom: 0 !important;
@@ -23,6 +23,7 @@
 		min-height: 22em;
 		position: relative;
 		top: -3.25em;
+		opacity: 0.9;
 
 		&:after {
 			@include vendor('transition', 'opacity #{_duration(banner)} ease');
@@ -33,11 +34,14 @@
 			display: block;
 			height: 100%;
 			left: 0;
-			opacity: 0.85;
+			opacity: 0.75;
 			position: absolute;
 			top: 0;
 			width: 100%;
 			z-index: 1;
+		}
+		&.major:after{
+			opacity: 0.80;
 		}
 
 		h1 {

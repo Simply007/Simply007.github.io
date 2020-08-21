@@ -10,6 +10,7 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
     <BannerLanding
       title={kontentItemGotcha.elements.title.value}
       content={kontentItemGotcha.elements.summary.value}
+      button={{ title: 'Back to journal', to: '/journal' }}
     />
     <div id="main" className="alt">
       <section>
