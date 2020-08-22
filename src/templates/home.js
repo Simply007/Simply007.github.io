@@ -17,7 +17,7 @@ export const query = graphql`
     ) {
       elements {
         profile_photo {
-          value {,
+          value {
             url
             description
             name

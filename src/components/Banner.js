@@ -14,7 +14,7 @@ const Banner = props => {
 
   return (
     <section id="banner" className="major">
-      {props.data.elements.hero_image.value.length > 0 &&
+      {props.data.elements.hero_image.value.length > 0 && (
         <Img
           fluid={
             props.data.elements.hero_image.value[0].localFile.childImageSharp
@@ -31,18 +31,21 @@ const Banner = props => {
             objectPosition: '75% 25%',
           }}
         />
-      }
+      )}
       <div className="inner">
-
-        {props.data.elements.profile_photo.value.length > 0 &&
+        {props.data.elements.profile_photo.value.length > 0 && (
           <Img
-            fluid={props.data.elements.profile_photo.value[0].localFile.childImageSharp.fluid
+            fluid={
+              props.data.elements.profile_photo.value[0].localFile
+                .childImageSharp.fluid
             }
             style={{
               position: 'relative',
-              width: '150px', 
-              height: '150px'}} />
-        }
+              width: '150px',
+              height: '150px',
+            }}
+          />
+        )}
         <header className="major">
           <h1>{props.data.elements.primary_text.value}</h1>
         </header>
