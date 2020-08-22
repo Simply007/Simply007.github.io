@@ -23,8 +23,8 @@ export const query = graphql`
             name
             localFile {
               childImageSharp {
-                fluid(quality: 90, maxHeight: 150) {
-                  ...GatsbyImageSharpFluid_withWebp
+                fixed(quality: 100, width : 150) {
+                  ...GatsbyImageSharpFixed_withWebp
                 }
               }
             }
@@ -34,7 +34,7 @@ export const query = graphql`
           value {
             localFile {
               childImageSharp {
-                fluid(quality: 90, maxHeight: 1920) {
+                fluid(quality: 100, maxWidth: 1920) {
                   ...GatsbyImageSharpFluid_withWebp
                 }
               }

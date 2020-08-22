@@ -35,9 +35,9 @@ const Banner = props => {
       <div className="inner">
         {props.data.elements.profile_photo.value.length > 0 && (
           <Img
-            fluid={
+            fixed={
               props.data.elements.profile_photo.value[0].localFile
-                .childImageSharp.fluid
+                .childImageSharp.fixed
             }
             style={{
               position: 'relative',
