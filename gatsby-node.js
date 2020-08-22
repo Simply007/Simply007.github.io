@@ -40,7 +40,7 @@ exports.createSchemaCustomization = async api => {
             parent = allNavigationItems.find(
               item =>
                 item.preferred_language ===
-                  currentContextItem.preferred_language &&
+                currentContextItem.preferred_language &&
                 item.elements['sub_items'].value.includes(
                   currentContextItem.system.codename
                 )
@@ -103,10 +103,10 @@ exports.createPages = async ({ graphql, actions }) => {
       contentPageType === 'kontent_item_home_page'
         ? './src/templates/home.js'
         : contentPageType === 'kontent_item_sections_page'
-        ? './src/templates/sections-page.js'
-        : contentPageType === 'kontent_item_listing_page'
-        ? './src/templates/listing-page.js'
-        : null
+          ? './src/templates/sections-page.js'
+          : contentPageType === 'kontent_item_listing_page'
+            ? './src/templates/listing-page.js'
+            : null
 
     if (!templatePath) {
       return
@@ -132,25 +132,25 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const { data: journalItems } = await graphql(`
-    query GotchaQuery {
-      allKontentItemGotcha {
-        nodes {
-          elements {
-            url_slug {
-              value
-            }
-          }
-          system {
-            codename
-          }
-          preferred_language
+  const { data: gotchas } = await graphql(`
+query GotchaQuery {
+  allKontentItemGotcha(filter: {elements: {url_slug: {value: {ne: ""}}, channel_purpose: {value: {elemMatch: {codename: {eq: "website"}}}}}}) {
+    nodes {
+      elements {
+        url_slug {
+          value
         }
       }
+      system {
+        codename
+      }
+      preferred_language
     }
-  `)
+  }
+}
+`)
 
-  journalItems.allKontentItemGotcha.nodes.forEach(journalItem =>
+  gotchas.allKontentItemGotcha.nodes.forEach(journalItem =>
     createPage({
       path: `/journal/${journalItem.elements.url_slug.value}`,
       component: require.resolve('./src/templates/journal-item.js'),

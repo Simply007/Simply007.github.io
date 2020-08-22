@@ -23,6 +23,17 @@ export const query = graphql`
             name
           }
         }
+        hero_image {
+          value {
+            localFile {
+              childImageSharp {
+                fluid(quality: 90, maxHeight: 1920) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
+        }
         primary_text {
           value
         }

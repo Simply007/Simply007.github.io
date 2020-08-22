@@ -106,6 +106,7 @@ const ListingPage = ({
       <BannerLanding
         title={pageData.elements.primary_text.value}
         content={pageData.elements.secondary_text.value}
+        heroImage={pageData.elements.hero_image.value.length > 0 ?pageData.elements.hero_image.value[0].localFile.childImageSharp.fluid : undefined}
       />
       <div className="content">
         <div className="inner">
@@ -138,6 +139,17 @@ export const query = graphql`
         }
         secondary_text {
           value
+        }
+        hero_image {
+          value {
+            localFile {
+              childImageSharp {
+                fluid(quality: 90, maxHeight: 1920) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
         }
         list_types {
           value

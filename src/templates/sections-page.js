@@ -23,20 +23,20 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
     const actions =
       section.elements.cta.value.length > 0
         ? section.elements.cta.value.map(cta => (
-            <li key={cta.elements.external_url.value}>
-              <a href={cta.elements.external_url.value} className="button">
-                {cta.elements.title.value}
-              </a>
-            </li>
-          ))
+          <li key={cta.elements.external_url.value}>
+            <a href={cta.elements.external_url.value} className="button">
+              {cta.elements.title.value}
+            </a>
+          </li>
+        ))
         : null
 
     const header =
       index === 0 ? (
         <h2>{section.elements.header.value}</h2>
       ) : (
-        <h3>{section.elements.header.value}</h3>
-      )
+          <h3>{section.elements.header.value}</h3>
+        )
 
     return (
       <section className={image && 'spotlights'}>
@@ -60,6 +60,7 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
       <BannerLanding
         title={pageData.elements.header.value}
         content={pageData.elements.summary.value}
+        heroImage={pageData.elements.hero_image.value.length > 0 ? pageData.elements.hero_image.value[0].localFile.childImageSharp.fluid : undefined}
       />
       <div id="main">{sections}</div>
     </Layout>
@@ -78,6 +79,17 @@ export const query = graphql`
         }
         summary {
           value
+        }
+        hero_image {
+          value {
+            localFile {
+              childImageSharp {
+                fluid(quality: 90, maxHeight: 1920) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
         }
         sections {
           value {
