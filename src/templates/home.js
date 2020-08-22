@@ -23,7 +23,7 @@ export const query = graphql`
             name
             localFile {
               childImageSharp {
-                fixed(quality: 100, width : 150) {
+                fixed(quality: 100, width: 150) {
                   ...GatsbyImageSharpFixed_withWebp
                 }
               }
