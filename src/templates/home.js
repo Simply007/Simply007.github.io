@@ -17,10 +17,17 @@ export const query = graphql`
     ) {
       elements {
         profile_photo {
-          value {
+          value {,
             url
             description
             name
+            localFile {
+              childImageSharp {
+                fluid(quality: 90, maxHeight: 150) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
           }
         }
         hero_image {
