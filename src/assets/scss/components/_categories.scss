@@ -1,5 +1,3 @@
-
-
 .categories {
   @include vendor('display', 'flex');
   @include vendor('flex-wrap', 'wrap');
@@ -10,15 +8,19 @@
   & + * {
     border-top: 0 !important;
   }
-  
-  & li {
+
+  & > li {
     list-style: none;
+    & > .button {
+      margin: 0.3em;
+      &:focus {
+        outline-color: _palette(highlight);
+      }
+      &:active {
+        background-color: _palette(fg);
+      }
+    }
   }
-
-  &  > .button {
-    margin: .5em ;
-  }
-
 
   &:before {
     @include vendor('transition', 'opacity 0.5s ease');
