@@ -106,7 +106,12 @@ const ListingPage = ({
       <BannerLanding
         title={pageData.elements.primary_text.value}
         content={pageData.elements.secondary_text.value}
-        heroImage={pageData.elements.hero_image.value.length > 0 ?pageData.elements.hero_image.value[0].localFile.childImageSharp.fluid : undefined}
+        heroImage={
+          pageData.elements.hero_image.value.length > 0
+            ? pageData.elements.hero_image.value[0].localFile.childImageSharp
+                .fluid
+            : undefined
+        }
       />
       <div className="content">
         <div className="inner">
