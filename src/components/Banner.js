@@ -1,4 +1,5 @@
 import React from 'react'
+import Img from 'gatsby-image'
 
 const Banner = props => {
   const actions = props.data.elements.cta.value.map(cta => (
@@ -13,12 +14,38 @@ const Banner = props => {
 
   return (
     <section id="banner" className="major">
-      <div className="inner">
-        <img
-          src={props.data.elements.profile_photo.value[0].url}
-          alt={props.data.elements.profile_photo.value[0].description}
-          width="150px"
+      {props.data.elements.hero_image.value.length > 0 && (
+        <Img
+          fluid={
+            props.data.elements.hero_image.value[0].localFile.childImageSharp
+              .fluid
+          }
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: '100%',
+            height: '100%',
+          }}
+          imgStyle={{
+            objectPosition: '75% 25%',
+          }}
         />
+      )}
+      <div className="inner">
+        {props.data.elements.profile_photo.value.length > 0 && (
+          <Img
+            fixed={
+              props.data.elements.profile_photo.value[0].localFile
+                .childImageSharp.fixed
+            }
+            style={{
+              position: 'relative',
+              width: '150px',
+              height: '150px',
+            }}
+          />
+        )}
         <header className="major">
           <h1>{props.data.elements.primary_text.value}</h1>
         </header>

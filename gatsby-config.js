@@ -52,5 +52,13 @@ module.exports = {
         exclude: ['/style-guide', '/style-guide/*'],
       },
     },
+    {
+      resolve: `@rshackleton/gatsby-transformer-kontent-image`,
+      options: {
+        local: true,
+      },
+    },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
   ],
 }

@@ -21,6 +21,24 @@ export const query = graphql`
             url
             description
             name
+            localFile {
+              childImageSharp {
+                fixed(quality: 100, width: 150) {
+                  ...GatsbyImageSharpFixed_withWebp
+                }
+              }
+            }
+          }
+        }
+        hero_image {
+          value {
+            localFile {
+              childImageSharp {
+                fluid(quality: 100, maxWidth: 1920) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
           }
         }
         primary_text {

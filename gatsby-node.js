@@ -132,9 +132,18 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const { data: journalItems } = await graphql(`
+  const { data: gotchas } = await graphql(`
     query GotchaQuery {
-      allKontentItemGotcha {
+      allKontentItemGotcha(
+        filter: {
+          elements: {
+            url_slug: { value: { ne: "" } }
+            channel_purpose: {
+              value: { elemMatch: { codename: { eq: "website" } } }
+            }
+          }
+        }
+      ) {
         nodes {
           elements {
             url_slug {
@@ -150,7 +159,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  journalItems.allKontentItemGotcha.nodes.forEach(journalItem =>
+  gotchas.allKontentItemGotcha.nodes.forEach(journalItem =>
     createPage({
       path: `/journal/${journalItem.elements.url_slug.value}`,
       component: require.resolve('./src/templates/journal-item.js'),

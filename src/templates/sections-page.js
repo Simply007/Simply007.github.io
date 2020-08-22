@@ -60,6 +60,12 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
       <BannerLanding
         title={pageData.elements.header.value}
         content={pageData.elements.summary.value}
+        heroImage={
+          pageData.elements.hero_image.value.length > 0
+            ? pageData.elements.hero_image.value[0].localFile.childImageSharp
+                .fluid
+            : undefined
+        }
       />
       <div id="main">{sections}</div>
     </Layout>
@@ -78,6 +84,17 @@ export const query = graphql`
         }
         summary {
           value
+        }
+        hero_image {
+          value {
+            localFile {
+              childImageSharp {
+                fluid(quality: 90, maxHeight: 1920) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
         }
         sections {
           value {
