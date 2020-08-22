@@ -78,7 +78,7 @@ class DefaultLayout extends React.Component {
                           height
                         }
                       }
-                    }        
+                    }
                     description
                   }
                 }
@@ -229,15 +229,21 @@ class DefaultLayout extends React.Component {
                     },
                     {
                       property: 'og:image',
-                      content: otherData.image.value[0].localFile.childImageSharp.fixed.src,
+                      content:
+                        otherData.image.value[0].localFile.childImageSharp.fixed
+                          .src,
                     },
                     {
                       property: 'og:image:width',
-                      content: otherData.image.value[0].localFile.childImageSharp.fixed.width,
+                      content:
+                        otherData.image.value[0].localFile.childImageSharp.fixed
+                          .width,
                     },
                     {
                       property: 'og:image:height',
-                      content: otherData.image.value[0].localFile.childImageSharp.fixed.height,
+                      content:
+                        otherData.image.value[0].localFile.childImageSharp.fixed
+                          .height,
                     },
                     { name: 'twitter:card', content: 'summary_large_image' },
                     { name: 'twitter:title', content: otherData.title.value },
@@ -247,7 +253,9 @@ class DefaultLayout extends React.Component {
                     },
                     {
                       name: 'twitter:image',
-                      content: otherData.image.value[0].localFile.childImageSharp.fixed.src,
+                      content:
+                        otherData.image.value[0].localFile.childImageSharp.fixed
+                          .src,
                     },
                   ]}
                   htmlAttributes={{
