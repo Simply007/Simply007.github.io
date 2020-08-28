@@ -44,95 +44,96 @@ class DefaultLayout extends React.Component {
       <SmartLinkWrapper>
         <StaticQuery
           query={graphql`
-          {
-            kontentItemLayout(
-              system: { codename: { eq: "default_layout" } }
-              preferred_language: { eq: "en-US" }
-            ) {
-              system {
-                id
-              }
-              elements {
-                title {
-                  value
+            {
+              kontentItemLayout(
+                system: { codename: { eq: "default_layout" } }
+                preferred_language: { eq: "en-US" }
+              ) {
+                system {
+                  id
                 }
-                meta_description {
-                  value
-                }
-                site_url {
-                  value
-                }
-                keywords {
-                  value {
-                    ... on kontent_item_keyword {
-                      elements {
-                        keyword {
-                          value
+                elements {
+                  title {
+                    value
+                  }
+                  meta_description {
+                    value
+                  }
+                  site_url {
+                    value
+                  }
+                  keywords {
+                    value {
+                      ... on kontent_item_keyword {
+                        elements {
+                          keyword {
+                            value
+                          }
                         }
                       }
                     }
                   }
-                }
-                image {
-                  value {
-                    localFile {
-                      childImageSharp {
-                        fixed(width: 1200, quality: 100) {
-                          src
-                          width
-                          height
+                  image {
+                    value {
+                      localFile {
+                        childImageSharp {
+                          fixed(width: 1200, quality: 100) {
+                            src
+                            width
+                            height
+                          }
                         }
                       }
+                      description
                     }
-                    description
                   }
-                }
-                header {
-                  value {
-                    ... on kontent_item_header {
-                      system {
-                        id
-                      }
-                      elements {
-                        menu_caption {
-                          value
+                  header {
+                    value {
+                      ... on kontent_item_header {
+                        system {
+                          id
                         }
-                        menu {
-                          value {
-                            system {
-                              name
-                              codename
-                            }
+                        elements {
+                          menu_caption {
+                            value
                           }
-                        }
-                        title_link {
-                          value {
-                            ... on kontent_item_link {
-                              id
-                              elements {
-                                text {
-                                  value
-                                }
-                                url {
-                                  value
-                                }
-                              }
-                            }
-                          }
-                        }
-                        menu {
-                          value {
-                            ... on kontent_item_navigation_item {
+                          menu {
+                            value {
                               system {
-                                id
+                                name
+                                codename
                               }
-                              url
-                              elements {
-                                title {
-                                  value
+                            }
+                          }
+                          title_link {
+                            value {
+                              ... on kontent_item_link {
+                                id
+                                elements {
+                                  text {
+                                    value
+                                  }
+                                  url {
+                                    value
+                                  }
                                 }
-                                external_url {
-                                  value
+                              }
+                            }
+                          }
+                          menu {
+                            value {
+                              ... on kontent_item_navigation_item {
+                                system {
+                                  id
+                                }
+                                url
+                                elements {
+                                  title {
+                                    value
+                                  }
+                                  external_url {
+                                    value
+                                  }
                                 }
                               }
                             }
@@ -141,43 +142,43 @@ class DefaultLayout extends React.Component {
                       }
                     }
                   }
-                }
-                footer {
-                  value {
-                    ... on kontent_item_footer {
-                      id
-                      elements {
-                        footer_text {
-                          value
-                        }
-                        social_media_accounts {
-                          value {
-                            ... on kontent_item_social_media_account {
-                              id
-                              elements {
-                                account_handle {
-                                  value
-                                }
-                                social_media_type {
-                                  value {
-                                    ... on kontent_item_social_media_type {
-                                      id
-                                      elements {
-                                        label {
-                                          value
-                                        }
-                                        account_icon {
-                                          value {
-                                            url
-                                            description
-                                            name
+                  footer {
+                    value {
+                      ... on kontent_item_footer {
+                        id
+                        elements {
+                          footer_text {
+                            value
+                          }
+                          social_media_accounts {
+                            value {
+                              ... on kontent_item_social_media_account {
+                                id
+                                elements {
+                                  account_handle {
+                                    value
+                                  }
+                                  social_media_type {
+                                    value {
+                                      ... on kontent_item_social_media_type {
+                                        id
+                                        elements {
+                                          label {
+                                            value
                                           }
-                                        }
-                                        account_icon_code {
-                                          value
-                                        }
-                                        account_pattern {
-                                          value
+                                          account_icon {
+                                            value {
+                                              url
+                                              description
+                                              name
+                                            }
+                                          }
+                                          account_icon_code {
+                                            value
+                                          }
+                                          account_pattern {
+                                            value
+                                          }
                                         }
                                       }
                                     }
@@ -193,8 +194,7 @@ class DefaultLayout extends React.Component {
                 }
               }
             }
-          }
-        `}
+          `}
           render={data => {
             const headerData = get(
               data,
@@ -209,12 +209,12 @@ class DefaultLayout extends React.Component {
 
             const imageUrl = `${otherData.site_url.value.trimEnd('/')}${
               otherData.image.value[0].localFile.childImageSharp.fixed.src
-              }`
+            }`
             return (
               <div
                 className={`body ${this.state.loading} ${
                   this.state.isMenuVisible ? 'is-menu-visible' : ''
-                  }`}
+                }`}
               >
                 <div id="wrapper">
                   <Header
@@ -248,14 +248,14 @@ class DefaultLayout extends React.Component {
                       {
                         property: 'og:image:width',
                         content:
-                          otherData.image.value[0].localFile.childImageSharp.fixed
-                            .width,
+                          otherData.image.value[0].localFile.childImageSharp
+                            .fixed.width,
                       },
                       {
                         property: 'og:image:height',
                         content:
-                          otherData.image.value[0].localFile.childImageSharp.fixed
-                            .height,
+                          otherData.image.value[0].localFile.childImageSharp
+                            .fixed.height,
                       },
                       { name: 'twitter:card', content: 'summary_large_image' },
                       { name: 'twitter:title', content: otherData.title.value },

@@ -24,38 +24,45 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
     const actions =
       section.elements.cta.value.length > 0
         ? section.elements.cta.value.map(cta => (
-          <li key={cta.elements.external_url.value}>
-            <a href={cta.elements.external_url.value} className="button">
-              {cta.elements.title.value}
-            </a>
-          </li>
-        ))
+            <li key={cta.elements.external_url.value}>
+              <a href={cta.elements.external_url.value} className="button">
+                {cta.elements.title.value}
+              </a>
+            </li>
+          ))
         : null
 
     const header =
       index === 0 ? (
-        <h2
-        >{section.elements.header.value}</h2>
+        <h2>{section.elements.header.value}</h2>
       ) : (
-          <h3>
-            {section.elements.header.value}
-          </h3>
-        )
+        <h3>{section.elements.header.value}</h3>
+      )
 
     return (
-      <section className={image && 'spotlights'} data-kontent-item-id={section.system.id}>
+      <section
+        className={image && 'spotlights'}
+        data-kontent-item-id={section.system.id}
+      >
         {image}
         <div className="content">
           <div className="inner">
-            <header className="major" data-kontent-element-codename="header">{header}</header>
+            <header className="major" data-kontent-element-codename="header">
+              {header}
+            </header>
             <p
               dangerouslySetInnerHTML={{
                 __html: section.elements.content.value,
               }}
               data-kontent-element-codename="content"
-
             />
-            <ul className="actions" style={{display: "inline-block"}} data-kontent-element-codename="cta">{actions}</ul>
+            <ul
+              className="actions"
+              style={{ display: 'inline-block' }}
+              data-kontent-element-codename="cta"
+            >
+              {actions}
+            </ul>
           </div>
         </div>
       </section>
@@ -70,14 +77,16 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
           heroImage={
             pageData.elements.hero_image.value.length > 0
               ? pageData.elements.hero_image.value[0].localFile.childImageSharp
-                .fluid
+                  .fluid
               : undefined
           }
           titleCodename="header"
           contentCodename="summary"
         />
       </div>
-      <div id="main" data-kontent-item-id={pageData.system.id}>{sections}</div>
+      <div id="main" data-kontent-item-id={pageData.system.id}>
+        {sections}
+      </div>
     </Layout>
   )
 }
@@ -112,7 +121,7 @@ export const query = graphql`
         sections {
           value {
             ... on kontent_item_section {
-              system{
+              system {
                 id
               }
               elements {

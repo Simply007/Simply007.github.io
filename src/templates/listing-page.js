@@ -43,9 +43,14 @@ const ListingPage = ({
           )
     )
     .map(item => (
-      <article key={item.elements.url_slug.value} data-kontent-item-id={item.system.id}>
+      <article
+        key={item.elements.url_slug.value}
+        data-kontent-item-id={item.system.id}
+      >
         <header className="major">
-          <h3 data-kontent-element-codename="title">{item.elements.title.value}</h3>
+          <h3 data-kontent-element-codename="title">
+            {item.elements.title.value}
+          </h3>
           <p
             dangerouslySetInnerHTML={{ __html: item.elements.summary.value }}
             data-kontent-element-codename="title"
@@ -119,7 +124,7 @@ const ListingPage = ({
           <header className="major">
             <h2>My Gotchas</h2>
             {categories.terms.length > 0 && (
-              <ul className="categories" >{categoriesComponents}</ul>
+              <ul className="categories">{categoriesComponents}</ul>
             )}
           </header>
         </div>

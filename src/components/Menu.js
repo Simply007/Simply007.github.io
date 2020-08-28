@@ -16,19 +16,17 @@ const Menu = props => {
             {menuItem.elements.title.value}
           </a>
         ) : (
-            <Link onClick={props.onToggleMenu} to={menuItem.url}>
-              {menuItem.elements.title.value}
-            </Link>
-          )}
+          <Link onClick={props.onToggleMenu} to={menuItem.url}>
+            {menuItem.elements.title.value}
+          </Link>
+        )}
       </li>
     ))
 
   return (
-    <nav id="menu" data-kontent-item-id={props["data-kontent-item-id"]} >
+    <nav id="menu" data-kontent-item-id={props['data-kontent-item-id']}>
       <div className="inner" data-kontent-element-codename="menu">
-        <ul className="links">
-          {menuItems}
-        </ul>
+        <ul className="links">{menuItems}</ul>
       </div>
       <span
         role="button"
