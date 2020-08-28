@@ -16,37 +16,18 @@ const Menu = props => {
             {menuItem.elements.title.value}
           </a>
         ) : (
-          <Link onClick={props.onToggleMenu} to={menuItem.url}>
-            {menuItem.elements.title.value}
-          </Link>
-        )}
+            <Link onClick={props.onToggleMenu} to={menuItem.url}>
+              {menuItem.elements.title.value}
+            </Link>
+          )}
       </li>
     ))
 
-  if (!props.data) {
-    menuItems = (
-      <>
-        <li>
-          <Link onClick={props.onToggleMenu} to="/">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link onClick={props.onToggleMenu} to="/pwas">
-            PWA series
-          </Link>
-        </li>
-      </>
-    )
-  }
-
   return (
-    <nav id="menu">
-      <div className="inner">
+    <nav id="menu" data-kontent-item-id={props["data-kontent-item-id"]} >
+      <div className="inner" data-kontent-element-codename="menu">
         <ul className="links">
           {menuItems}
-          {/* <li><Link onClick={props.onToggleMenu} to="/generic">Generic</Link></li>
-                <li><Link onClick={props.onToggleMenu} to="/elements">Elements</Link></li> */}
         </ul>
       </div>
       <span

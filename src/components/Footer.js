@@ -22,12 +22,15 @@ const Footer = props => {
   return (
     <footer id="footer">
       <div className="inner">
-        <ul className="icons">{icons}</ul>
+        <ul className="icons" data-kontent-element-codename="social_media_accounts">
+          {icons}
+          </ul>
         <ul
           className="copyright"
           dangerouslySetInnerHTML={{
             __html: props.data.elements.footer_text.value,
           }}
+          data-kontent-element-codename="footer_text"
         ></ul>
       </div>
     </footer>

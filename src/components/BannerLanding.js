@@ -22,11 +22,12 @@ const BannerLanding = props => (
 
     <div className="inner">
       <header className="major">
-        <h1>{props.title}</h1>
+        <h1 data-kontent-element-codename={props.titleCodename} >{props.title}</h1>
       </header>
       <div
         className="content"
         dangerouslySetInnerHTML={{ __html: props.content }}
+        data-kontent-element-codename={props.contentCodename}
       ></div>
       {props.button && (
         <div className="content">

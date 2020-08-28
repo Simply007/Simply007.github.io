@@ -13,45 +13,48 @@ const Banner = props => {
   ))
 
   return (
-    <section id="banner" className="major">
+    <section id="banner" className="major" data-kontent-item-id={props.data.system.id}>
       {props.data.elements.hero_image.value.length > 0 && (
-        <Img
-          fluid={
-            props.data.elements.hero_image.value[0].localFile.childImageSharp
-              .fluid
-          }
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            width: '100%',
-            height: '100%',
-          }}
-          imgStyle={{
-            objectPosition: '75% 25%',
-          }}
-        />
+          <Img
+            fluid={
+              props.data.elements.hero_image.value[0].localFile.childImageSharp
+                .fluid
+            }
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              width: '100%',
+              height: '100%',
+            }}
+            imgStyle={{
+              objectPosition: '75% 25%',
+            }}
+          />
       )}
       <div className="inner">
         {props.data.elements.profile_photo.value.length > 0 && (
-          <Img
-            fixed={
-              props.data.elements.profile_photo.value[0].localFile
-                .childImageSharp.fixed
-            }
-            style={{
-              position: 'relative',
-              width: '150px',
-              height: '150px',
-            }}
-          />
+          <div data-kontent-element-codename="profile_photo" style={{display: 'inline-block'}}>
+            <Img
+              fixed={
+                props.data.elements.profile_photo.value[0].localFile
+                  .childImageSharp.fixed
+              }
+              style={{
+                position: 'relative',
+                width: '150px',
+                height: '150px',
+              }}
+              data-kontent-element-codename="profile_photo"
+            />
+          </div>
         )}
         <header className="major">
-          <h1>{props.data.elements.primary_text.value}</h1>
+          <h1 data-kontent-element-codename="primary_text">{props.data.elements.primary_text.value}</h1>
         </header>
         <div className="content">
-          <p>{props.data.elements.secondary_text.value}</p>
-          <ul className="actions">{actions}</ul>
+          <p data-kontent-element-codename="secondary_text">{props.data.elements.secondary_text.value}</p>
+          <ul className="actions" data-kontent-element-codename="cta">{actions}</ul>
         </div>
       </div>
     </section>
