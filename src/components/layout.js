@@ -196,12 +196,14 @@ class DefaultLayout extends React.Component {
 
           const otherData = get(data, 'kontentItemLayout.elements')
 
-          const imageUrl = `${otherData.site_url.value.trimEnd('/')}${otherData.image.value[0].localFile.childImageSharp.fixed.src }`;
+          const imageUrl = `${otherData.site_url.value.trimEnd('/')}${
+            otherData.image.value[0].localFile.childImageSharp.fixed.src
+          }`
           return (
             <div
               className={`body ${this.state.loading} ${
                 this.state.isMenuVisible ? 'is-menu-visible' : ''
-                }`}
+              }`}
             >
               <div id="wrapper">
                 <Header
@@ -230,7 +232,7 @@ class DefaultLayout extends React.Component {
                     },
                     {
                       property: 'og:image',
-                      content: imageUrl
+                      content: imageUrl,
                     },
                     {
                       property: 'og:image:width',
@@ -252,7 +254,7 @@ class DefaultLayout extends React.Component {
                     },
                     {
                       name: 'twitter:image',
-                      content: imageUrl
+                      content: imageUrl,
                     },
                   ]}
                   htmlAttributes={{
