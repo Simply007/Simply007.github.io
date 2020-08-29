@@ -38,12 +38,12 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
               }
             }}
             images={kontentItemGotcha.elements.content.images}
-            resolveImage={(image) => (
+            resolveImage={image => (
               <Img
                 fluid={image.localFile.childImageSharp.fluid}
                 className="box"
                 style={{
-                  padding: '0'
+                  padding: '0',
                 }}
                 imgStyle={{
                   width: '100%',
@@ -58,44 +58,48 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
 )
 
 export const query = graphql`
-query GotchaQuery($language: String = "", $codename: String = "") {
-  kontentItemGotcha(preferred_language: {eq: $language}, system: {codename: {eq: $codename}}) {
-    elements {
-      title {
-        value
-      }
-      post_date {
-        value
-      }
-      summary {
-        value
-      }
-      image {
-        value {
-          url
+  query GotchaQuery($language: String = "", $codename: String = "") {
+    kontentItemGotcha(
+      preferred_language: { eq: $language }
+      system: { codename: { eq: $codename } }
+    ) {
+      elements {
+        title {
+          value
         }
-      }
-      content {
-        value
-        modular_content {
-          ... on kontent_item_code_snippet {
-            system {
-              codename
-            }
-            elements {
-              code {
-                value
+        post_date {
+          value
+        }
+        summary {
+          value
+        }
+        image {
+          value {
+            url
+          }
+        }
+        content {
+          value
+          modular_content {
+            ... on kontent_item_code_snippet {
+              system {
+                codename
+              }
+              elements {
+                code {
+                  value
+                }
               }
             }
           }
-        }
-        images {
-          image_id
-          description
-          localFile {
-            childImageSharp {
-              fluid(quality: 100, maxWidth: 1920) {
-                ...GatsbyImageSharpFluid_withWebp
+          images {
+            image_id
+            description
+            localFile {
+              childImageSharp {
+                fluid(quality: 100, maxWidth: 1920) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
               }
             }
           }
@@ -103,7 +107,6 @@ query GotchaQuery($language: String = "", $codename: String = "") {
       }
     }
   }
-}
 `
 
 export default JournalItem
