@@ -4,6 +4,7 @@ import { RichTextElement } from '@kentico/gatsby-kontent-components'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import CodeHighlighter from '../components/CodeHighlighter'
+import Img from 'gatsby-image'
 
 const JournalItem = ({ data: { kontentItemGotcha } }) => (
   <Layout>
@@ -36,6 +37,19 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
                   return <div>Component not supported</div>
               }
             }}
+            images={kontentItemGotcha.elements.content.images}
+            resolveImage={(image) => (
+              <Img
+                fluid={image.localFile.childImageSharp.fluid}
+                className="box"
+                style={{
+                  padding: '0'
+                }}
+                imgStyle={{
+                  width: '100%',
+                }}
+              />
+            )}
           />
         </div>
       </section>
@@ -44,40 +58,44 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
 )
 
 export const query = graphql`
-  query GotchaQuery(
-    $preferred_language: StringQueryOperatorInput = {}
-    $codename: String = ""
-  ) {
-    kontentItemGotcha(
-      preferred_language: $preferred_language
-      system: { codename: { eq: $codename } }
-    ) {
-      elements {
-        title {
-          value
+query GotchaQuery($language: String = "", $codename: String = "") {
+  kontentItemGotcha(preferred_language: {eq: $language}, system: {codename: {eq: $codename}}) {
+    elements {
+      title {
+        value
+      }
+      post_date {
+        value
+      }
+      summary {
+        value
+      }
+      image {
+        value {
+          url
         }
-        post_date {
-          value
-        }
-        summary {
-          value
-        }
-        image {
-          value {
-            url
+      }
+      content {
+        value
+        modular_content {
+          ... on kontent_item_code_snippet {
+            system {
+              codename
+            }
+            elements {
+              code {
+                value
+              }
+            }
           }
         }
-        content {
-          value
-          modular_content {
-            ... on kontent_item_code_snippet {
-              system {
-                codename
-              }
-              elements {
-                code {
-                  value
-                }
+        images {
+          image_id
+          description
+          localFile {
+            childImageSharp {
+              fluid(quality: 100, maxWidth: 1920) {
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
@@ -85,6 +103,7 @@ export const query = graphql`
       }
     }
   }
+}
 `
 
 export default JournalItem
