@@ -17,6 +17,7 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
               section.elements.image.value[0].description ||
               section.elements.image.value[0].name
             }
+            data-kontent-element-codename="image"
           />
         </a>
       ) : null
@@ -39,17 +40,29 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
       )
 
     return (
-      <section className={image && 'spotlights'}>
+      <section
+        className={image && 'spotlights'}
+        data-kontent-item-id={section.system.id}
+      >
         {image}
         <div className="content">
           <div className="inner">
-            <header className="major">{header}</header>
+            <header className="major" data-kontent-element-codename="header">
+              {header}
+            </header>
             <p
               dangerouslySetInnerHTML={{
                 __html: section.elements.content.value,
               }}
+              data-kontent-element-codename="content"
             />
-            <ul className="actions">{actions}</ul>
+            <ul
+              className="actions"
+              style={{ display: 'inline-block' }}
+              data-kontent-element-codename="cta"
+            >
+              {actions}
+            </ul>
           </div>
         </div>
       </section>
@@ -57,17 +70,23 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
   })
   return (
     <Layout>
-      <BannerLanding
-        title={pageData.elements.header.value}
-        content={pageData.elements.summary.value}
-        heroImage={
-          pageData.elements.hero_image.value.length > 0
-            ? pageData.elements.hero_image.value[0].localFile.childImageSharp
-                .fluid
-            : undefined
-        }
-      />
-      <div id="main">{sections}</div>
+      <div data-kontent-item-id={pageData.system.id}>
+        <BannerLanding
+          title={pageData.elements.header.value}
+          content={pageData.elements.summary.value}
+          heroImage={
+            pageData.elements.hero_image.value.length > 0
+              ? pageData.elements.hero_image.value[0].localFile.childImageSharp
+                  .fluid
+              : undefined
+          }
+          titleCodename="header"
+          contentCodename="summary"
+        />
+      </div>
+      <div id="main" data-kontent-item-id={pageData.system.id}>
+        {sections}
+      </div>
     </Layout>
   )
 }
@@ -78,6 +97,9 @@ export const query = graphql`
       preferred_language: { eq: $language }
       system: { codename: { eq: $codename } }
     ) {
+      system {
+        id
+      }
       elements {
         header {
           value
@@ -99,6 +121,9 @@ export const query = graphql`
         sections {
           value {
             ... on kontent_item_section {
+              system {
+                id
+              }
               elements {
                 header {
                   value

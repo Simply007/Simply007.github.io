@@ -15,6 +15,9 @@ export const query = graphql`
       preferred_language: { eq: $language }
       system: { codename: { eq: $codename } }
     ) {
+      system {
+        id
+      }
       elements {
         profile_photo {
           value {

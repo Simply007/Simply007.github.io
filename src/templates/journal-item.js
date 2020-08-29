@@ -11,10 +11,12 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
       title={kontentItemGotcha.elements.title.value}
       content={kontentItemGotcha.elements.summary.value}
       button={{ title: 'Back to journal', to: '/journal' }}
+      titleCodename={'title'}
+      contentCodename={'title'}
     />
     <div id="main" className="alt">
       <section>
-        <div className="inner">
+        <div className="inner" data-kontent-element-codename="content">
           <RichTextElement
             value={kontentItemGotcha.elements.content.value}
             linkedItems={kontentItemGotcha.elements.content.modular_content}

@@ -10,7 +10,11 @@ const Header = props => {
   const titleText = get(titleLink, 'elements.text.value')
   const titleURL = get(titleLink, 'elements.url.value', '/')
   return (
-    <header id="header" className="alt">
+    <header
+      id="header"
+      className="alt"
+      data-kontent-item-id={props.data.system.id}
+    >
       <Link to={titleURL} className="logo">
         <strong>{titleText}</strong>
       </Link>
@@ -21,6 +25,7 @@ const Header = props => {
           className="menu-link"
           onClick={props.onToggleMenu}
           onKeyDown={props.onToggleMenu}
+          data-kontent-element-codename="menu"
         >
           {menuCaption}
         </span>
