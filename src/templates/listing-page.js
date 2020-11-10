@@ -67,9 +67,8 @@ const ListingPage = ({
     ))
 
   const categoriesComponents = categories.terms.map(category => (
-    <li>
+    <li key={category.codename}>
       <button
-        key={category.codename}
         className={`button${
           selectedCategories.has(category.codename) ? ' toggle' : ''
         }`}
@@ -92,9 +91,8 @@ const ListingPage = ({
   ))
 
   categoriesComponents.unshift(
-    <li>
+    <li key="#ALL">
       <button
-        key="#ALL"
         onClick={() => setSelectedCategories(new Set())}
         className={`button${
           selectedCategories.size === 0
