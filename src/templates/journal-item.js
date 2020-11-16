@@ -12,11 +12,15 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
       title={kontentItemGotcha.elements.title.value}
       content={kontentItemGotcha.elements.summary.value}
       button={{ title: 'Back to journal', to: '/journal' }}
-      titleCodename='title'
-      contentCodename='summary'
+      titleCodename="title"
+      contentCodename="summary"
       itemId={kontentItemGotcha.system.id}
     />
-    <div id="main" className="alt" data-kontent-item-id={kontentItemGotcha.system.id}>
+    <div
+      id="main"
+      className="alt"
+      data-kontent-item-id={kontentItemGotcha.system.id}
+    >
       <section>
         <div className="inner" data-kontent-element-codename="content">
           <RichTextElement

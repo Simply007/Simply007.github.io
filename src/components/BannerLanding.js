@@ -3,7 +3,11 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 
 const BannerLanding = props => (
-  <section id="banner" data-kontent-item-id={props.itemId} className={`style${Math.floor(Math.random() * 6) + 1}`}>
+  <section
+    id="banner"
+    data-kontent-item-id={props.itemId}
+    className={`style${Math.floor(Math.random() * 6) + 1}`}
+  >
     {props.heroImage && (
       <Img
         fluid={props.heroImage}
