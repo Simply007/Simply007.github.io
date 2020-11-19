@@ -49,6 +49,9 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
                 className="box"
                 style={{
                   padding: '0',
+                  width: '80%',
+                  margin: '0 0 1em 2em',
+                  maxWidth: '600px',
                 }}
                 imgStyle={{
                   width: '100%',
