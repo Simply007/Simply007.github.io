@@ -41,13 +41,18 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
                 case 'kontent_item_button':
                   return (
                     <p>
-                      <a href={linkedItem.elements.external_url.value} className="button">
-                        <span className={`icon ${linkedItem.elements.icon.value}`}>
+                      <a
+                        href={linkedItem.elements.external_url.value}
+                        className="button"
+                      >
+                        <span
+                          className={`icon ${linkedItem.elements.icon.value}`}
+                        >
                           {linkedItem.elements.title.value}
                         </span>
                       </a>
                     </p>
-                  );
+                  )
                 default:
                   return <div>Component not supported</div>
               }
@@ -103,7 +108,7 @@ export const query = graphql`
           value
           modular_content {
             system {
-                codename
+              codename
             }
             ... on kontent_item_code_snippet {
               elements {
