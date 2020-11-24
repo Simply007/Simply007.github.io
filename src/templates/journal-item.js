@@ -15,6 +15,12 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
       titleCodename="title"
       contentCodename="summary"
       itemId={kontentItemGotcha.system.id}
+      heroImage={
+        kontentItemGotcha.elements.image.value.length > 0
+          ? kontentItemGotcha.elements.image.value[0].localFile.childImageSharp
+              .fluid
+          : undefined
+      }
     />
     <div
       id="main"
@@ -61,7 +67,6 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
             resolveImage={image => (
               <Img
                 fluid={image.localFile.childImageSharp.fluid}
-                className="box"
                 style={{
                   padding: '0',
                   width: '80%',
@@ -101,7 +106,13 @@ export const query = graphql`
         }
         image {
           value {
-            url
+            localFile {
+              childImageSharp {
+                fluid(quality: 90, maxHeight: 1920) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
           }
         }
         content {
