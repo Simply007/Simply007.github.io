@@ -1,6 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Layout from '../../components/layout'
+import CodeHighlighter from '../../components/CodeHighlighter'
 
 import pic03 from '../../assets/images/style-guide/pic03.jpg'
 import pic08 from '../../assets/images/style-guide/pic08.jpg'
@@ -772,6 +773,10 @@ const Elements = props => (
                   i = 0; print 'It took ' + i + ' iterations to sort the deck.';
                 </code>
               </pre>
+
+
+              <h3>Code</h3>
+              <CodeHighlighter language="javascript" code="i = 0; print 'It took ' + i + ' iterations to sort the deck.';"/>
             </div>
           </div>
         </div>
