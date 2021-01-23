@@ -774,9 +774,11 @@ const Elements = props => (
                 </code>
               </pre>
 
-
               <h3>Code</h3>
-              <CodeHighlighter language="javascript" code="i = 0; print 'It took ' + i + ' iterations to sort the deck.';"/>
+              <CodeHighlighter
+                language="javascript"
+                code="i = 0; print 'It took ' + i + ' iterations to sort the deck.';"
+              />
             </div>
           </div>
         </div>
