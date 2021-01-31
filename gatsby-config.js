@@ -30,9 +30,9 @@ module.exports = {
           process.env.KONTENT_PREVIEW_ENABLED &&
           process.env.KONTENT_PREVIEW_ENABLED.toLowerCase() === 'true'
             ? process.env.KONTENT_PREVIEW_KEY
-            : process.env.KONTENT_SECURED_KEY,
-        languageCodenames: process.env.KONTENT_LANGUAGE_CODENAMES.split(
-          ','
+            : undefined,
+            languageCodenames: process.env.KONTENT_LANGUAGE_CODENAMES.split(
+              ','
         ).map(lang => lang.trim()),
         includeTaxonomies: true, // opt-out by default
       },
