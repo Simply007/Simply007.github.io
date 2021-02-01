@@ -13,6 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    env:
+      KONTENT_PROJECT_ID: ${{ secrets.KONTENT_PROJECT_ID }}
+      KONTENT_LANGUAGE_CODENAMES: ${{ secrets.KONTENT_LANGUAGE_CODENAMES }}
 
     strategy:
       matrix:
