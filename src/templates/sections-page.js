@@ -26,7 +26,15 @@ const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
         ? section.elements.cta.value.map(cta => (
             <li key={cta.elements.external_url.value}>
               <a href={cta.elements.external_url.value} className="button">
-                {cta.elements.title.value}
+                <span
+                    className={
+                      cta.elements.icon.value
+                        ? `icon ${cta.elements.icon.value}`
+                        : undefined
+                    }
+                  >
+                    {cta.elements.title.value}
+                  </span>
               </a>
             </li>
           ))
