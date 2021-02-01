@@ -83,7 +83,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 }
                 ... on kontent_item_listing_page {
                   elements {
-                    list_types {
+                    listing_page_options__list_types {
                       value
                     }
                   }
@@ -113,8 +113,12 @@ exports.createPages = async ({ graphql, actions }) => {
     }
 
     const listTypes = []
-    if (contentPage.elements && contentPage.elements.list_types) {
-      JSON.parse(contentPage.elements.list_types.value)
+    if (
+      contentPage.elements &&
+      contentPage.elements.listing_page_options__list_types &&
+      contentPage.elements.listing_page_options__list_types.value
+    ) {
+      JSON.parse(contentPage.elements.listing_page_options__list_types.value)
         .map(type => type.codename)
         .forEach(codename => {
           listTypes.push(codename)

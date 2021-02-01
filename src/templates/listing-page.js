@@ -160,7 +160,7 @@ export const query = graphql`
             }
           }
         }
-        list_types {
+        listing_page_options__list_types {
           value
         }
       }
