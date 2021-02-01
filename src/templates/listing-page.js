@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
+import ListingItem from '../components/ListingItem'
 
 /**
  * Check if there is an intersect in the following Set and array
@@ -42,29 +43,7 @@ const ListingPage = ({
             gotcha.elements.listing_category.value.map(c => c.codename)
           )
     )
-    .map(item => (
-      <article
-        key={item.elements.url_slug.value}
-        data-kontent-item-id={item.system.id}
-      >
-        <header className="major">
-          <h3 data-kontent-element-codename="title">
-            {item.elements.title.value}
-          </h3>
-          <p
-            dangerouslySetInnerHTML={{ __html: item.elements.summary.value }}
-            data-kontent-element-codename="title"
-          />
-          <ul className="actions">
-            <li>
-              <Link className="button" to={item.elements.url_slug.value}>
-                Learn more
-              </Link>
-            </li>
-          </ul>
-        </header>
-      </article>
-    ))
+    .map(item => <ListingItem item={item} />)
 
   const categoriesComponents = categories.terms.map(category => (
     <li key={category.codename}>
