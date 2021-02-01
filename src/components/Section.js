@@ -53,7 +53,7 @@ const Section = ({ section, isFirst }) => {
           <header className="major" data-kontent-element-codename="header">
             {header}
           </header>
-          <p
+          <div
             dangerouslySetInnerHTML={{
               __html: section.elements.content.value,
             }}

@@ -8,7 +8,7 @@ const ListingItem = ({ item }) => (
   >
     <header className="major">
       <h3 data-kontent-element-codename="title">{item.elements.title.value}</h3>
-      <p
+      <div
         dangerouslySetInnerHTML={{ __html: item.elements.summary.value }}
         data-kontent-element-codename="title"
       />
