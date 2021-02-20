@@ -4,7 +4,6 @@ import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 
-
 const JournalItem = ({ data: { kontentItemGotcha } }) => (
   <Layout>
     <BannerLanding
@@ -17,7 +16,7 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
       heroImage={
         kontentItemGotcha.elements.image.value.length > 0
           ? kontentItemGotcha.elements.image.value[0].localFile.childImageSharp
-            .fluid
+              .fluid
           : undefined
       }
     />
@@ -28,7 +27,7 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
     >
       <section>
         <div className="inner" data-kontent-element-codename="content">
-          <RichText element={kontentItemGotcha.elements.content}/>
+          <RichText element={kontentItemGotcha.elements.content} />
         </div>
       </section>
     </div>

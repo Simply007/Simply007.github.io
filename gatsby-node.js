@@ -172,7 +172,7 @@ exports.createPages = async ({ graphql, actions }) => {
         codename: journalItem.system.codename,
       },
     })
-  );
+  )
 
   const { data: projects } = await graphql(`
     query ProjectQuery {
@@ -210,5 +210,5 @@ exports.createPages = async ({ graphql, actions }) => {
         codename: projectItem.system.codename,
       },
     })
-  );
+  )
 }

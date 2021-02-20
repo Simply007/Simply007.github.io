@@ -10,9 +10,7 @@ const RichText = ({ element }) => (
     resolveLinkedItem={linkedItem => {
       switch (linkedItem.__typename) {
         case 'kontent_item_code_snippet':
-          const codeComponent = JSON.parse(
-            linkedItem.elements.code.value
-          )
+          const codeComponent = JSON.parse(linkedItem.elements.code.value)
           return (
             <CodeHighlighter
               language={codeComponent.language}
@@ -26,9 +24,7 @@ const RichText = ({ element }) => (
                 href={linkedItem.elements.external_url.value}
                 className="button"
               >
-                <span
-                  className={`icon ${linkedItem.elements.icon.value}`}
-                >
+                <span className={`icon ${linkedItem.elements.icon.value}`}>
                   {linkedItem.elements.title.value}
                 </span>
               </a>
@@ -54,6 +50,6 @@ const RichText = ({ element }) => (
       />
     )}
   />
-);
+)
 
-export default RichText;
+export default RichText
