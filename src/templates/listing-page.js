@@ -32,25 +32,47 @@ const ListingPage = ({
       node.elements.channel_purpose.value
         .map(i => i.codename)
         .includes('website')
-  )
+  );
 
-  const journalOverview = gotchas
-    .filter(gotcha =>
+  const projects = listingData.nodes.filter(
+    node =>
+      node.__typename === 'kontent_item_project' &&
+      node.elements.channel_purpose.value
+        .map(i => i.codename)
+        .includes('website')
+  );
+
+  const items = gotchas.concat(projects);
+
+  const allItems = items
+    .filter(item =>
       selectedCategories.size === 0
         ? true
         : categorySuits(
-            selectedCategories,
-            gotcha.elements.listing_category.value.map(c => c.codename)
-          )
+          selectedCategories,
+          item.elements.listing_category.value.map(c => c.codename)
+        )
+    );
+
+
+  debugger;
+  const journalOverview = allItems
+    .filter(item =>
+      selectedCategories.size === 0
+        ? true
+        : categorySuits(
+          selectedCategories,
+          item.elements.listing_category.value.map(c => c.codename)
+        )
     )
     .map(item => <ListingItem item={item} />)
+
 
   const categoriesComponents = categories.terms.map(category => (
     <li key={category.codename}>
       <button
-        className={`button${
-          selectedCategories.has(category.codename) ? ' toggle' : ''
-        }`}
+        className={`button${selectedCategories.has(category.codename) ? ' toggle' : ''
+          }`}
         data-category-codename={category.codename}
         onClick={() =>
           setSelectedCategories(selectedCategories => {
@@ -73,11 +95,10 @@ const ListingPage = ({
     <li key="#ALL">
       <button
         onClick={() => setSelectedCategories(new Set())}
-        className={`button${
-          selectedCategories.size === 0
-            ? ' disabled toggle'
-            : ' icon fa-times-circle'
-        }`}
+        className={`button${selectedCategories.size === 0
+          ? ' disabled toggle'
+          : ' icon fa-times-circle'
+          }`}
       >
         {selectedCategories.size === 0 ? 'ALL' : 'CLEAR'}
       </button>
@@ -92,14 +113,14 @@ const ListingPage = ({
         heroImage={
           pageData.elements.hero_image.value.length > 0
             ? pageData.elements.hero_image.value[0].localFile.childImageSharp
-                .fluid
+              .fluid
             : undefined
         }
       />
       <div className="content">
         <div className="inner">
           <header className="major">
-            <h2>My Gotchas</h2>
+            <h2>My {pageData.elements.primary_text.value}s</h2>
             {categories.terms.length > 0 && (
               <ul className="categories">{categoriesComponents}</ul>
             )}
@@ -167,6 +188,7 @@ export const query = graphql`
             }
             listing_category {
               value {
+                name
                 codename
               }
             }

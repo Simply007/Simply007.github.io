@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@kentico/gatsby-kontent-components": "^6.2.0",
-    "@kentico/gatsby-source-kontent": "^6.3.0",
+    "@kentico/gatsby-source-kontent": "^6.3.1",
     "@kentico/kontent-smart-link": "^1.2.1",
     "@rshackleton/gatsby-transformer-kontent-image": "^2.1.0",
     "gatsby": "^2.31.1",
