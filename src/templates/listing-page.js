@@ -18,11 +18,7 @@ const categorySuits = (selectedCategories, itemCategories) => {
 }
 
 const ListingPage = ({
-  data: {
-    kontentItemListingPage: pageData,
-    allKontentItem: listingData,
-    categories,
-  },
+  data: { kontentItemListingPage: pageData, allKontentItem: listingData },
 }) => {
   const [selectedCategories, setSelectedCategories] = useState(new Set())
 
@@ -34,18 +30,45 @@ const ListingPage = ({
         .includes('website')
   )
 
-  const journalOverview = gotchas
-    .filter(gotcha =>
+  const projects = listingData.nodes.filter(
+    node =>
+      node.__typename === 'kontent_item_project' &&
+      node.elements.channel_purpose.value
+        .map(i => i.codename)
+        .includes('website')
+  )
+
+  const items = gotchas.concat(projects)
+
+  const allCategories = {}
+  for (const item of items) {
+    for (const itemCategory of item.elements.listing_category.value) {
+      allCategories[itemCategory.codename] = itemCategory
+    }
+  }
+
+  const allItems = items.filter(item =>
+    selectedCategories.size === 0
+      ? true
+      : categorySuits(
+          selectedCategories,
+          item.elements.listing_category.value.map(c => c.codename)
+        )
+  )
+
+  const listingOverview = allItems
+    .filter(item =>
       selectedCategories.size === 0
         ? true
         : categorySuits(
             selectedCategories,
-            gotcha.elements.listing_category.value.map(c => c.codename)
+            item.elements.listing_category.value.map(c => c.codename)
           )
     )
-    .map(item => <ListingItem item={item} />)
+    .map(item => <ListingItem key={item.system.codename} item={item} />)
 
-  const categoriesComponents = categories.terms.map(category => (
+  const categories = Object.values(allCategories)
+  const categoriesComponents = categories.map(category => (
     <li key={category.codename}>
       <button
         className={`button${
@@ -97,15 +120,15 @@ const ListingPage = ({
         }
       />
       <div className="content">
-        <div className="inner">
-          <header className="major">
-            <h2>My Gotchas</h2>
-            {categories.terms.length > 0 && (
+        {categories.length > 0 && (
+          <div className="inner">
+            <header className="major">
+              <h2>Categories</h2>
               <ul className="categories">{categoriesComponents}</ul>
-            )}
-          </header>
-        </div>
-        <section className="tiles">{journalOverview}</section>
+            </header>
+          </div>
+        )}
+        <section className="tiles">{listingOverview}</section>
       </div>
     </Layout>
   )
@@ -148,6 +171,7 @@ export const query = graphql`
       nodes {
         system {
           id
+          codename
         }
         ... on kontent_item_gotcha {
           elements {
@@ -156,6 +180,11 @@ export const query = graphql`
             }
             url_slug {
               value
+            }
+            image {
+              value {
+                url
+              }
             }
             summary {
               value
@@ -167,19 +196,44 @@ export const query = graphql`
             }
             listing_category {
               value {
+                name
                 codename
               }
             }
           }
         }
-      }
-    }
-    categories: kontentTaxonomy(
-      system: { codename: { eq: "listing_category" } }
-    ) {
-      terms {
-        name
-        codename
+        ... on kontent_item_project {
+          elements {
+            title {
+              value
+            }
+            url_slug {
+              value
+            }
+            release_date {
+              value
+            }
+            image {
+              value {
+                url
+              }
+            }
+            summary {
+              value
+            }
+            channel_purpose {
+              value {
+                codename
+              }
+            }
+            listing_category {
+              value {
+                name
+                codename
+              }
+            }
+          }
+        }
       }
     }
   }

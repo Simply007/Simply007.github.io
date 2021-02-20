@@ -173,4 +173,42 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   )
+
+  const { data: projects } = await graphql(`
+    query ProjectQuery {
+      allKontentItemProject(
+        filter: {
+          elements: {
+            url_slug: { value: { ne: "" } }
+            channel_purpose: {
+              value: { elemMatch: { codename: { eq: "website" } } }
+            }
+          }
+        }
+      ) {
+        nodes {
+          elements {
+            url_slug {
+              value
+            }
+          }
+          system {
+            codename
+          }
+          preferred_language
+        }
+      }
+    }
+  `)
+
+  projects.allKontentItemProject.nodes.forEach(projectItem =>
+    createPage({
+      path: `/projects/${projectItem.elements.url_slug.value}`,
+      component: require.resolve('./src/templates/project-item.js'),
+      context: {
+        language: projectItem.preferred_language,
+        codename: projectItem.system.codename,
+      },
+    })
+  )
 }
