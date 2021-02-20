@@ -10,6 +10,8 @@
 		@include vendor('display', 'flex');
 		@include vendor('flex-wrap', 'wrap');
 		border-top: 0 !important;
+		margin: 0 auto;
+		max-width: 88em;
 
 		& + * {
 			border-top: 0 !important;
@@ -39,8 +41,20 @@
 			}
 
 			header {
+				@include vendor('transition', (
+						'transform 0.25s ease',
+						'opacity 0.25s ease',
+						'filter 1s ease',
+						'background 0.25s ease',
+						'-webkit-filter 1s ease'
+					));
 				position: relative;
 				z-index: 3;
+				padding: .5em;
+
+				.summary {
+					padding-right: .5em;
+				}
 
 				.actions {
 					padding-bottom: 0;
@@ -96,6 +110,11 @@
 			&:hover {
 				&:before {
 					opacity: 0;
+				}
+
+				header.major {
+					border-radius: 0.2em;
+					background-color: #22222299;
 				}
 			}
 

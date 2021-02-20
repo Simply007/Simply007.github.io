@@ -18,11 +18,7 @@ const categorySuits = (selectedCategories, itemCategories) => {
 }
 
 const ListingPage = ({
-  data: {
-    kontentItemListingPage: pageData,
-    allKontentItem: listingData,
-    categories,
-  },
+  data: { kontentItemListingPage: pageData, allKontentItem: listingData },
 }) => {
   const [selectedCategories, setSelectedCategories] = useState(new Set())
 
@@ -32,7 +28,7 @@ const ListingPage = ({
       node.elements.channel_purpose.value
         .map(i => i.codename)
         .includes('website')
-  );
+  )
 
   const projects = listingData.nodes.filter(
     node =>
@@ -40,39 +36,44 @@ const ListingPage = ({
       node.elements.channel_purpose.value
         .map(i => i.codename)
         .includes('website')
-  );
+  )
 
-  const items = gotchas.concat(projects);
+  const items = gotchas.concat(projects)
 
-  const allItems = items
+  const allCategories = {}
+  for (const item of items) {
+    for (const itemCategory of item.elements.listing_category.value) {
+      allCategories[itemCategory.codename] = itemCategory
+    }
+  }
+
+  const allItems = items.filter(item =>
+    selectedCategories.size === 0
+      ? true
+      : categorySuits(
+          selectedCategories,
+          item.elements.listing_category.value.map(c => c.codename)
+        )
+  )
+
+  const listingOverview = allItems
     .filter(item =>
       selectedCategories.size === 0
         ? true
         : categorySuits(
-          selectedCategories,
-          item.elements.listing_category.value.map(c => c.codename)
-        )
-    );
-
-
-  debugger;
-  const journalOverview = allItems
-    .filter(item =>
-      selectedCategories.size === 0
-        ? true
-        : categorySuits(
-          selectedCategories,
-          item.elements.listing_category.value.map(c => c.codename)
-        )
+            selectedCategories,
+            item.elements.listing_category.value.map(c => c.codename)
+          )
     )
-    .map(item => <ListingItem item={item} />)
+    .map(item => <ListingItem key={item.system.codename} item={item} />)
 
-
-  const categoriesComponents = categories.terms.map(category => (
+  const categories = Object.values(allCategories)
+  const categoriesComponents = categories.map(category => (
     <li key={category.codename}>
       <button
-        className={`button${selectedCategories.has(category.codename) ? ' toggle' : ''
-          }`}
+        className={`button${
+          selectedCategories.has(category.codename) ? ' toggle' : ''
+        }`}
         data-category-codename={category.codename}
         onClick={() =>
           setSelectedCategories(selectedCategories => {
@@ -95,10 +96,11 @@ const ListingPage = ({
     <li key="#ALL">
       <button
         onClick={() => setSelectedCategories(new Set())}
-        className={`button${selectedCategories.size === 0
-          ? ' disabled toggle'
-          : ' icon fa-times-circle'
-          }`}
+        className={`button${
+          selectedCategories.size === 0
+            ? ' disabled toggle'
+            : ' icon fa-times-circle'
+        }`}
       >
         {selectedCategories.size === 0 ? 'ALL' : 'CLEAR'}
       </button>
@@ -113,20 +115,20 @@ const ListingPage = ({
         heroImage={
           pageData.elements.hero_image.value.length > 0
             ? pageData.elements.hero_image.value[0].localFile.childImageSharp
-              .fluid
+                .fluid
             : undefined
         }
       />
       <div className="content">
-        <div className="inner">
-          <header className="major">
-            <h2>My {pageData.elements.primary_text.value}s</h2>
-            {categories.terms.length > 0 && (
+        {categories.length > 0 && (
+          <div className="inner">
+            <header className="major">
+              <h2>Categories</h2>
               <ul className="categories">{categoriesComponents}</ul>
-            )}
-          </header>
-        </div>
-        <section className="tiles">{journalOverview}</section>
+            </header>
+          </div>
+        )}
+        <section className="tiles">{listingOverview}</section>
       </div>
     </Layout>
   )
@@ -169,6 +171,7 @@ export const query = graphql`
       nodes {
         system {
           id
+          codename
         }
         ... on kontent_item_gotcha {
           elements {
@@ -177,6 +180,11 @@ export const query = graphql`
             }
             url_slug {
               value
+            }
+            image {
+              value {
+                url
+              }
             }
             summary {
               value
@@ -194,14 +202,38 @@ export const query = graphql`
             }
           }
         }
-      }
-    }
-    categories: kontentTaxonomy(
-      system: { codename: { eq: "listing_category" } }
-    ) {
-      terms {
-        name
-        codename
+        ... on kontent_item_project {
+          elements {
+            title {
+              value
+            }
+            url_slug {
+              value
+            }
+            release_date {
+              value
+            }
+            image {
+              value {
+                url
+              }
+            }
+            summary {
+              value
+            }
+            channel_purpose {
+              value {
+                codename
+              }
+            }
+            listing_category {
+              value {
+                name
+                codename
+              }
+            }
+          }
+        }
       }
     }
   }
