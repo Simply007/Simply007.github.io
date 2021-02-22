@@ -48,7 +48,7 @@ const ProjectItem = ({ data: { kontentItemProject } }) => (
             )}
             {kontentItemProject.elements.release_date.value && (
               <li>
-                <strong>Release date: </strong>
+                <strong>Released: </strong>
                 {new Date(
                   kontentItemProject.elements.release_date.value
                 ).toDateString()}
