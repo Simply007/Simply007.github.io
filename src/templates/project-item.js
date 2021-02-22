@@ -16,7 +16,7 @@ const ProjectItem = ({ data: { kontentItemProject } }) => (
       heroImage={
         kontentItemProject.elements.image.value.length > 0
           ? kontentItemProject.elements.image.value[0].localFile.childImageSharp
-            .fluid
+              .fluid
           : undefined
       }
     />
@@ -28,19 +28,24 @@ const ProjectItem = ({ data: { kontentItemProject } }) => (
       <section>
         <div className="inner" data-kontent-element-codename="content">
           <ul className="icons">
-            {kontentItemProject.elements.live_url.value &&
-              <li><Link
-                className="icon alt fa-globe"
-                to={kontentItemProject.elements.live_url.value}
-                title="Live"
-              />
-              </li>}
-            {kontentItemProject.elements.source_code_url.value &&
-              <li><Link
-                className="icon alt fa-code-fork"
-                to={kontentItemProject.elements.source_code_url.value}
-                title="Source code"
-              /></li>}
+            {kontentItemProject.elements.live_url.value && (
+              <li>
+                <Link
+                  className="icon alt fa-globe"
+                  to={kontentItemProject.elements.live_url.value}
+                  title="Live"
+                />
+              </li>
+            )}
+            {kontentItemProject.elements.source_code_url.value && (
+              <li>
+                <Link
+                  className="icon alt fa-code-fork"
+                  to={kontentItemProject.elements.source_code_url.value}
+                  title="Source code"
+                />
+              </li>
+            )}
           </ul>
           <RichText element={kontentItemProject.elements.content} />
         </div>
