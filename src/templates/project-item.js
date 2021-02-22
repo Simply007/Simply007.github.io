@@ -16,7 +16,7 @@ const ProjectItem = ({ data: { kontentItemProject } }) => (
       heroImage={
         kontentItemProject.elements.image.value.length > 0
           ? kontentItemProject.elements.image.value[0].localFile.childImageSharp
-            .fluid
+              .fluid
           : undefined
       }
     />
@@ -46,10 +46,14 @@ const ProjectItem = ({ data: { kontentItemProject } }) => (
                 />
               </li>
             )}
-            {kontentItemProject.elements.release_date.value && (<li>
-              <strong>Release date: </strong>
-              {new Date(kontentItemProject.elements.release_date.value).toDateString()}
-            </li>)}
+            {kontentItemProject.elements.release_date.value && (
+              <li>
+                <strong>Release date: </strong>
+                {new Date(
+                  kontentItemProject.elements.release_date.value
+                ).toDateString()}
+              </li>
+            )}
           </ul>
           <RichText element={kontentItemProject.elements.content} />
         </div>
