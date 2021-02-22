@@ -2,10 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 <url> <loc>https://ondrej.chrastina.tech/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://ondrej.chrastina.tech/journal</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://ondrej.chrastina.tech/projects</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://ondrej.chrastina.tech/pwa-series</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://ondrej.chrastina.tech/journal/kill-the-process-occupying-your-port</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://ondrej.chrastina.tech/journal/js-map-in-java</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://ondrej.chrastina.tech/journal/specify-folder-when-uploading-asset-via-kontent-js-management-sdk</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://ondrej.chrastina.tech/journal/jamstack-on-net-from-zero-to-hero-with-statiq-and-kontent</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://ondrej.chrastina.tech/journal/test-out-javascript-async-await-easily</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://ondrej.chrastina.tech/projects/kentico-github-io</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://ondrej.chrastina.tech/projects/ondrej-chrastina-tech</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
