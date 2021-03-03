@@ -169,6 +169,7 @@ export const query = graphql`
     }
     allKontentItem(filter: { system: { type: { in: $listTypes } } }) {
       nodes {
+        __typename
         system {
           id
           codename
