@@ -1,7 +1,6 @@
 import React from 'react'
 import { ImageElement } from '@kentico/gatsby-kontent-components'
 
-
 const Banner = props => {
   const actions = props.data.elements.cta.value.map(cta => (
     <li key={cta.elements.external_url.value}>
@@ -21,9 +20,7 @@ const Banner = props => {
     >
       {props.data.elements.hero_image.value.length > 0 && (
         <ImageElement
-          image={
-            props.data.elements.hero_image.value[0]
-          }
+          image={props.data.elements.hero_image.value[0]}
           style={{
             position: 'absolute',
             left: 0,
@@ -43,9 +40,7 @@ const Banner = props => {
             style={{ display: 'inline-block' }}
           >
             <ImageElement
-              image={
-                props.data.elements.profile_photo.value[0]
-              }
+              image={props.data.elements.profile_photo.value[0]}
               style={{
                 position: 'relative',
                 width: '150px',

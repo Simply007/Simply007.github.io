@@ -36,11 +36,7 @@ const RichText = ({ element }) => (
     }}
     images={element.images}
     resolveImage={image => {
-      return (
-        <ImageElement
-          image={image}
-        />
-      );
+      return <ImageElement image={image} />
     }}
   />
 )
