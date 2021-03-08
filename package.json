@@ -20,14 +20,15 @@
     }
   },
   "dependencies": {
-    "@kentico/gatsby-kontent-components": "^6.3.2-alpha.1",
-    "@kentico/gatsby-source-kontent": "^6.3.2-alpha.1",
+    "@kentico/gatsby-kontent-components": "^6.3.2-alpha.2",
+    "@kentico/gatsby-source-kontent": "^6.3.2-alpha.2",
     "@kentico/kontent-smart-link": "^1.2.2",
     "@reach/router": "^1.3.4",
     "@rshackleton/gatsby-transformer-kontent-image": "^2.1.0",
     "gatsby": "^3.0.0",
     "gatsby-image": "^3.0.0",
     "gatsby-plugin-google-analytics": "^3.0.0",
+    "gatsby-plugin-image": "^1.0.0",
     "gatsby-plugin-manifest": "^3.0.0",
     "gatsby-plugin-offline": "^4.0.0",
     "gatsby-plugin-react-helmet": "^4.0.0",

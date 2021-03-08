@@ -15,8 +15,7 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
       itemId={kontentItemGotcha.system.id}
       heroImage={
         kontentItemGotcha.elements.image.value.length > 0
-          ? kontentItemGotcha.elements.image.value[0].localFile.childImageSharp
-              .fluid
+          ? kontentItemGotcha.elements.image.value[0]
           : undefined
       }
     />
@@ -55,18 +54,17 @@ export const query = graphql`
         }
         image {
           value {
-            localFile {
-              childImageSharp {
-                fluid(quality: 90, maxHeight: 1920) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
+            name
+            url
+            width
+            height
+            description
           }
         }
         content {
           value
           modular_content {
+            __typename
             system {
               codename
             }
@@ -93,14 +91,10 @@ export const query = graphql`
           }
           images {
             image_id
+            url
+            width
+            height
             description
-            localFile {
-              childImageSharp {
-                fluid(quality: 100, maxWidth: 1920) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
           }
         }
       }

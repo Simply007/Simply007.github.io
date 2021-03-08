@@ -114,8 +114,7 @@ const ListingPage = ({
         content={pageData.elements.secondary_text.value}
         heroImage={
           pageData.elements.hero_image.value.length > 0
-            ? pageData.elements.hero_image.value[0].localFile.childImageSharp
-                .fluid
+            ? pageData.elements.hero_image.value[0]
             : undefined
         }
       />
@@ -153,13 +152,11 @@ export const query = graphql`
         }
         hero_image {
           value {
-            localFile {
-              childImageSharp {
-                fluid(quality: 90, maxHeight: 1920) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
+            name
+            url
+            width
+            height
+            description
           }
         }
         listing_page_options__list_types {

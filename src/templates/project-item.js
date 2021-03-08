@@ -15,8 +15,7 @@ const ProjectItem = ({ data: { kontentItemProject } }) => (
       itemId={kontentItemProject.system.id}
       heroImage={
         kontentItemProject.elements.image.value.length > 0
-          ? kontentItemProject.elements.image.value[0].localFile.childImageSharp
-              .fluid
+          ? kontentItemProject.elements.image.value[0]
           : undefined
       }
     />
@@ -89,13 +88,10 @@ export const query = graphql`
         }
         image {
           value {
-            localFile {
-              childImageSharp {
-                fluid(quality: 90, maxHeight: 1920) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
+            url
+            width
+            height
+            description
           }
         }
         content {
@@ -127,14 +123,10 @@ export const query = graphql`
           }
           images {
             image_id
+            url
+            width
+            height
             description
-            localFile {
-              childImageSharp {
-                fluid(quality: 100, maxWidth: 1920) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
           }
         }
       }
