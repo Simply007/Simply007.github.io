@@ -15,6 +15,7 @@ const Landing = () => (
         name="description"
         content="Progressive web apps series by Ondřej Chrastina"
       />
+      <meta name="robots" content="noindex, nofollow" />
     </Helmet>
 
     <BannerLanding
