@@ -39,7 +39,7 @@ class DefaultLayout extends React.Component {
 
   render() {
     const { children } = this.props
-    const ogImageWidth = 1200;
+    const ogImageWidth = 1200
 
     return (
       <SmartLinkWrapper>
@@ -203,11 +203,14 @@ class DefaultLayout extends React.Component {
 
             const otherData = get(data, 'kontentItemLayout.elements')
 
-            const imageUrl = `${otherData.site_url.value.trimEnd('/')}${otherData.image.value[0].url}?w=${ogImageWidth}&format=auto`
+            const imageUrl = `${otherData.site_url.value.trimEnd('/')}${
+              otherData.image.value[0].url
+            }?w=${ogImageWidth}&format=auto`
             return (
               <div
-                className={`body ${this.state.loading} ${this.state.isMenuVisible ? 'is-menu-visible' : ''
-                  }`}
+                className={`body ${this.state.loading} ${
+                  this.state.isMenuVisible ? 'is-menu-visible' : ''
+                }`}
               >
                 <div id="wrapper">
                   <Header
@@ -240,11 +243,13 @@ class DefaultLayout extends React.Component {
                       },
                       {
                         property: 'og:image:width',
-                        content: ogImageWidth
+                        content: ogImageWidth,
                       },
                       {
                         property: 'og:image:height',
-                        content:  ogImageWidth/otherData.image.value[0].width * otherData.image.value[0].height
+                        content:
+                          (ogImageWidth / otherData.image.value[0].width) *
+                          otherData.image.value[0].height,
                       },
                       { name: 'twitter:card', content: 'summary_large_image' },
                       { name: 'twitter:title', content: otherData.title.value },
@@ -263,7 +268,10 @@ class DefaultLayout extends React.Component {
                   ></Helmet>
                   {children}
                   {/* <Contact /> */}
-                  <Footer data={footerData} footerItemId={get(data, 'kontentItemLayout.system.id')} />
+                  <Footer
+                    data={footerData}
+                    footerItemId={get(data, 'kontentItemLayout.system.id')}
+                  />
                 </div>
                 <Menu
                   onToggleMenu={this.handleToggleMenu}
