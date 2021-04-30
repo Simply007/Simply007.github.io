@@ -14,7 +14,6 @@ const Landing = props => (
       <title>Landing - Forty by HTML5 UP</title>
       <meta name="description" content="Landing Page" />
       <meta name="robots" content="noindex, nofollow" />
-
     </Helmet>
 
     <BannerLanding />

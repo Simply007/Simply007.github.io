@@ -24,10 +24,8 @@ class HomeIndex extends React.Component {
             },
             { name: 'keywords', content: 'personal site, Ondřej Chrastina' },
           ]}
-
         >
           <meta name="robots" content="noindex, nofollow" />
-
         </Helmet>
 
         <section id="banner" className="major">
