@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from 'gatsby-image'
+import { ImageElement } from '@kentico/gatsby-kontent-components'
 
 const Banner = props => {
   const actions = props.data.elements.cta.value.map(cta => (
@@ -19,11 +19,8 @@ const Banner = props => {
       data-kontent-item-id={props.data.system.id}
     >
       {props.data.elements.hero_image.value.length > 0 && (
-        <Img
-          fluid={
-            props.data.elements.hero_image.value[0].localFile.childImageSharp
-              .fluid
-          }
+        <ImageElement
+          image={props.data.elements.hero_image.value[0]}
           style={{
             position: 'absolute',
             left: 0,
@@ -42,11 +39,8 @@ const Banner = props => {
             data-kontent-element-codename="profile_photo"
             style={{ display: 'inline-block' }}
           >
-            <Img
-              fixed={
-                props.data.elements.profile_photo.value[0].localFile
-                  .childImageSharp.fixed
-              }
+            <ImageElement
+              image={props.data.elements.profile_photo.value[0]}
               style={{
                 position: 'relative',
                 width: '150px',

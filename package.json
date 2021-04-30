@@ -1,7 +1,7 @@
 {
   "name": "ondrej-chrastina-personal-site",
   "description": "Ondřej Chrastina's personal site.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Ondřej Chrastina",
   "keywords": [
     "gatsby"
@@ -11,6 +11,7 @@
     "build": "gatsby build && npm run copy",
     "copy": "cpx ./src/CNAME public",
     "develop": "gatsby develop",
+    "clean": "gatsby clean",
     "format": "prettier --write \"**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,26 +21,27 @@
     }
   },
   "dependencies": {
-    "@kentico/gatsby-kontent-components": "^6.2.0",
-    "@kentico/gatsby-source-kontent": "^6.3.1",
-    "@kentico/kontent-smart-link": "^1.2.1",
-    "@rshackleton/gatsby-transformer-kontent-image": "^2.1.0",
-    "gatsby": "^2.31.1",
-    "gatsby-image": "^2.10.0",
-    "gatsby-plugin-google-analytics": "^2.10.0",
-    "gatsby-plugin-manifest": "^2.11.0",
-    "gatsby-plugin-offline": "^3.9.0",
-    "gatsby-plugin-react-helmet": "^3.9.0",
-    "gatsby-plugin-sass": "^3.1.0",
-    "gatsby-plugin-sharp": "^2.13.1",
-    "gatsby-plugin-sitemap": "^2.11.0",
-    "gatsby-transformer-sharp": "^2.11.0",
+    "@kentico/gatsby-kontent-components": "^7.0.0-beta.1",
+    "@kentico/gatsby-source-kontent": "^7.0.0-beta.1",
+    "@kentico/kontent-smart-link": "^1.3.0",
+    "@reach/router": "^1.3.4",
+    "gatsby": "^3.4.0",
+    "gatsby-image": "^3.4.0",
+    "gatsby-plugin-google-analytics": "^3.0.0",
+    "gatsby-plugin-image": "^1.4.0",
+    "gatsby-plugin-manifest": "^3.0.0",
+    "gatsby-plugin-offline": "^4.0.0",
+    "gatsby-plugin-react-helmet": "^4.0.0",
+    "gatsby-plugin-sass": "^4.0.0",
+    "gatsby-plugin-sharp": "^3.0.0",
+    "gatsby-plugin-sitemap": "^3.0.0",
+    "gatsby-transformer-sharp": "^3.0.0",
     "lodash.get": "^4.4.2",
     "node-sass": "^4.14.1",
     "prismjs": "^1.23.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-helmet": "^5.2.1"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "cpx": "^1.5.0",

@@ -20,7 +20,7 @@ const Footer = props => {
   )
 
   return (
-    <footer id="footer">
+    <footer id="footer" data-kontent-item-id={props.footerItemId}>
       <div className="inner">
         <ul
           className="icons"

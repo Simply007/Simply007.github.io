@@ -1,7 +1,7 @@
 import React from 'react'
 import { RichTextElement } from '@kentico/gatsby-kontent-components'
 import CodeHighlighter from '../components/CodeHighlighter'
-import Img from 'gatsby-image'
+import { ImageElement } from '@kentico/gatsby-kontent-components'
 
 const RichText = ({ element }) => (
   <RichTextElement
@@ -35,20 +35,9 @@ const RichText = ({ element }) => (
       }
     }}
     images={element.images}
-    resolveImage={image => (
-      <Img
-        fluid={image.localFile.childImageSharp.fluid}
-        style={{
-          padding: '0',
-          width: '80%',
-          margin: '0 0 1em 2em',
-          maxWidth: '600px',
-        }}
-        imgStyle={{
-          width: '100%',
-        }}
-      />
-    )}
+    resolveImage={image => {
+      return <ImageElement image={image} />
+    }}
   />
 )
 

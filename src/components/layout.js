@@ -39,6 +39,7 @@ class DefaultLayout extends React.Component {
 
   render() {
     const { children } = this.props
+    const ogImageWidth = 1200
 
     return (
       <SmartLinkWrapper>
@@ -75,15 +76,10 @@ class DefaultLayout extends React.Component {
                   }
                   image {
                     value {
-                      localFile {
-                        childImageSharp {
-                          fixed(width: 1200, quality: 100) {
-                            src
-                            width
-                            height
-                          }
-                        }
-                      }
+                      url
+                      name
+                      width
+                      height
                       description
                     }
                   }
@@ -208,8 +204,8 @@ class DefaultLayout extends React.Component {
             const otherData = get(data, 'kontentItemLayout.elements')
 
             const imageUrl = `${otherData.site_url.value.trimEnd('/')}${
-              otherData.image.value[0].localFile.childImageSharp.fixed.src
-            }`
+              otherData.image.value[0].url
+            }?w=${ogImageWidth}&format=auto`
             return (
               <div
                 className={`body ${this.state.loading} ${
@@ -247,15 +243,13 @@ class DefaultLayout extends React.Component {
                       },
                       {
                         property: 'og:image:width',
-                        content:
-                          otherData.image.value[0].localFile.childImageSharp
-                            .fixed.width,
+                        content: ogImageWidth,
                       },
                       {
                         property: 'og:image:height',
                         content:
-                          otherData.image.value[0].localFile.childImageSharp
-                            .fixed.height,
+                          (ogImageWidth / otherData.image.value[0].width) *
+                          otherData.image.value[0].height,
                       },
                       { name: 'twitter:card', content: 'summary_large_image' },
                       { name: 'twitter:title', content: otherData.title.value },
@@ -274,7 +268,10 @@ class DefaultLayout extends React.Component {
                   ></Helmet>
                   {children}
                   {/* <Contact /> */}
-                  <Footer data={footerData} />
+                  <Footer
+                    data={footerData}
+                    footerItemId={get(data, 'kontentItemLayout.system.id')}
+                  />
                 </div>
                 <Menu
                   onToggleMenu={this.handleToggleMenu}

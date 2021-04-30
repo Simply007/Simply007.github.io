@@ -21,27 +21,20 @@ export const query = graphql`
       elements {
         profile_photo {
           value {
-            url
-            description
             name
-            localFile {
-              childImageSharp {
-                fixed(quality: 100, width: 150) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
+            url
+            width
+            height
+            description
           }
         }
         hero_image {
           value {
-            localFile {
-              childImageSharp {
-                fluid(quality: 100, maxWidth: 1920) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
+            name
+            url
+            width
+            height
+            description
           }
         }
         primary_text {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import { ImageElement } from '@kentico/gatsby-kontent-components'
 
 const BannerLanding = props => (
   <section
@@ -9,8 +9,8 @@ const BannerLanding = props => (
     className={`style${Math.floor(Math.random() * 6) + 1}`}
   >
     {props.heroImage && (
-      <Img
-        fluid={props.heroImage}
+      <ImageElement
+        image={props.heroImage}
         style={{
           position: 'absolute',
           left: 0,
