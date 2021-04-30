@@ -53,12 +53,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-image',
-    {
-      resolve: `@rshackleton/gatsby-transformer-kontent-image`,
-      options: {
-        local: true,
-      },
-    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
   ],
