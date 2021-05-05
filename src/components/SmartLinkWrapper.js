@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import KontentSmartLink from '@kentico/kontent-smart-link'
-import '@kentico/kontent-smart-link/dist/kontent-smart-link.styles.css'
 
 const SmartLinkWrapper = ({ children }) => {
   useEffect(() => {
