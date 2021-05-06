@@ -52,8 +52,5 @@ module.exports = {
         exclude: ['/style-guide', '/style-guide/*'],
       },
     },
-    'gatsby-plugin-image',
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
   ],
 }
