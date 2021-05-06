@@ -49,9 +49,11 @@ export const query = graphql`
         }
         hero_image {
           value {
-            url
-            description
             name
+            url
+            width
+            height
+            description
           }
         }
         sections {
