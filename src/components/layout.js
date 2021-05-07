@@ -203,7 +203,7 @@ class DefaultLayout extends React.Component {
 
             const otherData = get(data, 'kontentItemLayout.elements')
 
-            const imageUrl = `${otherData.site_url.value.trimEnd('/')}${
+            const imageUrl = `${
               otherData.image.value[0].url
             }?w=${ogImageWidth}&format=auto`
             return (
