@@ -203,9 +203,7 @@ class DefaultLayout extends React.Component {
 
             const otherData = get(data, 'kontentItemLayout.elements')
 
-            const imageUrl = `${
-              otherData.image.value[0].url
-            }?w=${ogImageWidth}&format=auto`
+            const imageUrl = `${otherData.image.value[0].url}?w=${ogImageWidth}&format=auto`
             return (
               <div
                 className={`body ${this.state.loading} ${
