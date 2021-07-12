@@ -4,62 +4,64 @@ import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 
-const ProjectItem = ({ data: { kontentItemProject } }) => (
-  <Layout>
-    <BannerLanding
-      title={kontentItemProject.elements.title.value}
-      content={kontentItemProject.elements.summary.value}
-      button={{ title: 'Back to projects', to: '/projects' }}
-      titleCodename="title"
-      contentCodename="summary"
-      itemId={kontentItemProject.system.id}
-      heroImage={
-        kontentItemProject.elements.image.value.length > 0
-          ? kontentItemProject.elements.image.value[0]
-          : undefined
-      }
-    />
-    <div
-      id="main"
-      className="alt"
-      data-kontent-item-id={kontentItemProject.system.id}
-    >
-      <section>
-        <div className="inner" data-kontent-element-codename="content">
-          <ul className="icons">
-            {kontentItemProject.elements.live_url.value && (
-              <li>
-                <Link
-                  className="icon alt fa-globe"
-                  to={kontentItemProject.elements.live_url.value}
-                  title="Live"
-                />
-              </li>
-            )}
-            {kontentItemProject.elements.source_code_url.value && (
-              <li>
-                <Link
-                  className="icon alt fa-code-fork"
-                  to={kontentItemProject.elements.source_code_url.value}
-                  title="Source code"
-                />
-              </li>
-            )}
-            {kontentItemProject.elements.release_date.value && (
-              <li>
-                <strong>Released: </strong>
-                {new Date(
-                  kontentItemProject.elements.release_date.value
-                ).toDateString()}
-              </li>
-            )}
-          </ul>
-          <RichText element={kontentItemProject.elements.content} />
-        </div>
-      </section>
-    </div>
-  </Layout>
-)
+const ProjectItem = ({ data: { kontentItemProject } }) => {
+  return (
+    <Layout>
+      <BannerLanding
+        title={kontentItemProject.elements.title.value}
+        content={kontentItemProject.elements.summary.value}
+        button={{ title: 'Back to projects', to: '/projects' }}
+        titleCodename="title"
+        contentCodename="summary"
+        itemId={kontentItemProject.system.id}
+        heroImage={
+          kontentItemProject.elements.image.value.length > 0
+            ? kontentItemProject.elements.image.value[0]
+            : undefined
+        }
+      />
+      <div
+        id="main"
+        className="alt"
+        data-kontent-item-id={kontentItemProject.system.id}
+      >
+        <section>
+          <div className="inner" data-kontent-element-codename="content">
+            <ul className="icons">
+              {kontentItemProject.elements.live_url.value && (
+                <li>
+                  <Link
+                    className="icon alt fa-globe"
+                    to={kontentItemProject.elements.live_url.value}
+                    title="Live"
+                  />
+                </li>
+              )}
+              {kontentItemProject.elements.source_code_url.value && (
+                <li>
+                  <Link
+                    className="icon alt fa-code"
+                    to={kontentItemProject.elements.source_code_url.value}
+                    title="Source code"
+                  />
+                </li>
+              )}
+              {kontentItemProject.elements.release_date.value && (
+                <li>
+                  <strong>Released: </strong>
+                  {new Date(
+                    kontentItemProject.elements.release_date.value
+                  ).toDateString()}
+                </li>
+              )}
+            </ul>
+            <RichText element={kontentItemProject.elements.content} />
+          </div>
+        </section>
+      </div>
+    </Layout>
+  )
+}
 
 export const query = graphql`
   query ProjectQuery($language: String = "", $codename: String = "") {
