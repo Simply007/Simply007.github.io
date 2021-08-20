@@ -5,7 +5,9 @@ import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 
 const JournalItem = ({ data: { kontentItemGotcha } }) => (
-  <Layout itemId={`${kontentItemGotcha.system.id}_${kontentItemGotcha.system.language}`}>
+  <Layout
+    itemId={`${kontentItemGotcha.system.id}_${kontentItemGotcha.system.language}`}
+  >
     <BannerLanding
       title={kontentItemGotcha.elements.title.value}
       content={kontentItemGotcha.elements.summary.value}
