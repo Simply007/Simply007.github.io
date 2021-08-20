@@ -5,7 +5,7 @@ import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 
 const JournalItem = ({ data: { kontentItemGotcha } }) => (
-  <Layout>
+  <Layout itemId={`${kontentItemGotcha.system.id}_${kontentItemGotcha.system.language}`}>
     <BannerLanding
       title={kontentItemGotcha.elements.title.value}
       content={kontentItemGotcha.elements.summary.value}
@@ -29,6 +29,10 @@ const JournalItem = ({ data: { kontentItemGotcha } }) => (
           <RichText element={kontentItemGotcha.elements.content} />
         </div>
       </section>
+
+      <section>
+        <div id="widget-root-2ba84926-16c7-41b5-9c33-327aa9f2a44d"></div>
+      </section>
     </div>
   </Layout>
 )
@@ -41,6 +45,7 @@ export const query = graphql`
     ) {
       system {
         id
+        language
       }
       elements {
         title {

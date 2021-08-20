@@ -23,6 +23,37 @@ class DefaultLayout extends React.Component {
     this.timeoutId = setTimeout(() => {
       this.setState({ loading: '' })
     }, 100)
+
+    if (this.props.itemId) {
+      const script1 = document.createElement("script");
+      script1.innerHTML = "window.recombeeIntegration=window.recombeeIntegration||function(){(recombeeIntegration.q=recombeeIntegration.q||[]).push(arguments)};recombeeIntegration.l=+new Date;";
+
+      const script2 = document.createElement("script");
+      script2.innerHTML = `recombeeIntegration({
+        "type": "SetDefaults",
+        "itemId": "${this.props.itemId}",
+        "publicToken": "FzdawQRdH0jGsxKNxMZ5jbKHityrMkoA9ZcR7pRfp54jl89mTWSGcs3OON8VfGka",
+        "databaseId": "simply-007-dev",
+        "rapiHostname": "client-rapi.recombee.com:443"
+      });
+      recombeeIntegration({
+        "type": "AddDetailView"
+      });
+      recombeeIntegration({
+        "type": "InitializeRecommendationWidget",
+        "rootElementId": "widget-root-2ba84926-16c7-41b5-9c33-327aa9f2a44d",
+        "widgetId": "2ba84926-16c7-41b5-9c33-327aa9f2a44d"
+      });`
+
+      const script3 = document.createElement("script");
+      script3.src = "https://web-integration.recombee.com/v1/recombee.js";
+      script3.defer = true;
+
+
+      document.body.appendChild(script1);
+      document.body.appendChild(script2);
+      document.body.appendChild(script3);
+    }
   }
 
   componentWillUnmount() {
@@ -206,9 +237,8 @@ class DefaultLayout extends React.Component {
             const imageUrl = `${otherData.image.value[0].url}?w=${ogImageWidth}&format=auto`
             return (
               <div
-                className={`body ${this.state.loading} ${
-                  this.state.isMenuVisible ? 'is-menu-visible' : ''
-                }`}
+                className={`body ${this.state.loading} ${this.state.isMenuVisible ? 'is-menu-visible' : ''
+                  }`}
               >
                 <div id="wrapper">
                   <Header
