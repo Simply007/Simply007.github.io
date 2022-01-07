@@ -2,7 +2,7 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://ondrej.chrastina.tech`,
+    siteUrl: `https://ondrej.chrastina.dev`,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
