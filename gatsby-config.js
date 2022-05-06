@@ -49,7 +49,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        exclude: ['/style-guide', '/style-guide/*'],
+        excludes: ['/style-guide', '/style-guide/*'],
       },
     },
     'gatsby-plugin-image',

@@ -24,12 +24,11 @@ exports.createSchemaCustomization = async api => {
       url: {
         type: `String`,
         resolve: async (source, args, context, info) => {
-          const allNavigationItems = await context.nodeModel.runQuery({
+          const { entries } = await context.nodeModel.findAll({
             query: {
               filter: {},
             },
             type: type,
-            firstOnly: false,
           })
 
           const urlFragments = [source.elements.slug.value] // /about/small-gas/subsection/<-
@@ -37,10 +36,10 @@ exports.createSchemaCustomization = async api => {
           let currentContextItem = source
 
           do {
-            parent = allNavigationItems.find(
+            parent = Array.from(entries).find(
               item =>
                 item.preferred_language ===
-                  currentContextItem.preferred_language &&
+                currentContextItem.preferred_language &&
                 item.elements['sub_items'].value.includes(
                   currentContextItem.system.codename
                 )
@@ -103,10 +102,10 @@ exports.createPages = async ({ graphql, actions }) => {
       contentPageType === 'kontent_item_home_page'
         ? './src/templates/home.js'
         : contentPageType === 'kontent_item_sections_page'
-        ? './src/templates/sections-page.js'
-        : contentPageType === 'kontent_item_listing_page'
-        ? './src/templates/listing-page.js'
-        : null
+          ? './src/templates/sections-page.js'
+          : contentPageType === 'kontent_item_listing_page'
+            ? './src/templates/listing-page.js'
+            : null
 
     if (!templatePath) {
       return

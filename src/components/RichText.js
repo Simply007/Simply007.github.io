@@ -8,8 +8,8 @@ const RichText = ({ element }) => (
     value={element.value}
     linkedItems={element.modular_content}
     resolveLinkedItem={linkedItem => {
-      switch (linkedItem.__typename) {
-        case 'kontent_item_code_snippet':
+      switch (linkedItem.system.type) {
+        case 'code_snippet':
           const codeComponent = JSON.parse(linkedItem.elements.code.value)
           return (
             <CodeHighlighter
@@ -17,7 +17,7 @@ const RichText = ({ element }) => (
               code={codeComponent.code}
             />
           )
-        case 'kontent_item_button':
+        case 'button':
           return (
             <p>
               <a

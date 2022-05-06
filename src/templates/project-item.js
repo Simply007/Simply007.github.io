@@ -5,6 +5,7 @@ import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 
 const ProjectItem = ({ data: { kontentItemProject } }) => {
+  console.log(kontentItemProject)
   return (
     <Layout>
       <BannerLanding
@@ -101,6 +102,7 @@ export const query = graphql`
           modular_content {
             system {
               codename
+              type
             }
             ... on kontent_item_code_snippet {
               elements {
