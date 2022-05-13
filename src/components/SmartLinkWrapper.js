@@ -17,10 +17,7 @@ const SmartLinkWrapper = ({ children }) => {
       query={graphql`
         {
           sitePlugin(name: { eq: "@kentico/gatsby-source-kontent" }) {
-            pluginOptions {
-              projectId
-              languageCodenames
-            }
+            pluginOptions
           }
         }
       `}

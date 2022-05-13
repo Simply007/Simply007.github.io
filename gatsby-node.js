@@ -24,12 +24,11 @@ exports.createSchemaCustomization = async api => {
       url: {
         type: `String`,
         resolve: async (source, args, context, info) => {
-          const allNavigationItems = await context.nodeModel.runQuery({
+          const { entries } = await context.nodeModel.findAll({
             query: {
               filter: {},
             },
             type: type,
-            firstOnly: false,
           })
 
           const urlFragments = [source.elements.slug.value] // /about/small-gas/subsection/<-
@@ -37,7 +36,7 @@ exports.createSchemaCustomization = async api => {
           let currentContextItem = source
 
           do {
-            parent = allNavigationItems.find(
+            parent = Array.from(entries).find(
               item =>
                 item.preferred_language ===
                   currentContextItem.preferred_language &&
