@@ -24,7 +24,6 @@
     "@kentico/gatsby-kontent-components": "^8.0.0",
     "@kentico/gatsby-source-kontent": "^8.0.0",
     "@kentico/kontent-smart-link": "^2.3.1",
-    "@reach/router": "^1.3.4",
     "gatsby": "^4.13.1",
     "gatsby-plugin-google-analytics": "^4.13.0",
     "gatsby-plugin-image": "^2.13.0",
@@ -37,8 +36,8 @@
     "gatsby-transformer-sharp": "^4.13.0",
     "lodash.get": "^4.4.2",
     "prismjs": "^1.28.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {

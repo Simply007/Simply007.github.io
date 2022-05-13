@@ -39,7 +39,7 @@ exports.createSchemaCustomization = async api => {
             parent = Array.from(entries).find(
               item =>
                 item.preferred_language ===
-                currentContextItem.preferred_language &&
+                  currentContextItem.preferred_language &&
                 item.elements['sub_items'].value.includes(
                   currentContextItem.system.codename
                 )
@@ -102,10 +102,10 @@ exports.createPages = async ({ graphql, actions }) => {
       contentPageType === 'kontent_item_home_page'
         ? './src/templates/home.js'
         : contentPageType === 'kontent_item_sections_page'
-          ? './src/templates/sections-page.js'
-          : contentPageType === 'kontent_item_listing_page'
-            ? './src/templates/listing-page.js'
-            : null
+        ? './src/templates/sections-page.js'
+        : contentPageType === 'kontent_item_listing_page'
+        ? './src/templates/listing-page.js'
+        : null
 
     if (!templatePath) {
       return
