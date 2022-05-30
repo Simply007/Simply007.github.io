@@ -40,10 +40,15 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-offline',
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: 'UA-173472499-1',
-        exclude: ['/style-guide/**'],
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          'G-R3560X2K2Q', // Google Analytics / GA
+        ],
+        pluginConfig: {
+          exclude: ['/style-guide/**'],
+        },
       },
     },
     {
