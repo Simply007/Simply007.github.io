@@ -28,7 +28,7 @@ module.exports = {
           process.env.KONTENT_PREVIEW_ENABLED.toLowerCase() === 'true',
         authorizationKey:
           process.env.KONTENT_PREVIEW_ENABLED &&
-            process.env.KONTENT_PREVIEW_ENABLED.toLowerCase() === 'true'
+          process.env.KONTENT_PREVIEW_ENABLED.toLowerCase() === 'true'
             ? process.env.KONTENT_PREVIEW_KEY
             : undefined,
         languageCodenames: process.env.KONTENT_LANGUAGE_CODENAMES.split(
@@ -44,10 +44,10 @@ module.exports = {
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
-          "G-R3560X2K2Q", // Google Analytics / GA
+          'G-R3560X2K2Q', // Google Analytics / GA
         ],
         pluginConfig: {
-          exclude: ["/style-guide/**"],
+          exclude: ['/style-guide/**'],
         },
       },
     },
