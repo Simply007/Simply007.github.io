@@ -64,9 +64,9 @@ export const query = graphql`
         content {
           value
           modular_content {
-            __typename
             system {
               codename
+              type
             }
             ... on kontent_item_code_snippet {
               elements {
