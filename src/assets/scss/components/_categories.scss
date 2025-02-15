@@ -1,7 +1,11 @@
+@use "sass:color";
+@use "../libs/functions";
+@use "../libs/skel";
+
 .categories {
-  @include vendor('display', 'flex');
-  @include vendor('flex-wrap', 'wrap');
-  @include vendor('justify-content', 'center');
+  @include skel.vendor('display', 'flex');
+  @include skel.vendor('flex-wrap', 'wrap');
+  @include skel.vendor('justify-content', 'center');
 
   border-top: 0 !important;
 
@@ -14,20 +18,20 @@
     & > .button {
       margin: 0.3em;
       &:focus {
-        outline-color: _palette(highlight);
+        outline-color: functions.palette(highlight);
       }
       &:active {
-        background-color: _palette(fg);
+        background-color: functions.palette(fg);
       }
     }
   }
 
   &:before {
-    @include vendor('transition', 'opacity 0.5s ease');
+    @include skel.vendor('transition', 'opacity 0.5s ease');
   }
 
   &:after {
-    background-color: transparentize(_palette(bg), 0.75);
+    background-color: color.adjust(functions.palette(bg), $alpha: -0.75);
     content: '';
   }
 

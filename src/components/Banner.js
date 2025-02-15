@@ -1,8 +1,8 @@
 import React from 'react'
-import { ImageElement } from '@kentico/gatsby-kontent-components'
+import { ImageElement } from '@kontent-ai/gatsby-components'
 
-const Banner = props => {
-  const actions = props.data.elements.cta.value.map(cta => (
+const Banner = (props) => {
+  const actions = props.data.elements.cta.value.map((cta) => (
     <li key={cta.elements.external_url.value}>
       <a href={cta.elements.external_url.value} className="button next scrolly">
         <span className={`icon ${cta.elements.icon.value}`}>

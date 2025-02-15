@@ -1,3 +1,6 @@
+@use "../libs/functions";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -38,7 +41,7 @@
 
 		&.fit {
 			display: block;
-			margin: 0 0 _size(element-margin) 0;
+			margin: 0 0 functions.size(element-margin) 0;
 			width: 100%;
 
 			img {
@@ -48,15 +51,15 @@
 
 		&.main {
 			display: block;
-			margin: (_size(element-margin) * 1.25) 0;
+			margin: (functions.size(element-margin) * 1.25) 0;
 			width: 100%;
 
 			img {
 				width: 100%;
 			}
 
-			@include breakpoint(small) {
-				margin: (_size(element-margin) * 0.75) 0;
+			@include skel.breakpoint(small) {
+				margin: (functions.size(element-margin) * 0.75) 0;
 			}
 		}
 	}

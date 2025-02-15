@@ -8,7 +8,7 @@ import pic08 from '../../assets/images/style-guide/pic08.jpg'
 import pic09 from '../../assets/images/style-guide/pic09.jpg'
 import pic10 from '../../assets/images/style-guide/pic10.jpg'
 
-const Elements = props => (
+const Elements = (props) => (
   <Layout>
     <Helmet>
       <title>Elements - Forty by HTML5 UP</title>

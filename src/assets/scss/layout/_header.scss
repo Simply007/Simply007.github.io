@@ -1,3 +1,8 @@
+@use "sass:color";
+@use "../libs/functions";
+@use "../libs/mixins";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -6,27 +11,27 @@
 
 /* Header */
 
-	@include keyframes('reveal-header') {
+	@include skel.keyframes('reveal-header') {
 		0% { top: -4em; opacity: 0; }
 		100% { top: 0; opacity: 1; }
 	}
 
 	#header {
-		@include vendor('display', 'flex');
-		background-color: _palette(bg-alt);
+		@include skel.vendor('display', 'flex');
+		background-color: functions.palette(bg-alt);
 		box-shadow: 0 0 0.25em 0 rgba(0,0,0,0.15);
 		cursor: default;
-		font-weight: _font(weight-bold);
+		font-weight: functions.font(weight-bold);
 		height: 3.25em;
 		left: 0;
-		letter-spacing: _font(letter-spacing-alt);
+		letter-spacing: functions.font(letter-spacing-alt);
 		line-height: 3.25em;
 		margin: 0;
 		position: fixed;
 		text-transform: uppercase;
 		top: 0;
 		width: 100%;
-		z-index: _misc(z-index-base);
+		z-index: functions.misc(z-index-base);
 
 		.logo {
 			border: 0;
@@ -37,35 +42,35 @@
 			padding: 0 1.5em;
 
 			strong {
-				@include vendor('transition', (
-					'background-color #{_duration(transition)} ease-in-out',
-					'color #{_duration(transition)} ease-in-out'
+				@include skel.vendor('transition', (
+					'background-color #{functions.duration(transition)} ease-in-out',
+					'color #{functions.duration(transition)} ease-in-out'
 				));
-				background-color: _palette(fg-bold);
-				color: _palette(bg);
+				background-color: functions.palette(fg-bold);
+				color: functions.palette(bg);
 				display: inline-block;
 				line-height: 1.65em;
 				margin-right: 0.325em;
-				padding: 0 0.125em 0 (_font(letter-spacing-alt) + 0.125em);
+				padding: 0 0.125em 0 (functions.font(letter-spacing-alt) + 0.125em);
 			}
 
 			&:hover {
 				strong {
-					background-color: _palette(highlight);
+					background-color: functions.palette(highlight);
 				}
 			}
 
 			&:active {
 				strong {
-					background-color: desaturate(darken(_palette(highlight), 15), 5);
+					background-color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15%), $saturation: -5%);
 				}
 			}
 		}
 
 		nav {
-			@include vendor('display', 'flex');
-			@include vendor('justify-content', 'flex-end');
-			@include vendor('flex-grow', '1');
+			@include skel.vendor('display', 'flex');
+			@include skel.vendor('justify-content', 'flex-end');
+			@include skel.vendor('flex-grow', '1');
 			height: inherit;
 			line-height: inherit;
 
@@ -87,7 +92,7 @@
 					padding-right: 3.325em !important;
 
 					&:before, &:after {
-						background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32" preserveAspectRatio="none"><style>line { stroke-width: 2px; stroke: #{_palette(fg-bold)}; }</style><line x1="0" y1="11" x2="24" y2="11" /><line x1="0" y1="21" x2="24" y2="21" /><line x1="0" y1="16" x2="24" y2="16" /></svg>');
+						background-image: mixins.svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32" preserveAspectRatio="none"><style>line { stroke-width: 2px; stroke: #{functions.palette(fg-bold)}; }</style><line x1="0" y1="11" x2="24" y2="11" /><line x1="0" y1="21" x2="24" y2="21" /><line x1="0" y1="16" x2="24" y2="16" /></svg>');
 						background-position: center;
 						background-repeat: no-repeat;
 						background-size: 24px 32px;
@@ -102,8 +107,8 @@
 					}
 
 					&:after {
-						@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
-						background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32" preserveAspectRatio="none"><style>line { stroke-width: 2px; stroke: #{_palette(highlight)}; }</style><line x1="0" y1="11" x2="24" y2="11" /><line x1="0" y1="21" x2="24" y2="21" /><line x1="0" y1="16" x2="24" y2="16" /></svg>');
+						@include skel.vendor('transition', 'opacity #{functions.duration(transition)} ease-in-out');
+						background-image: mixins.svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32" preserveAspectRatio="none"><style>line { stroke-width: 2px; stroke: #{functions.palette(highlight)}; }</style><line x1="0" y1="11" x2="24" y2="11" /><line x1="0" y1="21" x2="24" y2="21" /><line x1="0" y1="16" x2="24" y2="16" /></svg>');
 						opacity: 0;
 						z-index: 1;
 					}
@@ -126,23 +131,23 @@
 		}
 
 		&.reveal {
-			@include vendor('animation', 'reveal-header 0.35s ease');
+			@include skel.vendor('animation', 'reveal-header 0.35s ease');
 		}
 
 		&.alt {
-			@include vendor('transition', 'opacity #{_duration(banner)} ease');
-			@include vendor('transition-delay', '0.75s');
-			@include vendor('animation', 'none');
+			@include skel.vendor('transition', 'opacity #{functions.duration(banner)} ease');
+			@include skel.vendor('transition-delay', '0.75s');
+			@include skel.vendor('animation', 'none');
 			background-color: transparent;
 			box-shadow: none;
 			position: absolute;
 
-			&.style1 { .logo { strong { color: _palette(accent1); } } }
-			&.style2 { .logo { strong { color: _palette(accent2); } } }
-			&.style3 { .logo { strong { color: _palette(accent3); } } }
-			&.style4 { .logo { strong { color: _palette(accent4); } } }
-			&.style5 { .logo { strong { color: _palette(accent5); } } }
-			&.style6 { .logo { strong { color: _palette(accent6); } } }
+			&.style1 { .logo { strong { color: functions.palette(accent1); } } }
+			&.style2 { .logo { strong { color: functions.palette(accent2); } } }
+			&.style3 { .logo { strong { color: functions.palette(accent3); } } }
+			&.style4 { .logo { strong { color: functions.palette(accent4); } } }
+			&.style5 { .logo { strong { color: functions.palette(accent5); } } }
+			&.style6 { .logo { strong { color: functions.palette(accent6); } } }
 		}
 
 		.body.is-loading & {
@@ -151,7 +156,7 @@
 			}
 		}
 
-		@include breakpoint(xlarge) {
+		@include skel.breakpoint(xlarge) {
 			nav {
 				a {
 					&.menu-link {
@@ -165,7 +170,7 @@
 			}
 		}
 
-		@include breakpoint(large) {
+		@include skel.breakpoint(large) {
 			nav {
 				a {
 					&.menu-link {
@@ -179,7 +184,7 @@
 			}
 		}
 
-		@include breakpoint(small) {
+		@include skel.breakpoint(small) {
 			height: 2.75em;
 			line-height: 2.75em;
 
@@ -214,7 +219,7 @@
 			}
 		}
 
-		@include breakpoint(xsmall) {
+		@include skel.breakpoint(xsmall) {
 			.logo {
 				span {
 					display: none;

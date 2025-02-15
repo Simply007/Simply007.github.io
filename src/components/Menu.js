@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
-const Menu = props => {
+const Menu = (props) => {
   let menuItems =
     props.data &&
-    props.data.map(menuItem => (
+    props.data.map((menuItem) => (
       <li key={menuItem.url}>
         {menuItem.elements.external_url.value ? (
           <a

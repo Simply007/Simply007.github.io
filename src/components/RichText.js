@@ -1,13 +1,12 @@
 import React from 'react'
-import { RichTextElement } from '@kentico/gatsby-kontent-components'
+import { ImageElement, RichTextElement } from '@kontent-ai/gatsby-components'
 import CodeHighlighter from '../components/CodeHighlighter'
-import { ImageElement } from '@kentico/gatsby-kontent-components'
 
 const RichText = ({ element }) => (
   <RichTextElement
     value={element.value}
     linkedItems={element.modular_content}
-    resolveLinkedItem={linkedItem => {
+    resolveLinkedItem={(linkedItem) => {
       switch (linkedItem.system.type) {
         case 'code_snippet':
           const codeComponent = JSON.parse(linkedItem.elements.code.value)
@@ -35,7 +34,7 @@ const RichText = ({ element }) => (
       }
     }}
     images={element.images}
-    resolveImage={image => {
+    resolveImage={(image) => {
       return <ImageElement image={image} />
     }}
   />

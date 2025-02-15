@@ -6,11 +6,11 @@
 
 // You can delete this file if you're not using it
 
-const { getKontentItemNodeTypeName } = require('@kentico/gatsby-source-kontent')
+const { getKontentItemNodeTypeName } = require('@kontent-ai/gatsby-source')
 const path = require('path')
 const { parsePath } = require('gatsby')
 
-exports.createSchemaCustomization = async api => {
+exports.createSchemaCustomization = async (api) => {
   const {
     actions: { createTypes },
     schema,
@@ -37,7 +37,7 @@ exports.createSchemaCustomization = async api => {
 
           do {
             parent = Array.from(entries).find(
-              item =>
+              (item) =>
                 item.preferred_language ===
                   currentContextItem.preferred_language &&
                 item.elements['sub_items'].value.includes(
@@ -95,17 +95,17 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  data.allKontentItemNavigationItem.nodes.forEach(page => {
+  data.allKontentItemNavigationItem.nodes.forEach((page) => {
     const contentPage = page.elements.content_page.value[0]
     const contentPageType = contentPage.__typename
     const templatePath =
       contentPageType === 'kontent_item_home_page'
         ? './src/templates/home.js'
         : contentPageType === 'kontent_item_sections_page'
-        ? './src/templates/sections-page.js'
-        : contentPageType === 'kontent_item_listing_page'
-        ? './src/templates/listing-page.js'
-        : null
+          ? './src/templates/sections-page.js'
+          : contentPageType === 'kontent_item_listing_page'
+            ? './src/templates/listing-page.js'
+            : null
 
     if (!templatePath) {
       return
@@ -118,8 +118,8 @@ exports.createPages = async ({ graphql, actions }) => {
       contentPage.elements.listing_page_options__list_types.value
     ) {
       JSON.parse(contentPage.elements.listing_page_options__list_types.value)
-        .map(type => type.codename)
-        .forEach(codename => {
+        .map((type) => type.codename)
+        .forEach((codename) => {
           listTypes.push(codename)
         })
     }
@@ -162,7 +162,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  gotchas.allKontentItemGotcha.nodes.forEach(journalItem =>
+  gotchas.allKontentItemGotcha.nodes.forEach((journalItem) =>
     createPage({
       path: `/journal/${journalItem.elements.url_slug.value}`,
       component: require.resolve('./src/templates/journal-item.js'),
@@ -200,7 +200,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  projects.allKontentItemProject.nodes.forEach(projectItem =>
+  projects.allKontentItemProject.nodes.forEach((projectItem) =>
     createPage({
       path: `/projects/${projectItem.elements.url_slug.value}`,
       component: require.resolve('./src/templates/project-item.js'),

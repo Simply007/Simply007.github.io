@@ -1,3 +1,8 @@
+@use "sass:color";
+@use "../libs/functions";
+@use "../libs/mixins";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -14,9 +19,9 @@
       border-top: 0 !important;
     }
 
-    @include vendor('display', 'flex');
-      @include vendor('flex-direction', 'row');
-      background-color: desaturate(lighten(_palette(bg-alt), 2), 1);
+    @include skel.vendor('display', 'flex');
+      @include skel.vendor('flex-direction', 'row');
+      background-color: color.adjust(color.adjust(functions.palette(bg-alt), $lightness: 2%), $saturation: -1%);
 
       > .image {
         background-position: center center;
@@ -34,7 +39,7 @@
         }
 
         &:before {
-          background: transparentize(_palette(bg), 0.1);
+          background: color.adjust(functions.palette(bg), $alpha: -0.1);
           content: '';
           display: block;
           height: 100%;
@@ -47,21 +52,21 @@
       }
 
       > .content {
-        @include vendor('display', 'flex');
-        @include vendor('flex-direction', 'column');
-        @include vendor('justify-content', 'center');
-        @include vendor('align-items', 'center');
-        @include padding(2em, 3em);
+        @include skel.vendor('display', 'flex');
+        @include skel.vendor('flex-direction', 'column');
+        @include skel.vendor('justify-content', 'center');
+        @include skel.vendor('align-items', 'center');
+        @include mixins.padding(2em, 3em);
         width: 70%;
 
         > .inner {
           margin: 0 auto;
           max-width: 100%;
-          width: _size(inner);
+          width: functions.size(inner);
         }
       }
 
-      @include breakpoint(xlarge) {
+      @include skel.breakpoint(xlarge) {
         // > section {
           > .image {
             width: 40%;
@@ -73,7 +78,7 @@
         // }
       }
   
-      @include breakpoint(large) {
+      @include skel.breakpoint(large) {
           > .image {
             width: 45%;
           }
@@ -83,7 +88,7 @@
           }
       }
   
-      @include breakpoint(medium) {
+      @include skel.breakpoint(medium) {
           display: block;
   
           > .image {
@@ -91,24 +96,24 @@
           }
   
           > .content {
-            @include padding(4em, 3em);
+            @include mixins.padding(4em, 3em);
             width: 100%;
           }
       }
   
-      @include breakpoint(small) {
+      @include skel.breakpoint(small) {
           > .content {
-            @include padding(3em, 1.5em);
+            @include mixins.padding(3em, 1.5em);
           }
         }
 
 
       &:nth-child(2n).spotlights {
-        @include vendor('flex-direction', 'row-reverse');
-        background-color: desaturate(lighten(_palette(bg-alt), 4), 2);
+        @include skel.vendor('flex-direction', 'row-reverse');
+        background-color: color.adjust(color.adjust(functions.palette(bg-alt), $lightness: 4%), $saturation: -2%);
 
         > .content {
-          @include vendor('align-items', 'flex-end');
+          @include skel.vendor('align-items', 'flex-end');
         }
       }
     }

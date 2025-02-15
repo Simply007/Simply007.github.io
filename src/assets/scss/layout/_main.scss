@@ -1,3 +1,6 @@
+@use "../libs/functions";
+@use "../libs/mixins";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -7,20 +10,20 @@
 /* Main */
 
 	#main {
-		background-color: _palette(bg-alt);
+		background-color: functions.palette(bg-alt);
 
 		> * {
-			border-top: solid 1px _palette(border);
+			border-top: solid 1px functions.palette(border);
 
 			&:first-child {
 				border-top: 0;
 			}
 
-			@include inner;
+			@include mixins.inner;
 		}
 
 		&.alt {
 			background-color: transparent;
-			border-bottom: solid 1px _palette(border);
+			border-bottom: solid 1px functions.palette(border);
 		}
 	}

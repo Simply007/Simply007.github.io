@@ -9,7 +9,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: "Ondřej Chtastina's personal site.",
+        name: "Ondřej Chrastina's personal site.",
         short_name: 'chrastina',
         start_url: '/',
         background_color: '#242943',
@@ -19,7 +19,7 @@ module.exports = {
       },
     },
     {
-      resolve: '@kentico/gatsby-source-kontent',
+      resolve: '@kontent-ai/gatsby-source',
       options: {
         projectId: process.env.KONTENT_PROJECT_ID, // Fill in your Project ID
         // if false used authorization key for secured API
@@ -33,7 +33,7 @@ module.exports = {
             : undefined,
         languageCodenames: process.env.KONTENT_LANGUAGE_CODENAMES.split(
           ','
-        ).map(lang => lang.trim()),
+        ).map((lang) => lang.trim()),
         includeTaxonomies: true, // opt-out by default
       },
     },

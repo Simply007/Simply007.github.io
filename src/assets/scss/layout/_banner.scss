@@ -1,3 +1,7 @@
+@use "../libs/functions";
+@use "../libs/mixins";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -7,10 +11,10 @@
 /* Banner */
 
 	#banner {
-		@include vendor('align-items', 'center');
+		@include skel.vendor('align-items', 'center');
 		// @include vendor('background-image', 'url("../images/banner.jpg")');
-		@include vendor('display', 'flex');
-		@include padding(4em, 0, (2em, 0, 0, 0));
+		@include skel.vendor('display', 'flex');
+		@include mixins.padding(4em, 0, (2em, 0, 0, 0));
 		background-attachment: fixed;
 		background-position: 75% 50%;
 		background-repeat: no-repeat;
@@ -26,10 +30,10 @@
 		opacity: 0.9;
 
 		&:after {
-			@include vendor('transition', 'opacity #{_duration(banner)} ease');
-			@include vendor('transition-delay', '0.75s');
-			@include vendor('pointer-events', 'none');
-			background-color: _palette(bg);
+			@include skel.vendor('transition', 'opacity #{functions.duration(banner)} ease');
+			@include skel.vendor('transition-delay', '0.75s');
+			@include skel.vendor('pointer-events', 'none');
+			background-color: functions.palette(bg);
 			content: '';
 			display: block;
 			height: 100%;
@@ -49,7 +53,7 @@
 		}
 
 		> .inner {
-			@include vendor('transition', (
+			@include skel.vendor('transition', (
 				'opacity 1.5s ease',
 				'transform 0.5s ease-out',
 				'filter 0.5s ease',
@@ -76,9 +80,9 @@
 			}
 
 			.content {
-				@include vendor('display', 'flex');
-				@include vendor('align-items', 'center');
-				margin: 0 0 _size(element-margin) 0;
+				@include skel.vendor('display', 'flex');
+				@include skel.vendor('align-items', 'center');
+				margin: 0 0 functions.size(element-margin) 0;
 
 				> * {
 					margin-left: 1.5em;
@@ -94,8 +98,8 @@
 				}
 				
 					font-size: 0.7em;
-					font-weight: _font(weight-bold);
-					letter-spacing: _font(letter-spacing-alt);
+					font-weight: functions.font(weight-bold);
+					letter-spacing: functions.font(letter-spacing-alt);
 					text-transform: uppercase;
 			
 			}
@@ -111,12 +115,12 @@
 			}
 		}
 
-		&.style1 { &:after { background-color: _palette(accent1); } }
-		&.style2 { &:after { background-color: _palette(accent2); } }
-		&.style3 { &:after { background-color: _palette(accent3); } }
-		&.style4 { &:after { background-color: _palette(accent4); } }
-		&.style5 { &:after { background-color: _palette(accent5); } }
-		&.style6 { &:after { background-color: _palette(accent6); } }
+		&.style1 { &:after { background-color: functions.palette(accent1); } }
+		&.style2 { &:after { background-color: functions.palette(accent2); } }
+		&.style3 { &:after { background-color: functions.palette(accent3); } }
+		&.style4 { &:after { background-color: functions.palette(accent4); } }
+		&.style5 { &:after { background-color: functions.palette(accent5); } }
+		&.style6 { &:after { background-color: functions.palette(accent6); } }
 
 		.body.is-loading & {
 			&:after {
@@ -124,18 +128,18 @@
 			}
 
 			> .inner {
-				@include vendor('filter', 'blur(0.125em)');
-				@include vendor('transform', 'translateX(-0.5em)');
+				@include skel.vendor('filter', 'blur(0.125em)');
+				@include skel.vendor('transform', 'translateX(-0.5em)');
 				opacity: 0;
 			}
 		}
 
-		@include breakpoint(large) {
+		@include skel.breakpoint(large) {
 			background-attachment: scroll;
 		}
 
-		@include breakpoint(small) {
-			@include padding(3em, 0, (2em, 0, 0, 0));
+		@include skel.breakpoint(small) {
+			@include mixins.padding(3em, 0, (2em, 0, 0, 0));
 			height: auto;
 			margin-bottom: -2.75em;
 			max-height: none;
@@ -152,7 +156,7 @@
 
 					> * {
 						margin-left: 0;
-						margin-bottom: _size(element-margin);
+						margin-bottom: functions.size(element-margin);
 					}
 				}
 			}
@@ -164,8 +168,8 @@
 			}
 		}
 
-		@include breakpoint(xsmall) {
-			@include padding(4em, 0, (2em, 0, 0, 0));
+		@include skel.breakpoint(xsmall) {
+			@include mixins.padding(4em, 0, (2em, 0, 0, 0));
 
 			> .inner {
 				.content {
@@ -178,7 +182,7 @@
 			}
 
 			&.major {
-				@include padding(6em, 0, (2em, 0, 0, 0));
+				@include mixins.padding(6em, 0, (2em, 0, 0, 0));
 			}
 		}
 	}

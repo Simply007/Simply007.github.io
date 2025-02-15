@@ -191,7 +191,7 @@ class DefaultLayout extends React.Component {
               }
             }
           `}
-          render={data => {
+          render={(data) => {
             const headerData = get(
               data,
               'kontentItemLayout.elements.header.value[0]'
@@ -226,7 +226,7 @@ class DefaultLayout extends React.Component {
                       {
                         name: 'keywords',
                         content: otherData.keywords.value
-                          .map(keyword => keyword.elements.keyword.value)
+                          .map((keyword) => keyword.elements.keyword.value)
                           .join(','),
                       },
                       { property: 'og:type', content: 'website' },
