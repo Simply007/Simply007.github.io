@@ -1,3 +1,8 @@
+@use "sass:color";
+@use "../libs/functions";
+@use "../libs/mixins";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -7,8 +12,8 @@
 /* Tiles */
 
 	.tiles {
-		@include vendor('display', 'flex');
-		@include vendor('flex-wrap', 'wrap');
+		@include skel.vendor('display', 'flex');
+		@include skel.vendor('flex-wrap', 'wrap');
 		border-top: 0 !important;
 		margin: 0 auto;
 		max-width: 88em;
@@ -18,15 +23,15 @@
 		}
 
 		article {
-			@include vendor('align-items', 'center');
-			@include vendor('display', 'flex');
-			@include vendor('transition', (
+			@include skel.vendor('align-items', 'center');
+			@include skel.vendor('display', 'flex');
+			@include skel.vendor('transition', (
 				'transform 0.25s ease',
 				'opacity 0.25s ease',
 				'filter 1s ease',
 				'-webkit-filter 1s ease'
 			));
-			@include padding(4em, 4em);
+			@include mixins.padding(4em, 4em);
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -41,7 +46,7 @@
 			}
 
 			header {
-				@include vendor('transition', (
+				@include skel.vendor('transition', (
 						'transform 0.25s ease',
 						'opacity 0.25s ease',
 						'filter 1s ease',
@@ -83,7 +88,7 @@
 			}
 
 			&:before {
-				@include vendor('transition', 'opacity 0.5s ease');
+				@include skel.vendor('transition', 'opacity 0.5s ease');
 				bottom: 0;
 				content: '';
 				display: block;
@@ -96,7 +101,7 @@
 			}
 
 			&:after {
-				background-color: transparentize(_palette(bg), 0.75);
+				background-color: color.adjust(functions.palette(bg), $alpha: -0.75);
 				content: '';
 				display: block;
 				height: 100%;
@@ -119,8 +124,8 @@
 			}
 
 			&.is-transitioning {
-				@include vendor('transform', 'scale(0.95)');
-				@include vendor('filter', 'blur(0.5em)');
+				@include skel.vendor('transform', 'scale(0.95)');
+				@include skel.vendor('filter', 'blur(0.5em)');
 				opacity: 0;
 			}
 
@@ -131,57 +136,57 @@
 
 			&:nth-child(6n - 5) {
 				&:before {
-					background-color: _palette(accent1);
+					background-color: functions.palette(accent1);
 				}
 			}
 
 			&:nth-child(6n - 4) {
 				&:before {
-					background-color: _palette(accent2);
+					background-color: functions.palette(accent2);
 				}
 			}
 
 			&:nth-child(6n - 3) {
 				&:before {
-					background-color: _palette(accent3);
+					background-color: functions.palette(accent3);
 				}
 			}
 
 			&:nth-child(6n - 2) {
 				&:before {
-					background-color: _palette(accent4);
+					background-color: functions.palette(accent4);
 				}
 			}
 
 			&:nth-child(6n - 1) {
 				&:before {
-					background-color: _palette(accent5);
+					background-color: functions.palette(accent5);
 				}
 			}
 
 			&:nth-child(6n) {
 				&:before {
-					background-color: _palette(accent6);
+					background-color: functions.palette(accent6);
 				}
 			}
 		}
 
-		@include breakpoint(large) {
+		@include skel.breakpoint(large) {
 			article {
-				@include padding(4em, 3em);
+				@include mixins.padding(4em, 3em);
 				min-height: 20em;
 			}
 		}
 
-		@include breakpoint(medium) {
+		@include skel.breakpoint(medium) {
 			article {
 				width: 50% !important;
 			}
 		}
 
-		@include breakpoint(small) {
+		@include skel.breakpoint(small) {
 			article {
-				@include padding(3em, 1.5em);
+				@include mixins.padding(3em, 1.5em);
 				min-height: 0;
 
 				h3 {
@@ -190,7 +195,7 @@
 			}
 		}
 
-		@include breakpoint(xsmall) {
+		@include skel.breakpoint(xsmall) {
 			display: block;
 
 			article {

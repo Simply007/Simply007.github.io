@@ -1,11 +1,12 @@
-@import 'libs/vars';
-@import 'libs/functions';
-@import 'libs/mixins';
-@import 'libs/skel';
+@use "sass:meta";
+@use 'libs/vars';
+@use 'libs/functions';
+@use 'libs/mixins';
+@use 'libs/skel';
 @import '../css/font-awesome.min.css';
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic');
 
-@import "css-grid";
+@include meta.load-css("css-grid");
 
 /*
 	Forty by HTML5 UP
@@ -13,7 +14,7 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-	@include skel-breakpoints((
+	@include skel.skel-breakpoints((
 		xlarge: '(max-width: 1680px)',
 		large: '(max-width: 1280px)',
 		medium: '(max-width: 980px)',
@@ -22,52 +23,38 @@
 		xxsmall: '(max-width: 360px)'
 	));
 
-	@include skel-layout((
+	@include skel.skel-layout((
 		reset: 'full',
 		boxModel: 'border'
 	));
 
-	@mixin inner {
-		> .inner {
-			@include padding(4em, 0);
-			margin: 0 auto;
-			max-width: _size(inner);
-			width: calc(100% - 6em);
-
-			@include breakpoint(small) {
-				@include padding(3em, 0);
-				width: calc(100% - 3em);
-			}
-		}
-	}
-
 // Base.
 
-	@import 'base/page';
-	@import 'base/typography';
+	@include meta.load-css('base/page');
+	@include meta.load-css('base/typography');
 
 // Component.
 
-	@import 'components/section';
-	@import 'components/form';
-	@import 'components/box';
-	@import 'components/icon';
-	@import 'components/image';
-	@import 'components/list';
-	@import 'components/table';
-	@import 'components/button';
-	@import 'components/tiles';
-	@import 'components/categories';
-	@import 'components/contact-method';
-	@import 'components/spotlights';
-	@import 'components/code-highlighter';
+	@include meta.load-css('components/section');
+	@include meta.load-css('components/form');
+	@include meta.load-css('components/box');
+	@include meta.load-css('components/icon');
+	@include meta.load-css('components/image');
+	@include meta.load-css('components/list');
+	@include meta.load-css('components/table');
+	@include meta.load-css('components/button');
+	@include meta.load-css('components/tiles');
+	@include meta.load-css('components/categories');
+	@include meta.load-css('components/contact-method');
+	@include meta.load-css('components/spotlights');
+	@include meta.load-css('components/code-highlighter');
 
 // Layout.
 
-	@import 'layout/header';
-	@import 'layout/banner';
-	@import 'layout/main';
-	@import 'layout/contact';
-	@import 'layout/footer';
-	@import 'layout/wrapper';
-	@import 'layout/menu';
+	@include meta.load-css('layout/header');
+	@include meta.load-css('layout/banner');
+	@include meta.load-css('layout/main');
+	@include meta.load-css('layout/contact');
+	@include meta.load-css('layout/footer');
+	@include meta.load-css('layout/wrapper');
+	@include meta.load-css('layout/menu');

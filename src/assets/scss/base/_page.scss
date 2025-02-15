@@ -1,3 +1,6 @@
+@use "../libs/functions";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -17,21 +20,21 @@
 		}
 
 	// Ensures page width is always >=320px.
-		@include breakpoint(xsmall) {
+		@include skel.breakpoint(xsmall) {
 			html, body {
 				min-width: 320px;
 			}
 		}
 
 	body {
-		background: _palette(bg);
+		background: functions.palette(bg);
 
 		// Prevents animation/transition "flicker" on page load.
 		// Automatically added/removed by js/main.js.
 			&.is-loading {
 				*, *:before, *:after {
-					@include vendor('animation', 'none !important');
-					@include vendor('transition', 'none !important');
+					@include skel.vendor('animation', 'none !important');
+					@include skel.vendor('transition', 'none !important');
 				}
 			}
 

@@ -1,3 +1,7 @@
+@use "../libs/functions";
+@use "../libs/mixins";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -7,16 +11,16 @@
 /* Contact */
 
 	#contact {
-		border-bottom: solid 1px _palette(border);
+		border-bottom: solid 1px functions.palette(border);
 		overflow-x: hidden;
 
 		> .inner {
-			@include vendor('display', 'flex');
+			@include skel.vendor('display', 'flex');
 			padding: 0 !important;
 
 			> :nth-child(2n - 1) {
-				@include padding(4em, 0, (0, 3em, 0, 0));
-				border-right: solid 1px _palette(border);
+				@include mixins.padding(4em, 0, (0, 3em, 0, 0));
+				border-right: solid 1px functions.palette(border);
 				width: 60%;
 			}
 
@@ -29,11 +33,11 @@
 				padding: 0;
 
 				> * {
-					@include padding(3em, 0, (0, 0, 0, 3em));
+					@include mixins.padding(3em, 0, (0, 0, 0, 3em));
 					position: relative;
 
 					&:before {
-						border-top: solid 1px _palette(border);
+						border-top: solid 1px functions.palette(border);
 						content: '';
 						display: block;
 						margin-left: -3em;
@@ -51,12 +55,12 @@
 			}
 		}
 
-		@include breakpoint(medium) {
+		@include skel.breakpoint(medium) {
 			> .inner {
 				display: block;
 
 				> :nth-child(2n - 1) {
-					@include padding(4em, 0, (0, 0, 0, 0));
+					@include mixins.padding(4em, 0, (0, 0, 0, 0));
 					border-right: 0;
 					width: 100%;
 				}
@@ -68,7 +72,7 @@
 
 				> .split {
 					> * {
-						@include padding(3em, 0, (0, 0, 0, 0));
+						@include mixins.padding(3em, 0, (0, 0, 0, 0));
 
 						&:before {
 						}
@@ -83,10 +87,10 @@
 			}
 		}
 
-		@include breakpoint(small) {
+		@include skel.breakpoint(small) {
 			> .inner {
 				> :nth-child(2n - 1) {
-					@include padding(3em, 0, (0, 0, 0, 0));
+					@include mixins.padding(3em, 0, (0, 0, 0, 0));
 				}
 			}
 		}

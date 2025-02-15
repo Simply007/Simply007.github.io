@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "../libs/functions";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -10,32 +14,32 @@ body,
 input,
 select,
 textarea {
-  color: _palette(fg);
-  font-family: _font(family);
+  color: functions.palette(fg);
+  font-family: functions.font(family);
   font-size: 17pt;
-  font-weight: _font(weight);
-  letter-spacing: _font(letter-spacing);
+  font-weight: functions.font(weight);
+  letter-spacing: functions.font(letter-spacing);
   line-height: 1.65;
 
-  @include breakpoint(xlarge) {
+  @include skel.breakpoint(xlarge) {
     font-size: 14pt;
   }
 
-  @include breakpoint(large) {
+  @include skel.breakpoint(large) {
     font-size: 12pt;
   }
 
-  @include breakpoint(xxsmall) {
+  @include skel.breakpoint(xxsmall) {
     font-size: 11pt;
   }
 }
 
 a {
-  @include vendor(
+  @include skel.vendor(
     'transition',
     (
-      'color #{_duration(transition)} ease-in-out',
-      'border-bottom-color #{_duration(transition)} ease-in-out'
+      'color #{functions.duration(transition)} ease-in-out',
+      'border-bottom-color #{functions.duration(transition)} ease-in-out'
     )
   );
   border-bottom: dotted 1px;
@@ -44,18 +48,18 @@ a {
 
   &:hover {
     border-bottom-color: transparent;
-    color: _palette(highlight) !important;
+    color: functions.palette(highlight) !important;
   }
 
   &:active {
-    color: desaturate(darken(_palette(highlight), 15), 5) !important;
+    color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15), $saturation: -5) !important;
   }
 }
 
 strong,
 b {
-  color: _palette(fg-bold);
-  font-weight: _font(weight-bold);
+  color: functions.palette(fg-bold);
+  font-weight: functions.font(weight-bold);
 }
 
 em,
@@ -64,7 +68,7 @@ i {
 }
 
 p {
-  margin: 0 0 _size(element-margin) 0;
+  margin: 0 0 functions.size(element-margin) 0;
 }
 
 h1,
@@ -73,10 +77,10 @@ h3,
 h4,
 h5,
 h6 {
-  color: _palette(fg-bold);
-  font-weight: _font(weight-bold);
+  color: functions.palette(fg-bold);
+  font-weight: functions.font(weight-bold);
   line-height: 1.65;
-  margin: 0 0 (_size(element-margin) * 0.5) 0;
+  margin: 0 0 (functions.size(element-margin) * 0.5) 0;
 
   a {
     color: inherit;
@@ -108,7 +112,7 @@ h6 {
   font-size: 0.7em;
 }
 
-@include breakpoint(small) {
+@include skel.breakpoint(small) {
   h1 {
     font-size: 2em;
   }
@@ -135,15 +139,15 @@ sup {
 }
 
 blockquote {
-  border-left: solid 4px _palette(border);
+  border-left: solid 4px functions.palette(border);
   font-style: italic;
-  margin: 0 0 _size(element-margin) 0;
-  padding: calc(_size(element-margin) / 4) 0 calc(_size(element-margin) / 4)
-    _size(element-margin);
+  margin: 0 0 functions.size(element-margin) 0;
+  padding: calc(functions.size(element-margin) / 4) 0 calc(functions.size(element-margin) / 4)
+    functions.size(element-margin);
 }
 
 code {
-  font-family: _font(family-fixed);
+  font-family: functions.font(family-fixed);
   white-space: pre-wrap;
   text-decoration: none;
   padding: 0.2em 0.2em;
@@ -155,9 +159,9 @@ code {
 
 pre {
   -webkit-overflow-scrolling: touch;
-  font-family: _font(family-fixed);
+  font-family: functions.font(family-fixed);
   font-size: 0.9em;
-  margin: 0 0 _size(element-margin) 0;
+  margin: 0 0 functions.size(element-margin) 0;
 
   code {
     display: block;
@@ -169,11 +173,11 @@ pre {
 
 hr {
   border: 0;
-  border-bottom: solid 1px _palette(border);
-  margin: _size(element-margin) 0;
+  border-bottom: solid 1px functions.palette(border);
+  margin: functions.size(element-margin) 0;
 
   &.major {
-    margin: (_size(element-margin) * 1.5) 0;
+    margin: (functions.size(element-margin) * 1.5) 0;
   }
 }
 

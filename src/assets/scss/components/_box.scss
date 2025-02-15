@@ -1,3 +1,5 @@
+@use "../libs/functions";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -7,8 +9,8 @@
 /* Box */
 
 	.box {
-		border: solid 1px _palette(border);
-		margin-bottom: _size(element-margin);
+		border: solid 1px functions.palette(border);
+		margin-bottom: functions.size(element-margin);
 		padding: 1.5em;
 
 		> :last-child,

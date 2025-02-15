@@ -1,3 +1,8 @@
+@use "sass:color";
+@use "../libs/functions";
+@use "../libs/mixins";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -7,16 +12,16 @@
 /* Menu */
 
 	#menu {
-		@include vendor('transition', (
-			'transform #{_duration(menu)} ease',
-			'opacity #{_duration(menu)} ease',
-			'visibility #{_duration(menu)}'
+		@include skel.vendor('transition', (
+			'transform #{functions.duration(menu)} ease',
+			'opacity #{functions.duration(menu)} ease',
+			'visibility #{functions.duration(menu)}'
 		));
-		@include vendor('align-items', 'center');
-		@include vendor('display', 'flex');
-		@include vendor('justify-content', 'center');
-		@include vendor('pointer-events', 'none');
-		background: transparentize(_palette(bg), 0.1);
+		@include skel.vendor('align-items', 'center');
+		@include skel.vendor('display', 'flex');
+		@include skel.vendor('justify-content', 'center');
+		@include skel.vendor('pointer-events', 'none');
+		background: color.adjust(functions.palette(bg), $alpha: -0.1);
 		box-shadow: none;
 		height: 100%;
 		left: 0;
@@ -27,15 +32,15 @@
 		top: 0;
 		visibility: hidden;
 		width: 100%;
-		z-index: _misc(z-index-base) + 2;
+		z-index: functions.misc(z-index-base) + 2;
 
 		.inner {
-			@include vendor('transition', (
-				'transform #{_duration(menu)} ease-out',
-				'opacity #{_duration(menu)} ease',
-				'visibility #{_duration(menu)}'
+			@include skel.vendor('transition', (
+				'transform #{functions.duration(menu)} ease-out',
+				'opacity #{functions.duration(menu)} ease',
+				'visibility #{functions.duration(menu)}'
 			));
-			@include vendor('transform', 'rotateX(20deg)');
+			@include skel.vendor('transform', 'rotateX(20deg)');
 			-webkit-overflow-scrolling: touch;
 			max-width: 100%;
 			max-height: 100vh;
@@ -46,16 +51,16 @@
 			width: 18em;
 
 			> :first-child {
-				margin-top: _size(element-margin);
+				margin-top: functions.size(element-margin);
 			}
 
 			> :last-child {
-				margin-bottom: (_size(element-margin) * 1.5);
+				margin-bottom: (functions.size(element-margin) * 1.5);
 			}
 		}
 
 		ul {
-			margin: 0 0 (_size(element-margin) * 0.5) 0;
+			margin: 0 0 (functions.size(element-margin) * 0.5) 0;
 
 			&.links {
 				list-style: none;
@@ -66,11 +71,11 @@
 
 					> a:not(.button) {
 						border: 0;
-						border-top: solid 1px _palette(border);
+						border-top: solid 1px functions.palette(border);
 						display: block;
 						font-size: 0.8em;
-						font-weight: _font(weight-bold);
-						letter-spacing: _font(letter-spacing-alt);
+						font-weight: functions.font(weight-bold);
+						letter-spacing: functions.font(letter-spacing-alt);
 						line-height: 4em;
 						text-decoration: none;
 						text-transform: uppercase;
@@ -91,7 +96,7 @@
 		}
 
 		.close {
-			@include vendor('transition', 'color #{_duration(transition)} ease-in-out');
+			@include skel.vendor('transition', 'color #{functions.duration(transition)} ease-in-out');
 			-webkit-tap-highlight-color: rgba(0,0,0,0);
 			border: 0;
 			cursor: pointer;
@@ -110,7 +115,7 @@
 			width: 8em;
 
 			&:before, &:after {
-				@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
+				@include skel.vendor('transition', 'opacity #{functions.duration(transition)} ease-in-out');
 				background-position: center;
 				background-repeat: no-repeat;
 				content: '';
@@ -123,11 +128,11 @@
 			}
 
 			&:before {
-				background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(fg-bold)}; stroke-width: 2; }</style><line x1="0" y1="0" x2="20" y2="20" /><line x1="20" y1="0" x2="0" y2="20" /></svg>');
+				background-image: mixins.svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{functions.palette(fg-bold)}; stroke-width: 2; }</style><line x1="0" y1="0" x2="20" y2="20" /><line x1="20" y1="0" x2="0" y2="20" /></svg>');
 			}
 
 			&:after {
-				background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(highlight)}; stroke-width: 2; }</style><line x1="0" y1="0" x2="20" y2="20" /><line x1="20" y1="0" x2="0" y2="20" /></svg>');
+				background-image: mixins.svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{functions.palette(highlight)}; stroke-width: 2; }</style><line x1="0" y1="0" x2="20" y2="20" /><line x1="20" y1="0" x2="0" y2="20" /></svg>');
 				opacity: 0;
 			}
 
@@ -141,22 +146,22 @@
 
 	body.is-ie {
 		#menu {
-			background: transparentize(_palette(bg-alt), 0.025);
+			background: color.adjust(functions.palette(bg-alt), $alpha: -0.025);
 		}
 	}
 
 	.body.is-menu-visible {
 		#wrapper {
-			@include vendor('filter', 'blur(0.5em)');
+			@include skel.vendor('filter', 'blur(0.5em)');
 		}
 
 		#menu {
-			@include vendor('pointer-events', 'auto');
+			@include skel.vendor('pointer-events', 'auto');
 			opacity: 1;
 			visibility: visible;
 
 			.inner {
-				@include vendor('transform', 'none');
+				@include skel.vendor('transform', 'none');
 				opacity: 1;
 				visibility: visible;
 			}

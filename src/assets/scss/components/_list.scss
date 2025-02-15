@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "../libs/functions";
+@use "../libs/skel";
+
 ///
 /// Forty by HTML5 UP
 /// html5up.net | @ajlkn
@@ -8,7 +12,7 @@
 
 ol {
 	list-style: decimal;
-	margin: 0 0 _size(element-margin) 0;
+	margin: 0 0 functions.size(element-margin) 0;
 	padding-left: 1.25em;
 
 	li {
@@ -23,7 +27,7 @@ ol {
 
 ul {
 	list-style: disc;
-	margin: 0 0 _size(element-margin) 0;
+	margin: 0 0 functions.size(element-margin) 0;
 	padding-left: 1em;
 
 	li {
@@ -39,7 +43,7 @@ ul {
 		padding-left: 0;
 
 		li {
-			border-top: solid 1px _palette(border);
+			border-top: solid 1px functions.palette(border);
 			padding: 0.5em 0;
 
 			&:first-child {
@@ -63,7 +67,7 @@ ul {
 			}
 		}
 
-		@include breakpoint(small) {
+		@include skel.breakpoint(small) {
 			li {
 				padding: 0 0.75em 0.75em 0;
 			}
@@ -77,7 +81,7 @@ ul {
 
 		li {
 			display: inline-block;
-			padding: 0 (_size(element-margin) * 0.5) 0 0;
+			padding: 0 (functions.size(element-margin) * 0.5) 0 0;
 			vertical-align: middle;
 
 			&:last-child {
@@ -87,14 +91,14 @@ ul {
 
 		&.small {
 			li {
-				padding: 0 (_size(element-margin) * 0.5) 0 0;
+				padding: 0 (functions.size(element-margin) * 0.5) 0 0;
 			}
 		}
 
 		&.vertical {
 			li {
 				display: block;
-				padding: (_size(element-margin) * 0.5) 0 0 0;
+				padding: (functions.size(element-margin) * 0.5) 0 0 0;
 
 				&:first-child {
 					padding-top: 0;
@@ -116,14 +120,14 @@ ul {
 
 		&.fit {
 			display: table;
-			margin-left: (_size(element-margin) * -0.5);
+			margin-left: (functions.size(element-margin) * -0.5);
 			padding: 0;
 			table-layout: fixed;
-			width: calc(100% + #{(_size(element-margin) * 0.5)});
+			width: calc(100% + #{(functions.size(element-margin) * 0.5)});
 
 			li {
 				display: table-cell;
-				padding: 0 0 0 (_size(element-margin) * 0.5);
+				padding: 0 0 0 (functions.size(element-margin) * 0.5);
 
 				>* {
 					margin-bottom: 0;
@@ -131,11 +135,11 @@ ul {
 			}
 
 			&.small {
-				margin-left: (_size(element-margin) * -0.5);
-				width: calc(100% + #{(_size(element-margin) * 0.5)});
+				margin-left: (functions.size(element-margin) * -0.5);
+				width: calc(100% + #{(functions.size(element-margin) * 0.5)});
 
 				li {
-					padding: 0 0 0 (_size(element-margin) * 0.5);
+					padding: 0 0 0 (functions.size(element-margin) * 0.5);
 				}
 			}
 		}
@@ -152,13 +156,13 @@ ul {
 			vertical-align: middle;
 
 			>.page {
-				@include vendor('transition', ('background-color #{_duration(transition)} ease-in-out',
-						'color #{_duration(transition)} ease-in-out'
+				@include skel.vendor('transition', ('background-color #{functions.duration(transition)} ease-in-out',
+						'color #{functions.duration(transition)} ease-in-out'
 					));
 				border-bottom: 0;
 				display: inline-block;
 				font-size: 0.8em;
-				font-weight: _font(weight-bold);
+				font-weight: functions.font(weight-bold);
 				height: 1.5em;
 				line-height: 1.5em;
 				margin: 0 0.125em;
@@ -167,16 +171,16 @@ ul {
 				text-align: center;
 
 				&.active {
-					background-color: _palette(fg-bold);
-					color: _palette(bg);
+					background-color: functions.palette(fg-bold);
+					color: functions.palette(bg);
 
 					&:hover {
-						background-color: _palette(highlight);
-						color: _palette(bg) !important;
+						background-color: functions.palette(highlight);
+						color: functions.palette(bg) !important;
 					}
 
 					&:active {
-						background-color: desaturate(darken(_palette(highlight), 15), 5);
+						background-color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15), $saturation: -5);
 					}
 				}
 			}
@@ -190,7 +194,7 @@ ul {
 			}
 		}
 
-		@include breakpoint(xsmall) {
+		@include skel.breakpoint(xsmall) {
 			li {
 				&:nth-child(n+2):nth-last-child(n+2) {
 					display: none;
@@ -205,15 +209,15 @@ ul {
 }
 
 dl {
-	margin: 0 0 _size(element-margin) 0;
+	margin: 0 0 functions.size(element-margin) 0;
 
 	dt {
 		display: block;
-		font-weight: _font(weight-bold);
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
+		font-weight: functions.font(weight-bold);
+		margin: 0 0 (functions.size(element-margin) * 0.5) 0;
 	}
 
 	dd {
-		margin-left: _size(element-margin);
+		margin-left: functions.size(element-margin);
 	}
 }
