@@ -9,7 +9,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: "Ondřej Chtastina's personal site.",
+        name: "Ondřej Chrastina's personal site.",
         short_name: 'chrastina',
         start_url: '/',
         background_color: '#242943',
