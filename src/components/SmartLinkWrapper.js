@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import KontentSmartLink from '@kentico/kontent-smart-link'
+import KontentSmartLink from '@kontent-ai/smart-link'
 
 const SmartLinkWrapper = ({ children }) => {
   useEffect(() => {
@@ -16,12 +16,12 @@ const SmartLinkWrapper = ({ children }) => {
     <StaticQuery
       query={graphql`
         {
-          sitePlugin(name: { eq: "@kentico/gatsby-source-kontent" }) {
+          sitePlugin(name: { eq: "@kontent-ai/gatsby-source" }) {
             pluginOptions
           }
         }
       `}
-      render={data => (
+      render={(data) => (
         <div
           className="kontent-smart-link-sdk-wrapper"
           data-kontent-project-id={data.sitePlugin.pluginOptions.projectId}

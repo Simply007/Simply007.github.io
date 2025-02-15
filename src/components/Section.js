@@ -19,7 +19,7 @@ const Section = ({ section, isFirst }) => {
     ) : null
   const actions =
     section.elements.cta.value.length > 0
-      ? section.elements.cta.value.map(cta => (
+      ? section.elements.cta.value.map((cta) => (
           <li key={cta.elements.external_url.value}>
             <a href={cta.elements.external_url.value} className="button">
               <span

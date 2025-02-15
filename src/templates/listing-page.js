@@ -11,7 +11,7 @@ import ListingItem from '../components/ListingItem'
  */
 const categorySuits = (selectedCategories, itemCategories) => {
   return (
-    [...selectedCategories].filter(category =>
+    [...selectedCategories].filter((category) =>
       itemCategories.includes(category)
     ).length > 0
   )
@@ -23,18 +23,18 @@ const ListingPage = ({
   const [selectedCategories, setSelectedCategories] = useState(new Set())
 
   const gotchas = listingData.nodes.filter(
-    node =>
+    (node) =>
       node.__typename === 'kontent_item_gotcha' &&
       node.elements.channel_purpose.value
-        .map(i => i.codename)
+        .map((i) => i.codename)
         .includes('website')
   )
 
   const projects = listingData.nodes.filter(
-    node =>
+    (node) =>
       node.__typename === 'kontent_item_project' &&
       node.elements.channel_purpose.value
-        .map(i => i.codename)
+        .map((i) => i.codename)
         .includes('website')
   )
 
@@ -47,28 +47,28 @@ const ListingPage = ({
     }
   }
 
-  const allItems = items.filter(item =>
+  const allItems = items.filter((item) =>
     selectedCategories.size === 0
       ? true
       : categorySuits(
           selectedCategories,
-          item.elements.listing_category.value.map(c => c.codename)
+          item.elements.listing_category.value.map((c) => c.codename)
         )
   )
 
   const listingOverview = allItems
-    .filter(item =>
+    .filter((item) =>
       selectedCategories.size === 0
         ? true
         : categorySuits(
             selectedCategories,
-            item.elements.listing_category.value.map(c => c.codename)
+            item.elements.listing_category.value.map((c) => c.codename)
           )
     )
-    .map(item => <ListingItem key={item.system.codename} item={item} />)
+    .map((item) => <ListingItem key={item.system.codename} item={item} />)
 
   const categories = Object.values(allCategories)
-  const categoriesComponents = categories.map(category => (
+  const categoriesComponents = categories.map((category) => (
     <li key={category.codename}>
       <button
         className={`button${
@@ -76,7 +76,7 @@ const ListingPage = ({
         }`}
         data-category-codename={category.codename}
         onClick={() =>
-          setSelectedCategories(selectedCategories => {
+          setSelectedCategories((selectedCategories) => {
             if (selectedCategories.has(category.codename)) {
               const result = new Set(selectedCategories)
               result.delete(category.codename)

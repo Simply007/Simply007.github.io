@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { ImageElement } from '@kentico/gatsby-kontent-components'
+import { ImageElement } from '@kontent-ai/gatsby-components'
 
-const BannerLanding = props => (
+const BannerLanding = (props) => (
   <section
     id="banner"
     data-kontent-item-id={props.itemId}

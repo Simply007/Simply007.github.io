@@ -4,7 +4,7 @@ import Layout from '../../components/layout'
 
 import pic11 from '../../assets/images/style-guide/pic11.jpg'
 
-const Generic = props => (
+const Generic = (props) => (
   <Layout>
     <Helmet>
       <title>Generic - Forty by HTML5 UP</title>
