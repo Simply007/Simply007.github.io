@@ -52,7 +52,7 @@ a {
   }
 
   &:active {
-    color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15), $saturation: -5) !important;
+    color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15%), $saturation: -5%) !important;
   }
 }
 

@@ -180,7 +180,7 @@ ul {
 					}
 
 					&:active {
-						background-color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15), $saturation: -5);
+						background-color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15%), $saturation: -5%);
 					}
 				}
 			}

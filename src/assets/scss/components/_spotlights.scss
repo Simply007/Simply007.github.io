@@ -21,7 +21,7 @@
 
     @include skel.vendor('display', 'flex');
       @include skel.vendor('flex-direction', 'row');
-      background-color: color.adjust(color.adjust(functions.palette(bg-alt), $lightness: 2), $saturation: -1);
+      background-color: color.adjust(color.adjust(functions.palette(bg-alt), $lightness: 2%), $saturation: -1%);
 
       > .image {
         background-position: center center;
@@ -110,7 +110,7 @@
 
       &:nth-child(2n).spotlights {
         @include skel.vendor('flex-direction', 'row-reverse');
-        background-color: color.adjust(color.adjust(functions.palette(bg-alt), $lightness: 4), $saturation: -2);
+        background-color: color.adjust(color.adjust(functions.palette(bg-alt), $lightness: 4%), $saturation: -2%);
 
         > .content {
           @include skel.vendor('align-items', 'flex-end');

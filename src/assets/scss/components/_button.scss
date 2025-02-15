@@ -47,8 +47,8 @@
 
 		&:active {
 			background-color: color.adjust(functions.palette(highlight), $alpha: -0.9);
-			box-shadow: inset 0 0 0 2px color.adjust(color.adjust(functions.palette(highlight), $lightness: -15), $saturation: -5);
-			color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15), $saturation: -5);
+			box-shadow: inset 0 0 0 2px color.adjust(color.adjust(functions.palette(highlight), $lightness: -15%), $saturation: -5%);
+			color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15%), $saturation: -5%);
 		}
 
 		&.icon {
@@ -124,7 +124,7 @@
 			}
 
 			&:active {
-				background-color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15), $saturation: -5);
+				background-color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15%), $saturation: -5%);
 			}
 		}
 
@@ -139,7 +139,7 @@
 			}
 
 			&:active {
-				background-color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15), $saturation: -5);
+				background-color: color.adjust(color.adjust(functions.palette(highlight), $lightness: -15%), $saturation: -5%);
 			}
 		}
 
