@@ -39,7 +39,7 @@ exports.createSchemaCustomization = async (api) => {
             parent = Array.from(entries).find(
               (item) =>
                 item.preferred_language ===
-                  currentContextItem.preferred_language &&
+                currentContextItem.preferred_language &&
                 item.elements['sub_items'].value.includes(
                   currentContextItem.system.codename
                 )
@@ -145,6 +145,13 @@ exports.createPages = async ({ graphql, actions }) => {
               value: { elemMatch: { codename: { eq: "website" } } }
             }
           }
+        },
+        sort: {
+          elements: {
+            post_date: {
+              value: DESC
+            }
+          }
         }
       ) {
         nodes {
@@ -181,6 +188,13 @@ exports.createPages = async ({ graphql, actions }) => {
             url_slug: { value: { ne: "" } }
             channel_purpose: {
               value: { elemMatch: { codename: { eq: "website" } } }
+            }
+          }
+        },
+        sort: {
+          elements: {
+            release_date: {
+              value: DESC
             }
           }
         }

@@ -89,6 +89,41 @@ export const query = graphql`
                         external_url {
                           value
                         }
+                        link_to {
+                          value {
+                            __typename
+                            ... on kontent_item_navigation_item {
+                              elements {
+                                slug {
+                                  value
+                                }
+                                title {
+                                  value
+                                }
+                              }
+                            }
+                            ... on kontent_item_project {
+                              elements {
+                                url_slug {
+                                  value
+                                }
+                                title {
+                                  value
+                                }
+                              }
+                            }
+                            ... on kontent_item_gotcha {
+                              elements {
+                                url_slug {
+                                  value
+                                }
+                                title {
+                                  value
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
