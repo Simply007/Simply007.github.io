@@ -17,6 +17,11 @@ const categorySuits = (selectedCategories, itemCategories) => {
   )
 }
 
+const getPostItemValue = (item) => (
+  (item.__typename === 'kontent_item_project' && item.elements.release_date.value)
+  || (item.__typename === 'kontent_item_gotcha' && item.elements.post_date.value)
+);
+
 const ListingPage = ({
   data: { kontentItemListingPage: pageData, allKontentItem: listingData },
 }) => {
@@ -51,9 +56,9 @@ const ListingPage = ({
     selectedCategories.size === 0
       ? true
       : categorySuits(
-          selectedCategories,
-          item.elements.listing_category.value.map((c) => c.codename)
-        )
+        selectedCategories,
+        item.elements.listing_category.value.map((c) => c.codename)
+      )
   )
 
   const listingOverview = allItems
@@ -61,19 +66,28 @@ const ListingPage = ({
       selectedCategories.size === 0
         ? true
         : categorySuits(
-            selectedCategories,
-            item.elements.listing_category.value.map((c) => c.codename)
-          )
+          selectedCategories,
+          item.elements.listing_category.value.map((c) => c.codename)
+        )
     )
+    .sort((a, b) => {
+      const left = getPostItemValue(a);
+      const right = getPostItemValue(b);
+
+      if (left && right) {
+        return new Date(right) - new Date(left)
+      }
+      else
+        return 0;
+    })
     .map((item) => <ListingItem key={item.system.codename} item={item} />)
 
   const categories = Object.values(allCategories)
   const categoriesComponents = categories.map((category) => (
     <li key={category.codename}>
       <button
-        className={`button${
-          selectedCategories.has(category.codename) ? ' toggle' : ''
-        }`}
+        className={`button${selectedCategories.has(category.codename) ? ' toggle' : ''
+          }`}
         data-category-codename={category.codename}
         onClick={() =>
           setSelectedCategories((selectedCategories) => {
@@ -96,11 +110,10 @@ const ListingPage = ({
     <li key="#ALL">
       <button
         onClick={() => setSelectedCategories(new Set())}
-        className={`button${
-          selectedCategories.size === 0
-            ? ' disabled toggle'
-            : ' icon fa-times-circle'
-        }`}
+        className={`button${selectedCategories.size === 0
+          ? ' disabled toggle'
+          : ' icon fa-times-circle'
+          }`}
       >
         {selectedCategories.size === 0 ? 'ALL' : 'CLEAR'}
       </button>
@@ -185,6 +198,9 @@ export const query = graphql`
               }
             }
             summary {
+              value
+            }
+            post_date {
               value
             }
             channel_purpose {
