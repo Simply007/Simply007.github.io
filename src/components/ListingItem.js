@@ -65,7 +65,7 @@ const ListingItem = ({ item }) => {
             <div
               dangerouslySetInnerHTML={{ __html: item.elements.summary.value }}
               data-kontent-element-codename="summary"
-              className="summary box"
+              className="summary"
             />
             <ul className="actions">
               <li>

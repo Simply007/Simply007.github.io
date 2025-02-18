@@ -111,15 +111,13 @@
 				width: 100%;
 				z-index: 1;
 			}
+			header.major {
+				background-color: color.adjust(functions.palette(bg), $alpha: -0.1);
+			}
 
 			&:hover {
 				&:before {
 					opacity: 0;
-				}
-
-				header.major {
-					border-radius: 0.2em;
-					background-color: #22222299;
 				}
 			}
 
