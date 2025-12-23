@@ -19,6 +19,7 @@ const categorySuits = (selectedCategories, itemCategories) => {
 
 const getPostItemValue = (item) => (
   (item.__typename === 'kontent_item_project' && item.elements.release_date.value)
+  || (item.__typename === 'kontent_item_talk' && item.elements.release_date.value)
   || (item.__typename === 'kontent_item_gotcha' && item.elements.post_date.value)
 );
 
@@ -43,7 +44,15 @@ const ListingPage = ({
         .includes('website')
   )
 
-  const items = gotchas.concat(projects)
+  const talks = listingData.nodes.filter(
+    (node) =>
+      node.__typename === 'kontent_item_talk' &&
+      node.elements.channel_purpose.value
+        .map((i) => i.codename)
+        .includes('website')
+  )
+
+  const items = gotchas.concat(projects).concat(talks)
 
   const allCategories = {}
   for (const item of items) {
@@ -217,6 +226,38 @@ export const query = graphql`
           }
         }
         ... on kontent_item_project {
+          elements {
+            title {
+              value
+            }
+            url_slug {
+              value
+            }
+            release_date {
+              value
+            }
+            image {
+              value {
+                url
+              }
+            }
+            summary {
+              value
+            }
+            channel_purpose {
+              value {
+                codename
+              }
+            }
+            listing_category {
+              value {
+                name
+                codename
+              }
+            }
+          }
+        }
+        ... on kontent_item_talk {
           elements {
             title {
               value

@@ -224,4 +224,49 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   )
+
+  const { data: talks } = await graphql(`
+    query TalkQuery {
+      allKontentItemTalk(
+        filter: {
+          elements: {
+            url_slug: { value: { ne: "" } }
+            channel_purpose: {
+              value: { elemMatch: { codename: { eq: "website" } } }
+            }
+          }
+        },
+        sort: {
+          elements: {
+            release_date: {
+              value: DESC
+            }
+          }
+        }
+      ) {
+        nodes {
+          elements {
+            url_slug {
+              value
+            }
+          }
+          system {
+            codename
+          }
+          preferred_language
+        }
+      }
+    }
+  `)
+
+  talks.allKontentItemTalk.nodes.forEach((talkItem) =>
+    createPage({
+      path: `/talks/${talkItem.elements.url_slug.value}`,
+      component: require.resolve('./src/templates/talk-item.js'),
+      context: {
+        language: talkItem.preferred_language,
+        codename: talkItem.system.codename,
+      },
+    })
+  )
 }
