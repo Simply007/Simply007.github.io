@@ -20,41 +20,46 @@ const ProjectItem = ({ data: { kontentItemProject } }) => {
             : undefined
         }
       />
+
+
       <div
         id="main"
         className="alt"
         data-kontent-item-id={kontentItemProject.system.id}
       >
+        <section className='frontmatter'>
+          {kontentItemProject.elements.release_date.value && (
+            <div className="box" >
+              <strong>Released: </strong>
+              {new Date(
+                kontentItemProject.elements.release_date.value
+              ).toDateString()}
+            </div>
+          )}
+          <div>
+            {(kontentItemProject.elements.live_url.value || kontentItemProject.elements.source_code_url.value) &&
+              (<ul className='actions'>
+                {kontentItemProject.elements.live_url.value && (
+                  <li>
+                    <button
+                      className="icon fa-globe"
+                      to={kontentItemProject.elements.live_url.value}
+                      title="Live">Live URL <span className="icon fa-external-link-alt"/></button>
+                  </li>
+                )}
+                {kontentItemProject.elements.source_code_url.value && (
+                  <li>
+                    <button
+                      className="icon fa-code"
+                      to={kontentItemProject.elements.source_code_url.value}
+                      title="Source code">Source Code <span className="icon fa-external-link-alt"/></button>
+                  </li>
+                )}
+              </ul>)}
+          </div>
+        </section>
         <section>
           <div className="inner" data-kontent-element-codename="content">
-            <ul className="icons">
-              {kontentItemProject.elements.live_url.value && (
-                <li>
-                  <Link
-                    className="icon alt fa-globe"
-                    to={kontentItemProject.elements.live_url.value}
-                    title="Live"
-                  />
-                </li>
-              )}
-              {kontentItemProject.elements.source_code_url.value && (
-                <li>
-                  <Link
-                    className="icon alt fa-code"
-                    to={kontentItemProject.elements.source_code_url.value}
-                    title="Source code"
-                  />
-                </li>
-              )}
-              {kontentItemProject.elements.release_date.value && (
-                <li>
-                  <strong>Released: </strong>
-                  {new Date(
-                    kontentItemProject.elements.release_date.value
-                  ).toDateString()}
-                </li>
-              )}
-            </ul>
             <RichText element={kontentItemProject.elements.content} />
           </div>
         </section>
