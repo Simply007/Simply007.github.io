@@ -26,6 +26,10 @@ article {
 		@include skel.breakpoint(small) {
 			width: calc(100% - 3em);
 		}
+
+		> div {
+			margin-bottom: 1em;
+		}
 	}
 }
 

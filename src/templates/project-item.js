@@ -29,7 +29,7 @@ const ProjectItem = ({ data: { kontentItemProject } }) => {
       >
         <section className='frontmatter'>
           {kontentItemProject.elements.release_date.value && (
-            <div className="box" >
+            <div>
               <strong>Released: </strong>
               {new Date(
                 kontentItemProject.elements.release_date.value

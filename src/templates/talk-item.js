@@ -29,7 +29,7 @@ const TalkItem = ({ data: { kontentItemTalk } }) => {
       >
         <section className='frontmatter'>
           {kontentItemTalk.elements.release_date.value && (
-            <div className="box" >
+            <div>
               <strong>Released: </strong>
               {new Date(
                 kontentItemTalk.elements.release_date.value
