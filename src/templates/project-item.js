@@ -44,7 +44,7 @@ const ProjectItem = ({ data: { kontentItemProject } }) => {
                     <a
                       className="button icon fa-globe"
                       href={kontentItemProject.elements.live_url.value}
-                      title="Live">Live URL <span className="icon fa-external-link-alt"/></a>
+                      title="See Live">Live URL <span className="icon fa-external-link-alt"/></a>
                   </li>
                 )}
                 {kontentItemProject.elements.source_code_url.value && (

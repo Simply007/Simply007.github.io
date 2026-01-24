@@ -44,7 +44,7 @@ const TalkItem = ({ data: { kontentItemTalk } }) => {
                     <a
                       className="button icon fa-slideshare"
                       href={kontentItemTalk.elements.slides_url.value}
-                      title="Live">Slides</a>
+                      title="Slides">Slides</a>
                   </li>
                 )}
                 {kontentItemTalk.elements.recording_url.value && (
