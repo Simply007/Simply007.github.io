@@ -33,7 +33,6 @@ const RichText = ({ element }) => (
             )
             // link existing content item
           } else if (linkedItem.elements.link_to.value.length > 0) {
-            debugger
             const linkedContentItem = linkedItem.elements.link_to.value[0]
             const title =
               linkedItem.elements.title.value ||
