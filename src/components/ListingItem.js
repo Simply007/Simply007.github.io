@@ -19,7 +19,7 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              {item.elements.title.value}
+              <a href={item.elements.url_slug.value}>{item.elements.title.value}</a>
             </h3>
             <i className='' data-kontent-element-codename="post_date">
               {new Date(
@@ -56,7 +56,7 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              {item.elements.title.value}
+              <a href={item.elements.url_slug.value}>{item.elements.title.value}</a>
             </h3>
             <i className='' data-kontent-element-codename="release_date">
               {new Date(
@@ -93,7 +93,7 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              {item.elements.title.value}
+              <a href={item.elements.url_slug.value}>{item.elements.title.value}</a>
             </h3>
             <i className='' data-kontent-element-codename="release_date">
               {new Date(
