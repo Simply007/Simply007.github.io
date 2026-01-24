@@ -82,6 +82,7 @@ ul {
 			display: inline-block;
 			padding: 0 (functions.size(element-margin) * 0.5) 0 0;
 			vertical-align: middle;
+			margin: 0.2em;
 
 			&:last-child {
 				padding-right: 0;
