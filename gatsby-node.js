@@ -39,7 +39,7 @@ exports.createSchemaCustomization = async (api) => {
             parent = Array.from(entries).find(
               (item) =>
                 item.preferred_language ===
-                currentContextItem.preferred_language &&
+                  currentContextItem.preferred_language &&
                 item.elements['sub_items'].value.includes(
                   currentContextItem.system.codename
                 )
@@ -145,14 +145,8 @@ exports.createPages = async ({ graphql, actions }) => {
               value: { elemMatch: { codename: { eq: "website" } } }
             }
           }
-        },
-        sort: {
-          elements: {
-            post_date: {
-              value: DESC
-            }
-          }
         }
+        sort: { elements: { post_date: { value: DESC } } }
       ) {
         nodes {
           elements {
@@ -190,14 +184,8 @@ exports.createPages = async ({ graphql, actions }) => {
               value: { elemMatch: { codename: { eq: "website" } } }
             }
           }
-        },
-        sort: {
-          elements: {
-            release_date: {
-              value: DESC
-            }
-          }
         }
+        sort: { elements: { release_date: { value: DESC } } }
       ) {
         nodes {
           elements {
@@ -235,14 +223,8 @@ exports.createPages = async ({ graphql, actions }) => {
               value: { elemMatch: { codename: { eq: "website" } } }
             }
           }
-        },
-        sort: {
-          elements: {
-            release_date: {
-              value: DESC
-            }
-          }
         }
+        sort: { elements: { release_date: { value: DESC } } }
       ) {
         nodes {
           elements {

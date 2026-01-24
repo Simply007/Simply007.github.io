@@ -6,8 +6,14 @@
   @include skel.vendor('display', 'flex');
   @include skel.vendor('flex-wrap', 'wrap');
   @include skel.vendor('justify-content', 'center');
+  @include skel.vendor('transition', (
+    'max-height 0.3s ease-in-out',
+    'opacity 0.3s ease-in-out',
+    'margin-top 0.3s ease-in-out'
+  ));
 
   border-top: 0 !important;
+  overflow: hidden;
 
   & + * {
     border-top: 0 !important;
@@ -40,4 +46,37 @@
       opacity: 0;
     }
   }
+
+  &.expanded {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 1em;
+  }
+
+  &.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    border: none !important;
+  }
+}
+
+// Categories wrapper - provides horizontal margins like .inner
+.categories-wrapper {
+  margin: 0 auto;
+  max-width: functions.size(inner);
+  width: calc(100% - 6em);
+
+  @include skel.breakpoint(small) {
+    padding-top: 1em;
+    width: calc(100% - 3em);
+  }
+}
+
+// Categories toggle button - minimal styles
+.categories-toggle {
+  @include skel.vendor('display', 'inline-flex');
+  @include skel.vendor('align-items', 'center');
+  gap: 0.5em;
+  margin-bottom: 1em;
 }

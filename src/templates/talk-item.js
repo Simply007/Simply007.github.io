@@ -21,13 +21,12 @@ const TalkItem = ({ data: { kontentItemTalk } }) => {
         }
       />
 
-
       <div
         id="main"
         className="alt"
         data-kontent-item-id={kontentItemTalk.system.id}
       >
-        <section className='frontmatter'>
+        <section className="frontmatter">
           {kontentItemTalk.elements.release_date.value && (
             <div>
               <strong>Released: </strong>
@@ -37,14 +36,18 @@ const TalkItem = ({ data: { kontentItemTalk } }) => {
             </div>
           )}
           <div>
-            {(kontentItemTalk.elements.slides_url.value || kontentItemTalk.elements.recording_url.value) &&
-              (<ul className='actions'>
+            {(kontentItemTalk.elements.slides_url.value ||
+              kontentItemTalk.elements.recording_url.value) && (
+              <ul className="actions">
                 {kontentItemTalk.elements.slides_url.value && (
                   <li>
                     <a
                       className="button icon fa-slideshare"
                       href={kontentItemTalk.elements.slides_url.value}
-                      title="Slides">Slides</a>
+                      title="Slides"
+                    >
+                      Slides
+                    </a>
                   </li>
                 )}
                 {kontentItemTalk.elements.recording_url.value && (
@@ -52,10 +55,14 @@ const TalkItem = ({ data: { kontentItemTalk } }) => {
                     <a
                       className="button icon fa-video"
                       href={kontentItemTalk.elements.recording_url.value}
-                      title="Source code">Recording</a>
+                      title="Source code"
+                    >
+                      Recording
+                    </a>
                   </li>
                 )}
-              </ul>)}
+              </ul>
+            )}
           </div>
         </section>
         <section>
@@ -69,7 +76,7 @@ const TalkItem = ({ data: { kontentItemTalk } }) => {
 }
 
 export const query = graphql`
-query Talk($language: String = "", $codename: String = "") {
+  query Talk($language: String = "", $codename: String = "") {
     kontentItemTalk(
       preferred_language: { eq: $language }
       system: { codename: { eq: $codename } }
