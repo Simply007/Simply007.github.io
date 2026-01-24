@@ -21,13 +21,12 @@ const ProjectItem = ({ data: { kontentItemProject } }) => {
         }
       />
 
-
       <div
         id="main"
         className="alt"
         data-kontent-item-id={kontentItemProject.system.id}
       >
-        <section className='frontmatter'>
+        <section className="frontmatter">
           {kontentItemProject.elements.release_date.value && (
             <div>
               <strong>Released: </strong>
@@ -37,14 +36,18 @@ const ProjectItem = ({ data: { kontentItemProject } }) => {
             </div>
           )}
           <div>
-            {(kontentItemProject.elements.live_url.value || kontentItemProject.elements.source_code_url.value) &&
-              (<ul className='actions'>
+            {(kontentItemProject.elements.live_url.value ||
+              kontentItemProject.elements.source_code_url.value) && (
+              <ul className="actions">
                 {kontentItemProject.elements.live_url.value && (
                   <li>
                     <a
                       className="button icon fa-globe"
                       href={kontentItemProject.elements.live_url.value}
-                      title="See Live">Live URL <span className="icon fa-external-link-alt"/></a>
+                      title="See Live"
+                    >
+                      Live URL <span className="icon fa-external-link-alt" />
+                    </a>
                   </li>
                 )}
                 {kontentItemProject.elements.source_code_url.value && (
@@ -52,10 +55,14 @@ const ProjectItem = ({ data: { kontentItemProject } }) => {
                     <a
                       className="button icon fa-code"
                       href={kontentItemProject.elements.source_code_url.value}
-                      title="Source code">Source Code <span className="icon fa-external-link-alt"/></a>
+                      title="Source code"
+                    >
+                      Source Code <span className="icon fa-external-link-alt" />
+                    </a>
                   </li>
                 )}
-              </ul>)}
+              </ul>
+            )}
           </div>
         </section>
         <section>

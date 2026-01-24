@@ -19,12 +19,13 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              <a href={item.elements.url_slug.value}>{item.elements.title.value}</a>
+              <a href={item.elements.url_slug.value}>
+                {item.elements.title.value}
+              </a>
             </h3>
-            <i className='' data-kontent-element-codename="post_date">
-              {new Date(
-                item.elements.post_date.value
-              ).toDateString()}</i>
+            <i className="" data-kontent-element-codename="post_date">
+              {new Date(item.elements.post_date.value).toDateString()}
+            </i>
             <div
               dangerouslySetInnerHTML={{ __html: item.elements.summary.value }}
               data-kontent-element-codename="summary"
@@ -56,12 +57,13 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              <a href={item.elements.url_slug.value}>{item.elements.title.value}</a>
+              <a href={item.elements.url_slug.value}>
+                {item.elements.title.value}
+              </a>
             </h3>
-            <i className='' data-kontent-element-codename="release_date">
-              {new Date(
-                item.elements.release_date.value
-              ).toDateString()}</i>
+            <i className="" data-kontent-element-codename="release_date">
+              {new Date(item.elements.release_date.value).toDateString()}
+            </i>
             <div
               dangerouslySetInnerHTML={{ __html: item.elements.summary.value }}
               data-kontent-element-codename="summary"
@@ -93,12 +95,13 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              <a href={item.elements.url_slug.value}>{item.elements.title.value}</a>
+              <a href={item.elements.url_slug.value}>
+                {item.elements.title.value}
+              </a>
             </h3>
-            <i className='' data-kontent-element-codename="release_date">
-              {new Date(
-                item.elements.release_date.value
-              ).toDateString()}</i>
+            <i className="" data-kontent-element-codename="release_date">
+              {new Date(item.elements.release_date.value).toDateString()}
+            </i>
             <div
               dangerouslySetInnerHTML={{ __html: item.elements.summary.value }}
               data-kontent-element-codename="summary"

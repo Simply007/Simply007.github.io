@@ -17,16 +17,18 @@ const categorySuits = (selectedCategories, itemCategories) => {
   )
 }
 
-const getPostItemValue = (item) => (
-  (item.__typename === 'kontent_item_project' && item.elements.release_date.value)
-  || (item.__typename === 'kontent_item_talk' && item.elements.release_date.value)
-  || (item.__typename === 'kontent_item_gotcha' && item.elements.post_date.value)
-);
+const getPostItemValue = (item) =>
+  (item.__typename === 'kontent_item_project' &&
+    item.elements.release_date.value) ||
+  (item.__typename === 'kontent_item_talk' &&
+    item.elements.release_date.value) ||
+  (item.__typename === 'kontent_item_gotcha' && item.elements.post_date.value)
 
 const ListingPage = ({
   data: { kontentItemListingPage: pageData, allKontentItem: listingData },
 }) => {
   const [selectedCategories, setSelectedCategories] = useState(new Set())
+  const [isCategoriesExpanded, setIsCategoriesExpanded] = useState(false)
 
   const gotchas = listingData.nodes.filter(
     (node) =>
@@ -65,9 +67,9 @@ const ListingPage = ({
     selectedCategories.size === 0
       ? true
       : categorySuits(
-        selectedCategories,
-        item.elements.listing_category.value.map((c) => c.codename)
-      )
+          selectedCategories,
+          item.elements.listing_category.value.map((c) => c.codename)
+        )
   )
 
   const listingOverview = allItems
@@ -75,19 +77,17 @@ const ListingPage = ({
       selectedCategories.size === 0
         ? true
         : categorySuits(
-          selectedCategories,
-          item.elements.listing_category.value.map((c) => c.codename)
-        )
+            selectedCategories,
+            item.elements.listing_category.value.map((c) => c.codename)
+          )
     )
     .sort((a, b) => {
-      const left = getPostItemValue(a);
-      const right = getPostItemValue(b);
+      const left = getPostItemValue(a)
+      const right = getPostItemValue(b)
 
       if (left && right) {
         return new Date(right) - new Date(left)
-      }
-      else
-        return 0;
+      } else return 0
     })
     .map((item) => <ListingItem key={item.system.codename} item={item} />)
 
@@ -95,8 +95,9 @@ const ListingPage = ({
   const categoriesComponents = categories.map((category) => (
     <li key={category.codename}>
       <button
-        className={`button${selectedCategories.has(category.codename) ? ' toggle' : ''
-          }`}
+        className={`button${
+          selectedCategories.has(category.codename) ? ' toggle' : ''
+        }`}
         data-category-codename={category.codename}
         onClick={() =>
           setSelectedCategories((selectedCategories) => {
@@ -119,10 +120,11 @@ const ListingPage = ({
     <li key="#ALL">
       <button
         onClick={() => setSelectedCategories(new Set())}
-        className={`button${selectedCategories.size === 0
-          ? ' disabled toggle'
-          : ' icon fa-times-circle'
-          }`}
+        className={`button${
+          selectedCategories.size === 0
+            ? ' disabled toggle'
+            : ' icon fa-times-circle'
+        }`}
       >
         {selectedCategories.size === 0 ? 'ALL' : 'CLEAR'}
       </button>
@@ -142,11 +144,27 @@ const ListingPage = ({
       />
       <div className="content">
         {categories.length > 0 && (
-          <div className="inner">
-            <header className="major">
-              <h2>Categories</h2>
-              <ul className="categories">{categoriesComponents}</ul>
-            </header>
+          <div className="categories-wrapper">
+            <button
+              onClick={() => setIsCategoriesExpanded(!isCategoriesExpanded)}
+              aria-expanded={isCategoriesExpanded}
+              aria-controls="categories-list"
+              className="button categories-toggle"
+            >
+              Categories
+              {selectedCategories.size > 0 && ` (${selectedCategories.size})`}
+              <span
+                className={`icon fa-chevron-${isCategoriesExpanded ? 'up' : 'down'}`}
+                aria-hidden="true"
+              ></span>
+            </button>
+            <ul
+              id="categories-list"
+              className={`categories${isCategoriesExpanded ? ' expanded' : ' collapsed'}`}
+              aria-hidden={!isCategoriesExpanded}
+            >
+              {categoriesComponents}
+            </ul>
           </div>
         )}
         <section className="tiles">{listingOverview}</section>

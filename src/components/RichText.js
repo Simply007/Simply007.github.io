@@ -33,9 +33,10 @@ const RichText = ({ element }) => (
             )
             // link existing content item
           } else if (linkedItem.elements.link_to.value.length > 0) {
-            debugger;
             const linkedContentItem = linkedItem.elements.link_to.value[0]
-            const title = linkedItem.elements.title.value || linkedContentItem.elements.title.value;
+            const title =
+              linkedItem.elements.title.value ||
+              linkedContentItem.elements.title.value
             switch (linkedContentItem.__typename) {
               case 'kontent_item_navigation_item': {
                 return (
@@ -44,7 +45,9 @@ const RichText = ({ element }) => (
                       href={`/${linkedContentItem.elements.slug.value}`}
                       className="button"
                     >
-                      <span className={`icon ${linkedItem.elements.icon.value}`}>
+                      <span
+                        className={`icon ${linkedItem.elements.icon.value}`}
+                      >
                         {title}
                       </span>
                     </a>
@@ -52,31 +55,28 @@ const RichText = ({ element }) => (
                 )
               }
               case 'kontent_item_project': {
-                const iconCode = linkedItem.elements.icon.value || 'fa-project-diagram';
+                const iconCode =
+                  linkedItem.elements.icon.value || 'fa-project-diagram'
                 return (
                   <p>
                     <a
                       href={`/projects/${linkedContentItem.elements.url_slug.value}`}
                       className="button"
                     >
-                      <span className={`icon ${iconCode}`}>
-                        {title}
-                      </span>
+                      <span className={`icon ${iconCode}`}>{title}</span>
                     </a>
                   </p>
                 )
               }
               case 'kontent_item_gotcha': {
-                const iconCode = linkedItem.elements.icon.value || 'fa-blog';
+                const iconCode = linkedItem.elements.icon.value || 'fa-blog'
                 return (
                   <p>
                     <a
                       href={`/gotchas/${linkedContentItem.elements.url_slug.value}`}
                       className="button"
                     >
-                      <span className={`icon ${iconCode}`}>
-                        {title}
-                      </span>
+                      <span className={`icon ${iconCode}`}>{title}</span>
                     </a>
                   </p>
                 )
