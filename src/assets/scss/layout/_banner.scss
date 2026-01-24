@@ -13,9 +13,7 @@
 
 	#banner {
 		@include skel.vendor('align-items', 'center');
-		// @include vendor('background-image', 'url("../images/banner.jpg")');
 		@include skel.vendor('display', 'flex');
-		@include mixins.padding(4em, 0, (2em, 0, 0, 0));
 		background-attachment: fixed;
 		background-position: 75% 50%;
 		background-repeat: no-repeat;
@@ -23,11 +21,11 @@
 		border-bottom: 0 !important;
 		cursor: default;
 		height: 60vh;
-		margin-bottom: -3.25em;
+		margin-bottom: 1em;
 		max-height: 32em;
 		min-height: 22em;
 		position: relative;
-		top: -3.25em;
+		top: 0;
 		opacity: 0.9;
 
 		&:after {
@@ -108,9 +106,6 @@
 		}
 
 		&.major {
-			height: 75vh;
-			min-height: 30em;
-			max-height: 50em;
 
 			&.alt {
 				opacity: 0.75;
@@ -141,12 +136,12 @@
 		}
 
 		@include skel.breakpoint(small) {
-			@include mixins.padding(3em, 0, (2em, 0, 0, 0));
+			@include mixins.padding(2em, 0, (0, 0, 0, 0));
 			height: auto;
-			margin-bottom: -2.75em;
+			margin-bottom: 0;
 			max-height: none;
 			min-height: 0;
-			top: -2.75em;
+			top: 0;
 
 			h1 {
 				font-size: 2em;
@@ -171,7 +166,7 @@
 		}
 
 		@include skel.breakpoint(xsmall) {
-			@include mixins.padding(4em, 0, (2em, 0, 0, 0));
+			@include mixins.padding(3em, 0, (0, 0, 0, 0));
 
 			> .inner {
 				.content {
@@ -184,7 +179,7 @@
 			}
 
 			&.major {
-				@include mixins.padding(6em, 0, (2em, 0, 0, 0));
+				@include mixins.padding(1em, 0, (0em, 0, 0, 0));
 			}
 		}
 	}

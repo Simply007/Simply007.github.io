@@ -29,7 +29,7 @@ const TalkItem = ({ data: { kontentItemTalk } }) => {
       >
         <section className='frontmatter'>
           {kontentItemTalk.elements.release_date.value && (
-            <div className="box" >
+            <div>
               <strong>Released: </strong>
               {new Date(
                 kontentItemTalk.elements.release_date.value
@@ -41,18 +41,18 @@ const TalkItem = ({ data: { kontentItemTalk } }) => {
               (<ul className='actions'>
                 {kontentItemTalk.elements.slides_url.value && (
                   <li>
-                    <button
-                      className="icon fa-slideshare"
-                      to={kontentItemTalk.elements.slides_url.value}
-                      title="Live">Slides</button>
+                    <a
+                      className="button icon fa-slideshare"
+                      href={kontentItemTalk.elements.slides_url.value}
+                      title="Slides">Slides</a>
                   </li>
                 )}
                 {kontentItemTalk.elements.recording_url.value && (
                   <li>
-                    <button
-                      className="icon fa-video"
-                      to={kontentItemTalk.elements.recording_url.value}
-                      title="Source code">Recording</button>
+                    <a
+                      className="button icon fa-video"
+                      href={kontentItemTalk.elements.recording_url.value}
+                      title="Source code">Recording</a>
                   </li>
                 )}
               </ul>)}

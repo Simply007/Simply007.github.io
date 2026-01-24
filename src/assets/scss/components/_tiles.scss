@@ -71,8 +71,11 @@
 				font-size: 1.75em;
 
 				a {
+					text-decoration: underline;
+    				cursor: pointer;
+					
 					&:hover {
-						color: inherit !important;
+						// color: inherit !important;
 					}
 				}
 			}

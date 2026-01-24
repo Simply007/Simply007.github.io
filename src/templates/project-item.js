@@ -29,7 +29,7 @@ const ProjectItem = ({ data: { kontentItemProject } }) => {
       >
         <section className='frontmatter'>
           {kontentItemProject.elements.release_date.value && (
-            <div className="box" >
+            <div>
               <strong>Released: </strong>
               {new Date(
                 kontentItemProject.elements.release_date.value
@@ -41,18 +41,18 @@ const ProjectItem = ({ data: { kontentItemProject } }) => {
               (<ul className='actions'>
                 {kontentItemProject.elements.live_url.value && (
                   <li>
-                    <button
-                      className="icon fa-globe"
-                      to={kontentItemProject.elements.live_url.value}
-                      title="Live">Live URL <span className="icon fa-external-link-alt"/></button>
+                    <a
+                      className="button icon fa-globe"
+                      href={kontentItemProject.elements.live_url.value}
+                      title="See Live">Live URL <span className="icon fa-external-link-alt"/></a>
                   </li>
                 )}
                 {kontentItemProject.elements.source_code_url.value && (
                   <li>
-                    <button
-                      className="icon fa-code"
-                      to={kontentItemProject.elements.source_code_url.value}
-                      title="Source code">Source Code <span className="icon fa-external-link-alt"/></button>
+                    <a
+                      className="button icon fa-code"
+                      href={kontentItemProject.elements.source_code_url.value}
+                      title="Source code">Source Code <span className="icon fa-external-link-alt"/></a>
                   </li>
                 )}
               </ul>)}
