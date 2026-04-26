@@ -1,5 +1,6 @@
 # Personal site
 
+In fixing:
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e7dcc33b-8c8b-46e0-bd0f-8b85daa859cc/deploy-status)](https://app.netlify.com/sites/chrastina/deploys)
 
 This is my personal website build using [Gatsby](https://gatsbyjs.org) and [Kentico Kontent](https://kontent.ai) as a data source.
