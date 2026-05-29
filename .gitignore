@@ -11,3 +11,7 @@ yarn.lock
 *.log
 
 .env
+.env.local
+
+# One-off import scripts (do not commit secrets/binaries)
+scripts/
