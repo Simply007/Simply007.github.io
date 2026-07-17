@@ -25,6 +25,9 @@ const Footer = (props) => {
         <ul
           className="icons"
           data-kontent-element-codename="social_media_accounts"
+          data-kontent-add-button
+          data-kontent-render-position="right"
+          data-kontent-insert-position="end"
         >
           {icons}
         </ul>
