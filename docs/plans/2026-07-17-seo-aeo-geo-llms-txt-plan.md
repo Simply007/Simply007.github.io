@@ -33,7 +33,7 @@ If the user requests changes, apply them as a follow-up commit, re-show evidence
 
 | # | Task | Commit | Files touched | Evidence shown | Verdict | Date |
 |---|------|--------|---------------|----------------|---------|------|
-| _(filled in as tasks complete)_ | | | | | | |
+| 1 | Branch + plan doc + deps (turndown 7.2.4, gatsby-plugin-feed 5.16.0) | 77c2ad4, bad8128 | docs/plans/…plan.md, package.json, package-lock.json | `node -e require(...)` confirmed both packages resolve; npm audit notice pre-existing, install clean; PR #50 opened | ⏳ pending | 2026-07-17 |
 
 ## Context
 
