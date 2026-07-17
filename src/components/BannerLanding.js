@@ -32,9 +32,12 @@ const BannerLanding = (props) => (
       </header>
       <div
         className="content"
-        dangerouslySetInnerHTML={{ __html: props.content }}
         data-kontent-element-codename={props.contentCodename}
-      ></div>
+      >
+        {/* single wrapper keeps injected inline elements (e.g. links) from
+            becoming flex items of .content, which would blockify them */}
+        <div dangerouslySetInnerHTML={{ __html: props.content }}></div>
+      </div>
       {props.button && (
         <div className="content">
           <Link
