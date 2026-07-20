@@ -1,8 +1,12 @@
 require('dotenv').config()
 
+const { SITE_URL, AUTHOR_NAME, stripHtml } = require('./src/utils/seo')
+
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://ondrej.chrastina.dev`,
+    title: AUTHOR_NAME,
+    description: `Personal site and journal of ${AUTHOR_NAME} — software developer.`,
+    siteUrl: SITE_URL,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -55,6 +59,145 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         excludes: ['/style-guide', '/style-guide/*'],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            output: '/rss.xml',
+            title: `${AUTHOR_NAME} — Journal, Projects & Talks`,
+            query: `
+              {
+                allKontentItemGotcha(
+                  filter: {
+                    elements: {
+                      url_slug: { value: { ne: "" } }
+                      channel_purpose: {
+                        value: { elemMatch: { codename: { eq: "website" } } }
+                      }
+                    }
+                  }
+                ) {
+                  nodes {
+                    elements {
+                      title {
+                        value
+                      }
+                      summary {
+                        value
+                      }
+                      post_date {
+                        value
+                      }
+                      url_slug {
+                        value
+                      }
+                    }
+                  }
+                }
+                allKontentItemProject(
+                  filter: {
+                    elements: {
+                      url_slug: { value: { ne: "" } }
+                      channel_purpose: {
+                        value: { elemMatch: { codename: { eq: "website" } } }
+                      }
+                    }
+                  }
+                ) {
+                  nodes {
+                    elements {
+                      title {
+                        value
+                      }
+                      summary {
+                        value
+                      }
+                      release_date {
+                        value
+                      }
+                      url_slug {
+                        value
+                      }
+                    }
+                  }
+                }
+                allKontentItemTalk(
+                  filter: {
+                    elements: {
+                      url_slug: { value: { ne: "" } }
+                      channel_purpose: {
+                        value: { elemMatch: { codename: { eq: "website" } } }
+                      }
+                    }
+                  }
+                ) {
+                  nodes {
+                    elements {
+                      title {
+                        value
+                      }
+                      summary {
+                        value
+                      }
+                      release_date {
+                        value
+                      }
+                      url_slug {
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            serialize: ({
+              query: {
+                site,
+                allKontentItemGotcha,
+                allKontentItemProject,
+                allKontentItemTalk,
+              },
+            }) => {
+              const toFeedItem = (pathPrefix, category) => (node) => {
+                const url = `${site.siteMetadata.siteUrl}${pathPrefix}${node.elements.url_slug.value}/`
+                return {
+                  title: node.elements.title.value,
+                  description: stripHtml(node.elements.summary.value),
+                  date: (node.elements.post_date || node.elements.release_date)
+                    .value,
+                  url,
+                  guid: url,
+                  categories: [category],
+                }
+              }
+              return allKontentItemGotcha.nodes
+                .map(toFeedItem('/journal/', 'Journal'))
+                .concat(
+                  allKontentItemProject.nodes.map(
+                    toFeedItem('/projects/', 'Projects')
+                  )
+                )
+                .concat(
+                  allKontentItemTalk.nodes.map(toFeedItem('/talks/', 'Talks'))
+                )
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+            },
+          },
+        ],
       },
     },
     'gatsby-plugin-image',

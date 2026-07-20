@@ -25,6 +25,7 @@
     "@kontent-ai/gatsby-source": "^10.0.1",
     "@kontent-ai/smart-link": "^3.3.0",
     "gatsby": "^5.14.1",
+    "gatsby-plugin-feed": "^5.16.0",
     "gatsby-plugin-google-gtag": "^5.14.0",
     "gatsby-plugin-image": "^3.14.0",
     "gatsby-plugin-manifest": "^5.14.0",
@@ -38,7 +39,8 @@
     "prismjs": "^1.29.0",
     "react": "^18.0.0",
     "react-dom": "^18.3.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "turndown": "^7.2.4"
   },
   "devDependencies": {
     "cpx": "^1.5.0",
