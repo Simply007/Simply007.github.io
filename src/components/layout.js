@@ -309,7 +309,7 @@ class DefaultLayout extends React.Component {
                       {
                         rel: 'alternate',
                         type: 'application/rss+xml',
-                        title: `${AUTHOR_NAME} — Journal`,
+                        title: `${AUTHOR_NAME} — Journal, Projects & Talks`,
                         href: `${siteUrl}/rss.xml`,
                       },
                     ]}

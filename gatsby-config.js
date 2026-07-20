@@ -78,7 +78,7 @@ module.exports = {
         feeds: [
           {
             output: '/rss.xml',
-            title: `${AUTHOR_NAME} — Journal`,
+            title: `${AUTHOR_NAME} — Journal, Projects & Talks`,
             query: `
               {
                 allKontentItemGotcha(
@@ -90,7 +90,6 @@ module.exports = {
                       }
                     }
                   }
-                  sort: { elements: { post_date: { value: DESC } } }
                 ) {
                   nodes {
                     elements {
@@ -109,19 +108,94 @@ module.exports = {
                     }
                   }
                 }
+                allKontentItemProject(
+                  filter: {
+                    elements: {
+                      url_slug: { value: { ne: "" } }
+                      channel_purpose: {
+                        value: { elemMatch: { codename: { eq: "website" } } }
+                      }
+                    }
+                  }
+                ) {
+                  nodes {
+                    elements {
+                      title {
+                        value
+                      }
+                      summary {
+                        value
+                      }
+                      release_date {
+                        value
+                      }
+                      url_slug {
+                        value
+                      }
+                    }
+                  }
+                }
+                allKontentItemTalk(
+                  filter: {
+                    elements: {
+                      url_slug: { value: { ne: "" } }
+                      channel_purpose: {
+                        value: { elemMatch: { codename: { eq: "website" } } }
+                      }
+                    }
+                  }
+                ) {
+                  nodes {
+                    elements {
+                      title {
+                        value
+                      }
+                      summary {
+                        value
+                      }
+                      release_date {
+                        value
+                      }
+                      url_slug {
+                        value
+                      }
+                    }
+                  }
+                }
               }
             `,
-            serialize: ({ query: { site, allKontentItemGotcha } }) =>
-              allKontentItemGotcha.nodes.map((node) => {
-                const url = `${site.siteMetadata.siteUrl}/journal/${node.elements.url_slug.value}/`
+            serialize: ({
+              query: {
+                site,
+                allKontentItemGotcha,
+                allKontentItemProject,
+                allKontentItemTalk,
+              },
+            }) => {
+              const toFeedItem = (pathPrefix, category) => (node) => {
+                const url = `${site.siteMetadata.siteUrl}${pathPrefix}${node.elements.url_slug.value}/`
                 return {
                   title: node.elements.title.value,
                   description: stripHtml(node.elements.summary.value),
-                  date: node.elements.post_date.value,
+                  date: (node.elements.post_date || node.elements.release_date)
+                    .value,
                   url,
                   guid: url,
+                  categories: [category],
                 }
-              }),
+              }
+              return allKontentItemGotcha.nodes
+                .map(toFeedItem('/journal/', 'Journal'))
+                .concat(
+                  allKontentItemProject.nodes.map(
+                    toFeedItem('/projects/', 'Projects')
+                  )
+                )
+                .concat(
+                  allKontentItemTalk.nodes.map(toFeedItem('/talks/', 'Talks'))
+                )
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+            },
           },
         ],
       },
