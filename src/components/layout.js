@@ -8,6 +8,7 @@ import Menu from './Menu'
 import Footer from './Footer'
 import SmartLinkWrapper from './SmartLinkWrapper'
 import get from 'lodash.get'
+import { AUTHOR_NAME } from '../utils/seo'
 
 class DefaultLayout extends React.Component {
   constructor(props) {
@@ -46,6 +47,11 @@ class DefaultLayout extends React.Component {
         <StaticQuery
           query={graphql`
             {
+              site {
+                siteMetadata {
+                  siteUrl
+                }
+              }
               kontentItemLayout(
                 system: { codename: { eq: "default_layout" } }
                 preferred_language: { eq: "en-US" }
@@ -203,7 +209,46 @@ class DefaultLayout extends React.Component {
 
             const otherData = get(data, 'kontentItemLayout.elements')
 
-            const imageUrl = `${otherData.image.value[0].url}?w=${ogImageWidth}&format=auto`
+            const seo = this.props.seo || {}
+            const siteUrl = get(data, 'site.siteMetadata.siteUrl')
+            const defaultTitle = otherData.title.value
+            const title = seo.title
+              ? `${seo.title} | ${defaultTitle}`
+              : defaultTitle
+            const description =
+              seo.description || otherData.meta_description.value
+            const canonicalUrl = `${siteUrl}${seo.path || '/'}`
+            const seoImage =
+              (seo.image && seo.image.url && seo.image) ||
+              otherData.image.value[0]
+            const imageUrl = `${seoImage.url}?w=${ogImageWidth}&format=auto`
+
+            const sameAs = get(
+              footerData,
+              'elements.social_media_accounts.value',
+              []
+            ).map((account) =>
+              account.elements.social_media_type.value[0].elements.account_pattern.value.replace(
+                '%s',
+                account.elements.account_handle.value
+              )
+            )
+            const jsonLdBlocks = [
+              {
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                name: defaultTitle,
+                url: `${siteUrl}/`,
+                description: otherData.meta_description.value,
+              },
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Person',
+                name: AUTHOR_NAME,
+                url: `${siteUrl}/`,
+                sameAs,
+              },
+            ].concat(seo.jsonLd ? [].concat(seo.jsonLd) : [])
             return (
               <div
                 className={`body ${this.state.loading} ${
@@ -216,12 +261,12 @@ class DefaultLayout extends React.Component {
                     data={headerData}
                   />
                   <Helmet
-                    title={otherData.title.value}
+                    title={title}
                     meta={[
-                      { property: 'og:title', content: otherData.title.value },
+                      { property: 'og:title', content: title },
                       {
                         name: 'description',
-                        content: otherData.meta_description.value,
+                        content: description,
                       },
                       {
                         name: 'keywords',
@@ -229,11 +274,11 @@ class DefaultLayout extends React.Component {
                           .map((keyword) => keyword.elements.keyword.value)
                           .join(','),
                       },
-                      { property: 'og:type', content: 'website' },
-                      { property: 'og:url', content: otherData.site_url.value },
+                      { property: 'og:type', content: seo.ogType || 'website' },
+                      { property: 'og:url', content: canonicalUrl },
                       {
                         property: 'og:description',
-                        content: otherData.meta_description.value,
+                        content: description,
                       },
                       {
                         property: 'og:image',
@@ -246,24 +291,38 @@ class DefaultLayout extends React.Component {
                       {
                         property: 'og:image:height',
                         content:
-                          (ogImageWidth / otherData.image.value[0].width) *
-                          otherData.image.value[0].height,
+                          (ogImageWidth / seoImage.width) * seoImage.height,
                       },
                       { name: 'twitter:card', content: 'summary_large_image' },
-                      { name: 'twitter:title', content: otherData.title.value },
+                      { name: 'twitter:title', content: title },
                       {
                         name: 'twitter:description',
-                        content: otherData.meta_description.value,
+                        content: description,
                       },
                       {
                         name: 'twitter:image',
                         content: imageUrl,
                       },
                     ]}
+                    link={[
+                      { rel: 'canonical', href: canonicalUrl },
+                      {
+                        rel: 'alternate',
+                        type: 'application/rss+xml',
+                        title: `${AUTHOR_NAME} — Journal`,
+                        href: `${siteUrl}/rss.xml`,
+                      },
+                    ]}
                     htmlAttributes={{
                       lang: 'en',
                     }}
-                  ></Helmet>
+                  >
+                    {jsonLdBlocks.map((block, index) => (
+                      <script key={index} type="application/ld+json">
+                        {JSON.stringify(block)}
+                      </script>
+                    ))}
+                  </Helmet>
                   {children}
                   {/* <Contact /> */}
                   <Footer
