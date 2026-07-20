@@ -9,6 +9,12 @@
 const { getKontentItemNodeTypeName } = require('@kontent-ai/gatsby-source')
 const path = require('path')
 const { parsePath } = require('gatsby')
+const fs = require('fs')
+const {
+  buildRobotsTxt,
+  buildLlmsTxt,
+  buildLlmsFullTxt,
+} = require('./lib/static-seo-files')
 
 exports.createSchemaCustomization = async (api) => {
   const {
@@ -251,4 +257,217 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   )
+}
+
+const contentFragment = `
+  value
+  modular_content {
+    system {
+      codename
+      type
+    }
+    ... on kontent_item_code_snippet {
+      elements {
+        code {
+          value
+        }
+      }
+    }
+    ... on kontent_item_button {
+      elements {
+        title {
+          value
+        }
+        external_url {
+          value
+        }
+        link_to {
+          value {
+            __typename
+            ... on kontent_item_navigation_item {
+              elements {
+                slug {
+                  value
+                }
+                title {
+                  value
+                }
+              }
+            }
+            ... on kontent_item_project {
+              elements {
+                url_slug {
+                  value
+                }
+                title {
+                  value
+                }
+              }
+            }
+            ... on kontent_item_gotcha {
+              elements {
+                url_slug {
+                  value
+                }
+                title {
+                  value
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+exports.onPostBuild = async ({ graphql, reporter }) => {
+  const language = process.env.KONTENT_LANGUAGE_CODENAMES.split(',')[0].trim()
+
+  const { data, errors } = await graphql(
+    `
+      query StaticSeoFilesQuery($language: String!) {
+        kontentItemLayout(
+          system: { codename: { eq: "default_layout" } }
+          preferred_language: { eq: $language }
+        ) {
+          elements {
+            title {
+              value
+            }
+            meta_description {
+              value
+            }
+          }
+        }
+        allKontentItemGotcha(
+          filter: {
+            preferred_language: { eq: $language }
+            elements: {
+              url_slug: { value: { ne: "" } }
+              channel_purpose: {
+                value: { elemMatch: { codename: { eq: "website" } } }
+              }
+            }
+          }
+          sort: { elements: { post_date: { value: DESC } } }
+        ) {
+          nodes {
+            elements {
+              title {
+                value
+              }
+              summary {
+                value
+              }
+              post_date {
+                value
+              }
+              url_slug {
+                value
+              }
+              content {
+                ${contentFragment}
+              }
+            }
+          }
+        }
+        allKontentItemProject(
+          filter: {
+            preferred_language: { eq: $language }
+            elements: {
+              url_slug: { value: { ne: "" } }
+              channel_purpose: {
+                value: { elemMatch: { codename: { eq: "website" } } }
+              }
+            }
+          }
+          sort: { elements: { release_date: { value: DESC } } }
+        ) {
+          nodes {
+            elements {
+              title {
+                value
+              }
+              summary {
+                value
+              }
+              release_date {
+                value
+              }
+              url_slug {
+                value
+              }
+              live_url {
+                value
+              }
+              source_code_url {
+                value
+              }
+              content {
+                ${contentFragment}
+              }
+            }
+          }
+        }
+        allKontentItemTalk(
+          filter: {
+            preferred_language: { eq: $language }
+            elements: {
+              url_slug: { value: { ne: "" } }
+              channel_purpose: {
+                value: { elemMatch: { codename: { eq: "website" } } }
+              }
+            }
+          }
+          sort: { elements: { release_date: { value: DESC } } }
+        ) {
+          nodes {
+            elements {
+              title {
+                value
+              }
+              summary {
+                value
+              }
+              release_date {
+                value
+              }
+              url_slug {
+                value
+              }
+              slides_url {
+                value
+              }
+              recording_url {
+                value
+              }
+              content {
+                ${contentFragment}
+              }
+            }
+          }
+        }
+      }
+    `,
+    { language }
+  )
+
+  if (errors) {
+    reporter.panicOnBuild('StaticSeoFilesQuery failed', errors)
+    return
+  }
+
+  const siteContent = {
+    siteTitle: data.kontentItemLayout.elements.title.value,
+    siteDescription: data.kontentItemLayout.elements.meta_description.value,
+    journal: data.allKontentItemGotcha.nodes,
+    projects: data.allKontentItemProject.nodes,
+    talks: data.allKontentItemTalk.nodes,
+  }
+
+  fs.writeFileSync('./public/robots.txt', buildRobotsTxt())
+  fs.writeFileSync('./public/llms.txt', buildLlmsTxt(siteContent))
+  fs.writeFileSync('./public/llms-full.txt', buildLlmsFullTxt(siteContent))
+  reporter.info('Wrote robots.txt, llms.txt, and llms-full.txt')
 }
