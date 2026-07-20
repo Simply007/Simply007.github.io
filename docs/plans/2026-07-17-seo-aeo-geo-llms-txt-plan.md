@@ -40,6 +40,7 @@ If the user requests changes, apply them as a follow-up commit, re-show evidence
 | 5 | layout.js per-page SEO merge + global JSON-LD | (see feat commit) | src/components/layout.js | Built HTML: per-page titles, canonical + rss alternate links, og:url==canonical, WebSite + Person (9 sameAs) on every page | ✅ per blanket go-ahead | 2026-07-20 |
 | 6 | templates seo prop + RichText /journal/ fix | d996c48 | 5 templates, RichText.js | journal→BlogPosting, project→SoftwareSourceCode, talk→CreativeWork verified in built HTML; og:type article on journal/talks | ✅ per blanket go-ahead | 2026-07-20 |
 | 7 | format + full build verification | (this commit) | prettier-normalized files | `KONTENT_PREVIEW_ENABLED=false npm run build` succeeds (local preview key expired — 401 unrelated to changes; CI uses delivery API). All checklist items pass | ✅ per blanket go-ahead | 2026-07-20 |
+| 8 | Combined RSS: journal + projects + talks in /rss.xml | 24a87f2 | gatsby-config.js, layout.js | Rebuilt: 50 items (10 Journal, 16 Projects, 24 Talks), date-sorted DESC, category per item, feed + link titles updated | ✅ user-requested change | 2026-07-20 |
 
 ## Context
 
