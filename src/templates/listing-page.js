@@ -26,6 +26,7 @@ const getPostItemValue = (item) =>
 
 const ListingPage = ({
   data: { kontentItemListingPage: pageData, allKontentItem: listingData },
+  location,
 }) => {
   const [selectedCategories, setSelectedCategories] = useState(new Set())
   const [isCategoriesExpanded, setIsCategoriesExpanded] = useState(false)
@@ -132,7 +133,12 @@ const ListingPage = ({
   )
 
   return (
-    <Layout>
+    <Layout
+      seo={{
+        title: pageData.elements.primary_text.value,
+        path: location.pathname,
+      }}
+    >
       <BannerLanding
         title={pageData.elements.primary_text.value}
         content={pageData.elements.secondary_text.value}

@@ -3,8 +3,8 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Banner from '../components/Banner'
 
-const Home = ({ data }) => (
-  <Layout>
+const Home = ({ data, location }) => (
+  <Layout seo={{ path: location.pathname }}>
     <Banner data={data.kontentItemHomePage} />
   </Layout>
 )

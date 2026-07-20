@@ -4,13 +4,21 @@ import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import Section from '../components/Section'
 
-const SectionsPage = ({ data: { kontentItemSectionsPage: pageData } }) => {
+const SectionsPage = ({
+  data: { kontentItemSectionsPage: pageData },
+  location,
+}) => {
   const sections = pageData.elements.sections.value.map((section, index) => (
     <Section section={section} isFirst={index === 0} />
   ))
 
   return (
-    <Layout>
+    <Layout
+      seo={{
+        title: pageData.elements.header.value,
+        path: location.pathname,
+      }}
+    >
       <div data-kontent-item-id={pageData.system.id}>
         <BannerLanding
           title={pageData.elements.header.value}
