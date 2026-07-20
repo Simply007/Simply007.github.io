@@ -32,19 +32,19 @@ const JournalItem = ({ data: { kontentItemGotcha }, location }) => {
         },
       }}
     >
-    <BannerLanding
-      title={kontentItemGotcha.elements.title.value}
-      content={kontentItemGotcha.elements.summary.value}
-      button={{ title: 'Back to journal', to: '/journal' }}
-      titleCodename="title"
-      contentCodename="summary"
-      itemId={kontentItemGotcha.system.id}
-      heroImage={
-        kontentItemGotcha.elements.image.value.length > 0
-          ? kontentItemGotcha.elements.image.value[0]
-          : undefined
-      }
-    />
+      <BannerLanding
+        title={kontentItemGotcha.elements.title.value}
+        content={kontentItemGotcha.elements.summary.value}
+        button={{ title: 'Back to journal', to: '/journal' }}
+        titleCodename="title"
+        contentCodename="summary"
+        itemId={kontentItemGotcha.system.id}
+        heroImage={
+          kontentItemGotcha.elements.image.value.length > 0
+            ? kontentItemGotcha.elements.image.value[0]
+            : undefined
+        }
+      />
       <div
         id="main"
         className="alt"

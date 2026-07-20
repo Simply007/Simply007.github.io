@@ -33,7 +33,13 @@ If the user requests changes, apply them as a follow-up commit, re-show evidence
 
 | # | Task | Commit | Files touched | Evidence shown | Verdict | Date |
 |---|------|--------|---------------|----------------|---------|------|
-| 1 | Branch + plan doc + deps (turndown 7.2.4, gatsby-plugin-feed 5.16.0) | 77c2ad4, bad8128 | docs/plans/…plan.md, package.json, package-lock.json | `node -e require(...)` confirmed both packages resolve; npm audit notice pre-existing, install clean; PR #50 opened | ⏳ pending | 2026-07-17 |
+| 1 | Branch + plan doc + deps (turndown 7.2.4, gatsby-plugin-feed 5.16.0) | 77c2ad4, bad8128 | docs/plans/…plan.md, package.json, package-lock.json | `node -e require(...)` confirmed both packages resolve; npm audit notice pre-existing, install clean; PR #50 opened | ✅ approved (blanket go-ahead 2026-07-20: "the plan is on… start implementing") | 2026-07-17 |
+| 2 | SEO utils + rich-text→markdown converter | (see feat commit) | src/utils/seo.js, lib/rich-text-to-markdown.js | Smoke test vs real page-data: 3 fenced ```javascript blocks, 2 images, no `<object>`/`&nbsp;` remnants. Fix applied: turndown routes empty `<object>` through `blankReplacement`, not rules | ✅ per blanket go-ahead | 2026-07-20 |
+| 3 | static-seo-files builders + onPostBuild | (see feat commit) | lib/static-seo-files.js, gatsby-node.js | Build writes public/robots.txt (828 B), llms.txt (19 KB), llms-full.txt (120 KB) | ✅ per blanket go-ahead | 2026-07-20 |
+| 4 | siteMetadata + RSS feed | (see feat commit) | gatsby-config.js | public/rss.xml valid XML, 10 journal items, correct /journal/{slug}/ links + pubDates | ✅ per blanket go-ahead | 2026-07-20 |
+| 5 | layout.js per-page SEO merge + global JSON-LD | (see feat commit) | src/components/layout.js | Built HTML: per-page titles, canonical + rss alternate links, og:url==canonical, WebSite + Person (9 sameAs) on every page | ✅ per blanket go-ahead | 2026-07-20 |
+| 6 | templates seo prop + RichText /journal/ fix | d996c48 | 5 templates, RichText.js | journal→BlogPosting, project→SoftwareSourceCode, talk→CreativeWork verified in built HTML; og:type article on journal/talks | ✅ per blanket go-ahead | 2026-07-20 |
+| 7 | format + full build verification | (this commit) | prettier-normalized files | `KONTENT_PREVIEW_ENABLED=false npm run build` succeeds (local preview key expired — 401 unrelated to changes; CI uses delivery API). All checklist items pass | ✅ per blanket go-ahead | 2026-07-20 |
 
 ## Context
 
