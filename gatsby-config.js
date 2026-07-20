@@ -1,8 +1,12 @@
 require('dotenv').config()
 
+const { SITE_URL, AUTHOR_NAME, stripHtml } = require('./src/utils/seo')
+
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://ondrej.chrastina.dev`,
+    title: AUTHOR_NAME,
+    description: `Personal site and journal of ${AUTHOR_NAME} — software developer.`,
+    siteUrl: SITE_URL,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -55,6 +59,71 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         excludes: ['/style-guide', '/style-guide/*'],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            output: '/rss.xml',
+            title: `${AUTHOR_NAME} — Journal`,
+            query: `
+              {
+                allKontentItemGotcha(
+                  filter: {
+                    elements: {
+                      url_slug: { value: { ne: "" } }
+                      channel_purpose: {
+                        value: { elemMatch: { codename: { eq: "website" } } }
+                      }
+                    }
+                  }
+                  sort: { elements: { post_date: { value: DESC } } }
+                ) {
+                  nodes {
+                    elements {
+                      title {
+                        value
+                      }
+                      summary {
+                        value
+                      }
+                      post_date {
+                        value
+                      }
+                      url_slug {
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            serialize: ({ query: { site, allKontentItemGotcha } }) =>
+              allKontentItemGotcha.nodes.map((node) => {
+                const url = `${site.siteMetadata.siteUrl}/journal/${node.elements.url_slug.value}/`
+                return {
+                  title: node.elements.title.value,
+                  description: stripHtml(node.elements.summary.value),
+                  date: node.elements.post_date.value,
+                  url,
+                  guid: url,
+                }
+              }),
+          },
+        ],
       },
     },
     'gatsby-plugin-image',
