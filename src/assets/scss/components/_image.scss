@@ -64,9 +64,9 @@
 		}
 	}
 
-	/* QR code images in rich text content: cap at 18.75em (~300px at the default root font size) */
+	/* QR code images in rich text content: cap at 18.75rem (300px at the 16px root font size) */
 
 	.gatsby-image-wrapper:has(img[alt^="QR code"]) {
-		max-width: 18.75em;
+		max-width: 18.75rem;
 		width: 100%;
 	}
