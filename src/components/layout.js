@@ -8,7 +8,12 @@ import Menu from './Menu'
 import Footer from './Footer'
 import SmartLinkWrapper from './SmartLinkWrapper'
 import get from 'lodash.get'
-import { AUTHOR_NAME } from '../utils/seo'
+import {
+  AUTHOR_NAME,
+  AUTHOR_PROFILE,
+  PERSON_ID,
+  WEBSITE_ID,
+} from '../utils/seo'
 
 class DefaultLayout extends React.Component {
   constructor(props) {
@@ -237,15 +242,25 @@ class DefaultLayout extends React.Component {
               {
                 '@context': 'https://schema.org',
                 '@type': 'WebSite',
+                '@id': WEBSITE_ID,
                 name: defaultTitle,
                 url: `${siteUrl}/`,
-                description: otherData.meta_description.value,
+                description: AUTHOR_PROFILE.description,
+                publisher: { '@id': PERSON_ID },
+                author: { '@id': PERSON_ID },
               },
               {
                 '@context': 'https://schema.org',
                 '@type': 'Person',
+                '@id': PERSON_ID,
                 name: AUTHOR_NAME,
                 url: `${siteUrl}/`,
+                image: AUTHOR_PROFILE.imageUrl,
+                jobTitle: AUTHOR_PROFILE.jobTitle,
+                description: AUTHOR_PROFILE.description,
+                worksFor: AUTHOR_PROFILE.worksFor,
+                address: AUTHOR_PROFILE.address,
+                knowsAbout: AUTHOR_PROFILE.knowsAbout,
                 sameAs,
               },
             ].concat(seo.jsonLd ? [].concat(seo.jsonLd) : [])

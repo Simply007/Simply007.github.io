@@ -3,7 +3,7 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
-import { SITE_URL, AUTHOR_NAME, stripHtml } from '../utils/seo'
+import { SITE_URL, PERSON_ID, stripHtml } from '../utils/seo'
 
 const ProjectItem = ({ data: { kontentItemProject }, location }) => {
   const elements = kontentItemProject.elements
@@ -30,7 +30,7 @@ const ProjectItem = ({ data: { kontentItemProject }, location }) => {
           codeRepository: elements.source_code_url.value || undefined,
           url: elements.live_url.value || canonicalUrl,
           mainEntityOfPage: canonicalUrl,
-          author: { '@type': 'Person', name: AUTHOR_NAME, url: `${SITE_URL}/` },
+          author: { '@id': PERSON_ID },
           inLanguage: 'en',
         },
       }}
