@@ -11,7 +11,7 @@
 - Published: 2025-06-22
 - Section: Journal
 
-When integrating CKEditor 5 , it's tempting to start small—using the CKEditor Builder or diving into the crash course. But there’s a subtle gotcha that trips up even experienced developers: the Essentials plugin doesn’t include Paragraph support . Without it, your editor silently fails—no errors, just an empty editing area. This post shows the problem, the fix, and why remembering to add the Paragraph plugin is... well, essential. 🚀
+When integrating CKEditor 5, it's tempting to start small—using the CKEditor Builder or diving into the crash course. But there’s a subtle gotcha that trips up even experienced developers: the Essentials plugin doesn’t include Paragraph support. Without it, your editor silently fails—no errors, just an empty editing area. This post shows the problem, the fix, and why remembering to add the Paragraph plugin is... well, essential. 🚀
 
 When you're adding **CKEditor 5** to your platform, chances are you're starting simple—maybe testing in a sandbox project or integrating through the excellent CKEditor Builder, or diving into the CKEditor Framework Crash Course.
 
@@ -242,7 +242,7 @@ This project is a testament to how modern creative tools can transform complex t
 - Published: 2021-06-07
 - Section: Journal
 
-This little gotcha might help you to decide whether you item is a content item, or a content component . What is that good for? Content components are always returned as a part of the parent item and can't be fetched solely. This condition can help you i.e. with caching.
+This little gotcha might help you to decide whether you item is a content item, or a content component. What is that good for? Content components are always returned as a part of the parent item and can't be fetched solely. This condition can help you i.e. with caching.
 
 Do you want to cache content items and you are not sure which ones are content components and which are linked items?  
   
@@ -287,7 +287,7 @@ private static isComponent(property: any): boolean {
 - Published: 2021-03-21
 - Section: Journal
 
-It is possible to parse out Kontent Project ID out of the Management API Key . That means no more necessity to ask for two keys for your Kontent tools.
+It is possible to parse out Kontent Project ID out of the Management API Key. That means no more necessity to ask for two keys for your Kontent tools.
 
 Do you develop any Kontent tool using [Management API](https://docs.kontent.ai/reference/management-api-v2#tag/API-key-scope-and-validity) and still ask for both - Project ID and Management API key? Following lines will help you to improve your UX as well as cleanout your code.
 
@@ -624,7 +624,7 @@ If you want to see a more complex example, check out the [Kentico Kontent Statiq
 - Published: 2020-08-29
 - Section: Journal
 
-Have you been struggling with some NPM library providing async API? It is surprisingly easy to set up a playground capable of Javascript async , await . Let's get to it!
+Have you been struggling with some NPM library providing async API? It is surprisingly easy to set up a playground capable of Javascript async, await. Let's get to it!
 
 ## Solution
 
@@ -778,7 +778,7 @@ Test out Javascript async await easily
 - Published: 2020-07-31
 - Section: Journal
 
-It is great that Kentico Kontent Management REST API allows uploading the assets, but how to upload an asset under a specific folder and how to achieve it via Javascript Management SDK ? Originally this question was asked on StackOverflow .
+It is great that Kentico Kontent Management REST API allows uploading the assets, but how to upload an asset under a specific folder and how to achieve it via Javascript Management SDK? Originally this question was asked on StackOverflow.
 
 The answer is pretty simple in the end. The only hard thing is to find the right part of the [REST Management API documentation](https://docs.kontent.ai/reference/management-api-v2) and then find this API provided via  [Javascript/Typescript Management SDK](https://github.com/Kentico/kontent-management-sdk-js) wrapper.  
 
@@ -908,7 +908,7 @@ List<CTA> transfomedCtas = section
 - Section: Projects
 - Source code: https://github.com/ckeditor/devrel-ckeditor-ai-coding-agents-demo
 
-The runnable companion to the \"Less time, fewer tokens, better effects\" webinar: a fictional trip-planning landing page whose About section is edited by a CKEditor InlineEditor that an AI coding agent wired in - Format painter, Slash commands, AI assistant, autosave and all.
+The runnable companion to the "Less time, fewer tokens, better effects" webinar: a fictional trip-planning landing page whose About section is edited by a CKEditor InlineEditor that an AI coding agent wired in - Format painter, Slash commands, AI assistant, autosave and all.
 
 ## What's inside
 
@@ -1097,7 +1097,7 @@ Collaboration features look monolithic from the outside; this repo shows they co
 - Section: Projects
 - Source code: https://github.com/Simply007/ts-type-arithmetic
 
-The companion repository for my \"Extreme TypeScript\" talks: learn conditional types, infer, template literal types, and recursion by building a calculator that computes entirely at compile time.
+The companion repository for my "Extreme TypeScript" talks: learn conditional types, infer, template literal types, and recursion by building a calculator that computes entirely at compile time.
 
 ## What's inside
 
@@ -1492,7 +1492,7 @@ Demonstrates UKS networking, ingress, persistent storage (for WADs), and zero-to
 - Live: https://kontent-starter-corporate-next-js.netlify.app
 - Source code: https://github.com/Simply007/kontent-starter-corporate-next-js
 
-Next.js corporate starter site using Kontent.ai as a CMS .
+Next.js corporate starter site using Kontent.ai as a CMS.
 
 ## 🚀 **Supercharge Your Corporate Website with Next.js & Kontent.ai!**
 
@@ -1540,7 +1540,7 @@ For more details, refer to the [repository](https://github.com/kontent-ai/boiler
 - Live: https://javadoc.io/doc/com.github.kentico/kontent-delivery/latest/index.html
 - Source code: https://github.com/Kentico/kontent-java-packages
 
-The monorepo containing Kontent Delivery SDK for data fetching facilitation from Kontent headless CMS , model generator, and a set of examples of how to use these two tools using Gradle, Spring Boot, and Java + Kotlin android application.
+The monorepo containing Kontent Delivery SDK for data fetching facilitation from Kontent headless CMS, model generator, and a set of examples of how to use these two tools using Gradle, Spring Boot, and Java + Kotlin android application.
 
 _I would like to start with the disclaimer. The core of the Delivery SDK was written by_ [_Adam J. Weigold_](https://github.com/aweigold)_. My core work was to refactor the solution so that the package is easy to maintain, extensible and allow to include examples in the monorepo itself_.
 
@@ -1843,7 +1843,7 @@ For scenarios such as modeling a listing page, this tool allows users to specify
 - Live: https://kontent-template-gatsby-landing-page-photon.netlify.app
 - Source code: https://github.com/Simply007/kontent-template-gatsby-landing-page-photon
 
-Kentico Kontent web template using Gatsby.js and Kentico Kontent based on Gatsby starter Photon .
+Kentico Kontent web template using Gatsby.js and Kentico Kontent based on Gatsby starter Photon.
 
 Gatsby.js starter ([official gallery](https://www.gatsbyjs.com/starters/Simply007/kontent-template-gatsby-landing-page-photon/)) based on [Gatsby starter Photon](https://www.gatsbyjs.org/starters/codebushi/gatsby-starter-photon/) is a simple landing page boilerplate. It consists of a set of sections you can configure and order in the headless CMS - Kentico Kontent.
 
@@ -1865,7 +1865,7 @@ It was also selected as one of [the best Jamstack themes by Stackrole](https://t
 - Published: 2018-12-12
 - Section: Projects
 
-This boilerplate showcasing how to combine the Node.js web server Express.js with GraphQL . The server converts the Kentico Kontent Delivery REST API to GraphQL using the Apollo framework and then renders the output using the Pug view engine .
+This boilerplate showcasing how to combine the Node.js web server Express.js with GraphQL. The server converts the Kentico Kontent Delivery REST API to GraphQL using the Apollo framework and then renders the output using the Pug view engine.
 
 Boilerplate is combining [Express.js](https://expressjs.com) web server with [Apollo framework](https://www.apollographql.com) middleware to provide a GraphQL API wrapper around the REST API by headless CMS Kentico Kontent.
 
