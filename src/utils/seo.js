@@ -9,10 +9,11 @@ const WEBSITE_ID = `${SITE_URL}/#website`
 const AUTHOR_PROFILE = {
   jobTitle: 'Developer Advocate',
   description:
-    'Developer Advocate focused on CKEditor, AI coding agents, and content editing. Conference speaker based in Brno, Czech Republic.',
+    'Self-employed Developer Relations consultant, currently working mainly with CKEditor. Focused on rich text editing, AI coding agents, and content editing. Conference speaker based in Brno, Czech Republic.',
   imageUrl:
     'https://assets-eu-01.kc-usercontent.com/6aec6c2a-3010-01c9-8295-4d988333f15d/8eff9399-d66c-415f-a343-5c17cad17e63/website-icon.png',
-  worksFor: {
+  // contractor engagement, not employment — affiliation, not worksFor
+  affiliation: {
     '@type': 'Organization',
     name: 'CKEditor',
     url: 'https://ckeditor.com',

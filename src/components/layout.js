@@ -258,7 +258,7 @@ class DefaultLayout extends React.Component {
                 image: AUTHOR_PROFILE.imageUrl,
                 jobTitle: AUTHOR_PROFILE.jobTitle,
                 description: AUTHOR_PROFILE.description,
-                worksFor: AUTHOR_PROFILE.worksFor,
+                affiliation: AUTHOR_PROFILE.affiliation,
                 address: AUTHOR_PROFILE.address,
                 knowsAbout: AUTHOR_PROFILE.knowsAbout,
                 sameAs,
