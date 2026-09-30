@@ -51,17 +51,28 @@ const pageDescription = (pathname) =>
   PAGE_DESCRIPTIONS[pathname] ||
   PAGE_DESCRIPTIONS[pathname.replace(/\/?$/, '/')]
 
-const stripHtml = (html) =>
-  (html || '')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/\s+/g, ' ')
+// Cleans artifacts left by tag stripping and CMS text: literal \" escapes,
+// stray spaces before punctuation / after opening parens, repeated whitespace
+const normalizeText = (s = '') =>
+  s
+    .replace(/\\"/g, '"')
+    // only when the punctuation ends a word — keeps tokens like ".NET" intact
+    .replace(/\s+([.,!?;:)])(?=\s|$)/g, '$1')
+    .replace(/([(])\s+/g, '$1')
+    .replace(/\s{2,}/g, ' ')
     .trim()
+
+const stripHtml = (html) =>
+  normalizeText(
+    (html || '')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+  )
 
 module.exports = {
   SITE_URL,
@@ -71,5 +82,6 @@ module.exports = {
   AUTHOR_PROFILE,
   PAGE_DESCRIPTIONS,
   pageDescription,
+  normalizeText,
   stripHtml,
 }
