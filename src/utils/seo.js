@@ -34,6 +34,23 @@ const AUTHOR_PROFILE = {
   ],
 }
 
+const PAGE_DESCRIPTIONS = {
+  '/': 'Ondřej Chrastina, Developer Advocate for CKEditor. Talks, demos, and articles on rich text editing, AI coding agents, and developer experience.',
+  '/journal/':
+    'Articles by Ondřej Chrastina on CKEditor 5, headless CMS, TypeScript, and developer tooling, with practical fixes and walkthroughs.',
+  '/projects/':
+    'Demo projects and open-source code by Ondřej Chrastina: CKEditor AI showcases, conference workshop repos, and CMS starters.',
+  '/talks/':
+    'Conference talks, webinars, and videos by Ondřej Chrastina on CKEditor, Drupal, TYPO3, AI coding agents, and TypeScript.',
+  '/pwa-series/':
+    'A series by Ondřej Chrastina on building Progressive Web Apps with Angular and a headless CMS, and keeping a perfect Lighthouse score.',
+}
+
+// pathname arrives with or without trailing slash depending on context
+const pageDescription = (pathname) =>
+  PAGE_DESCRIPTIONS[pathname] ||
+  PAGE_DESCRIPTIONS[pathname.replace(/\/?$/, '/')]
+
 const stripHtml = (html) =>
   (html || '')
     .replace(/<[^>]+>/g, ' ')
@@ -52,5 +69,7 @@ module.exports = {
   PERSON_ID,
   WEBSITE_ID,
   AUTHOR_PROFILE,
+  PAGE_DESCRIPTIONS,
+  pageDescription,
   stripHtml,
 }
