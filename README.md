@@ -4,7 +4,7 @@
 
 This is my personal website build using [Gatsby](https://gatsbyjs.org) and [Kentico Kontent](https://kontent.ai) as a data source.
 
-[![Home page preview](./docs/home-page.png)](https://ondrej.chrastina.tech)
+[![Home page preview](./docs/home-page.png)](https://ondrej.chrastina.dev)
 
 ## Installation
 
@@ -39,11 +39,11 @@ Here is an example of using the grid, for a 3 column layout:
 
 You could find out the style guide on:
 
-* [/style-guide](https://ondrej.chrastina.tech/style-guide) - Home page style showcase
-* [/styleguide/elements](https://ondrej.chrastina.tech/style-guide/elements) - elements style guide
-* [/styleguide/generic](https://ondrej.chrastina.tech/style-guide/generic) - generic page showcase
-* [/styleguide/landing](https://ondrej.chrastina.tech/style-guide/landing) - landing page showcase
-* [/styleguide/sections](https://ondrej.chrastina.tech/style-guide/sections) - sections page showcase
+* [/style-guide](https://ondrej.chrastina.dev/style-guide) - Home page style showcase
+* [/styleguide/elements](https://ondrej.chrastina.dev/style-guide/elements) - elements style guide
+* [/styleguide/generic](https://ondrej.chrastina.dev/style-guide/generic) - generic page showcase
+* [/styleguide/landing](https://ondrej.chrastina.dev/style-guide/landing) - landing page showcase
+* [/styleguide/sections](https://ondrej.chrastina.dev/style-guide/sections) - sections page showcase
 
 ## Connect to your own project
 
