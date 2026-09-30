@@ -2,9 +2,15 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Banner from '../components/Banner'
+import { pageDescription } from '../utils/seo'
 
 const Home = ({ data, location }) => (
-  <Layout seo={{ path: location.pathname }}>
+  <Layout
+    seo={{
+      path: location.pathname,
+      description: pageDescription(location.pathname),
+    }}
+  >
     <Banner data={data.kontentItemHomePage} />
   </Layout>
 )

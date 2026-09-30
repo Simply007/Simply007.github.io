@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import Section from '../components/Section'
+import { pageDescription } from '../utils/seo'
 
 const SectionsPage = ({
   data: { kontentItemSectionsPage: pageData },
@@ -17,6 +18,7 @@ const SectionsPage = ({
       seo={{
         title: pageData.elements.header.value,
         path: location.pathname,
+        description: pageDescription(location.pathname),
       }}
     >
       <div data-kontent-item-id={pageData.system.id}>

@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import ListingItem from '../components/ListingItem'
+import { pageDescription } from '../utils/seo'
 
 /**
  * Check if there is an intersect in the following Set and array
@@ -137,6 +138,7 @@ const ListingPage = ({
       seo={{
         title: pageData.elements.primary_text.value,
         path: location.pathname,
+        description: pageDescription(location.pathname),
       }}
     >
       <BannerLanding
