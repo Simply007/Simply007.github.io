@@ -1,0 +1,2391 @@
+# Ondřej Chrastina
+
+> Ondřej Chrastina's personal site
+
+---
+
+# CKEditor 5 Pitfall: Don't Forget the Paragraph Plugin
+
+- URL: https://ondrej.chrastina.dev/journal/ckeditor-5-pitfall-don-t-forget-the-paragraph-plugin/
+- Published: 2025-06-22
+- Section: Journal
+
+When integrating CKEditor 5 , it's tempting to start small—using the CKEditor Builder or diving into the crash course. But there’s a subtle gotcha that trips up even experienced developers: the Essentials plugin doesn’t include Paragraph support . Without it, your editor silently fails—no errors, just an empty editing area. This post shows the problem, the fix, and why remembering to add the Paragraph plugin is... well, essential. 🚀
+
+When you're adding **CKEditor 5** to your platform, chances are you're starting simple—maybe testing in a sandbox project or integrating through the excellent CKEditor Builder, or diving into the CKEditor Framework Crash Course.
+
+In my case, I tried both approaches:
+
+-   🧱 Using the CKEditor Builder
+-   ⚙️ Following the CKEditor framework crash course
+
+Both are fantastic resources. However, there's one small but **crucial** detail that’s easy to overlook:
+
+_💡 You need \*\*two plugins\*\* to make even a minimal CKEditor 5 setup work:_  
+
+-   `Essential`
+-   🚨 `Paragraph` (yes, it's **not** included in Essentials!)
+
+```javascript
+ClassicEditor.create(element, {
+    licenseKey: 'GPL',
+    plugins: [
+        Essentials, // * ✅ Essential
+        Paragraph // 🚨 Paragraph 🚨 
+    ]
+});
+```
+
+  
+
+## The Pitfall: Only Using Essentials
+
+It might seem like the following setup is enough:
+
+```javascript
+// Import the editor.
+import {
+    ClassicEditor,
+    Essentials,
+} from 'ckeditor5';
+
+// Import the styles.
+import 'ckeditor5/ckeditor5.css';
+
+// Get the HTML element with the ID of 'app'.
+const element = document.querySelector('#app');
+
+// Instantiate the editor using the `create` method.
+const editor = await ClassicEditor.create(element, {
+    licenseKey: 'GPL',
+    plugins: [
+        Essentials
+    ]
+});
+```
+
+The editor initializes, **but nothing works**—no content, no cursor, and no error messages either! 😱
+
+_Yes, the configuration is slightly richer, but it still behaves the same in the editor area._
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/bdcb2a0b-234a-4762-a603-e9893f4427fc/Screenshot%202025-06-19%20at%2018.03.56.png)
+
+Take a look at this case:
+
+_“Are you missing something?”  
+_Yes. Yes, you are (and it is in the docs):
+
+### YES, it is in the docs
+
+`(alias) class Essentials   import Essentials`
+
+A plugin including all essential editing features. It represents a set of features that enables similar functionalities to a `<textarea>` element.
+
+It includes:
+
+-   `:ui/editorui/accessibilityhelp/accessibilityhelp~AccessibilityHelp,`
+-   `:clipboard/clipboard~Clipboard,`
+-   `:enter/enter~Enter,`
+-   `:select-all/selectall~SelectAll,`
+-   `:enter/shiftenter~ShiftEnter,`
+-   `:typing/typing~Typing,`
+-   `:undo/undo~Undo.`
+
+This plugin set does not define any block-level containers (such as **:paragraph/paragraph~Paragraph**). If your editor is supposed to handle block content, make sure to include it.
+
+## The Fix: Add the Paragraph Plugin 🎉
+
+```javascript
+// Import the editor.
+import {
+    ClassicEditor,
+    Essentials,
+    Paragraph
+} from 'ckeditor5';
+
+// Import the styles.
+import 'ckeditor5/ckeditor5.css';
+
+// Get the HTML element with the ID of 'app'.
+const element = document.querySelector('#app');
+
+// Instantiate the editor using the `create` method.
+const editor = await ClassicEditor.create(element, {
+    licenseKey: 'GPL',
+    plugins: [
+        Essentials,
+        Paragraph
+    ]
+});
+```
+
+And voilà:  
+_“Much better!”_
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/fe334a52-26f2-469c-ac0b-0f6f9fbe8418/Screenshot%202025-06-19%20at%2018.05.39.png)
+
+## 🧠 Key Takeaway
+
+-   `Essentials` plugin ≠ has everything you need for editing.
+-   For a working CKEditor instance, especially one with block content, add the Paragraph plugin.
+-   Always double-check the docs—even for plugins that sound... well, essential.
+
+_Keep this in mind as you build your rich text editing experiences! 💡_
+
+---
+
+# From Prototype to Purpose: The Journey of Our Custom Elements at Kontent.ai
+
+- URL: https://ondrej.chrastina.dev/journal/from-prototype-to-purpose-the-journey-of-our-custom-elements-at-kontent-ai/
+- Published: 2025-02-17
+- Section: Journal
+
+Blogpost detailing our journey from a simple showcase to a comprehensive custom element gallery at Kontent.ai, sharing insights on how my team and I evolved the project to empower developers and enhance our headless CMS capabilities.
+
+## Introduction
+
+When we first envisioned custom elements at Kontent.ai, our goal was to extend our headless CMS with tailored functionality through small HTML apps running in sandboxed iframes. These apps interact with Kontent.ai using a defined set of JavaScript post messages, essentially loading web pages within the CMS. This integration, facilitated by the [Custom Elements API](https://kontent.ai/learn/docs/custom-elements), enabled us to build tools that went far beyond standard content type elements.
+
+## What Is a Custom Element?
+
+Custom elements are self-contained web applications embedded directly in the Kontent.ai CMS. They communicate with the system through a set of post messages defined in JavaScript, allowing for seamless integration and extended functionality. In simple terms, they are web pages loaded within the CMS that interact via the [Custom Elements API](https://kontent.ai/learn/docs/custom-elements), giving developers the power to create interactive and context-aware content experiences.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/d51c4959-79c5-48a0-825c-4c250d676a7c/content%20type%20with%20custom%20element.webp)
+
+  
+
+## The Early Days: Prototypes and Simple Samples
+
+Our journey began with a modest project aimed at showcasing how to build custom elements and interact with them. We started with two simple sample elements—a color picker and a Markdown editor. These initial prototypes came bundled with basic CSS styles and fonts, ensuring they adhered to the headless CMS's look and feel. This phase was crucial as it provided a clear, hands-on example of how the Custom Elements API could be leveraged to enhance content creation.  
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/9248f4ec-b5b5-47dd-8d22-4249593b6fc4/Screenshot%202025-02-18%20at%2018.09.47.png)
+
+  
+
+## Community Growth and the Expanding Catalog
+
+As more developers began building their own custom elements, our project quickly evolved. We transformed our initial repository into a comprehensive catalog using Gatsby.js, inviting community submissions and sharing custom elements that were both innovative and practical. This catalog not only served as a code repository but also functioned as a deployment center (via GitHub Pages) for these elements. The repository became a valuable resource for consulting and professional services, showcasing the creativity and potential of custom elements within the Kontent.ai ecosystem.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/dc09c46c-6071-40c2-83f9-d014c7b9fed0/Screenshot%202025-02-18%20at%2018.03.24.png)
+
+  
+
+## The Need for Re-architecture
+
+With the expansion of our custom elements catalog, public confusion began to emerge. Many users mistakenly believed that the elements hosted on our repository were fully maintained by us for production use. To address this, we re-architected the project by rewriting the library in Vue.js. This new client-side web app was designed to serve purely as a guidepost—providing best practices, consistent styling, and enhanced search functionality—without being a production hosting platform. This clear delineation helped us reposition our role as providers of developer resources rather than as maintainers of every custom element.
+
+[Check out more!](https://ondrej.chrastina.dev/projects/custom-element-gallery/)
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/929aeb91-a7f9-42b5-81ec-c6aff2428b3f/Screenshot%202025-02-18%20at%2014.06.25.png)
+
+  
+
+## Splitting the Project: Embracing the Single Responsibility Principle
+
+As our repository grew, it became increasingly challenging to curate a mix of well-maintained custom elements alongside one-off projects that quickly became outdated. Coordinating updates—especially when new versions of the Custom Elements API were released or when style updates were necessary—was time-consuming. In line with the Single Responsibility Principle, we decided to split our initiative into three distinct parts:
+
+-   **Developer Resources and Documentation:** We consolidated our best practices and documentation into a dedicated space, available at [Kontent.ai Integrations](https://kontent-ai.github.io/integrations/Integrations). This ensures developers have a clear and comprehensive guide for creating custom elements.
+-   **Guidepost Using GitHub Tags:** To streamline the discovery of community-built elements, we transitioned our guidepost to leverage GitHub tags. Contributors can now mark their custom elements as searchable using the tagging conventions detailed in our [Naming Conventions](https://kontent-ai.github.io/Naming-conventions#tagging) guide.
+-   **Dedicated React.js Template Repository:** We also established a standalone React.js template repository ([custom-element-starter-react](https://github.com/kontent-ai/custom-element-starter-react)) that serves as a robust starting point for developers looking to build their own custom elements. This repository is actively maintained, allowing community members to pull in updates and enhancements as needed.
+-   **List of Curated Integrations**: [Curated and maintained integrations](https://kontent.ai/integrations) that ensure a higher level of maintenance from Kontent.ai DevRel team.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/572edd19-a57e-46ed-8fdd-0d1d12516485/Screenshot%202025-02-18%20at%2018.15.53.png)
+
+  
+
+## Conclusion
+
+This evolution has provided a more coherent and maintainable environment for custom element development at Kontent.ai. Creators now have access to robust resources and templates that simplify the process of building custom elements, while consumers benefit from a clear, searchable catalog of community innovations. Reflecting on our journey, I’m proud of how our collective efforts have empowered developers and enriched the Kontent.ai ecosystem, setting the stage for future innovation.
+
+---
+
+# How I Turned Kubernetes Into a Fun, Kid-Friendly YouTube Short
+
+- URL: https://ondrej.chrastina.dev/journal/how-i-turned-kubernetes-into-a-fun-kid-friendly-youtube-short/
+- Published: 2025-02-16
+- Section: Journal
+
+Join me, Ondřej Chrastina, on a creative journey to discover how Kubernetes is transformed into a fun, kid-friendly video by breaking down complex tech into simple, engaging concepts using tools like ChatGPT, ElevenLabs, and Canva.
+
+Recently, I set out on a mission to simplify one of tech’s more complex concepts—Kubernetes—so that even a five-year-old could grasp it. Imagine having a huge box of LEGO bricks and a magical helper that organizes them into perfect structures every time. That’s Kubernetes in a nutshell!
+
+## Step 1: Crafting the Script
+
+I started by using ChatGPT to generate a script along with detailed scene descriptions. In just minutes, I had a solid foundation that broke down Kubernetes into easy-to-understand, playful ideas. This step was all about making sure the content was accessible and engaging.
+
+## Step 2: Creating the Visuals
+
+After a few rounds of tweaks, I managed to produce some really appealing images for each scene—all while staying within the free image usage limits. These visuals helped turn abstract concepts into something tangible and fun, much like turning LEGO bricks into a masterpiece.
+
+## Step 3: Bringing It to Life with Audio
+
+Next up, I generated the audio using ElevenLabs. I opted for a reel/short video format since it allowed me to find free resources more easily compared to creating a full comic (which was my initial idea). The result was clear, lively narration that tied everything together.
+
+## Step 4: Assembling the Video
+
+Finally, I combined the script, images, and audio using Canva. The final video was a seamless blend of creativity and technology, culminating in an engaging YouTube upload that makes learning about Kubernetes a delightful experience.
+
+## Wrap-up
+
+This project is a testament to how modern creative tools can transform complex technical subjects into something both fun and approachable. Whether you're a tech enthusiast or just looking for a simpler way to learn, I hope this video inspires you to see technology from a new, playful perspective. Enjoy the video, and happy learning!
+
+🎉 And this is the result 🎉
+
+[https://youtube.com/shorts/N85\_wB-kkCs?si=BOi0qkA40momwTFg](https://youtube.com/shorts/N85_wB-kkCs?si=BOi0qkA40momwTFg)
+
+---
+
+# Hacky way to check if content item is a component
+
+- URL: https://ondrej.chrastina.dev/journal/hacky-way-to-check-if-content-item-is-a-component/
+- Published: 2021-06-07
+- Section: Journal
+
+This little gotcha might help you to decide whether you item is a content item, or a content component . What is that good for? Content components are always returned as a part of the parent item and can't be fetched solely. This condition can help you i.e. with caching.
+
+Do you want to cache content items and you are not sure which ones are content components and which are linked items?  
+  
+You can use a little hack - the third segment of content components always starts with `01`. This effectively prevents you from doing one round trip to the server to check if the item is a component or not (by using get items and specifying the ID and checking if you get the item in the response). Or parsing the rich text element to get the information whether the linked item is a component, or linked item.
+
+  
+Here is a C# snippet using Guid
+
+```csharp
+private static bool IsComponent(JProperty property)
+{
+// Components have substring 01 in its id starting at position 14.
+// xxxxxxxx-xxxx-01xx-xxxx-xxxxxxxxxxxx
+var id = property?.Value?["system"]?["id"]?.Value<string>();
+return id != null && (Guid.TryParse(id, out _) && id.Substring(14, 2).Equals("01", StringComparison.Ordinal));
+}
+```
+
+And here a Typescript showcase using regular expressions to do the same:
+
+```typescript
+private static isComponent(property: any): boolean {
+  // Components have substring '01' in its id starting at position 14.
+  // xxxxxxxx-xxxx-01xx-xxxx-xxxxxxxxxxxx
+  const id = property?.Value?.["system"]?.["id"] as string | undefined;
+  
+  if (!id) return false;
+  
+  // Validate GUID format
+  const guidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+  if (!guidRegex.test(id)) return false;
+  
+  return id.substring(14, 16) === "01";
+}
+```
+
+---
+
+# Get Kontent Project ID from the Management API key
+
+- URL: https://ondrej.chrastina.dev/journal/get-kontent-project-id-from-the-management-api-key/
+- Published: 2021-03-21
+- Section: Journal
+
+It is possible to parse out Kontent Project ID out of the Management API Key . That means no more necessity to ask for two keys for your Kontent tools.
+
+Do you develop any Kontent tool using [Management API](https://docs.kontent.ai/reference/management-api-v2#tag/API-key-scope-and-validity) and still ask for both - Project ID and Management API key? Following lines will help you to improve your UX as well as cleanout your code.
+
+The management API key is just a [JWT token](https://tools.ietf.org/html/rfc7519) containing the payload (in between header with signature). So you could decode it i.e. by using [JWT.io](https://jwt.io/), And as a payload, you could see this:
+
+```json
+{
+  "jti": "b6a9ee86bfdc41c89f20048c3baaba04",
+  "iat": "1612535158",
+  "exp": "1958135158",
+  "project_id": "06c2b8951700013e5f3160283aff1100",
+  "ver": "2.1.0",
+  "uid": "usr_0vMrpCH2TkOK5oK3y3bKNS",
+  "aud": "manage.kenticocloud.com"
+}
+```
+
+The `project_id` could be used to identify the project with one modification. It is necessary to add dashes on appropriate places to respect the [GUID format](http://guid.one/guid).  
+  
+To do all of that, the code would end up looking like that (or any other language alternative) - or you just use a library like [jwt-decode](https://github.com/auth0/jwt-decode). But it is always good to know what they do.
+
+```javascript
+const managementApiKey = "ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0KICAianRpIjogImI2YTllZTg2YmZkYzQxYzg5ZjIwMDQ4YzNiYWFiYTA0IiwNCiAgImlhdCI6ICIxNjEyNTM1MTU4IiwNCiAgImV4cCI6ICIxOTU4MTM1MTU4IiwNCiAgInByb2plY3RfaWQiOiAiMDZjMmI4OTUxNzAwMDEzZTVmMzE2MDI4M2FmZjExMDAiLA0KICAidmVyIjogIjIuMS4wIiwNCiAgInVpZCI6ICJ1c3JfMHZNcnBDSDJUa09LNW9LM3kzYktOUyIsDQogICJhdWQiOiAibWFuYWdlLmtlbnRpY29jbG91ZC5jb20iDQp9.aEqGajw7e9m13lnID0z9PBCL0MytqYlvoYg_rwPfEJo";
+
+const payloadBase64 = managementApiKey.split('.')[1];
+const payloadBase64Cleared = payloadBase64.replace(/-/g, '+').replace(/_/g, '/');
+const jsonPayload = decodeURIComponent(
+	atob(payloadBase64Cleared)
+  	.split('')
+    .map((c) => 
+    	('%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+    )
+    .join('')
+);
+
+const payloadObject = JSON.parse(jsonPayload);
+
+const projectIdWithoutDashes = payloadObject.project_id;
+
+const projectId = 
+	`${projectIdWithoutDashes.substr(0, 8)}-\
+${projectIdWithoutDashes.substr(8, 4)}-\
+${projectIdWithoutDashes.substr(12,4 )}-\
+${projectIdWithoutDashes.substr(16, 4)}-\
+${projectIdWithoutDashes.substr(20)}`
+
+console.log(projectId);
+```
+
+If you want to play with it - [check out this Codepen](https://codepen.io/simply007-the-sasster/pen/xxRvNoX).  
+  
+_...and of course, I invalidated the showcased API key 🤞_
+
+---
+
+# Jamstack on .NET: From zero to hero with Statiq and Kontent
+
+- URL: https://ondrej.chrastina.dev/journal/jamstack-on-net-from-zero-to-hero-with-statiq-and-kontent/
+- Published: 2020-11-30
+- Section: Journal
+
+How to start building Jamstack Apps in .NET utilizing Statiq and headless CMS.
+
+**Are you interested in Jamstack, but sad you can't practice it with .NET? The times have changed, and .NET developers are now able to build Jamstack apps using the new static site generator Statiq. This article walks you through the setup of a ready-to-use boilerplate! If you are new to Jamstack on .NET, follow the steps below to wrap your head around the basics. If you know the drill, skip that part and use the boilerplate.**
+
+[Boilerplate](https://github.com/Kentico/kontent-boilerplate-statiq-net)
+
+## Technologies
+
+Let's briefly introduce [Jamstack](https://jamstack.org). It is a web architecture based on the pre-rendered assets (HTML files, images, CSS, etc.) that are generated at the build time based on templates and data.
+
+![Technology puzzle diagram](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/35b18ef7-53f1-49f2-84d0-55d5175aca4b/sstatiq%20puzzle%20with%20arrows.png)
+
+Now, let's jump right to the available technologies. First is Statiq, a generation platform providing the .NET based [Statiq.Framework](https://statiq.dev/framework) for creating a static site generator infrastructure and a set of modules called [Statiq.Web](https://statiq.dev/web) that will make the initial configuration of the framework easier.
+
+The next pieces of the puzzle are the **templates and data storage**. I have chosen **Razor as a template engine** since it is the most known one in the .NET world. **Data** will be provided by a **headless CMS—Kentico Kontent**. It provides more flexibility and collaboration features in comparison with markdown files, and it has a Statiq module out of the box.
+
+The last piece is to get all the assets and [deploy them to Netlify.](https://statiq.dev/web/deployment/netlify)
+
+## Let's start
+
+The whole boilerplate creation is split into three parts—an application skeleton, a content source, and a connector that allows Statiq to generate pages.
+
+_Before you do anything else,_ [_download and install a .NET 5_](https://dotnet.microsoft.com/download) _if you haven't already._
+
+### Prepare the application
+
+First, use [dotnet CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) to create a new console application.
+
+```powershell
+dotnet new console --name FromZeroToHero
+```
+
+Then, navigate to the application folder and install a `Statiq.Web` Nuget package (which will also download `Statiq.Framework` as a dependency).
+
+```powershell
+cd FromZeroToHero
+dotnet add package Statiq.Web -v 1.0.0-*
+```
+
+And then configure `Statiq.Framework` in `Program.cs` to use the default configuration of the `Statiq.Web` modules.
+
+```csharp
+using System.Threading.Tasks;
+using Statiq.App;
+using Statiq.Web;
+
+namespace FromZeroToHero
+{
+  public class Program
+  {
+    public static async Task<int> Main(string[] args) =>
+      await Bootstrapper
+        .Factory
+        .CreateWeb(args)
+        .RunAsync();
+  }
+}
+```
+
+💡 _At this point, if you run_ `_dotnet run -- preview_`_, you can browse your empty site at_ `_http://localhost:5080_` 💡
+
+### Prepare content
+
+As the title mentioned, the boilerplate is about going "from zero to hero". This means creating a "Hero" content model that consists of a headline, summary, and CTA. Plus creating one content item based on that model. We'll do all that in a headless CMS [Kentico Kontent](hrrps://kontent.ai) as it already features Statiq integration.
+
+-   First, [create an account at Kontent.ai](https://app.kontent.ai/sign-up?utm_source=nextjs_docs_example&utm_medium=devrel&utm_campaign=extended_trial).
+    -   _The link above will provide you with a 90-day trial. Once you finish the trial, or even during the trial period, you can switch to the_ [_**Developer plan**_](https://kontent.ai/developer-plan)_, which is_ _**free of charge**_ _and lets you run small projects with $0 budget._
+-   After signing up, [create an empty project](https://docs.kontent.ai/tutorials/set-up-kontent/projects/manage-projects#a-creating-projects).
+-   From your Kontent project, go to _Content models_ and add a new Content type called "Hero" with these text fields:
+    -   Headline
+    -   Summary
+    -   CTA label
+    -   CTA URL
+
+![Hero content model](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/efa45ff8-0464-456e-bd04-bac13fddcaf4/Hero%20model.png)
+
+-   Go to _Content & Assets_ section in your project and click _Create new_ on the _Content_ tab and select _Hero_ content type and fill the elements
+    -   _Content Item Name:_ Hero
+    -   _Headline:_ From zero to hero with Statiq and Kontent
+    -   _Summary:_ How to start with the .NET Jamstack app utilizing Statiq as a Static generation platform and Kentico Kontent as a data source.
+    -   _CTA label:_ Explore
+    -   _CTA URL:_ https://github.com/Kentico/kontent-boilerplate-statiq-net
+-   Publish the changes
+
+![Hero content item detail](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/a410aa81-6bb1-444e-8333-023aa3dc24d1/Hero%20item.png)
+
+### Connect content and the site
+
+Now let's load the content from the headless CMS using [Kontent.Statiq](https://www.nuget.org/packages/Kontent.Statiq) module and render it with Razor engine.
+
+First, install Kontent.Statiq module:
+
+```powershell
+dotnet add package Kontent.Statiq --version 1.0.0-*
+```
+
+Copy the Project ID from the Kontent application.
+
+-   Enter [Kontent application](https://app.kontent.ai/)
+-   Go to "Project Settings" and select "API keys"
+-   Copy "Project ID"
+
+![Copy project ID section](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/68e26358-78c4-40b8-9335-25c77291fe9f/Project%20ID.png)
+
+Then install the [Kontent Model Generator for .NET](https://www.nuget.org/packages/Kentico.Kontent.ModelGenerator) and generate our Hero model.
+
+```powershell
+dotnet new tool-manifest
+dotnet tool install Kentico.Kontent.ModelGenerator
+dotnet tool run KontentModelGenerator --projectid "<projectid>" --namespace "FromZeroToHero.Models" --outputdir "Models" --generatepartials true --structuredmodel true
+```
+
+_For more specific information about the model generator configuration,_ [_follow the generator's Readme_](https://github.com/Kentico/kontent-generators-net#readme)_._
+
+After generation, you will end up with three files `Models/Hero.Generated.cs`, which is a POCO model class, then `Models/Hero.cs` that allows extending the model class, and the last one is `Models/CustomTypeProviders.cs` that will be used to provide model mapping information.
+
+The next step is to initialize the Kontent Delivery SDK client for dependency injection. Extend `Program.cs` file with `ConfigureServices`.
+
+```csharp
+using System.Threading.Tasks;
+using FromZeroToHero.Models;
+using Kentico.Kontent.Delivery.Abstractions;
+using Kentico.Kontent.Delivery.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using Statiq.App;
+using Statiq.Common;
+using Statiq.Web;
+
+namespace FromZeroToHero
+{
+    public class Program
+    {
+        public static async Task<int> Main(string[] args) =>
+          await Bootstrapper
+            .Factory
+            .CreateWeb(args)
+            .ConfigureServices((services, config) =>
+            {
+                // Add the type provider
+                services.AddSingleton<ITypeProvider, CustomTypeProvider>();
+                // Configure Delivery SDK
+                services.AddDeliveryClient(opts =>
+                    opts.WithProjectId("<projectid>")
+                        .UseProductionApi()
+                        .Build());
+            })
+            .RunAsync();
+    }
+}
+```
+
+All of your assets and templates should be placed in the `/input` folder. Create a view file `_Hero.cshtml` in the `/input` folder then and use generated `FromZeroToHero.Models.Hero` class as a model for the template.
+
+```html
+@model FromZeroToHero.Models.Hero;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@Model.Headline</title>
+</head>
+<body>
+  <h1>@Model.Headline</h1>
+  <div>
+    @Model.Summary
+  </div>
+  <div>
+    <a href="@Model.CtaUrl">@Model.CtaLabel</a>
+  </div>
+</body>
+</html>
+```
+
+And finally,  to connect the configured client to load the data to the model and pass them to the Razor engine, we will define a new [Statiq Pipeline](https://statiq.dev/framework/pipelines). The pipeline is like a Controller from MVC. Create a new file in `Pipelines/HeroPipeline.cs`. By inheriting from `Statiq.Core.Pipeline`, Statiq automatically includes your pipeline in the generation process.
+
+```csharp
+using FromZeroToHero.Models;
+using Kentico.Kontent.Delivery.Abstractions;
+using Kentico.Kontent.Delivery.Urls.QueryParameters;
+using Kentico.Kontent.Delivery.Urls.QueryParameters.Filters;
+using Kontent.Statiq;
+using Statiq.Common;
+using Statiq.Core;
+using Statiq.Razor;
+
+namespace FromZeroToHero
+{
+    // <see href="https://statiq.dev/framework/pipelines">Pipelines documentation</see>
+    public class HeroPipeline : Pipeline
+    {
+        public HeroPipeline(IDeliveryClient client)
+        {
+            ProcessModules = new ModuleList
+            {
+                // Load "Hero" item and transfer it into IDocument.
+                // <see href="https://github.com/alanta/Kontent.Statiq">Kontent.Statiq</see>
+                new Kontent<Hero>(client)
+                    .WithQuery(
+                        new EqualsFilter("system.codename", "hero"),
+                        new LimitParameter(1)
+                    ),
+                // Load Razor template to IDocument content.
+                // <see href="https://github.com/statiqdev/Statiq.Framework/blob/main/src/core/Statiq.Core/Modules/Content/MergeContent.cs">MergeContent</see>.
+                // <see href="https://statiq.dev/web/content-and-data/content/">Content propery of IDocument</see>
+                new MergeContent(
+                    new ReadFiles(patterns: "_Hero.cshtml")
+                ),
+                // Render HTML file from Razor template and document typed as Hero model.
+                // <see href="https://github.com/statiqdev/Statiq.Framework/blob/main/src/extensions/Statiq.Razor/RenderRazor.cs">RenderRazor</see>
+                new RenderRazor()
+                    .WithModel(KontentConfig.As<Hero>()),
+                // Set file system destionation for the document.
+                // <see href="https://github.com/statiqdev/Statiq.Framework/blob/main/src/core/Statiq.Core/Modules/IO/SetDestination.cs">SetDestination</see>
+                new SetDestination(new NormalizedPath("index.html")),
+                // Flush the the output.
+                // <see href="https://github.com/statiqdev/Statiq.Framework/blob/main/src/core/Statiq.Core/Modules/IO/WriteFiles.cs">WriteFiles</see>.
+                new WriteFiles()
+            };
+        }
+    }
+}
+```
+
+🚀_Done! Now run_ `_dotnet build -- preview_` _and see your first hero page at_ `_http://localhost:5080_`_🚀_
+
+-   _Raw boilerplate is on GitHub under_ [_raw-boilerplate tag_](https://github.com/Kentico/kontent-boilerplate-statiq-net/tree/raw-boilerplate)
+
+## Fine-tuning
+
+The following sections describe how to extend a boilerplate with Razor layout standards, basic styling, and configuration settings. These changes are already included in the boilerplate.
+
+### Razor conventions
+
+Razor works the standard way in the Statiq environment. By creating `_Layout.cshtml` in the `input` folder and specifying the default layout in `_ViewStart.cshtml` like below, you prepare the standard setup for adding the pages with the same layout (as was done in [this commit](https://github.com/Kentico/kontent-boilerplate-statiq-net/commit/8c6a99a018be817aa2776371a8aef847625993b9) with `_Hero.cshtml` template).
+
+```plain_text
+@{ 
+    Layout = "_Layout"; 
+}
+```
+
+### Sass
+
+Since the [Sass](https://sass-lang.com) (as well as Less) is already pre-configured in `Statiq.Web` default modules, it is possible to create a sass file in the `input` folder and then reference it by the same name with `.css` extension. Create `main.scss` file and reference its transpiled version in the Razor view using `@IExecutionContext.Current.GetLink("/main.css")` and add some basic styling (see the [implementation](https://github.com/Kentico/kontent-boilerplate-statiq-net/commit/a8a7f03ea5db9737d69636828dde923500acc334)).
+
+![Kontent and Statiq boilerplate](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/14f703a1-5d64-4ab8-923f-0499464f1e70/screenshot.png)
+
+### Extract Project ID
+
+It is a good idea and a [.NET best practice to extract configuration to settings files](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0#default-configuration). To extract the Kontent delivery client configuration to this file, create an `appsettings.json` file with the `DeliveryOptions` section containing only one property `ProjectId`. Then in `Project.cs` configure the delivery client to dependency injection (see the [implementation](https://github.com/Kentico/kontent-boilerplate-statiq-net/commit/92f2d802fd66b4878b7299a2b8932bed84e3953c)):
+
+```csharp
+services.AddDeliveryClient((IConfiguration)config)
+```
+
+That action also opens the door for you to use different sets of configurations depending on the environment i.e. use configuration with a preview API key for your local development environment.
+
+## Conclusion
+
+In this article, I showed you how to build a simple Jamstack site using .NET and static site generator Statiq. We created a new content type with some content in a headless CMS, connected the CMS to our application, and converted the data into generated static pages. Find the complete implementation here:
+
+[Boilerplate](https://github.com/Kentico/kontent-boilerplate-statiq-net)
+
+If you want to see a more complex example, check out the [Kentico Kontent Statiq - Lumen Starter](https://github.com/Kentico/statiq-starter-kontent-lumen).
+
+---
+
+# Test out Javascript async await easily
+
+- URL: https://ondrej.chrastina.dev/journal/test-out-javascript-async-await-easily/
+- Published: 2020-08-29
+- Section: Journal
+
+Have you been struggling with some NPM library providing async API? It is surprisingly easy to set up a playground capable of Javascript async , await . Let's get to it!
+
+## Solution
+
+It is quite a straight forward process with **one key aspect**. You want to initialize new NPM package and prepare script that is capable to run asynchronous API and wait for the result.  
+I suppose you already have [Node.js](https://nodejs.org/en/download/) installed since you want to test out some javascript locally.
+
+**First**, you need to **create empty directory** and [**initialize the NPM package**](https://docs.npmjs.com/cli/init) inside.
+
+```powershell
+mkdir playground
+cd playground
+npm init -y
+```
+
+This will create `package.json` file with this content.
+
+```json
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+**Second step** is to create `index.js` file with **self-invocation function** plus **mark this function as async!** This will do the trick and you could use `await` wherever you want.
+
+```javascript
+const doWhatever = async () => {
+  // await whatever
+};
+
+// Self-invocation async function
+(async () => {
+  await doWhatever();
+})().catch((err) => {
+  console.error(err);
+  throw err;
+});
+```
+
+ **Last step** is to add a NPM script that will run `index.js` file to test it out. Just define `start` script that will run `node index.js` command.
+
+```json
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js" // THAT LINE
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+And just run the `start` script via [`npm CLI`](https://docs.npmjs.com/cli/npm).
+
+```powershell
+npm start
+```
+
+## Real example
+
+My exact scenario is to test out the [Kontent Delivery SDK for Javascript](https://github.com/Kentico/kontent-delivery-sdk-js#readme) for loading one content piece asynchronously using `await` so the result look like that.
+
+![Async Await playground example](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/5edcc9fc-bfcf-47a4-8a02-734dcb55a91d/2020-08-29_15-19-00.png)
+
+Install  required packages `rxjs` and `@kentico/kontent-delivery`
+
+```powershell
+npm i rxjs --save
+npm i @kentico/kontent-delivery --save
+```
+
+This will define these two dependencies to `package.json` file and install them to `node_modules` folder.
+
+```json
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": { // THESE DEPENDENCIES
+    "@kentico/kontent-delivery": "^10.0.0",
+    "rxjs": "^6.6.2"
+  }
+}
+```
+
+And to test out something real, let's adjust the `index.js` file to load content item of this gotcha.
+
+```javascript
+const { DeliveryClient } = require('@kentico/kontent-delivery');
+
+const doWhatever = async () => {
+  const client = new DeliveryClient({
+    projectId: "75653ec1-36a2-01e0-0d25-a64799947697",
+  });
+
+  const result = await client.item("test_out_javascript_await_easily")
+    .toPromise(); // THERE YOU GO!
+
+  console.log(result.item.title.value);
+}
+
+
+// Self-invocation async function
+(async () => {
+  await doWhatever();
+})().catch(err => {
+  console.error(err);
+  throw (err);
+});
+```
+
+So by running `npm start` you will get something like that!
+
+```powershell
+PS C:\tmp\playground> npm start
+
+> playground@1.0.0 start C:\tmp\playground
+> node index.js
+
+Test out Javascript async await easily
+```
+
+**And Voila - the title logged to console!** That is why we program 🤓
+
+---
+
+# Specify folder when uploading Asset via Kontent JS Management SDK
+
+- URL: https://ondrej.chrastina.dev/journal/specify-folder-when-uploading-asset-via-kontent-js-management-sdk/
+- Published: 2020-07-31
+- Section: Journal
+
+It is great that Kentico Kontent Management REST API allows uploading the assets, but how to upload an asset under a specific folder and how to achieve it via Javascript Management SDK ? Originally this question was asked on StackOverflow .
+
+The answer is pretty simple in the end. The only hard thing is to find the right part of the [REST Management API documentation](https://docs.kontent.ai/reference/management-api-v2) and then find this API provided via  [Javascript/Typescript Management SDK](https://github.com/Kentico/kontent-management-sdk-js) wrapper.  
+
+JS SDK should wrap the capabilities of the [Kontent REST Management API v2](https://docs.kontent.ai/reference/management-api-v2), in this case, the crucial is folder property of the Asset model.  
+  
+So the insert script when uploading an asset and then submitting it under specific folder would look like that:
+
+```javascript
+const folders = await mClient.listAssetFolders()
+  .toPromise(); // get folders
+const desiredFolder = folders.items
+  .find(folder => folder.name = "Pets"); // set desired folder
+const assetData = await getAssetDataDataFromUrl(article.image.url)
+  .toPromise(); // load binary how you want it
+const assetObject = await mClient
+  .uploadBinaryFile()
+  .withData(assetData)
+  .toPromise(); // upload binary
+
+const asset = await mClient.addAsset()
+  .withData({
+    descriptions: [{
+      language: {
+        codename: argv.language
+      },
+      description: `Image for article ${article.title}`
+    }],
+    external_id: article.image.id,
+    file_reference: {
+      ...assetObject.data
+    },
+    folder:  {
+      id: desiredFolder.id,
+      // also possible to use external ID:
+      // external_id: desiredFolder.externalId 
+    }
+  })
+  .toPromise();
+```
+
+If you already have the asset in Kontent, you could also just assign an aseet under your desired folder:
+
+```javascript
+const updatedAsset = await mClient.upsertAsset().withData({
+  // not sure if you need to add whole asset object like:
+  // `...asset`, but I think it is not necessary
+  folder:  {
+    id: desiredFolder.id,
+    // also possible to use external ID:
+    // external_id: desiredFolder.externalId 
+  }
+}).toPromise()
+```
+
+Original [answer on StackOverflow](https://stackoverflow.com/questions/63190557/how-can-i-add-asset-image-to-specific-folder-using-kentico/63191503#63191503).
+
+---
+
+# Kill the process occupying your port
+
+- URL: https://ondrej.chrastina.dev/journal/kill-the-process-occupying-your-port/
+- Published: 2020-07-27
+- Section: Journal
+
+Have you encounter with exception like " Address already in use: bind "? If you have been doing web development I have no doubt you have! Now you need to find the bas**rd and kill the process. But how to do that quickly on Windows?
+
+The solution is quite easy - use PowerShell!  
+First list all processes with their **PIDs** (in example with port `8080`)
+
+```plain_text
+netstat -ano | Select-String "8080"
+```
+
+You will get something like that:  
+
+```plain_text
+TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       14736
+TCP    [::]:8080              [::]:0                 LISTENING       14736
+```
+
+  
+Then use the PID (last column) and kill the process with fire using `taskkill`:
+
+```powershell
+ taskkill /F /pid 14736
+```
+
+---
+
+# JS "map" in Java
+
+- URL: https://ondrej.chrastina.dev/journal/js-map-in-java/
+- Published: 2020-07-24
+- Section: Journal
+
+How to transform all items in a List or Array to another array? If you come from JavaScript world mean map method, in .Net, you would use LINQ and Select method. But how is that in Java 8?
+
+The answer is quite easy, if you find the [Stream API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html) of Java 8. These API supports functional-style operations on streams of elements, such as map-reduce transformations on collections.
+
+So in Javascript the code would be like:
+
+```javascript
+const transformedCtas = section.elements.cta.value.map(cta => ({
+    ctaTitle: cta.elements.title.value,
+    ctaUrl: cta.elements.external_url.value
+}));
+```
+
+In Java 8, you would use:
+
+```java
+List<CTA> transfomedCtas = section
+    .getElements()
+    .getCta() // This returns List/Enumerable/...
+    .stream() // This is the key - transform data to sream and then use strem API for whatever you want
+    .map(cta -> 
+        new CTA(cta.getElements().getTitle(), cta.getElements().getExternalUrl()
+    );
+```
+
+---
+
+# Content Editing Unlocked: TYPO3 v14 Demo Project
+
+- URL: https://ondrej.chrastina.dev/projects/t3dd-2026-content-editing-unlocked/
+- Published: 2026-08-08
+- Section: Projects
+- Source code: https://github.com/Simply007/t3dd-2026-content-editing-unlocked
+
+The companion TYPO3 v14 demo for my "Content Editing Unlocked" talk at TYPO3 Developer Days 2026 - everything from the session as working code: theme-aware RTE previews, button styles shared via Site Sets, an OpenStreetMap block widget, and link icons in the link browser.
+
+## What's inside
+
+A TYPO3 v14 project showing how to make CKEditor 5 match your frontend instead of fighting it. It covers the whole talk in runnable form: RTE previews that follow the site theme, style-based button elements defined once in a Site Set and reused across sites, a custom OpenStreetMap block widget rendered identically in the editor and on the live site, and custom icons that show up in the link browser.
+
+## Why it exists
+
+Talks fade, repositories stay. Every configuration decision and production gotcha from the session is captured here as code you can clone, run, and compare against your own setup - the contract between the editor and the live site, made explicit.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/t3dd-2026-content-editing-unlocked)
+-   [The talk this demo was built for](https://ondrej.chrastina.dev/talks/content-editing-unlocked-t3dd-2026/)
+
+---
+
+# Web Summer Camp 2026 Workshop Playgrounds
+
+- URL: https://ondrej.chrastina.dev/projects/websummercamp-2026-workshop-playgrounds/
+- Published: 2026-07-13
+- Section: Projects
+- Source code: https://github.com/Simply007/websummercamp-2026-workshops
+
+My hands-on outputs from the workshops I attended at Web Summer Camp 2026 - one playground per half-day workshop, collected in a single repo so the learning survives the conference.
+
+## What's inside
+
+Web Summer Camp is built around serious half-day workshops, and the only way to make those stick is to keep the code. This repo collects my hands-on outputs from the sessions I attended across the tracks - each in its own folder with notes on what the workshop covered and what I took away from it.
+
+## Why it exists
+
+Conference learning has a half-life of about two weeks unless you turn it into something executable. Collecting the playgrounds in one repo means I can revisit any of them - and anyone curious about a workshop can see what it actually produced.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/websummercamp-2026-workshops)
+-   [Web Summer Camp 2026](https://websummercamp.com/2026)
+
+---
+
+# Proactive Digital Twin Workshop
+
+- URL: https://ondrej.chrastina.dev/projects/proactive-digital-twin-workshop/
+- Published: 2026-07-02
+- Section: Projects
+- Source code: https://github.com/Simply007/proactive-digital-twin-workshop
+
+The companion repository for my "Beyond the Chatbot: Engineering Your Proactive Digital Twin" workshop at Web Summer Camp 2026 - everything you need to deploy your own always-on agentic digital twin: setup scripts, living-files templates, and exercise walkthroughs.
+
+## What's inside
+
+This repo packages the whole hands-on workshop so you can run it at your own pace: deploying an autonomous OpenClaw agent to a VPS, shaping its behavior through living Markdown files (`user.md`, `heartbeat.md`), connecting real-world APIs on free and trial tiers, and setting up proactive Heartbeat logic so the agent acts on its own.
+
+## Why it exists
+
+Workshops die when the projector turns off unless the material stands on its own. This repository is built to survive the room - README-first, step-by-step exercises with checkpoints, troubleshooting tables, and explicit backup plans for when the VPS, API, or conference Wi-Fi lets you down.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/proactive-digital-twin-workshop)
+-   [Web Summer Camp 2026 - AI Engineering track](https://websummercamp.com/2026/program/ai)
+
+---
+
+# [Updated] Intro Video from Notum's Strapi & Next.js starter
+
+- URL: https://ondrej.chrastina.dev/projects/intro-video-from-notum-s-strapi-next-js-starter/
+- Published: 2025-10-06
+- Section: Projects
+- Live: https://youtu.be/VZlJZuurUH8?si=7v0B0a9_-Ivd5GuQ
+- Source code: https://github.com/notum-cz/strapi-next-monorepo-starter/
+
+Fast-track Strapi + Next.js monorepo: 5-min video, lean README, yarn dev spins Docker, hot-reload pages—onboard and build CMS-driven apps quickly.
+
+**Developers want to code, not wade through a wall of docs.**  
+This video is designed to **slash onboarding time** for the **Strapi + Next.js monorepo starter**. Instead of scrolling through a long “Get Started” section, you watch a five-minute walkthrough:
+
+[Check out the (updated) video!](https://youtu.be/VZlJZuurUH8)
+
+Follow the video, and you’ll have a running stack and the learner README by the time it finishes.
+
+### Step-by-step shown in the video
+
+1.  Clone this repository
+    -   `git clone https://github.com/notum-cz/strapi-next-monorepo-starter`
+2.  Install dependencies
+    -   `nvm use`
+    -   `yarn` 
+3.  _Before the first run, you need to retrieve_ [_Strapi API token_](https://docs.strapi.io/cms/features/api-tokens)_._
+    -   `_yarn dev:strapi_`
+    -   _Go to Strapi admin URL and navigate to_ [_Settings > API Tokens_](http://localhost:1337/admin/settings/api-tokens)_._ 
+    -   _Select "Create new API token" and copy it's value to_ `_STRAPI_REST_READONLY_API_KEY_` _in_ `_/apps/ui/.env.local_` _file._
+4.  `yarn dev`
+    -   Open your browser and go to [http://localhost:3000](http://localhost:3000/) to see the UI app in action.
+    -   Open your browser and go to [http://localhost:1337/admin](http://localhost:1337/admin) to see the Strapi app in action.
+
+That’s it!  
+Local Strapi, seeded DB, and live Next.js front-end in minutes, with a slimmer README for the next dev who joins.
+
+---
+
+# CKEditor weekend video series
+
+- URL: https://ondrej.chrastina.dev/projects/ckeditor-weekend-video-series/
+- Published: 2025-05-25
+- Section: Projects
+- Live: https://www.youtube.com/playlist?list=PLKzl1AGxt2J0j2H3xUuFLGO-s_-f0K9eD
+- Source code: https://github.com/Simply007/ondrejs-notes
+
+I started with my personal YouTube channe l, where I shared a typical coding videos. In this series, I vibe-coded a clone of the Google Keep app, showcasing how to build a notes application from scratch. The second part focused on enhancing the app by integrating CKEditor for rich-text editing, making it a powerful tool for managing notes. Finally, I demonstrated the inclusion of CKEditor's real-time collaboration features, allowing multiple users to edit notes simultaneously and view revision histories.
+
+## Project Overview — “Notes App from Zero to Hero”
+
+A three-part, hands-on series that starts with a blank prompt and ends with a fully featured, **CKEditor-powered**, real-time-collaborative notes app (React 18 + Vite + TS).
+
+[Follow the YT Playlist](https://www.youtube.com/playlist?list=PLKzl1AGxt2J0j2H3xUuFLGO-s_-f0K9eD)
+
+###   
+
+### Part 1 – Build & Deploy the Base App
+
+_Video #1:_ **“AI Vibe-Coding a Google-Keep-Style Notes App”**
+
+[Video](https://youtu.be/V02w3CK8KG4)
+
+[Code branch `notes-template`](https://github.com/Simply007/ondrejs-notes/tree/notes-template)
+
+Key takeaways:
+
+-   Cursor’s _Vibe Coding_ scaffolds Vite + React + TS in one prompt.
+-   Adds React Router, GUID utils & LocalStorage CRUD.
+-   Pushes to GitHub and deploys to Vercel, fixing a lint-break on the way.
+
+###   
+
+### Part 2 – Rich-Text & AI Assistant
+
+_Video #2:_ **“Turn a Textarea into a CKEditor 5 Powerhouse”**
+
+[Video](https://youtu.be/LAGl6orIGRw)
+
+[Code branch `ck-editor`](https://github.com/Simply007/ondrejs-notes/tree/ck-editor)
+
+  
+Highlights
+
+-   Uses CKEditor Builder to pick premium features (headings, lists, code-block, PDF export, OpenAI Assistant).
+-   Wraps the generated build in a reusable `<RichText />` component.
+-   Two-way binds HTML to LocalStorage and re-deploys to Vercel.
+
+###   
+
+### Part 3 – Real-Time Collaboration
+
+_Video #3:_ **“From Solo Notes to Live Collaboration”**
+
+[Video](https://youtu.be/qn4FthLFvK4)
+
+[Code branch `collaboration-features`](https://github.com/Simply007/ondrejs-notes/tree/collaboration-features)
+
+  
+What’s new
+
+-   Regenerates the editor build with **Real-Time Collaboration** & _Revision History_.
+-   Wires each note’s GUID as `channelId`, enabling multi-user rooms.
+-   Simple share-by-URL flow and LocalStorage fallback for guests.
+-   Live demo with two browsers; notes sync and diff viewer in action.
+
+📌 **Next ideas:** plug in auth & a remote DB, polish race-conditions, refine user naming.  
+⭐️ Star / fork the repo & drop feedback on GitHub, or Youtube!
+
+[GitHub repository](https://github.com/Simply007/ondrejs-notes)
+
+---
+
+# UpCloud & Doom
+
+- URL: https://ondrej.chrastina.dev/projects/upcloud-doom/
+- Published: 2025-03-04
+- Section: Projects
+- Source code: https://github.com/Simply007/upcloud-doom
+
+Learn how to package classic DOOM into a Docker image, deploy it on UpCloud Kubernetes, and stream gameplay via noVNC—proof UKS handles full GUI apps.
+
+**This project shows how to run a full-blown GUI application—specifically, the classic first-person shooter DOOM (1993)—inside containers on UpCloud Kubernetes Service (UKS).**
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/e8d7d858-eb08-481d-a0b3-eb1d7a0c2d27/ChatGPT%20Image%20Jun%203%2C%202025%2C%2002_11_38%20PM.png)
+
+Instead of another “Hello World” or WordPress chart, the authors picked the cult-classic DOOM. The goal: package the original Linux DOOM, wire it to a headless X server, expose it over VNC/**noVNC**, push the container to an UpCloud registry, and deploy it on a vanilla UKS cluster—all with a single helm/kubectl apply.
+
+### Key moments
+
+1.  **Container build** – Multi-stage Dockerfile installs `linuxdoom-1.10`, `xvfb`, `x11vnc`, and noVNC, bundling the shareware WAD for clean licensing.
+2.  **Registry push** – Image is tagged and pushed to UpCloud Container Registry so UKS nodes pull it entirely inside UpCloud’s network.
+3.  **Kubernetes objects** –
+    -   **Deployment** runs one DOOM pod per replica, each exposing VNC on port 5900.
+    -   **Service** + **Ingress** forward WebSocket traffic through UpCloud’s load balancer to noVNC.
+    -   **ConfigMap** passes runtime flags (e.g., `-warp 1`) so live demos can swap levels.
+4.  **Access & scaling** – Opening the ingress URL launches DOOM in the browser; increasing replica count instantly spawns more playable pods.
+5.  **Cost demo** – `kubectl scale deployment doom --replicas=0` shows how workloads shut down when not in use, eliminating idle compute costs.
+
+## Quick summary
+
+**Item**
+
+**Details**
+
+**Repo**
+
+`Simply007/upcloud-doom`
+
+**Purpose**
+
+Showcase running legacy GUI software (DOOM) on **UpCloud Kubernetes Service** via Docker + noVNC.
+
+**Tech stack**
+
+Docker, Linux DOOM 1.10, Xvfb, x11vnc, noVNC, Helm/Kubectl, UKS, UpCloud Container Registry.
+
+**How it works**
+
+1\. Build image → 2. Push to registry → 3. `kubectl apply -f k8s/` → 4. Open ingress URL and play DOOM in the browser.
+
+**Why it matters**
+
+Demonstrates UKS networking, ingress, persistent storage (for WADs), and zero-to-hero app onboarding in a fun, memorable way.
+
+**Live demo footprint**
+
+~250 MB image, < 300 Mi B RAM, scales from 1–N replicas; costs tied only to active nodes.
+
+---
+
+# Next.js Corporate Starter
+
+- URL: https://ondrej.chrastina.dev/projects/next-js-corporate-starter/
+- Published: 2023-05-11
+- Section: Projects
+- Live: https://kontent-starter-corporate-next-js.netlify.app
+- Source code: https://github.com/Simply007/kontent-starter-corporate-next-js
+
+Next.js corporate starter site using Kontent.ai as a CMS .
+
+## 🚀 **Supercharge Your Corporate Website with Next.js & Kontent.ai!**
+
+Leverage the power of **Incremental Static Regeneration (ISR)** with **Kontent.ai**, the headless CMS that keeps your content dynamic without sacrificing speed.
+
+✨ **Why ISR + Kontent.ai?**
+
+-   Get the **performance of static sites** with the **flexibility of dynamic content**
+-   Publish updates instantly—no need to rebuild the entire site
+-   Deliver **fast, SEO-friendly pages** while keeping content fresh
+
+Perfect for corporate websites that demand both **speed and scalability**. Ready to build? Let’s go! 🚀
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/edd1d84b-3b2e-4c08-a2f5-9087e4ce794b/preview-configuration.gif)
+
+Check out the [README](https://github.com/Simply007/kontent-starter-corporate-next-js/blob/main/README.md) of the repository to learn more!
+
+---
+
+# Next.js boilerplate for Kontent.ai
+
+- URL: https://ondrej.chrastina.dev/projects/next-js-boilerplate-for-kontent-ai/
+- Published: 2022-10-31
+- Section: Projects
+- Live: https://kontent-ai-boilerplate-next-js.netlify.app
+- Source code: https://github.com/Kentico/kontent-boilerplate-next-js
+
+The Kontent.ai Boilerplate for Next.js demonstrates how to use Next.js's Static Generation with Kontent.ai as the content source. It provides a ready-to-deploy setup for projects that integrate content management with a Next.js frontend.
+
+The [Kontent.ai Boilerplate for Next.js](https://github.com/kontent-ai/boilerplate-next-js) demonstrates Next.js's Static Generation feature with Kontent.ai as the data source. 
+
+It includes setup instructions for deploying the project on platforms like Netlify and Vercel. The boilerplate fetches content from a shared Kontent.ai sample project, allowing customization by cloning the project and editing content. 
+
+The development process involves configuring environment variables, running the development server, and editing pages with live updates.
+
+For more details, refer to the [repository](https://github.com/kontent-ai/boilerplate-next-js).
+
+---
+
+# Java for Kontent by Kentico
+
+- URL: https://ondrej.chrastina.dev/projects/java-for-kontent-by-kentico/
+- Published: 2022-05-06
+- Section: Projects
+- Live: https://javadoc.io/doc/com.github.kentico/kontent-delivery/latest/index.html
+- Source code: https://github.com/Kentico/kontent-java-packages
+
+The monorepo containing Kontent Delivery SDK for data fetching facilitation from Kontent headless CMS , model generator, and a set of examples of how to use these two tools using Gradle, Spring Boot, and Java + Kotlin android application.
+
+_I would like to start with the disclaimer. The core of the Delivery SDK was written by_ [_Adam J. Weigold_](https://github.com/aweigold)_. My core work was to refactor the solution so that the package is easy to maintain, extensible and allow to include examples in the monorepo itself_.
+
+This monorepo contains Delivery SDK that facilitates working with [Kontent Delivery REST API](https://kontent.ai/learn/reference/delivery-api), allowing to resolve rich text elements into consumable form - mainly thanks to revolvers, template engine support.
+
+```java
+DeliveryClient client = new DeliveryClient(
+  DeliveryOptions
+    .builder()
+    .projectId("975bf280-fd91-488c-994c-2f04416e5ee3")
+    .productionApiKey("secured key")
+    .build()
+);
+
+// Retrieves a list of the specified elements from the first 10 content items of
+// the 'brewer' content type, ordered by the 'product_name' element value
+// also includes total number of items stored in kentico i.e. for pagination purposes
+
+CompletionsStage<ContentItemsListingResponse> response = client.getItems(
+  DeliveryParameterBuilder.params()
+    .language("es-ES")
+    .filterEquals("system.type", "brewer")
+    .projection("image", "price", "product_status", "processing")
+    .page(null, 10)
+    .orderByAsc("elements.product_name")
+    .includeTotalCount()
+    .build()
+)
+```
+
+It also provides an automatic strongly model resolution of the content items into JAVA POJO classes.
+
+```java
+package com.dancinggoat.models;
+
+import java.lang.String;
+import java.time.ZonedDateTime;
+import java.util.List;
+import kentico.kontent.delivery.Asset;
+import kentico.kontent.delivery.ContentItem;
+import kentico.kontent.delivery.ContentItemMapping;
+import kentico.kontent.delivery.ElementMapping;
+import kentico.kontent.delivery.System;
+import kentico.kontent.delivery.Taxonomy;
+
+/**
+ * This code was generated by a <a href="https://github.com/Kentico/cloud-generators-java">cloud-generators-java tool</a>
+ *
+ * Changes to this file may cause incorrect behavior and will be lost if the code is regenerated.
+ * For further modifications of the class, create a separate file and extend this class.
+ */
+@ContentItemMapping("article")
+public class Article {
+  @ElementMapping("personas")
+  List<Taxonomy> personas;
+
+  @ElementMapping("title")
+  String title;
+
+  @ElementMapping("teaser_image")
+  List<Asset> teaserImage;
+
+  @ElementMapping("post_date")
+  ZonedDateTime postDate;
+
+  @ElementMapping("summary")
+  String summary;
+
+  @ElementMapping("body_copy")
+  String bodyCopy;
+
+  @ContentItemMapping("related_articles")
+  List<ContentItem> relatedArticles;
+
+  @ElementMapping("meta_keywords")
+  String metaKeywords;
+
+  @ElementMapping("meta_description")
+  String metaDescription;
+
+  @ElementMapping("color")
+  String color;
+
+  System system;
+
+  public List<Taxonomy> getPersonas() {
+    return personas;
+  }
+
+  public void setPersonas(List<Taxonomy> personas) {
+    this.personas = personas;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public List<Asset> getTeaserImage() {
+    return teaserImage;
+  }
+
+  public void setTeaserImage(List<Asset> teaserImage) {
+    this.teaserImage = teaserImage;
+  }
+
+  public ZonedDateTime getPostDate() {
+    return postDate;
+  }
+
+  public void setPostDate(ZonedDateTime postDate) {
+    this.postDate = postDate;
+  }
+
+  public String getSummary() {
+    return summary;
+  }
+
+  public void setSummary(String summary) {
+    this.summary = summary;
+  }
+
+  public String getBodyCopy() {
+    return bodyCopy;
+  }
+
+  public void setBodyCopy(String bodyCopy) {
+    this.bodyCopy = bodyCopy;
+  }
+
+  public List<ContentItem> getRelatedArticles() {
+    return relatedArticles;
+  }
+
+  public void setRelatedArticles(List<ContentItem> relatedArticles) {
+    this.relatedArticles = relatedArticles;
+  }
+
+  public String getMetaKeywords() {
+    return metaKeywords;
+  }
+
+  public void setMetaKeywords(String metaKeywords) {
+    this.metaKeywords = metaKeywords;
+  }
+
+  public String getMetaDescription() {
+    return metaDescription;
+  }
+
+  public void setMetaDescription(String metaDescription) {
+    this.metaDescription = metaDescription;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public System getSystem() {
+    return system;
+  }
+
+  public void setSystem(System system) {
+    this.system = system;
+  }
+}
+```
+
+Repository showcases how you can benefit from the features, not only on the Gradle console app but also using [Spring Boot framework](https://spring.io/projects/spring-boot) with [Thymeleaf template engine](https://www.thymeleaf.org/). I have also created an Android application in Java and in Kotlin. 
+
+![Spring Boot application](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/8770a2af-0ba5-4f0d-866d-c58e7cc136c5/screen.png)
+
+  
+
+![Android application showcase](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/724e4412-ba5b-45b6-863c-65b3f56f12d3/adroid-app-showcase.gif)
+
+The repository automatically releases versions from GitHub to Maven Central - by using GitHub actions.
+
+---
+
+# Custom element gallery
+
+- URL: https://ondrej.chrastina.dev/projects/custom-element-gallery/
+- Published: 2021-02-28
+- Section: Projects
+- Live: https://ondrej.chrastina.dev/kontent-custom-element-samples/gallery
+- Source code: https://github.com/Simply007/kontent-custom-element-samples
+
+The Gallery of Custom Element samples contains a list of different custom elements that might help you to extend content editing capabilities inside of your Kontent.ai.
+
+A Custom element is essentially a small HTML application that exists in a sandboxed `<iframe>` and interacts with [Kontent.ai](https://kontent.ai/) via the [Custom Elements API](https://kontent.ai/learn/reference/custom-elements-js-api).
+
+The **Gallery of Custom Element samples** contains a list of different custom elements that might help you to extend content editing capabilities inside of your Kontent.ai project, or even connect with different 3rd party services (like Digital Asset Management tools, or eCommerce solutions).
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/929aeb91-a7f9-42b5-81ec-c6aff2428b3f/Screenshot%202025-02-18%20at%2014.06.25.png)
+
+The custom elements denoted as **core integration** are focusing on a selected subset of integrated services mentioned on [https://kontent.ai/integrations](https://kontent.ai/integrations). These integrations will have a richer documentation and their issues will be handled with higher priority.
+
+---
+
+# Jamstackon.net
+
+- URL: https://ondrej.chrastina.dev/projects/jamstackon-net/
+- Published: 2021-01-27
+- Section: Projects
+- Live: https://jamstackon.net
+- Source code: https://github.com/Kentico/jamstackon.net
+
+Microsite utilizing Statiq and Kentico Kontent via Kontent.Statiq module to evangelize the Jamstack world for .NET developers.
+
+This microsite was built in cooperation with [Dave Glick](https://twitter.com/daveaglick) - the author of the [Statiq framework](https://statiq.dev/¨) and [Marnix van Valen](https://twitter.com/marnixvanvalen) - the author of [Kontent.Statiq](https://github.com/alanta/Kontent.Statiq) integration module helping connect Statiq and [Kentico Kontent Headless CMS](https://kontent.ai).  
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/302306f3-0066-4a3b-a57b-331536570694/screenshot%5B1%5D.png)
+
+The purpose of this microsite is to bring the Jamstack world closer to .NET developers.
+
+This site itself is written using the Statiq framework. The main dev benefit is in showcasing the data load approach when the content model is respecting the [Kentico Kontent Web Spotlight](https://docs.kontent.ai/tutorials/set-up-kontent/set-up-your-project/web-spotlight) navigation modeling practices. Long Story Short, if you are modeling the navigation of the sitemap structure in headless CMS, you can use the main pipeline (something like Controller in .NET MVC) from this project as the template/starting point for your project.  
+  
+The core of the implementation is the [Root pipeline](https://github.com/Kentico/jamstackon.net/blob/main/Pipelines/RootPipeline.cs):
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/eaa816ec-6dee-4d51-878e-82be8d9928fc/root-pipeline-statiq.PNG)
+
+---
+
+# ondrej.chrastina.dev
+
+- URL: https://ondrej.chrastina.dev/projects/ondrej-chrastina-dev/
+- Published: 2020-08-22
+- Section: Projects
+- Live: https://ondrej.chrastina.dev
+- Source code: https://github.com/Simply007/Simply007.github.io
+
+My personal website build with Gatsby and Kentico Kontent as a data source.
+
+This website was initially built as many dev's websites (Aug 2020) - the POC to test out the technology.  
+This particular trial was based on [Forty Gatsby Starter](https://www.gatsbyjs.com/starters/codebushi/gatsby-starter-forty), but it turned out to be pretty nice and complex. So I have decided to use it production so to speak. With CSS Grid support, all tooling set up including SCSS configuration,  prepared [icons using Font Awesome](https://fontawesome.com/icons), embedded style guide made it the great candidate to connect to [Kentico Kontent using the integration with Gatsby.js](https://www.gatsbyjs.com/plugins/@kentico/gatsby-source-kontent/) I have been working on at that time.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/a09132f0-8e57-47c9-bd04-501786157958/og-image%5B1%5D.png)
+
+  
+During the time I have done some extensions, but mostly content-wise, as you might have noticed from my explicit listing of design predefinitions of the starter. To mention some. I have added a categories filter for the listing pages, then the "Projects" section - the one that this page is in, and a new navigation content structure to follow [Kontent Web Spotlight](http://webspotlight.kontent.ai/) feature needs.  
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/da5a34a0-caac-44a1-ba92-25ad9236cb1a/personal-site-webspotlight.png)
+
+---
+
+# Official Next.js example for Next.js & Kontent.ai
+
+- URL: https://ondrej.chrastina.dev/projects/official-next-js-example-for-next-js-kontent-ai/
+- Published: 2020-08-09
+- Section: Projects
+- Live: https://next-blog-kontent-ai.vercel.app
+- Source code: https://github.com/vercel/next.js/tree/canary/examples/cms-kontent-ai
+
+Integrate Kontent.ai with Next.js to create a statically generated website with dynamic content management and preview capabilities.
+
+The [Next.js CMS Kontent.ai example](https://github.com/vercel/next.js/tree/canary/examples/cms-kontent-ai) demonstrates how to integrate Kontent.ai, a headless CMS, with Next.js to build a statically generated website. This setup allows developers to manage content through Kontent.ai while leveraging Next.js's Static Generation capabilities for optimal performance.
+
+**Key Features:**
+
+-   **Static Site Generation (SSG):** The example utilizes Next.js's SSG to pre-render pages at build time, ensuring fast load times and improved SEO.
+-   **Content Management:** By integrating with Kontent.ai, the project enables dynamic content updates without requiring code changes or redeployment.
+-   **Preview Mode:** The application supports Next.js's Preview Mode, allowing content editors to view unpublished changes in a live environment before publishing.
+
+This repository includes a ready-made content package, providing a complete setup for immediate deployment. Additionally, it offers step-by-step tutorials to guide users through importing their own data into the project.
+
+By following this example, developers can efficiently build and deploy a content-driven website that combines the flexibility of Kontent.ai with the performance benefits of Next.js.
+
+---
+
+# Kontent.ai content type selector
+
+- URL: https://ondrej.chrastina.dev/projects/kontent-ai-content-type-selector/
+- Published: 2020-07-16
+- Section: Projects
+- Live: https://kontent-custom-element-type-selector.netlify.app
+- Source code: https://github.com/Simply007/kontent-custom-element-type-selector
+
+Enhance your Kontent.ai CMS with a Vue.js custom element that enables editors to select content types directly within projects, featuring an optional debug panel and support for modeling listing pages.
+
+The [Kontent.ai Type Selector Custom Element](https://github.com/Simply007/kontent-custom-element-type-selector) enhances the Kontent.ai CMS by enabling editors to select content types directly within their projects. This custom element, written in Vue.js, offers an optional debug panel for diagnostics, facilitating easier troubleshooting and development.
+
+For scenarios such as modeling a listing page, this tool allows users to specify which content types should be included, streamlining the content management process.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/38ff955c-5ca9-45f5-9128-119afe286d4a/types-selector-showcase.gif)
+
+---
+
+# Gatsby.js Photon starter
+
+- URL: https://ondrej.chrastina.dev/projects/gatsby-js-photon-starter/
+- Published: 2019-05-20
+- Section: Projects
+- Live: https://kontent-template-gatsby-landing-page-photon.netlify.app
+- Source code: https://github.com/Simply007/kontent-template-gatsby-landing-page-photon
+
+Kentico Kontent web template using Gatsby.js and Kentico Kontent based on Gatsby starter Photon .
+
+Gatsby.js starter ([official gallery](https://www.gatsbyjs.com/starters/Simply007/kontent-template-gatsby-landing-page-photon/)) based on [Gatsby starter Photon](https://www.gatsbyjs.org/starters/codebushi/gatsby-starter-photon/) is a simple landing page boilerplate. It consists of a set of sections you can configure and order in the headless CMS - Kentico Kontent.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/1c3d65c9-4111-44cb-9417-90e0cdd9e1e5/template%5B1%5D.png)
+
+It is a responsive single-page site using SCSS for styling with custom-made grid by [codebushi](https://codebushi.com/).
+
+It contains an automatic deployment pipeline to deploy to Netlify, it is also listed in [jamstacktehemes.com](https://jamstackthemes.dev/theme/gatsby-kontent-photon/).
+
+It was also selected as one of [the best Jamstack themes by Stackrole](https://twitter.com/Stackrole/status/1279099778740043776) - [stackrole.com/jamstack/photon](https://stackrole.com/jamstack/photon/).
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/9ee71be7-e8fa-42a9-acad-11b8559768c3/photon-theme.PNG)
+
+---
+
+# Apollo Express Kontent boilerplate
+
+- URL: https://ondrej.chrastina.dev/projects/apollo-express-kontent-boilerplate/
+- Published: 2018-12-12
+- Section: Projects
+- Live: https://kontent-boilerplate-apollo.herokuapp.com
+- Source code: https://github.com/Kentico/kontent-boilerplate-express-apollo
+
+This boilerplate showcasing how to combine the Node.js web server Express.js with GraphQL . The server converts the Kentico Kontent Delivery REST API to GraphQL using the Apollo framework and then renders the output using the Pug view engine .
+
+Boilerplate is combining [Express.js](https://expressjs.com) web server with [Apollo framework](https://www.apollographql.com) middleware to provide a GraphQL API wrapper around the REST API by headless CMS Kentico Kontent.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/bd3421f9-ef53-48d7-9d61-eab2eddd8e42/schema.png)
+
+GraphQL schema is automatically generated using the [Kontent Schema generator tool](https://github.com/Kentico/kontent-schema-generator-graphql). 
+
+To showcase using the Apollo GraphQL client, the boilerplate is loading the last three articles stored in headless CMS and using [Pug view engine](https://pugjs.org) to construct the view of this simple listing.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/aaf6f5d7-e73a-4fba-8728-c5776797b9be/template_thumbnail.png)
+
+---
+
+# kentico.github.io
+
+- URL: https://ondrej.chrastina.dev/projects/kentico-github-io/
+- Published: 2018-09-10
+- Section: Projects
+- Live: https://kentico.github.io
+- Source code: https://github.com/Kentico/kentico.github.io
+
+Official site for GitHub Community in Kentico.
+
+The official site for GitHub Community in Kentico. This site is using [Gatsby](https://www.gatsbyjs.com/) static site generation.
+
+Data is stored in [Kentico Kontent](https://kontent.ai/) and provided by the [Gatsby source plugin](https://www.gatsbyjs.com/plugins/@kentico/gatsby-source-kontent). It shows an overview and some simple statistics about the [Kentico OS organization](https://github.com/Kentico). This data is periodically reloading via the [Azure function](https://azure.microsoft.com/services/functions/) and stored in [Azure Tables storage](https://azure.microsoft.com/services/storage/tables).
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/a5a16a4f-b67b-427c-943e-e57ea86bc148/dc-ogimage-c4f6c54856a7d7f55fe40fcf68f38204%5B1%5D.png)
+
+There is also a possibility to join the Kentico Github organization right from the website using GitHub API.
+
+![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/23f002d9-05b9-438b-95cc-3828bdbebd1d/Capture.PNG)
+
+This site is written using [Gatsby](https://gatsbyjs.com) as a frontend framework and [Kentico Kontent](https://kontent.ai) as a data source. It is also listed as one of the [examples on the jamstack.org site](https://jamstack.org/examples).
+
+---
+
+# CKEditor in Drupal: News in Content Editing
+
+- URL: https://ondrej.chrastina.dev/talks/ckeditor-in-drupal-news-in-content-editing-drupalcon-rotterdam-2026/
+- Published: 2026-09-29
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/ckeditor-in-drupal-news-in-content-editing-drupalcon-rotterdam-2026.pdf
+
+A 10 minute news update at DrupalCon Rotterdam 2026: everything that shipped for CKEditor in Drupal since Chicago - custom AI Reviews and AI Chat Shortcuts, the Context Control Center bridge between Drupal AI and CKEditor AI, the Export to PDF v2 engine, and the honest story of the 1.x and 2.x module lines heading into Drupal 12.
+
+## What the session covered
+
+In Chicago I showed CKEditor AI in Drupal days after the 1.8.0 release - the ink was not dry, and the team kept shipping the moment that talk ended. This sponsored lightning session was the curated changelog: ten minutes, zero fluff, and a clear picture of what your editors get next.
+
+-   **AI Reviews and AI Chat Shortcuts (1.8.1)** - teach the editor's AI your own editorial checks (tone of voice, terminology, compliance) and turn your team's repeated prompts into one-click chat actions.
+-   **One brain: Context Control Center (1.8.2)** - Drupal AI's global context (brand voice, site facts, glossaries) now flows into CKEditor AI. The first real bridge between the two ecosystems: define who you are once, and every AI surface speaks with it.
+-   **Export to PDF v2 and housekeeping** - the PDF exporter now runs on the actively developed v2 engine, plus a stability-fix roundup for Premium Features and the Plugin Pack.
+-   **One editor, two lines** - the honest 1.x vs 2.x split: Drupal 10.3+/11 sites keep the 1.x line with bugfixes, while the 2.x line (CKEditor 5 v48+, UMD builds, all new features) arrives with Drupal 12. Sequencing: Drupal 12 beta, then 2.0.0-beta, then 2.0.0.
+-   **Sneak peeks** - proof-of-concepts for real-time collaboration in Drupal and AI with shared context, plus fullscreen mode continuing its journey toward Drupal core.
+
+## Takeaways
+
+-   CKEditor AI shipped in Chicago and kept shipping: 1.8.1 and 1.8.2 landed within weeks.
+-   Drupal AI and CKEditor AI share one context: Drupal handles structure, the editor handles authoring.
+-   Your CKEditor feature roadmap is now coupled to your Drupal 12 migration plan - the modules will be ready when you are.
+-   Real-time collaboration and shared AI context are what is cooking next.
+
+## The venue
+
+[DrupalCon Rotterdam 2026](https://events.drupal.org/rotterdam2026), September 28 to October 1 - the European edition of the Drupal community's flagship event. CKEditor sponsored the conference, and this session ran on the Open Stage, picking up exactly where my DrupalCon Chicago lightning talk from March 2026 left off.
+
+## Resources
+
+-   [Slides (PDF)](https://ondrej.chrastina.dev/slides/ckeditor-in-drupal-news-in-content-editing-drupalcon-rotterdam-2026.pdf)
+-   [CKEditor 5 Premium Features module](https://www.drupal.org/project/ckeditor5_premium_features)
+-   [CKEditor 5 Plugin Pack module](https://www.drupal.org/project/ckeditor5_plugin_pack)
+-   [CKEditor for Drupal](https://ckeditor.com/drupal/)
+-   [The DrupalCon Chicago lightning talk this one picks up from](https://ondrej.chrastina.dev/talks/ckeditor-in-drupal-better-formatting-to-ai-authoring-drupalcon-2026/)
+
+---
+
+# Less time, fewer tokens, better effects: the official CKEditor support for AI coding agents
+
+- URL: https://ondrej.chrastina.dev/talks/less-time-fewer-tokens-better-effects-ckeditor-ai-coding-agents/
+- Published: 2026-09-17
+- Section: Talks
+- Recording: https://app.zuddl.com/p/a/event/1940c878-402a-4801-9239-b0aad2ff95ed
+
+Webinar with Marcin Burek (Product Manager at CKEditor) on the official CKEditor support for AI coding agents: an installable skill and a hosted documentation MCP server that give agents like Claude Code, Cursor, and Copilot accurate, version-aware knowledge instead of stale training data.
+
+## What the session covered
+
+Development teams increasingly rely on AI coding agents to ship faster. The challenge: agents working from stale training data guess at installation methods, misconfigure plugins, and sometimes just hallucinate. Together with Marcin Burek we showed how the official CKEditor support for AI agents fixes that at the source.
+
+-   **The CKEditor skill** - installed in your agent with a single command (`npx skills add ckeditor/skills`), working across Claude Code, Cursor, Codex, OpenCode, GitHub Copilot, Windsurf, Gemini, Cline, AMP, Zed, and more.
+-   **Guided integration** - how the skill walks agents through installation methods (npm, CDN, or ZIP), framework selection, plugin selection, toolbar configuration, and unlocking premium features - including setting the license key without trial and error.
+-   **The documentation MCP server** - semantic search over live docs, so the agent answers version-specific questions from current documentation instead of guessing.
+
+## Who it was for
+
+Engineering leads, frontend developers, and platform teams integrating CKEditor into their applications - especially those already using AI coding agents in their workflow.
+
+## Resources
+
+-   [Watch the recording (registration)](https://app.zuddl.com/p/a/event/1940c878-402a-4801-9239-b0aad2ff95ed)
+-   [Demo repository from the session](https://github.com/ckeditor/devrel-ckeditor-ai-coding-agents-demo)
+-   [The AI coding agents guide we followed](https://ckeditor.com/docs/ckeditor5/latest/getting-started/ai-coding-agents.html)
+-   [The official CKEditor skill](https://github.com/ckeditor/skills)
+
+---
+
+# Ondrej askin' - Conference Interview Series
+
+- URL: https://ondrej.chrastina.dev/talks/ondrej-askin-conference-interview-series/
+- Published: 2026-09-17
+- Section: Talks
+- Recording: https://youtube.com/playlist?list=PLZ9F0R17Zg3NafacHVuYqghN3ikNMgoMs
+
+My on-the-floor interview series: short, honest conversations with interesting people I meet at conferences - CEOs, community leaders, and engineers, recorded right on the conference floor. All episodes collected in one YouTube playlist, growing with every event season.
+
+## About the series
+
+Conferences are full of people with stories that never make it to the main stage. Ondrej askin' is my way of catching them: a camera, a couple of genuine questions, and a few minutes of conversation - recorded on the floor at the events I attend for CKEditor.
+
+## Where it has been recorded
+
+-   DevWorld Amsterdam - including Mathias Biilmann (Netlify CEO) on inventing beyond LLMs.
+-   DrupalCon Chicago, Acquia Engage Denver, and CMS Summit Frankfurt - community leaders across the CMS world.
+-   Web Summer Camp in Poreč - three episodes from one seaside conference, from AI agents to content strategy.
+-   T3CON, Kickoff, Python Pizza Ostrava, WebExpo Prague - and wherever the next season leads.
+
+## Watch
+
+New episodes land in the playlist as they are published - this entry grows with the series.
+
+-   [The full Ondrej askin' playlist on YouTube](https://youtube.com/playlist?list=PLZ9F0R17Zg3NafacHVuYqghN3ikNMgoMs)
+
+---
+
+# Editor Types Explained (Classic, Inline, Balloon, Balloon Block, Document, Multi-root)
+
+- URL: https://ondrej.chrastina.dev/talks/editor-types-explained/
+- Published: 2026-09-11
+- Section: Talks
+- Recording: https://youtu.be/w2_u4MtA0Lc
+
+One editor, different flavors: a fixed toolbar, a floating one, a Google Docs layout, even four editable boxes on one page. A sub-10-minute tour of all six ready-made CKEditor editor types, how small the code difference between them really is, and a complete setup generated with CKEditor Builder.
+
+## What the video covers
+
+The first episode of my 2026 product tutorial series: which of the six ready-made CKEditor editor types fits your use case, shown live with the actual integration code for each.
+
+-   **Classic** - forms, CMS fields, comment boxes: the fixed-toolbar workhorse.
+-   **Inline** - editing in place, right on the live page.
+-   **Balloon** - short, focused writing like comments and chat.
+-   **Balloon block** - articles and docs without a permanent toolbar.
+-   **Document (decoupled)** - the word processor experience, built for print and PDF.
+-   **Multi-root** - one content item, multiple editable regions, shared undo.
+
+The closing section generates a complete setup with [CKEditor Builder](https://builder.ckeditor.com/): pick a preset, adjust the features, copy the code.
+
+## Resources
+
+-   [Watch on YouTube](https://youtu.be/w2_u4MtA0Lc)
+-   [Editor types overview in the docs](https://ckeditor.com/docs/ckeditor5/latest/getting-started/setup/editor-types.html)
+-   [Live examples of every editor type](https://ckeditor.com/docs/ckeditor5/latest/examples/builds/classic-editor.html)
+
+---
+
+# Content Editing Unlocked: Multisite, Visual Builder, and Editor Capabilities
+
+- URL: https://ondrej.chrastina.dev/talks/content-editing-unlocked-t3dd-2026/
+- Published: 2026-08-08
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/content-editing-unlocked-t3dd-2026.pdf
+
+Conference talk at TYPO3 Developer Days 2026 in Karlsruhe, prepared together with Jürgen Pietschmann (T3Planet) and delivered solo. How to make content editing in TYPO3 maintainable across a multisite setup: shared RTE styles via Site Sets, custom icons that actually survive the trip to the live site, and CKEditor properly wired into the Visual Builder.
+
+## What the session covered
+
+Your editors deserve a consistent experience, no matter whether they work on one site or ten. This session was about making content editing in TYPO3 maintainable across a multisite setup - the configuration decisions that matter, the gotchas you only find in production, and what's coming in CKEditor that will give you even more control over the editing experience.
+
+-   **Multisite style configuration with Site Sets** - defining style-based elements (buttons, callouts) via Site Set `config.yaml` and sharing RTE style presets across sites without duplicating config.
+-   **Custom icons inside CKEditor** - the full pipeline from backend registration to frontend rendering, and what to check when icons show in the editor but not on the live site.
+-   **CKEditor in the Visual Builder** - how Content Blocks and field types fit together, how to enable CKEditor for a Visual Builder field, with real TYPO3 v14 examples.
+-   **What's in TYPO3 now and what's coming** - underused CKEditor 47.x features, CKEditor Plugin Pack news, CKEditor AI, and the upcoming paragraph-like editor model (`$inlineRoot`) for inline fields.
+
+## Takeaways
+
+-   Decide how much WYSIWYG power your editors get, then build for that answer.
+-   Share the editor configuration as a Site Set; sites opt in by dependency.
+-   One component, one stylesheet, loaded in the editor and on the live site.
+-   Icons and widgets follow the same rule: clean data attributes, rendered in both contexts.
+-   When the editor and the site disagree, the bug is the contract between them.
+
+## The venue
+
+[TYPO3 Developer Days 2026](https://t3dd.typo3.com/), August 5-8 in Karlsruhe - the TYPO3 community's annual deep-dive event. CKEditor sponsored the event (we even had our own room). The talk was prepared together with Jürgen Pietschmann of T3Planet, but he fell ill on the first day of the conference, so I delivered the Saturday morning slot solo and took over his part about the Visual Builder, CKEditor Plugin Pack, and CKEditor AI.
+
+## Resources
+
+-   [Slides (PDF)](https://ondrej.chrastina.dev/slides/content-editing-unlocked-t3dd-2026.pdf)
+-   [The "Content Editing Unlocked" repository (TYPO3 v14 demo)](https://l.ead.me/t3dd-2026-ceu)
+-   [CKEditor Pack for TYPO3 by T3Planet](https://l.ead.me/bguPpq)
+-   [Session page on the T3DD schedule](https://t3dd.typo3.com/schedule/sessions/content-editing-unlocked-1158)
+-   [CKEditor issue #19921: paragraph-like editor configuration](https://github.com/ckeditor/ckeditor5/issues/19921)
+
+Or scan them, straight from the closing slide:
+
+![QR code: the "Content Editing Unlocked" repository](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/13fff804-16c4-46f6-be12-61f7507a6cf6/qr-content-editing-unlocked-repo.png)
+
+[The "Content Editing Unlocked" repository](https://l.ead.me/t3dd-2026-ceu)
+
+![QR code: CKEditor Pack for TYPO3](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/238b6ba3-48e3-4568-a7b7-30d45240c20d/qr-ckeditor-pack.png)
+
+[CKEditor Pack for TYPO3](https://l.ead.me/bguPpq)
+
+---
+
+# Beyond the Chatbot: Engineering Your Proactive Digital Twin
+
+- URL: https://ondrej.chrastina.dev/talks/beyond-the-chatbot-engineering-your-proactive-digital-twin/
+- Published: 2026-07-02
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/beyond-the-chatbot-engineering-your-proactive-digital-twin.pdf
+
+Hands-on workshop at Web Summer Camp 2026 (Opatija, Croatia) in the AI Engineering track. Attendees crossed the line from reactive AI chat to proactive autonomy - deploying their own always-on agentic "digital twin" on a VPS, teaching it their goals through living Markdown files, and wiring it to real-world APIs.
+
+## What the workshop was about
+
+I bet most of you have spent some time chatting with AI - maybe even one-shotting a few websites, or keeping a library of prompts and predefined projects. It's cool. But constantly babysitting a chat window and approving every terminal command starts to feel like more work than it saves. The real magic happens when you stop chatting and start delegating.
+
+In this hands-on session we crossed the line from reactive AI to proactive autonomy, using OpenClaw - an autonomous agentic framework that lives on its own VPS with a "Heartbeat" that wakes up, scans your agenda, and executes tasks while you grab a coffee.
+
+## What we built
+
+-   **Deploying the Brain** - getting the agent running on a cloud instance so it is always-on.
+-   **The "Living Files" paradigm** - verbalizing your goals and "soul" into Markdown files (`user.md`, `heartbeat.md`) so the agent actually knows how you think.
+-   **Connecting the dots** - hooking the agent to real-world APIs (free and trial tiers) for research, scheduling, and notifications.
+-   **Proactive logic** - setting up Heartbeats so the agent checks your calendar or inbox and acts on its own.
+
+## The venue
+
+Web Summer Camp 2026, July 2-4 in Opatija, Croatia - running since 2012 with the same recipe: serious half-day workshops plus serious Croatian hospitality. Six tracks this year; I was part of the [AI Engineering track](https://websummercamp.com/2026/program/ai), evolved from last year's AI/Python track. The whole event is laser-focused on practical application - stuff you can use from next Monday.
+
+## Resources
+
+-   [Workshop repository](https://github.com/Simply007/proactive-digital-twin-workshop)
+-   [AI Engineering track program](https://websummercamp.com/2026/program/ai)
+
+---
+
+# Beyond Disjointed Text Boxes: Orchestrating Every Piece of Content and Its Metadata with CKEditor AI
+
+- URL: https://ondrej.chrastina.dev/talks/beyond-disjointed-text-boxes-ckeditor-ai-multiroot/
+- Published: 2026-06-25
+- Section: Talks
+- Recording: https://app.zuddl.com/p/a/event/ada452e7-dcc8-4faf-8088-7bb02168dbbd
+
+Webinar where I interviewed Witek Socha (Senior Technical Product Manager, CKEditor) on how CKEditor AI works across multi-root and multi-editor setups - keeping AI assistance accurate, contextual, and predictable no matter how the editing UI is composed.
+
+## What the session covered
+
+Software applications rarely have one editor on a page. Email composers have subject, body, and signature fields. CMS workflows split content into title, abstract, and body. Forms, page builders, and internal portals stitch together dozens of structured, editable regions. Bringing AI into those interfaces - without confusing users or losing context between fields - is where most integrations break down.
+
+## What you'll learn from the recording
+
+-   How CKEditor AI operates across multiple editable regions within a single editor instance, preserving per-root context and formatting.
+-   How to coordinate AI features across multiple independent editor instances with different configurations on the same page - without state collisions.
+-   How to direct AI Chat, Quick Actions, Review, and Translate to the right piece of content, with the right context, every time.
+
+## Who it was for
+
+CTOs, software architects, product managers, and engineering teams building structured, multi-field editing experiences where AI needs to behave correctly across every input.
+
+---
+
+# The Real Story Behind AI in Content Editing
+
+- URL: https://ondrej.chrastina.dev/talks/the-real-story-behind-ai-in-content-editing-cms-summit-2026/
+- Published: 2026-05-12
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/The%20real%20story%20behind%20AI%20in%20content%20editing.pdf
+
+Thought leadership session at CMS Summit Frankfurt 2026 - ~80 people in the room. Examined the real infrastructure, trust, and context-depth gaps enterprises hit when adopting AI in content workflows, with CKEditor woven in as the concrete example of how those gaps actually get solved.
+
+## What the session covered
+
+CMS Summit 2026 brought together CMS and DXP vendors, enterprise practitioners (JPMorganChase, DHL, ICANN, P&G), and a sizeable agency layer in Frankfurt. Very different energy from a developer conference - a room full of CMS decision-makers rather than engineers.
+
+The talk cut through the "Bring Your Own AI" hype to examine the three gaps that keep showing up in enterprise AI adoption:
+
+-   **Speed vs. discipline** - the pressure to "do AI now" clashes with the need for real workflows. Starting small, with a single well-defined use case, is how teams actually ship.
+-   **Trust** - security, compliance, and data governance still gate adoption. Logging, moderation, and on-premises options are not optional at enterprise scale.
+-   **Breadth vs. depth** - a ChatGPT licence is not a content strategy. The model is only as useful as the context you give it, and general breadth loses to domain depth every time.
+
+## CMS Idol 2026
+
+Beyond the main talk, I competed in CMS Idol 2026 - the only component-layer entry among CMS providers. That turned out to be an advantage: ~6 minutes of live CKEditor AI feature showcase in a room full of CMS decision-makers, with zero competitive noise from other editors.
+
+![CMS Idol 2026 — live CKEditor AI showcase wrap-up document in CKEditor](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/c8f59f70-af9a-4129-954a-77234f3d4acb/cms-idol-2026-ckeditor-live-showcase.png)
+
+## The venue
+
+Museum für Kommunikation, Frankfurt - ~100 attendees total, high signal, niche connections across the TYPO3, Drupal, and enterprise content editing community.
+
+[https://www.boye-co.com/conferences/cmssummit26/program#ondrej](https://www.boye-co.com/conferences/cmssummit26/program#ondrej)
+
+---
+
+# Sleep Better on Release Day: A Modern Testing Strategy for JavaScript SDKs and Components
+
+- URL: https://ondrej.chrastina.dev/talks/sleep-better-on-release-day/
+- Published: 2026-05-07
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/Sleep%20Better%20on%20Release%20Day_%20A%20Modern%20Testing%20Strategy%20for%20JavaScript%20SDKs%20and%20Components.pdf
+- Recording: https://www.youtube.com/watch?v=8YTQ5CciGZk
+
+Presented at DEVWorld Amsterdam 2026 to 5,000 combined attendees. A practical guide to validating complex JavaScript SDK ecosystems - covering the Integration Matrix, the Timeline Strategy for catching browser-engine regressions weeks early, and AI Models Interoperability for non-deterministic AI features.
+
+## What the talk was about
+
+At the beginning of my career, Thursdays were defined by a single painful ritual: manually clicking through every button in a DXP to catch regressions. Over time that got automated. Later, managing dozens of SDKs and starters at Kontent.ai taught me how to keep a distributed ecosystem consistent.
+
+CKEditor is a whole new level of complexity. Providing an open-source core alongside premium plugins means validating a massive plugin-based architecture where open modules interact with commercial ones - across customer environments, browser versions, and types. This talk ignored the standard Testing Pyramid and went straight to the three strategies that actually work at this scale.
+
+## The three pillars
+
+-   **The Integration Matrix** - testing across frameworks (React, Vue, Angular, Next.js), bundlers (Vite, webpack), and browser engines. Running sanity checks broad, deep tests targeted.
+-   **The Timeline Strategy** - using canary browser lanes to catch upstream engine regressions weeks before they reach stable. A Chrome spec change was caught 3 weeks early via a PR on a nightly build lane.
+-   **AI Models Interoperability** - automating tests for generative AI features where "exact match" assertions are impossible. Mocking for determinism, precision prompts to eliminate flakiness, and LLM-as-judge for semantic evaluation.
+
+## The venue
+
+DEVWorld Amsterdam 2026 - one of the bigger stages I've been on. 5,000 attendees on-site and online combined. The whole talk was built on real CKEditor work, with six teammates who shared their domain knowledge and real use-cases to make the examples genuine.
+
+## Resources
+
+-   [CKEditor QA E2E tests repo](https://github.com/ckeditor/qa-e2e-tests)
+-   [Chrome canary catch example - PR #19316](https://github.com/ckeditor/ckeditor5/pull/19316)
+-   [Slide deck](https://docs.google.com/presentation/d/1Y4qbdh1Eo3_kQZlyn-EGvzIRo5wcKLFlGparu63Qn6s/edit)
+
+---
+
+# Drupal in the Age of AI: From Experimentation to Impact
+
+- URL: https://ondrej.chrastina.dev/talks/drupal-in-the-age-of-ai-from-experimentation-to-impact/
+- Published: 2026-04-28
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/Drupal%20in%20the%20Age%20of%20AI_%20From%20Experimentation%20to%20Impact.pdf
+
+Co-presented with Seth Gregory (EPAM) at Acquia Engage Denver 2026 - full room, 64 attendees. Covers where Drupal stands in the AI era: editorial workflows, AI-assisted content creation, governance, and building an AI-ready foundation with a human-in-the-loop approach.
+
+## What the session covered
+
+AI is rapidly reshaping how digital experiences are built, managed, and optimized - but where does Drupal truly stand today? This session cut through the hype to examine how Drupal AI is transforming both the editorial workflow and the way developers and architects customize digital experiences.
+
+## Key areas
+
+-   **AI-assisted content creation** - practical use cases for authors working inside Drupal, with CKEditor AI as the embedded layer.
+-   **Content modeling with AI** - how to set up guardrails, semantic layers, and structured data that make AI reliable rather than unpredictable.
+-   **Governance and compliance** - the human-in-the-loop approach that keeps AI output review-able and auditable.
+-   **Building an AI-ready foundation** - architecture decisions that future-proof a Drupal site for the next wave of AI tooling.
+
+## The venue
+
+Acquia Engage Denver 2026 at the Gaylord Rockies Resort. CKEditor was a sponsor; the room was over capacity with 64 people. The session photo ended up in Acquia's official Day 2 post.
+
+We closed the conference with a dinner alongside Dries Buytaert (Drupal founder), Maya Schaeffer (Drupal Association board), and James Jackson-Abrahams (main driver behind Drupal AI).
+
+## Resources
+
+-   [Slide deck](https://docs.google.com/presentation/d/1c50wsno3iSenqAn-XjNhrin-wbMNd5ns1MnB76J7Yjs/edit?usp=sharing)
+-   [Acquia Engage Denver 2026](https://engage.acquia.com/denver-2026)
+
+---
+
+# Extreme TypeScript: Mastering Recursion and Inference via Type-Level Arithmetic
+
+- URL: https://ondrej.chrastina.dev/talks/extreme-typescript-recursion-inference-type-level-arithmetic/
+- Published: 2026-04-23
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/Notum%20Meetup_%20Extreme%20TypeScript_%20Mastering%20Recursion%20and%20Inference%20via%20Type-Level%20Arithmetic.pdf
+
+Meetup talk in Brno for Next.js & Strapi developers - a deep-dive into TypeScript's type system as a programming language of its own. Built around the story of a Haskell-inspired calculator with zero runtime code, teaching recursion, conditional types, and infer as practical tools for reading real library types.
+
+## The origin story
+
+An engineer on my team who was heavily invested in Haskell once brought something unusual to a 1-on-1: a functional calculator built entirely within TypeScript's type system - zero runtime code allowed. While practically "useless" for business logic, it turned out to be the ultimate educational tool for understanding how libraries like Zod, Prisma, and tRPC work under the hood.
+
+## What the talk covered
+
+-   **Counting with Tuples** - TypeScript doesn't do math natively; using `length` on Tuple types to represent numbers.
+-   **Recursive Conditional Types** - how to loop without `for` loops, using recursive types for compile-time computation.
+-   **Pattern Matching with `infer`** - destructuring types to extract values; the key to reading complex library definitions.
+-   **Practical payoff** - de-obfuscating scary type definitions from popular libraries and debugging "Type instantiation is excessively deep" errors.
+
+## Who it was for
+
+Developers who use TypeScript day-to-day but find themselves copy-pasting generics from Stack Overflow without understanding them. After this talk, the mental model for recursive types and inference is concrete - not just theoretical.
+
+## Resources
+
+-   [Slide deck](https://docs.google.com/presentation/d/19z9qyot_uQDu-YIxbXRu0FGV9P8DQi6jkMxwfFWCwRs/edit?usp=sharing)
+
+---
+
+# TuxCare Live: Chris and Ondřej Discuss CKEditor AI
+
+- URL: https://ondrej.chrastina.dev/talks/tuxcare-chris-and-ondrej-discuss-ckeditor-ai/
+- Published: 2026-04-10
+- Section: Talks
+- Recording: https://www.youtube.com/watch?v=n6MuyIPONfI
+
+Live stream with Chris DeMars on TuxCare - started as a conversation about AI in content creation, ended up as a deep product overview of CKEditor AI: features, real-world use cases, and the architecture behind enterprise-grade AI content editing.
+
+## What we covered
+
+TuxCare provides Long-Term Support as a service - keeping software, OSes, and runtimes alive beyond their official support windows with ongoing security patches. The audience is engineering teams running production systems that can't just upgrade on a vendor's schedule.
+
+The conversation started with AI in content creation and quickly turned into a full CKEditor AI walkthrough - which made it one of the more thorough external product overviews I've done:
+
+-   **CKEditor AI features** - AI Chat, AI Quick Actions, AI Review, and the integration model that makes them work inside any application.
+-   **Enterprise-grade architecture** - how to hook CKEditor to your own LLM endpoint, stay behind your VPC, and avoid sending content to a public model.
+-   **Real-world use cases** - where embedded AI beats standalone tools, and what it takes to go from a proof of concept to a production content workflow.
+
+## Resources
+
+-   [Full recording on YouTube](https://www.youtube.com/watch?v=n6MuyIPONfI)
+-   [TuxCare](https://tuxcare.com/)
+
+---
+
+# CKEditor AI on Your Premises: Hook your LLM and register MCP tools
+
+- URL: https://ondrej.chrastina.dev/talks/ckeditor-ai-on-your-premises-hook-your-llm-and-register-mcp-tools/
+- Published: 2026-04-09
+- Section: Talks
+- Recording: https://app.zuddl.com/p/a/event/e097fef4-d67e-4606-a77d-6a16b7ab6183?utm_campaign=ckeditor_ai_onprem_webinar&utm_source=webinars_page&utm_medium=referral
+
+A practical look at running CKEditor AI on your own infrastructure — wiring the editor to a self-hosted LLM and registering MCP tools so it can act on your data without ever leaving your premises.
+
+## What the session covered
+
+If you've ever shipped an enterprise feature only to hit a wall labelled "data residency," you know the pain. Your users want a co-writer that lives in the editor — your security team wants the model to live next to the database. This session walked through how to give them both.
+
+## The moving parts
+
+-   Hooking CKEditor AI to your own LLM endpoint — local, self-hosted, or behind your VPC.
+-   Registering MCP tools so the editor can pull live context (search, lookup, retrieval) without leaking content to a third-party model.
+-   Prompt routing, tool registration, and where authentication slots in.
+
+## Who it was for
+
+Engineering leads, AI architects, and platform teams who need rich-text AI features but can't ship anything that talks to a public model. There's always one constraint that breaks the obvious approach — on-premises is usually it.
+
+---
+
+# CKEditor in Drupal: From Better Formatting to AI-Powered Authoring
+
+- URL: https://ondrej.chrastina.dev/talks/ckeditor-in-drupal-better-formatting-to-ai-authoring-drupalcon-2026/
+- Published: 2026-03-25
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/CKEditor%20in%20Drupal_%20From%20Better%20Formatting%20to%20AI-Powered%20Authoring%20.pdf
+
+Lightning talk at DrupalCon Chicago 2026 - the latest CKEditor 5 improvements in the Drupal ecosystem, from enhanced formatting capabilities to the AI-powered authoring features now available in production Drupal sites.
+
+## What this lightning talk covered
+
+A fast-paced walkthrough of what's new in CKEditor 5 for Drupal developers and site builders - covering both the baseline formatting improvements and the AI-powered authoring layer that's now available in production.
+
+## Key updates covered
+
+-   **Formatting improvements** - enhanced toolbar configuration, new formatting options, and the UX refinements that matter most for content editors working in Drupal every day.
+-   **AI-powered authoring** - CKEditor AI features (AI Chat, Quick Actions, AI Review) and how they integrate with the Drupal editorial workflow.
+-   **What's coming next** - the roadmap for CKEditor in Drupal, including deeper integration with Drupal AI and the agentic content editing layer.
+
+## The venue
+
+DrupalCon Chicago 2026 - presented as a lightning talk during the core conference sessions, with the booth providing hands-on follow-up demonstrations for attendees who wanted to dig deeper.
+
+---
+
+# Case Study: Enterprise AI Content Creation Gaps
+
+- URL: https://ondrej.chrastina.dev/talks/enterprise-ai-content-creation-gaps-drupalcon-chicago-2026/
+- Published: 2026-03-25
+- Section: Talks
+- Recording: https://events.drupal.org/chicago2026
+
+DrupalCon Chicago 2026 session unpacking the real "AI gaps" enterprises hit in content workflows - the urgency trap, trust and compliance hurdles, the breadth-vs-depth problem, and why calling a model API is the easy part. Presents CKEditor AI as the embedded solution.
+
+## What the session covered
+
+The "Bring Your Own AI" era has arrived - but for agencies and their enterprise clients, it often creates disconnected workflows and new headaches instead of productivity gains. This session shared patterns from dozens of enterprise discovery calls, revealing the real gaps teams hit when they try to put generative AI into their content pipelines.
+
+## The four enterprise AI gaps
+
+-   **Urgency vs. strategy** - the pressure to "do AI now" clashes with starting with real, well-scoped workflows. The teams that ship something durable start small and focused.
+-   **Trust** - security, compliance, and data governance still gate adoption. Moderation, telemetry, and logging aren't optional at enterprise scale.
+-   **Breadth vs. depth** - a ChatGPT licence isn't a content strategy. The model is only as useful as the context and domain knowledge you give it.
+-   **API vs. flows** - calling a model is easy. User value is hard. Context, permissions, and workflow integration are where the real work is.
+
+## The solution frame
+
+The session introduced CKEditor AI as the embedded enterprise solution that addresses all four gaps: AI Chat, AI Review, and AI Quick Actions working directly inside the authoring workspace - with the security, compliance, and governance controls enterprise teams require.
+
+## The venue
+
+DrupalCon Chicago 2026 - a 4-day event celebrating 25 years of Drupal, with an AI-sponsored summit on day one. The whole conference was framed around AI readiness in the Drupal ecosystem.
+
+---
+
+# Bas.fm: Why Most GitHub Repos Fail (And How to Fix Them)
+
+- URL: https://ondrej.chrastina.dev/talks/basf-podcast-why-most-github-repos-fail-and-how-to-fix-them/
+- Published: 2026-03-17
+- Section: Talks
+- Recording: https://bas.fm/e/33
+
+Guest on Bas.fm - a wide-ranging conversation about OpenSource maintenance, Developer Relations, Python, and what actually makes a GitHub repository succeed long-term. With a CKEditor cameo, naturally.
+
+## What we talked about
+
+Bas.fm covers OpenSource, development, and the human side of building software in public. This episode was a direct follow-up to the OpenSource series I've been running - taking the principles behind healthy public repositories and putting them into conversation.
+
+-   **Why most repos fail** - the patterns that make a GitHub repository a ghost town vs. a living project: missing contribution guides, unclear scope, no first-issue labels, and the invisible signal of maintainer responsiveness.
+-   **OpenSource maintenance as a discipline** - what I learned from maintaining the Kontent.ai GitHub organization (dozens of SDKs and starters) and how those habits transferred to CKEditor work.
+-   **Developer Relations in the OpenSource context** - the overlap between DevRel and OS maintainership, and why the best DevRel work looks like good open-source citizenship.
+-   **Python, personal projects, and CKEditor** - a sprinkle of everything.
+
+## Resources
+
+-   [Audio episode on Bas.fm](https://bas.fm/e/33)
+-   [Video on YouTube](https://youtu.be/sNLyqR1N24c)
+-   [OpenSource guidelines repo](https://github.com/Simply007/os-guidelines)
+
+---
+
+# Hackmamba: Developer Experience, the New Way
+
+- URL: https://ondrej.chrastina.dev/talks/hackmamba-developer-experience-the-new-way/
+- Published: 2026-03-09
+- Section: Talks
+- Recording: https://www.youtube.com/watch?v=yqSVm2CCP_A
+
+Guest on Hackmamba's "Everything Outside Code" series - exploring how AI is reshaping Developer Experience, what that shift means for Developer Relations teams, and how CKEditor fits into the new landscape where tooling expectations have fundamentally changed.
+
+## What we talked about
+
+Hackmamba's "Everything Outside Code" series covers the softer side of software: community, DevRel, developer experience, and the ecosystem work that makes or breaks adoption. This episode touched on how AI is changing every assumption about what good DX looks like.
+
+-   **Developer Experience in the AI era** - how AI-assisted coding changes what developers expect from documentation, SDKs, and tooling. The bar for friction tolerance has dropped to near zero.
+-   **The shift in Developer Relations** - what DevRel looks like when developers are co-writing code with an AI assistant. Less "how to" content, more "why this" content. More emphasis on correctness and context.
+-   **CKEditor's position** - what it means to maintain a developer-facing tool that itself gets used inside AI-powered applications, and how that shapes the product and the DevRel strategy.
+
+## Resources
+
+-   [Full recording on YouTube](https://www.youtube.com/watch?v=yqSVm2CCP_A)
+
+---
+
+# CKEditor AI: Overcoming Enterprise AI Content Creation Challenges
+
+- URL: https://ondrej.chrastina.dev/talks/ckeditor-ai-overcoming-enterprise-ai-content-creation-challenges/
+- Published: 2026-02-12
+- Section: Talks
+- Recording: https://youtu.be/X4huZuM8AiY
+
+Roman Khudonogov and Witek Socha unpacked the four enterprise gaps we keep seeing in AI content creation — urgency, trust, breadth-vs-depth, and API-vs-flows — and what it actually takes to bridge them in production.
+
+## What the session covered
+
+I bet most of you have copy-pasted a paragraph from ChatGPT into your business app this week. That's the broken workflow we keep seeing in the wild — and the data backs it up: roughly 40% of work-related AI messages are writing tasks. Standalone tools cost you context, security, and time. Embedded AI wins. This session was about why, and what gets in the way at enterprise scale.
+
+## The four enterprise gaps
+
+Roman and Witek broke down the patterns they keep hearing in customer conversations:
+
+-   **Urgency vs. strategy** — speed pressure clashing with long-term planning.
+-   **Trust** — compliance, security, and data residency reality checks.
+-   **Breadth vs. depth** — generic AI versus domain-specific behavior.
+-   **API vs. flows** — model calls versus full production workflows.
+
+From there they dug into why applying AI to real documents is hard: evaluations, context windows, permissions, and where MCP fits into the backend complexity.
+
+## Who it was for
+
+CIOs, CTOs, engineering managers, technical leads, product managers, AI architects, and engineering teams building AI-powered content experiences that need to be secure, scalable, and compliant.
+
+## Chapters
+
+-   00:00 — Introduction & speaker introductions
+-   02:18 — CKEditor AI recap: features & demo
+-   04:23 — Why GenAI matters for writing (Roman Khudonogov)
+-   09:17 — The broken workflow: copy-paste between apps
+-   12:29 — Key takeaway: embed AI to eliminate friction
+-   16:02 — Enterprise AI gaps: patterns from customer conversations (Witek Socha)
+-   24:35 — Why applying AI to real documents is hard
+-   26:02 — Backend complexity: evaluations, context, permissions & MCP
+-   30:05 — Q&A
+
+## Resources
+
+-   [CKEditor](https://ckeditor.com/)
+-   [CKEditor documentation](https://ckeditor.com/docs/)
+-   [CKEditor portal](https://portal.ckeditor.com/)
+
+---
+
+# Tech Talks Daily: CKEditor and the Reality of Supporting Developers Across Every Tech Stack
+
+- URL: https://ondrej.chrastina.dev/talks/tech-talks-daily-ckeditor-reality-of-supporting-developers/
+- Published: 2026-01-29
+- Section: Talks
+- Recording: https://techblogwriter.co.uk/ckeditor/
+
+Guest on Tech Talks Daily (51K monthly listeners) - exploring what it really takes to support developers across every tech stack and why CKEditor's open architecture approach matters for developer experience at scale.
+
+## What we talked about
+
+Tech Talks Daily with Neil C. Hughes reaches 51,000 monthly listeners across developers, tech leaders, and enterprise decision-makers. The conversation covered the operational reality of supporting a rich-text editor that's integrated into hundreds of frameworks, CMSes, and custom applications worldwide.
+
+-   **Supporting developers at scale** - what "developer support" actually means when your users span vanilla JS, React, Angular, Vue, Next.js, Drupal, and dozens of other stacks. The documentation, tooling, and community infrastructure that makes it work.
+-   **Open architecture as a developer experience choice** - why CKEditor 5's plugin-based, framework-agnostic architecture isn't just a technical decision. It's a developer experience philosophy: integrate everywhere, own nothing you don't have to.
+-   **CKEditor AI and the next chapter** - how AI features fit into an editor that already lives inside someone else's application, and the constraints that makes enterprise AI harder than most demos show.
+
+## Resources
+
+-   [Episode on Tech Talks Daily](https://techblogwriter.co.uk/ckeditor/)
+
+---
+
+# Extreme TypeScript: Mastering Recursion and Inference via Type-Level Arithmetic
+
+- URL: https://ondrej.chrastina.dev/talks/extreme-typescript-mastering-recursion-and-inference-via-type-level-arithmetic/
+- Published: 2026-01-13
+- Section: Talks
+- Slides: https://github.com/Simply007/ts-type-arithmetic/blob/cdb7cfaec98c973494b24915148931a267b74f13/assets/Extreme%20TypeScript_%20Mastering%20Recursion%20and%20Inference%20via%20Type-Level%20Arithmetic.pdf
+
+Deep dive into advanced TypeScript type system features by building a compile-time calculator. Master conditional types, the infer keyword, template literal types, tuple manipulation, and recursive type definitions through practical, step-by-step examples. Learn to write type-level programs that perform arithmetic at compile time.
+
+A few years ago, an engineer on my team who was heavily invested in Haskell and declarative programming brought something unusual to our 1-on-1. It was a functional calculator built entirely within TypeScript's type system—zero runtime code allowed. 
+
+While practically "useless" for business logic, I realized it was the ultimate educational tool for demonstrating the raw power of the language. In this talk, we will deconstruct that experiment. We won't just look at code; we will learn how to **read and write** the complex constructs that power libraries like Zod, Prisma, or tRPC. You will learn how to manipulate **Tuples for counting**, master **Recursive Conditional Types**, and use `**infer**` to unwrap data. By the end, you won't just know how to add numbers in types—you will possess the mental framework to debug the most terrifying generic errors your library throws at you.
+
+---
+
+# AI Master Podcast: Building the Future of Content Editing with Al
+
+- URL: https://ondrej.chrastina.dev/talks/ai-master-podcast-building-the-future-of-content-editing-with-al/
+- Published: 2025-12-14
+- Section: Talks
+- Recording: https://creators.spotify.com/pod/profile/ai-master/episodes/AIMP-07-Ondej-Chrastina-Building-the-Future-of-Content-Editing-with-AI-e3ccqr1
+
+AI Master Podcast episode with Ondřej Chrastina (Developer Advocate at CKEditor) on AI-powered content editing. Learn how CKEditor 5 differs from CKEditor 4 (model-based architecture vs DOM), why it’s easier to extend with plugins, and how it supports collaboration, versioning, and track changes. We discuss CKEditor AI features for content ideation, drafting, rewriting, and review while preserving formatting, user control, safety, privacy, and GDPR. Practical insights on integrating LLMs into rich text editors, handling latency and hallucinations, prompt vs context engineering, multilingual challenges, and measuring AI productivity.
+
+This episode is also available on YouTube:
+
+[Future of Content Editing with AI](https://youtu.be/DVQilLE2PRE)
+
+In this episode of the AI Master Podcast, I’m joined by Ondřej Chrastina, Developer Advocate at CKEditor and an experienced Developer Relations leader with over 12 years of hands-on and leadership experience in building outstanding developer experience for complex platforms.
+
+Ondřej shares his professional journey — from QA engineering and software development, through building internal tooling and SDKs, to establishing and leading Developer Relations programs at companies such as Kentico, Kontent.ai, Ataccama, and now CKEditor. We talk about how deep empathy for developer pain points shapes better products, tooling, and documentation.
+
+A large part of our conversation focuses on CKEditor 5 — its modern, extensible architecture and the challenges of using rich-text editors in today’s web applications. We explore how generative AI and large language models can meaningfully enhance content editing, turning editors into intelligent assistants rather than passive tools.
+
+Ondřej explains practical AI use cases such as content suggestions, summarization, auto-formatting, review workflows, and AI-assisted collaboration. We also go deep into the technical and product challenges of embedding AI into editors: latency, context management, hallucinations, prompt engineering, safety, and maintaining full user control — especially in enterprise environments where privacy, data governance, and GDPR compliance are critical.
+
+We also discuss the future of rich-text editors in an AI-driven world, the role of open source and community contributions, multilingual challenges, and which AI advancements (embeddings, RAG, multimodal models) are most exciting for the next generation of editor experiences.
+
+To wrap up, we switch to a more personal perspective — continuous learning, staying motivated as a software engineer, productivity, travel, and a few lesser-known facts about Ondřej.
+
+## Key topics covered in this episode:
+
+-   Architecting AI-powered features in rich-text editors while preserving user control
+-   Integrating LLMs into editors: latency, context size, and hallucination challenges
+-   Prompt engineering patterns for editor-based AI workflows
+-   Privacy, GDPR, and data governance in enterprise-grade AI integrations
+-   The future of rich-text editors as intelligent, collaborative assistants
+
+---
+
+# CKEditor AI: Meet your app’s new AI co-writer
+
+- URL: https://ondrej.chrastina.dev/talks/ckeditor-ai-meet-your-app-s-new-ai-co-writer/
+- Published: 2025-12-01
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/CKEditor%20AI%20Meet%20You%20apps%20new%20AI%20cowriter.pdf
+- Recording: https://www.youtube.com/watch?v=AKYRzwHE-wQ
+
+Introduction and overview webinar with me and Andrzej Kala (Senior Technical Product Leader). The narrative was: "Stop forcing your users to switch tabs between ChatGPT and your application. Learn how to integrate a powerful, context-aware AI co-writer directly into your rich text editor."
+
+Developers should no longer require their users to switch tabs between ChatGPT and their application. Instead, they can integrate a powerful, context-aware AI co-writer directly into their rich text editor.  
+  
+The agenda of the webinar includes the following:
+
+-   **Introduction:** An overview of the topic and format of the webinar, followed by introductions from the speakers, including Andrzej Kała.
+-   **Interview about CKEditor AI:** A detailed discussion through interview questions, covering the features and functionalities of CKEditor AI.
+-   **Showcase of implementing CKEditor AI:** Demonstrating how to integrate CKEditor AI into a sample application, including asynchronous collaboration presets, AI chat features, AI actions, and AI review capabilities.
+-   **Walkthrough of the showcase:** A practical walkthrough of the project, selecting text and using it as context.
+-   **Wrap-up questions:** Addressing audience questions to conclude the webinar.
+
+---
+
+# Empowering the TYPO3 Community: Introducing CKEditor Pack for Enhanced Content Creation
+
+- URL: https://ondrej.chrastina.dev/talks/empowering-the-typo3-community-introducing-ckeditor-pack-for-enhanced-content-creation/
+- Published: 2025-11-25
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/CKEditor%20Pack%20for%20Enhanced%20Content%20Creation.pdf
+
+Open-Source, Open-Future: Our Vision for TYPO3 and CKEditor introduces the CKEditor Pack, a community-driven initiative designed to modernize content editing in TYPO3. The talk explores how open-source collaboration, a unified plugin ecosystem, and thoughtful editor experience design come together to simplify configuration while unlocking advanced editing capabilities.
+
+At **T3CON TYPO3 Conference**, this talk presented the **CKEditor Pack** as a new open-source initiative created to enhance and unify rich content editing in TYPO3. Built specifically for the TYPO3 ecosystem, the CKEditor Pack brings together a curated set of editing, collaboration, and productivity features while preserving the familiar TYPO3 look and feel. The goal is simple: reduce fragmentation, simplify configuration, and make advanced editing capabilities accessible out of the box.
+
+[CKEditor pack for TYPO3](https://extensions.typo3.org/extension/rte_ckeditor_pack)
+
+The session walks through the motivation behind the project, inspired by successful community models in other CMS ecosystems, and highlights how existing free plugins and maintainers can contribute to a shared, sustainable solution. Through practical examples and a live-style demonstration, the talk shows the benefits for different roles. Editors gain faster, cleaner workflows; admins get better governance and consistency. Integrators benefit from modular architecture and extensibility; and contributors are invited to actively shape the future of the project.
+
+As an open-source, community-first effort, the CKEditor Pack represents a long-term vision for TYPO3 editing: collaborative, powerful, and built together with the ecosystem. The session concludes with a look ahead at what’s next and how the TYPO3 community can get involved.  
+🔗 Presented at: [https://t3con.typo3.com/](https://t3con.typo3.com/)
+
+## Abstract
+
+Join me to explore a new community initiative by **T3Planet** and **CKEditor** aimed at transforming content editing in TYPO3. In this session, I will demonstrate the open-source **CKEditor Pack**, showcasing how it solves everyday challenges through advanced features like real-time collaboration, improved formatting workflows, and seamless media handling all within the familiar TYPO3 environment. This session is not just a demo, but an invitation: be part of the conversation and discover how you can help shape the future of this project to meet the real needs of the TYPO3 community.
+
+---
+
+# Streamline Your Image Workflow: A Deep Dive into CKEditor's Image Optimizer powered by Uploadcare
+
+- URL: https://ondrej.chrastina.dev/talks/streamline-your-image-workflow/
+- Published: 2025-10-09
+- Section: Talks
+- Recording: https://youtu.be/9VW_gwYS-T4
+
+A deep dive into CKEditor's Image Optimizer, powered by Uploadcare — what it does under the hood, how it slots into an existing CKEditor setup, and where it actually changes the day-to-day for authors and developers.
+
+## What the session covered
+
+Have you ever uploaded a 12 MB hero image into a CMS field that absolutely did not need 12 MB? I have. Image handling is one of those quiet bottlenecks — too easy to ignore, too painful to keep ignoring. Slow uploads, oversize assets, unnecessary processing on the client, formats that don't play nicely on mobile. The cumulative cost is real.
+
+## The deep dive
+
+-   What the CKEditor Image Optimizer (powered by Uploadcare) actually does — under the hood.
+-   Configuration and plug-in steps: where it slots into an existing CKEditor setup.
+-   Trade-offs and gotchas — there's always one.
+-   What changes for authors and what changes on the CDN bill.
+
+## Who it was for
+
+Developers handling rich media in CKEditor, content engineers who own the upload pipeline, and anyone tired of asking authors to please just compress the JPEG. Voila — a workflow that does it for them.
+
+---
+
+# Add Template & Mention Plugins to Existing Project
+
+- URL: https://ondrej.chrastina.dev/talks/add-template-and-mention-plugins-to-existing-project/
+- Published: 2025-09-23
+- Section: Talks
+- Recording: https://youtu.be/ZiW2Mu04gR0
+
+Part of the MLH 2025 series. I walked through two paths for adding Template and Mention plugins to an existing CKEditor 5 project — the fast route via CKEditor builder, and the manual integration when the scenario gets messy.
+
+## What this MLH 2025 session was about
+
+I bet most of you have shipped a CKEditor integration and then been asked to add "just one more plugin" a quarter later. Templates? @mentions? Both? Suddenly you're staring at a webpack config wondering if you should rebuild from scratch. You don't have to.
+
+## Two paths I walked through
+
+-   **CKEditor builder** — assemble a new build with the extra plugins. Fast path, copy-paste ready.
+-   **Manual integration** — for projects that have outgrown the builder UI: importing the plugin packages, wiring the toolbar, and registering the configuration.
+-   **Iteration discipline** — clean development cycles that don't break what's already in production.
+
+## Who it was for
+
+Developers with a working CKEditor 5 integration who need to extend it, particularly with Templates and Mention plugins. Practical, focused, no fluff — that was the whole point of the MLH 2025 series. All right, we're done!
+
+---
+
+# From Vanilla JS starter to TypeScript GitHub repo
+
+- URL: https://ondrej.chrastina.dev/talks/from-vanilla-js-starter-to-typescript-github-repo/
+- Published: 2025-09-23
+- Section: Talks
+- Recording: https://youtu.be/5lGozI_-Ds8
+
+Part of the MLH 2025 series. I took a CKEditor 5 vanilla JavaScript starter all the way to a real TypeScript GitHub repo — types, tooling, and a build setup another developer can clone and run.
+
+## What this MLH 2025 session was about
+
+Having written a good share of JavaScript code, I wanted to expand a CKEditor 5 starter into something I'd actually merge into production. That meant moving off the vanilla JS demo and into a TypeScript GitHub repo with types, lint, and a clean build pipeline.
+
+## The journey
+
+-   Starting point — the CKEditor 5 vanilla JS starter.
+-   Migrating to TypeScript — tsconfig, type imports for CKEditor 5 packages, and the small gotchas in between.
+-   Setting up the GitHub repo — scripts, CI-friendly structure, and a setup another developer can clone and run.
+-   Where the type definitions actually pay off (and where they're just compile-time noise).
+
+## Who it was for
+
+Developers comfortable with JS but new to TypeScript, especially those starting from the CKEditor 5 starter and ready to graduate to a real repo. Yippee — what a fun one to put together.
+
+---
+
+# Spark Team Productivity with a Frictionless, Unified AI Writing Stack
+
+- URL: https://ondrej.chrastina.dev/talks/spark-team-productivity-with-a-frictionless-unified-ai-writing-stack/
+- Published: 2025-09-15
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/Spark%20Team%20Productivity%20with%20a%20Frictionless,%20Unified%20AI%20Writing%20Stack.pdf
+- Recording: https://www.youtube.com/watch?v=N5DDRzJtBTY&list=PLKzl1AGxt2J3CtQzdUdNRBHS4lw-LIalL&index=1
+
+The talk introduces CKEditor AI, a groundbreaking add-on that seamlessly integrates AI capabilities into CKEditor. This innovation enables the AI to think and generate content in rich text format while preserving complex formatting. Designed for direct integration into your application, CKEditor AI offers a unified, secure, and flecible platform for content creation and editing.
+
+In this lightning talk delivered at The AI Conference 2025, I address the growing friction and security risks caused by the "Bring Your Own AI" (BYOAI) trend, where 78% of workers use external AI tools to generate content. I highlight how copying and pasting from external chatbots breaks formatting (tables, lists) and introduces compliance vulnerabilities for enterprises.
+
+**CKEditor AI** is designed to solve these, a new suite of capabilities integrated directly into the rich text editor. Unlike external tools, CKEditor AI is aware of the document model, meaning it preserves complex formatting during generation and editing. The talk outlines three core components of the solution:
+
+-   **AI Chat:** A context-aware assistant capable of drafting content (e.g., support ticket replies) directly in the editor.
+-   **Quick Actions:** Pre-configured commands for repetitive tasks like translation, summarization, or tone adjustment.
+-   **AI Content Review:** A specialized interface similar to "track changes" designed to handle high volumes of AI suggestions, ideal for regulatory audits or grammar checks.
+
+The talk is concluded by emphasizing that the solution creates a unified, secure environment for content creation that eliminates the chaos of external tools while maintaining enterprise-grade compliance.
+
+## Abstract:
+
+Your content creators, marketers, and support teams are juggling tools. They draft and experiment with content in multiple conversational AI systems. The result is a tedious copy-paste job into your application or internal system, followed by hours spent fixing the formatting that inevitably breaks. For them, it's inefficient. But for you - the founders, the product leaders, the developers - it is a nightmare. This 'Bring Your Own AI' chaos creates security holes, opens you up to compliance risks, and produces content that is inconsistent and often factually incorrect because it lacks critical context. The workflow is fundamentally broken.
+
+Let’s explore the challenges and opportunities of integrating AI directly into your content creation process. We will touch on how integrating AI into your writing stack can help you:
+
+-   Boost productivity and alignment
+    -   Give your users a unified platform with tailored AI
+    -   Preserve rich text formatting 
+    -   Get an AI-driven editing experience and review process without friction
+-   Offload the operational burden
+    -   Reduce the workload on AIOps teams
+-   Keep your product or application compliant and secure
+
+CKEditor has been the most trusted, robust rich text editor component on the market for over two decades - built for engineers and trusted by Fortune 500 companies. In this talk, we’ll unveil the new CKEditor AI: a suite of configurable components thaxt brings context‑aware generation, predefined quick actions, model selection, and review workflows directly into your rich text editor. Alongside integrated real-time collaboration, you get elevated rich text editing, a productivity boost, and a coherent user experience all in one place.
+
+Based on research with our customers, we will showcase possible applications of an integrated AI writing stack such as audit reports, translation workflows, or customer service sentiment analysis.
+
+Join us for this talk to learn more about what you can achieve with the unified AI writing stack
+
+  
+
+**Read the full recap of CKEditor's experience at the conference here:**
+
+[AI Conference 2025 - CKEditor in da house](https://dev.to/ckeditor/ai-conference-2025-ckeditor-in-da-house-m11)
+
+---
+
+# Building a blazing fast application with Gatsby.js
+
+- URL: https://ondrej.chrastina.dev/talks/building-a-blazing-fast-application-with-gatsby-js/
+- Published: 2019-09-15
+- Section: Talks
+
+Overview how Gtabsy source plugin is building the websites, it's speed benefits. And how JamStack in combination with headless CMS can help you to build blazing fast, secure and highly available site. Esp in combination withe Kentico Cloud (now Kontent.ai) headless CMS. Presented on Kentico Connection (Brno) 2019.
+
+The Gatsby source plugin plays a crucial role in building websites by enabling seamless integration between Gatsby.js and various data sources, such as headless CMS platforms. This plugin efficiently fetches data during the build process, allowing developers to pre-render static pages that are highly optimized for speed. By leveraging this approach, websites can deliver exceptional performance, as the static content is served directly from a Content Delivery Network (CDN), reducing load times significantly.
+
+The combination of JamStack architecture and a headless CMS further enhances the capabilities of modern web development. JamStack focuses on pre-rendering and decoupling the frontend from the backend, which not only improves speed but also enhances security by minimizing server-side vulnerabilities. A headless CMS, such as Kontent.ai, acts as a content repository that provides structured data via APIs. This enables developers to build blazing fast, secure, and highly available websites that are easy to scale and maintain.
+
+For more information about the Gtabs ysource plugin and how it connects Gatsby.js with headless CMS solutions, visit the official GitHub repository: [https://github.com/kontent-ai/gatsby-packages](https://github.com/kontent-ai/gatsby-packages).
