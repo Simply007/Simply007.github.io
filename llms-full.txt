@@ -900,6 +900,50 @@ List<CTA> transfomedCtas = section
 
 ---
 
+# Trailhead: the CKEditor AI Coding Agents Webinar Demo
+
+- URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-ai-coding-agents-demo/
+- Published: 2026-09-17
+- Section: Projects
+- Source code: https://github.com/ckeditor/devrel-ckeditor-ai-coding-agents-demo
+
+The runnable companion to the \"Less time, fewer tokens, better effects\" webinar: a fictional trip-planning landing page whose About section is edited by a CKEditor InlineEditor that an AI coding agent wired in - Format painter, Slash commands, AI assistant, autosave and all.
+
+## What's inside
+
+Trailhead is a fictional backcountry trip-planning landing page. Most of it is fixed marketing content; the **About** section is the demo surface: a vanilla JavaScript `InlineEditor` using CKEditor's model-based editing pipeline (not raw DOM editing), premium Format painter and Slash commands, CKEditor AI when a token endpoint is configured, autosave to local storage with restore on load, and explicit save/reset controls.
+
+## Why it exists
+
+Built for the webinar on the official CKEditor support for AI coding agents - the repo an agent equipped with the CKEditor skill and the docs MCP server helped assemble, so you can diff the promise against the code.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/ckeditor/devrel-ckeditor-ai-coding-agents-demo)
+-   [The webinar this demo was built for](https://ondrej.chrastina.dev/talks/less-time-fewer-tokens-better-effects-ckeditor-ai-coding-agents/)
+-   [The AI coding agents guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/ai-coding-agents.html)
+
+---
+
+# Mermaid Diagram Showcase
+
+- URL: https://ondrej.chrastina.dev/projects/mermaid-showcase/
+- Published: 2026-08-12
+- Section: Projects
+- Source code: https://github.com/Simply007/Mermaid-showcase
+
+A living gallery of Mermaid diagrams rendered natively by GitHub - including the OAuth flow diagrams from my article on securing CKEditor real-time collaboration.
+
+## What's inside
+
+A README-first repository where the diagrams are the content: sequence diagrams, flowcharts, and the OAuth token-exchange flows I drew for the article on wiring OAuth into CKEditor real-time collaboration - all rendered natively by GitHub's Mermaid support, no image exports involved.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/Mermaid-showcase)
+
+---
+
 # Content Editing Unlocked: TYPO3 v14 Demo Project
 
 - URL: https://ondrej.chrastina.dev/projects/t3dd-2026-content-editing-unlocked/
@@ -972,6 +1016,163 @@ Workshops die when the projector turns off unless the material stands on its own
 
 ---
 
+# CKEditor AI On-Premises Docker Showcase
+
+- URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-ai-onprem-docker-showcase/
+- Published: 2026-04-09
+- Section: Projects
+- Source code: https://github.com/ckeditor/devrel-ckeditor-ai-onprem-docker-showcase
+
+A complete local CKEditor AI environment in Docker Compose: every backend service, your own LLM hookup, and MCP tool registration - the hands-on setup behind my on-premises webinar and Shorts.
+
+## What's inside
+
+A Docker Compose environment that runs the whole CKEditor AI on-premises stack locally: the AI service, its databases, and a CKEditor frontend wired to it. Bring your On-Premises trial credentials, point it at your own LLM, register MCP tools, and you have the full data-never-leaves-the-building setup on your laptop.
+
+## Why it exists
+
+The demo environment behind the \\"CKEditor AI on Your Premises\\" webinar and the on-prem Shorts series - built so that evaluating the on-premises deployment model takes an afternoon, not a procurement cycle.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/ckeditor/devrel-ckeditor-ai-onprem-docker-showcase)
+-   [The webinar this environment powers](https://ondrej.chrastina.dev/talks/ckeditor-ai-on-your-premises-hook-your-llm-and-register-mcp-tools/)
+
+---
+
+# CKEditor 5 Timestamp Plugin for Drupal: Vibe-Coded at DrupalCon Chicago 2026
+
+- URL: https://ondrej.chrastina.dev/projects/drupalcon-chicago-26-ckeditor-ai-playground/
+- Published: 2026-04-01
+- Section: Projects
+- Source code: https://github.com/Simply007/drupalcon-chicago-26-ckeditor-ai-playground
+
+My first custom Drupal module extending CKEditor, vibe-coded with Claude Code on the DrupalCon Chicago conference floor - a toolbar button that inserts the current timestamp, plus the agent skill that knows how to build CKEditor 5 plugins as Drupal modules.
+
+## What's inside
+
+A working Drupal module (Drupal 10.1+/11) that adds a CKEditor 5 toolbar button inserting the current timestamp at the cursor - small on purpose, because the module is the demo, not the point. The point is the **agent skill** bundled with it: a reusable instruction set that teaches an AI coding agent how CKEditor 5 plugins become Drupal modules, so the next plugin does not start from a blank page.
+
+## Why it exists
+
+Built live at DrupalCon Chicago 2026 as an experiment: can you vibe-code your first custom Drupal module between sessions? The whole story, including what worked and what fought back, is in the write-up.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/drupalcon-chicago-26-ckeditor-ai-playground)
+-   [The full story on dev.to](https://dev.to/ckeditor/drupalcon-chicago-2026-how-i-vibe-coded-my-first-custom-drupal-module-extending-ckeditor-59mn)
+-   [The DrupalCon Chicago lightning talk](https://ondrej.chrastina.dev/talks/ckeditor-in-drupal-better-formatting-to-ai-authoring-drupalcon-2026/)
+
+---
+
+# CKEditor Collaboration Features Decomposed
+
+- URL: https://ondrej.chrastina.dev/projects/devrel-collaboration-features-decomposed/
+- Published: 2026-01-28
+- Section: Projects
+- Source code: https://github.com/ckeditor/devrel-collaboration-features-decomposed
+
+A bare-bones TypeScript project that adds CKEditor's collaboration features one at a time - comments, track changes, revision history, real-time collaboration - each in its minimal possible setup.
+
+## What's inside
+
+The premium collaboration features, decomposed: comments, track changes, revision history, and real-time collaboration, each introduced iteratively in the smallest setup that works. No framework, no styling detours - just the sequence of steps and the configuration each feature actually requires.
+
+## Why it exists
+
+Collaboration features look monolithic from the outside; this repo shows they compose. It accompanies my article on decomposing collaboration features, where each step is explained in order.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/ckeditor/devrel-collaboration-features-decomposed)
+-   [Real-time collaboration docs](https://ckeditor.com/docs/ckeditor5/latest/features/collaboration/real-time-collaboration/real-time-collaboration.html)
+
+---
+
+# Extreme TypeScript: a Compile-Time Calculator, Step by Step
+
+- URL: https://ondrej.chrastina.dev/projects/ts-type-arithmetic/
+- Published: 2026-01-12
+- Section: Projects
+- Source code: https://github.com/Simply007/ts-type-arithmetic
+
+The companion repository for my \"Extreme TypeScript\" talks: learn conditional types, infer, template literal types, and recursion by building a calculator that computes entirely at compile time.
+
+## What's inside
+
+A guided learning path through TypeScript's type system: conditional types and pattern matching, the `infer` keyword, template literal types, tuple spreads, and recursive type definitions - combined step by step until the type checker itself does arithmetic. Each step lives in the `learning/` directory with links to the official docs.
+
+## Why it exists
+
+Talks fade, repositories stay. This is the hands-on half of my \\"Extreme TypeScript: Mastering Recursion and Inference via Type-Level Arithmetic\\" talk, so you can replay every trick at your own pace and argue with the compiler directly.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/ts-type-arithmetic)
+-   [The talk this repo was built for](https://ondrej.chrastina.dev/talks/extreme-typescript-recursion-inference-type-level-arithmetic/)
+
+---
+
+# CKEditor AI Showcase (React)
+
+- URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-ai-showcase-react/
+- Published: 2025-11-29
+- Section: Projects
+- Source code: https://github.com/ckeditor/devrel-ckeditor-ai-showcase-react
+
+An interactive React demo of CKEditor AI configuration and customization: AI Chat, Quick Actions, and Review Mode explored through five hands-on tasks in a realistic content management interface.
+
+## What's inside
+
+A React application demonstrating CKEditor AI in a real-world content management interface. Five guided hands-on tasks walk through configuring and customizing AI Chat, Quick Actions, and Review Mode - so instead of reading about the AI features, you change their behavior and watch what happens.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/ckeditor/devrel-ckeditor-ai-showcase-react)
+-   [CKEditor AI documentation](https://ckeditor.com/docs/ckeditor5/latest/features/ai/overview.html)
+
+---
+
+# CKEditor Theme Playground
+
+- URL: https://ondrej.chrastina.dev/projects/ckeditor-theme-playground/
+- Published: 2025-10-20
+- Section: Projects
+- Source code: https://github.com/Simply007/ckeditor-theme-playground
+
+A small sandbox for experimenting with CKEditor 5 theming: tweak the editor's look with CSS custom properties and see how far the UI can bend before you need a custom build.
+
+## What's inside
+
+A minimal CKEditor 5 project wired up for theme experiments - the place where I try out how the editor's CSS custom properties respond before recommending an approach. Clone it, point it at your license (a free trial works), and restyle away.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/ckeditor-theme-playground)
+
+---
+
+# CKEditor Image Optimizer Demo (Uploadcare)
+
+- URL: https://ondrej.chrastina.dev/projects/ckeditor-image-optimizer-demo/
+- Published: 2025-10-09
+- Section: Projects
+- Source code: https://github.com/Simply007/ckeditor-image-optimizer-demo
+
+The demo project behind my Image Optimizer webinar: CKEditor 5 with the Uploadcare-powered image workflow - upload, transform, and deliver optimized images without leaving the editor.
+
+## What's inside
+
+A runnable CKEditor 5 project with the Uploadcare integration configured: image upload from devices, URLs, and cloud services, plus on-the-fly transformations and optimized delivery. It is the exact setup I walked through in the \\"Streamline Your Image Workflow\\" webinar.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/ckeditor-image-optimizer-demo)
+-   [Official Image Optimizer demo on ckeditor.com](https://ckeditor.com/ckeditor-5/demo/image-optimizer/)
+-   [The webinar this demo was built for](https://ondrej.chrastina.dev/talks/streamline-your-image-workflow/)
+
+---
+
 # [Updated] Intro Video from Notum's Strapi & Next.js starter
 
 - URL: https://ondrej.chrastina.dev/projects/intro-video-from-notum-s-strapi-next-js-starter/
@@ -1006,6 +1207,121 @@ Follow the video, and you’ll have a running stack and the learner README by th
 
 That’s it!  
 Local Strapi, seeded DB, and live Next.js front-end in minutes, with a slimmer README for the next dev who joins.
+
+---
+
+# CKEditor AI Playground
+
+- URL: https://ondrej.chrastina.dev/projects/ckeditor-ai-playground/
+- Published: 2025-10-06
+- Section: Projects
+- Live: https://ckeditor-ai-playground.vercel.app
+- Source code: https://github.com/Simply007/ckeditor-ai-playground
+
+My personal sandbox for CKEditor AI experiments, deployed on Vercel - the repo I reach for when a demo idea needs a quick home with the AI assistant already wired in.
+
+## What's inside
+
+A ready-to-run CKEditor setup with the AI assistant configured, deployed on Vercel. It is the scratchpad behind many of my CKEditor AI demos: when an idea needs trying, this is where it lands first.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/ckeditor-ai-playground)
+-   [Live playground](https://ckeditor-ai-playground.vercel.app)
+
+---
+
+# CKEditor Raffle
+
+- URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-raffle/
+- Published: 2025-09-18
+- Section: Projects
+- Source code: https://github.com/ckeditor/devrel-ckeditor-raffle
+
+The booth raffle tool: a web-based winner picker with slot-machine spin, confetti, and cryptographically fair selection - names come from a local text file, nothing gets stored or tracked.
+
+## What's inside
+
+A web raffle that reads participant names from a local `names.txt`, spins them slot-machine style, and celebrates the winner with confetti. Selection uses cryptographically secure randomness, and because everything is local, there is no storing or tracking of participants - which is exactly what you want at a conference booth.
+
+## Why it exists
+
+Battle-tested at CKEditor conference booths (the T3DD raffle with ~100 participants ran on it). Spacebar to spin.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/ckeditor/devrel-ckeditor-raffle)
+
+---
+
+# CKEditor 5 Sample for MLH Global Hack Week (Aug 2025)
+
+- URL: https://ondrej.chrastina.dev/projects/devrel-mlh-workshops-aug-2025/
+- Published: 2025-07-30
+- Section: Projects
+- Source code: https://github.com/ckeditor/devrel-mlh-workshops-aug-2025
+
+The sample project behind CKEditor's MLH Global Hack Week challenges: starter setup, TypeScript migration, template functionality, and CKInspector integration - built for beginners taking their first steps in editor customization.
+
+## What's inside
+
+A CKEditor 5 sample project supporting the four CKEditor challenges at MLH Global Hack Week: Beginners Week (August 2025): create a starter with Builder, migrate it to TypeScript, add template functionality, and hook up CKInspector. Each challenge builds on the previous one, taking a first-time integrator from zero to a customized editor.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/ckeditor/devrel-mlh-workshops-aug-2025)
+-   [CKEditor at Global Hack Week (blog)](https://ckeditor.com/blog/ckeditor-global-hack-week-aug-2025/)
+
+---
+
+# CKEditor & Plotly.js Widget Showcase
+
+- URL: https://ondrej.chrastina.dev/projects/ckeditor5-plotly-widget-showcase/
+- Published: 2025-07-03
+- Section: Projects
+- Live: https://ckeditor5-plotly-integration.netlify.app
+- Source code: https://github.com/Simply007/ckeditor5-plotly-widget-showcase
+
+Interactive Plotly.js charts living inside CKEditor 5 content: scatter, bar, line, pie, and histogram widgets with hover, zoom, and responsive resizing - a proof that rich data visualization and rich text editing can share one document.
+
+## What's inside
+
+A CKEditor 5 widget integration for the Plotly.js chart library. Editors insert interactive charts (scatter with trend lines, bar, line, pie, histogram) directly into their content; readers get hover tooltips, zoom and pan, and charts that resize with the page.
+
+## Why it exists
+
+A recurring customer question made concrete: can serious data visualization live inside the editor instead of being pasted in as a static image? This proof of concept says yes, and shows the widget architecture that makes it survive editing, undo, and collaboration.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/ckeditor5-plotly-widget-showcase)
+-   [Live demo](https://ckeditor5-plotly-integration.netlify.app)
+
+---
+
+# CKEditor 5 Smart Callout Plugin
+
+- URL: https://ondrej.chrastina.dev/projects/ckeditor5-smart-callout/
+- Published: 2025-06-24
+- Section: Projects
+- Live: https://ckeditor5-smart-callout.netlify.app
+- Source code: https://github.com/Simply007/ckeditor5-smart-callout
+
+A CKEditor 5 callout-box plugin generated with Claude Code - an early experiment in letting an AI coding agent build a complete editor plugin, deployed live on Netlify.
+
+## What's inside
+
+A callout/admonition plugin for CKEditor 5 - and an early data point in a question I keep returning to: how well can an AI coding agent build a real editor plugin end to end? This one was generated with Claude Code and shipped to Netlify as-is.
+
+## Why it exists
+
+It predates the official CKEditor support for AI coding agents, which made experiments like this dramatically more reliable - the before-picture, if you will.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/ckeditor5-smart-callout)
+-   [Live demo](https://ckeditor5-smart-callout.netlify.app)
+-   [The AI coding agents webinar (the after-picture)](https://ondrej.chrastina.dev/talks/less-time-fewer-tokens-better-effects-ckeditor-ai-coding-agents/)
 
 ---
 
@@ -1080,6 +1396,32 @@ What’s new
 ⭐️ Star / fork the repo & drop feedback on GitHub, or Youtube!
 
 [GitHub repository](https://github.com/Simply007/ondrejs-notes)
+
+---
+
+# Ondrej's Notes: One Note App, Seven Rich Text Editors
+
+- URL: https://ondrej.chrastina.dev/projects/ondrejs-notes/
+- Published: 2025-05-23
+- Section: Projects
+- Live: https://ondrejs-notes.vercel.app
+- Source code: https://github.com/Simply007/ondrejs-notes
+
+A Google Keep-inspired note app (React + TypeScript + Vite) that doubles as an editor comparison lab: switch a note between CKEditor, Tiptap, TinyMCE, Lexical, Froala, Quill, or a plain textarea and feel the differences yourself.
+
+## What's inside
+
+A simple, responsive note-taking app with notes stored in local storage - and one unusual feature: every note can be edited with a different rich text editor. CKEditor, Tiptap, TinyMCE, Lexical, Froala, Quill, and a plain textarea sit behind one switch, which makes it a hands-on comparison lab rather than just another Keep clone.
+
+## Why it exists
+
+It started as the base for my CKEditor weekend video series and grew into the showcase I use whenever someone asks \\"how do these editors actually differ in practice?\\" - the honest answer is a switch away.
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/ondrejs-notes)
+-   [Live app](https://ondrejs-notes.vercel.app)
+-   [The weekend video series built on top of it](https://ondrej.chrastina.dev/projects/ckeditor-weekend-video-series/)
 
 ---
 
@@ -1410,8 +1752,7 @@ The custom elements denoted as **core integration** are focusing on a selected
 - URL: https://ondrej.chrastina.dev/projects/jamstackon-net/
 - Published: 2021-01-27
 - Section: Projects
-- Live: https://jamstackon.net
-- Source code: https://github.com/Kentico/jamstackon.net
+- Live: https://web.archive.org/web/2023/https://jamstackon.net/
 
 Microsite utilizing Statiq and Kentico Kontent via Kontent.Statiq module to evangelize the Jamstack world for .NET developers.
 
@@ -1522,8 +1863,6 @@ It was also selected as one of [the best Jamstack themes by Stackrole](https://t
 - URL: https://ondrej.chrastina.dev/projects/apollo-express-kontent-boilerplate/
 - Published: 2018-12-12
 - Section: Projects
-- Live: https://kontent-boilerplate-apollo.herokuapp.com
-- Source code: https://github.com/Kentico/kontent-boilerplate-express-apollo
 
 This boilerplate showcasing how to combine the Node.js web server Express.js with GraphQL . The server converts the Kentico Kontent Delivery REST API to GraphQL using the Apollo framework and then renders the output using the Pug view engine .
 
@@ -1544,8 +1883,7 @@ To showcase using the Apollo GraphQL client, the boilerplate is loading the last
 - URL: https://ondrej.chrastina.dev/projects/kentico-github-io/
 - Published: 2018-09-10
 - Section: Projects
-- Live: https://kentico.github.io
-- Source code: https://github.com/Kentico/kentico.github.io
+- Live: https://web.archive.org/web/2023/https://kentico.github.io/
 
 Official site for GitHub Community in Kentico.
 
@@ -1925,6 +2263,7 @@ Developers who use TypeScript day-to-day but find themselves copy-pasting generi
 
 ## Resources
 
+-   [Companion repository: the compile-time calculator, step by step](https://github.com/Simply007/ts-type-arithmetic)
 -   [Slide deck](https://docs.google.com/presentation/d/19z9qyot_uQDu-YIxbXRu0FGV9P8DQi6jkMxwfFWCwRs/edit?usp=sharing)
 
 ---
@@ -1978,6 +2317,10 @@ If you've ever shipped an enterprise feature only to hit a wall labelled "data r
 
 Engineering leads, AI architects, and platform teams who need rich-text AI features but can't ship anything that talks to a public model. There's always one constraint that breaks the obvious approach — on-premises is usually it.
 
+## Resources
+
+-   [Companion repo: the on-premises Docker showcase from the session](https://github.com/ckeditor/devrel-ckeditor-ai-onprem-docker-showcase)
+
 ---
 
 # CKEditor in Drupal: From Better Formatting to AI-Powered Authoring
@@ -2002,6 +2345,10 @@ A fast-paced walkthrough of what's new in CKEditor 5 for Drupal developers and s
 ## The venue
 
 DrupalCon Chicago 2026 - presented as a lightning talk during the core conference sessions, with the booth providing hands-on follow-up demonstrations for attendees who wanted to dig deeper.
+
+## Resources
+
+-   [Companion repo: the vibe-coded CKEditor timestamp plugin for Drupal (+ agent skill)](https://github.com/Simply007/drupalcon-chicago-26-ckeditor-ai-playground)
 
 ---
 
@@ -2274,6 +2621,10 @@ Have you ever uploaded a 12 MB hero image into a CMS field that absolutely did n
 ## Who it was for
 
 Developers handling rich media in CKEditor, content engineers who own the upload pipeline, and anyone tired of asking authors to please just compress the JPEG. Voila — a workflow that does it for them.
+
+## Resources
+
+-   [Companion repo: the Image Optimizer demo project](https://github.com/Simply007/ckeditor-image-optimizer-demo)
 
 ---
 
