@@ -73,7 +73,7 @@ const RichText = ({ element }) => (
                 return (
                   <p>
                     <a
-                      href={`/gotchas/${linkedContentItem.elements.url_slug.value}`}
+                      href={`/journal/${linkedContentItem.elements.url_slug.value}`}
                       className="button"
                     >
                       <span className={`icon ${iconCode}`}>{title}</span>

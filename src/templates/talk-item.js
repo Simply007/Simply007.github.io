@@ -3,10 +3,47 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
+import { SITE_URL, AUTHOR_NAME, stripHtml } from '../utils/seo'
 
-const TalkItem = ({ data: { kontentItemTalk } }) => {
+const TalkItem = ({ data: { kontentItemTalk }, location }) => {
+  const elements = kontentItemTalk.elements
+  const description = stripHtml(elements.summary.value)
+  const image =
+    elements.image.value.length > 0 ? elements.image.value[0] : undefined
+  const canonicalUrl = `${SITE_URL}${location.pathname}`
   return (
-    <Layout>
+    <Layout
+      seo={{
+        title: elements.title.value,
+        description,
+        path: location.pathname,
+        ogType: 'article',
+        image,
+        jsonLd: {
+          '@context': 'https://schema.org',
+          '@type': 'CreativeWork',
+          name: elements.title.value,
+          description,
+          datePublished: elements.release_date.value,
+          image: image && image.url,
+          url: canonicalUrl,
+          mainEntityOfPage: canonicalUrl,
+          sameAs: [
+            elements.recording_url.value,
+            elements.slides_url.value,
+          ].filter(Boolean),
+          associatedMedia: elements.recording_url.value
+            ? {
+                '@type': 'VideoObject',
+                name: elements.title.value,
+                contentUrl: elements.recording_url.value,
+              }
+            : undefined,
+          author: { '@type': 'Person', name: AUTHOR_NAME, url: `${SITE_URL}/` },
+          inLanguage: 'en',
+        },
+      }}
+    >
       <BannerLanding
         title={kontentItemTalk.elements.title.value}
         content={kontentItemTalk.elements.summary.value}

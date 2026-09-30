@@ -3,35 +3,62 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
+import { SITE_URL, AUTHOR_NAME, stripHtml } from '../utils/seo'
 
-const JournalItem = ({ data: { kontentItemGotcha } }) => (
-  <Layout>
-    <BannerLanding
-      title={kontentItemGotcha.elements.title.value}
-      content={kontentItemGotcha.elements.summary.value}
-      button={{ title: 'Back to journal', to: '/journal' }}
-      titleCodename="title"
-      contentCodename="summary"
-      itemId={kontentItemGotcha.system.id}
-      heroImage={
-        kontentItemGotcha.elements.image.value.length > 0
-          ? kontentItemGotcha.elements.image.value[0]
-          : undefined
-      }
-    />
-    <div
-      id="main"
-      className="alt"
-      data-kontent-item-id={kontentItemGotcha.system.id}
+const JournalItem = ({ data: { kontentItemGotcha }, location }) => {
+  const elements = kontentItemGotcha.elements
+  const description = stripHtml(elements.summary.value)
+  const image =
+    elements.image.value.length > 0 ? elements.image.value[0] : undefined
+  return (
+    <Layout
+      seo={{
+        title: elements.title.value,
+        description,
+        path: location.pathname,
+        ogType: 'article',
+        image,
+        jsonLd: {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: elements.title.value,
+          description,
+          datePublished: elements.post_date.value,
+          image: image && image.url,
+          url: `${SITE_URL}${location.pathname}`,
+          mainEntityOfPage: `${SITE_URL}${location.pathname}`,
+          author: { '@type': 'Person', name: AUTHOR_NAME, url: `${SITE_URL}/` },
+          inLanguage: 'en',
+        },
+      }}
     >
-      <section>
-        <div className="inner" data-kontent-element-codename="content">
-          <RichText element={kontentItemGotcha.elements.content} />
-        </div>
-      </section>
-    </div>
-  </Layout>
-)
+      <BannerLanding
+        title={kontentItemGotcha.elements.title.value}
+        content={kontentItemGotcha.elements.summary.value}
+        button={{ title: 'Back to journal', to: '/journal' }}
+        titleCodename="title"
+        contentCodename="summary"
+        itemId={kontentItemGotcha.system.id}
+        heroImage={
+          kontentItemGotcha.elements.image.value.length > 0
+            ? kontentItemGotcha.elements.image.value[0]
+            : undefined
+        }
+      />
+      <div
+        id="main"
+        className="alt"
+        data-kontent-item-id={kontentItemGotcha.system.id}
+      >
+        <section>
+          <div className="inner" data-kontent-element-codename="content">
+            <RichText element={kontentItemGotcha.elements.content} />
+          </div>
+        </section>
+      </div>
+    </Layout>
+  )
+}
 
 export const query = graphql`
   query GotchaQuery($language: String = "", $codename: String = "") {
