@@ -1,6 +1,7 @@
 # Ondřej Chrastina
 
-> Ondřej Chrastina's personal site
+> Ondřej Chrastina, Developer Advocate for CKEditor. Talks, demos, and articles on rich text editing, AI coding agents, and developer experience.
+> Based in Brno, Czech Republic. GitHub: Simply007.
 
 ---
 
