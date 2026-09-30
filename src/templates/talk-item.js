@@ -3,7 +3,7 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
-import { SITE_URL, AUTHOR_NAME, stripHtml } from '../utils/seo'
+import { SITE_URL, PERSON_ID, stripHtml } from '../utils/seo'
 
 const TalkItem = ({ data: { kontentItemTalk }, location }) => {
   const elements = kontentItemTalk.elements
@@ -39,7 +39,7 @@ const TalkItem = ({ data: { kontentItemTalk }, location }) => {
                 contentUrl: elements.recording_url.value,
               }
             : undefined,
-          author: { '@type': 'Person', name: AUTHOR_NAME, url: `${SITE_URL}/` },
+          author: { '@id': PERSON_ID },
           inLanguage: 'en',
         },
       }}

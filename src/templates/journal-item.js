@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
-import { SITE_URL, AUTHOR_NAME, stripHtml } from '../utils/seo'
+import { SITE_URL, PERSON_ID, stripHtml } from '../utils/seo'
 
 const JournalItem = ({ data: { kontentItemGotcha }, location }) => {
   const elements = kontentItemGotcha.elements
@@ -27,7 +27,7 @@ const JournalItem = ({ data: { kontentItemGotcha }, location }) => {
           image: image && image.url,
           url: `${SITE_URL}${location.pathname}`,
           mainEntityOfPage: `${SITE_URL}${location.pathname}`,
-          author: { '@type': 'Person', name: AUTHOR_NAME, url: `${SITE_URL}/` },
+          author: { '@id': PERSON_ID },
           inLanguage: 'en',
         },
       }}
