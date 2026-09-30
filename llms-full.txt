@@ -9,6 +9,7 @@
 
 - URL: https://ondrej.chrastina.dev/journal/ckeditor-5-pitfall-don-t-forget-the-paragraph-plugin/
 - Published: 2025-06-22
+- Updated: 2025-06-23
 - Section: Journal
 
 When integrating CKEditor 5, it's tempting to start small—using the CKEditor Builder or diving into the crash course. But there’s a subtle gotcha that trips up even experienced developers: the Essentials plugin doesn’t include Paragraph support. Without it, your editor silently fails—no errors, just an empty editing area. This post shows the problem, the fix, and why remembering to add the Paragraph plugin is... well, essential. 🚀
@@ -139,6 +140,7 @@ _Keep this in mind as you build your rich text editing experiences! 💡_
 
 - URL: https://ondrej.chrastina.dev/journal/from-prototype-to-purpose-the-journey-of-our-custom-elements-at-kontent-ai/
 - Published: 2025-02-17
+- Updated: 2025-02-18
 - Section: Journal
 
 Blogpost detailing our journey from a simple showcase to a comprehensive custom element gallery at Kontent.ai, sharing insights on how my team and I evolved the project to empower developers and enhance our headless CMS capabilities.
@@ -204,6 +206,7 @@ This evolution has provided a more coherent and maintainable environment for cus
 
 - URL: https://ondrej.chrastina.dev/journal/how-i-turned-kubernetes-into-a-fun-kid-friendly-youtube-short/
 - Published: 2025-02-16
+- Updated: 2025-02-17
 - Section: Journal
 
 Join me, Ondřej Chrastina, on a creative journey to discover how Kubernetes is transformed into a fun, kid-friendly video by breaking down complex tech into simple, engaging concepts using tools like ChatGPT, ElevenLabs, and Canva.
@@ -240,6 +243,7 @@ This project is a testament to how modern creative tools can transform complex t
 
 - URL: https://ondrej.chrastina.dev/journal/hacky-way-to-check-if-content-item-is-a-component/
 - Published: 2021-06-07
+- Updated: 2025-02-12
 - Section: Journal
 
 This little gotcha might help you to decide whether you item is a content item, or a content component. What is that good for? Content components are always returned as a part of the parent item and can't be fetched solely. This condition can help you i.e. with caching.
@@ -285,6 +289,7 @@ private static isComponent(property: any): boolean {
 
 - URL: https://ondrej.chrastina.dev/journal/get-kontent-project-id-from-the-management-api-key/
 - Published: 2021-03-21
+- Updated: 2025-02-12
 - Section: Journal
 
 It is possible to parse out Kontent Project ID out of the Management API Key. That means no more necessity to ask for two keys for your Kontent tools.
@@ -347,6 +352,7 @@ _...and of course, I invalidated the showcased API key 🤞_
 
 - URL: https://ondrej.chrastina.dev/journal/jamstack-on-net-from-zero-to-hero-with-statiq-and-kontent/
 - Published: 2020-11-30
+- Updated: 2025-02-12
 - Section: Journal
 
 How to start building Jamstack Apps in .NET utilizing Statiq and headless CMS.
@@ -622,6 +628,7 @@ If you want to see a more complex example, check out the [Kentico Kontent Statiq
 
 - URL: https://ondrej.chrastina.dev/journal/test-out-javascript-async-await-easily/
 - Published: 2020-08-29
+- Updated: 2025-02-12
 - Section: Journal
 
 Have you been struggling with some NPM library providing async API? It is surprisingly easy to set up a playground capable of Javascript async, await. Let's get to it!
@@ -776,6 +783,7 @@ Test out Javascript async await easily
 
 - URL: https://ondrej.chrastina.dev/journal/specify-folder-when-uploading-asset-via-kontent-js-management-sdk/
 - Published: 2020-07-31
+- Updated: 2025-02-12
 - Section: Journal
 
 It is great that Kentico Kontent Management REST API allows uploading the assets, but how to upload an asset under a specific folder and how to achieve it via Javascript Management SDK? Originally this question was asked on StackOverflow.
@@ -841,6 +849,7 @@ Original [answer on StackOverflow](https://stackoverflow.com/questions/63190557/
 
 - URL: https://ondrej.chrastina.dev/journal/kill-the-process-occupying-your-port/
 - Published: 2020-07-27
+- Updated: 2025-02-12
 - Section: Journal
 
 Have you encounter with exception like " Address already in use: bind "? If you have been doing web development I have no doubt you have! Now you need to find the bas**rd and kill the process. But how to do that quickly on Windows?
@@ -872,6 +881,7 @@ Then use the PID (last column) and kill the process with fire using `taskkill`:
 
 - URL: https://ondrej.chrastina.dev/journal/js-map-in-java/
 - Published: 2020-07-24
+- Updated: 2025-02-12
 - Section: Journal
 
 How to transform all items in a List or Array to another array? If you come from JavaScript world mean map method, in .Net, you would use LINQ and Select method. But how is that in Java 8?
@@ -905,6 +915,7 @@ List<CTA> transfomedCtas = section
 
 - URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-ai-coding-agents-demo/
 - Published: 2026-09-17
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/ckeditor/devrel-ckeditor-ai-coding-agents-demo
 
@@ -930,6 +941,7 @@ Built for the webinar on the official CKEditor support for AI coding agents - th
 
 - URL: https://ondrej.chrastina.dev/projects/mermaid-showcase/
 - Published: 2026-08-12
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/Simply007/Mermaid-showcase
 
@@ -949,6 +961,7 @@ A README-first repository where the diagrams are the content: sequence diagrams,
 
 - URL: https://ondrej.chrastina.dev/projects/t3dd-2026-content-editing-unlocked/
 - Published: 2026-08-08
+- Updated: 2026-08-08
 - Section: Projects
 - Source code: https://github.com/Simply007/t3dd-2026-content-editing-unlocked
 
@@ -973,6 +986,7 @@ Talks fade, repositories stay. Every configuration decision and production gotch
 
 - URL: https://ondrej.chrastina.dev/projects/websummercamp-2026-workshop-playgrounds/
 - Published: 2026-07-13
+- Updated: 2026-07-17
 - Section: Projects
 - Source code: https://github.com/Simply007/websummercamp-2026-workshops
 
@@ -997,6 +1011,7 @@ Conference learning has a half-life of about two weeks unless you turn it into s
 
 - URL: https://ondrej.chrastina.dev/projects/proactive-digital-twin-workshop/
 - Published: 2026-07-02
+- Updated: 2026-07-17
 - Section: Projects
 - Source code: https://github.com/Simply007/proactive-digital-twin-workshop
 
@@ -1021,6 +1036,7 @@ Workshops die when the projector turns off unless the material stands on its own
 
 - URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-ai-onprem-docker-showcase/
 - Published: 2026-04-09
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/ckeditor/devrel-ckeditor-ai-onprem-docker-showcase
 
@@ -1045,6 +1061,7 @@ The demo environment behind the \\"CKEditor AI on Your Premises\\" webinar and t
 
 - URL: https://ondrej.chrastina.dev/projects/drupalcon-chicago-26-ckeditor-ai-playground/
 - Published: 2026-04-01
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/Simply007/drupalcon-chicago-26-ckeditor-ai-playground
 
@@ -1070,6 +1087,7 @@ Built live at DrupalCon Chicago 2026 as an experiment: can you vibe-code your fi
 
 - URL: https://ondrej.chrastina.dev/projects/devrel-collaboration-features-decomposed/
 - Published: 2026-01-28
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/ckeditor/devrel-collaboration-features-decomposed
 
@@ -1094,6 +1112,7 @@ Collaboration features look monolithic from the outside; this repo shows they co
 
 - URL: https://ondrej.chrastina.dev/projects/ts-type-arithmetic/
 - Published: 2026-01-12
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/Simply007/ts-type-arithmetic
 
@@ -1118,6 +1137,7 @@ Talks fade, repositories stay. This is the hands-on half of my \\"Extreme TypeSc
 
 - URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-ai-showcase-react/
 - Published: 2025-11-29
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/ckeditor/devrel-ckeditor-ai-showcase-react
 
@@ -1138,6 +1158,7 @@ A React application demonstrating CKEditor AI in a real-world content management
 
 - URL: https://ondrej.chrastina.dev/projects/ckeditor-theme-playground/
 - Published: 2025-10-20
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/Simply007/ckeditor-theme-playground
 
@@ -1157,6 +1178,7 @@ A minimal CKEditor 5 project wired up for theme experiments - the place where I 
 
 - URL: https://ondrej.chrastina.dev/projects/ckeditor-image-optimizer-demo/
 - Published: 2025-10-09
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/Simply007/ckeditor-image-optimizer-demo
 
@@ -1178,6 +1200,7 @@ A runnable CKEditor 5 project with the Uploadcare integration configured: image 
 
 - URL: https://ondrej.chrastina.dev/projects/intro-video-from-notum-s-strapi-next-js-starter/
 - Published: 2025-10-06
+- Updated: 2025-12-23
 - Section: Projects
 - Live: https://youtu.be/VZlJZuurUH8?si=7v0B0a9_-Ivd5GuQ
 - Source code: https://github.com/notum-cz/strapi-next-monorepo-starter/
@@ -1215,6 +1238,7 @@ Local Strapi, seeded DB, and live Next.js front-end in minutes, with a slimmer R
 
 - URL: https://ondrej.chrastina.dev/projects/ckeditor-ai-playground/
 - Published: 2025-10-06
+- Updated: 2026-09-30
 - Section: Projects
 - Live: https://ckeditor-ai-playground.vercel.app
 - Source code: https://github.com/Simply007/ckeditor-ai-playground
@@ -1236,6 +1260,7 @@ A ready-to-run CKEditor setup with the AI assistant configured, deployed on Verc
 
 - URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-raffle/
 - Published: 2025-09-18
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/ckeditor/devrel-ckeditor-raffle
 
@@ -1259,6 +1284,7 @@ Battle-tested at CKEditor conference booths (the T3DD raffle with ~100 participa
 
 - URL: https://ondrej.chrastina.dev/projects/devrel-mlh-workshops-aug-2025/
 - Published: 2025-07-30
+- Updated: 2026-09-30
 - Section: Projects
 - Source code: https://github.com/ckeditor/devrel-mlh-workshops-aug-2025
 
@@ -1279,6 +1305,7 @@ A CKEditor 5 sample project supporting the four CKEditor challenges at MLH Globa
 
 - URL: https://ondrej.chrastina.dev/projects/ckeditor5-plotly-widget-showcase/
 - Published: 2025-07-03
+- Updated: 2026-09-30
 - Section: Projects
 - Live: https://ckeditor5-plotly-integration.netlify.app
 - Source code: https://github.com/Simply007/ckeditor5-plotly-widget-showcase
@@ -1304,6 +1331,7 @@ A recurring customer question made concrete: can serious data visualization live
 
 - URL: https://ondrej.chrastina.dev/projects/ckeditor5-smart-callout/
 - Published: 2025-06-24
+- Updated: 2026-09-30
 - Section: Projects
 - Live: https://ckeditor5-smart-callout.netlify.app
 - Source code: https://github.com/Simply007/ckeditor5-smart-callout
@@ -1330,6 +1358,7 @@ It predates the official CKEditor support for AI coding agents, which made exper
 
 - URL: https://ondrej.chrastina.dev/projects/ckeditor-weekend-video-series/
 - Published: 2025-05-25
+- Updated: 2026-01-24
 - Section: Projects
 - Live: https://www.youtube.com/playlist?list=PLKzl1AGxt2J0j2H3xUuFLGO-s_-f0K9eD
 - Source code: https://github.com/Simply007/ondrejs-notes
@@ -1404,6 +1433,7 @@ What’s new
 
 - URL: https://ondrej.chrastina.dev/projects/ondrejs-notes/
 - Published: 2025-05-23
+- Updated: 2026-09-30
 - Section: Projects
 - Live: https://ondrejs-notes.vercel.app
 - Source code: https://github.com/Simply007/ondrejs-notes
@@ -1430,6 +1460,7 @@ It started as the base for my CKEditor weekend video series and grew into the sh
 
 - URL: https://ondrej.chrastina.dev/projects/upcloud-doom/
 - Published: 2025-03-04
+- Updated: 2025-06-03
 - Section: Projects
 - Source code: https://github.com/Simply007/upcloud-doom
 
@@ -1488,6 +1519,7 @@ Demonstrates UKS networking, ingress, persistent storage (for WADs), and zero-to
 
 - URL: https://ondrej.chrastina.dev/projects/next-js-corporate-starter/
 - Published: 2023-05-11
+- Updated: 2025-02-18
 - Section: Projects
 - Live: https://kontent-starter-corporate-next-js.netlify.app
 - Source code: https://github.com/Simply007/kontent-starter-corporate-next-js
@@ -1516,6 +1548,7 @@ Check out the [README](https://github.com/Simply007/kontent-starter-corporate-ne
 
 - URL: https://ondrej.chrastina.dev/projects/next-js-boilerplate-for-kontent-ai/
 - Published: 2022-10-31
+- Updated: 2025-02-17
 - Section: Projects
 - Live: https://kontent-ai-boilerplate-next-js.netlify.app
 - Source code: https://github.com/Kentico/kontent-boilerplate-next-js
@@ -1536,6 +1569,7 @@ For more details, refer to the [repository](https://github.com/kontent-ai/boiler
 
 - URL: https://ondrej.chrastina.dev/projects/java-for-kontent-by-kentico/
 - Published: 2022-05-06
+- Updated: 2025-02-12
 - Section: Projects
 - Live: https://javadoc.io/doc/com.github.kentico/kontent-delivery/latest/index.html
 - Source code: https://github.com/Kentico/kontent-java-packages
@@ -1732,6 +1766,7 @@ The repository automatically releases versions from GitHub to Maven Central - by
 
 - URL: https://ondrej.chrastina.dev/projects/custom-element-gallery/
 - Published: 2021-02-28
+- Updated: 2025-02-18
 - Section: Projects
 - Live: https://ondrej.chrastina.dev/kontent-custom-element-samples/gallery
 - Source code: https://github.com/Simply007/kontent-custom-element-samples
@@ -1752,6 +1787,7 @@ The custom elements denoted as **core integration** are focusing on a selected
 
 - URL: https://ondrej.chrastina.dev/projects/jamstackon-net/
 - Published: 2021-01-27
+- Updated: 2026-09-30
 - Section: Projects
 - Live: https://web.archive.org/web/2023/https://jamstackon.net/
 
@@ -1775,6 +1811,7 @@ The core of the implementation is the [Root pipeline](https://github.com/Kentico
 
 - URL: https://ondrej.chrastina.dev/projects/ondrej-chrastina-dev/
 - Published: 2020-08-22
+- Updated: 2025-02-13
 - Section: Projects
 - Live: https://ondrej.chrastina.dev
 - Source code: https://github.com/Simply007/Simply007.github.io
@@ -1797,6 +1834,7 @@ During the time I have done some extensions, but mostly content-wise, as you mig
 
 - URL: https://ondrej.chrastina.dev/projects/official-next-js-example-for-next-js-kontent-ai/
 - Published: 2020-08-09
+- Updated: 2025-02-17
 - Section: Projects
 - Live: https://next-blog-kontent-ai.vercel.app
 - Source code: https://github.com/vercel/next.js/tree/canary/examples/cms-kontent-ai
@@ -1821,6 +1859,7 @@ By following this example, developers can efficiently build and deploy a content
 
 - URL: https://ondrej.chrastina.dev/projects/kontent-ai-content-type-selector/
 - Published: 2020-07-16
+- Updated: 2025-02-17
 - Section: Projects
 - Live: https://kontent-custom-element-type-selector.netlify.app
 - Source code: https://github.com/Simply007/kontent-custom-element-type-selector
@@ -1839,6 +1878,7 @@ For scenarios such as modeling a listing page, this tool allows users to specify
 
 - URL: https://ondrej.chrastina.dev/projects/gatsby-js-photon-starter/
 - Published: 2019-05-20
+- Updated: 2025-02-12
 - Section: Projects
 - Live: https://kontent-template-gatsby-landing-page-photon.netlify.app
 - Source code: https://github.com/Simply007/kontent-template-gatsby-landing-page-photon
@@ -1863,6 +1903,7 @@ It was also selected as one of [the best Jamstack themes by Stackrole](https://t
 
 - URL: https://ondrej.chrastina.dev/projects/apollo-express-kontent-boilerplate/
 - Published: 2018-12-12
+- Updated: 2026-09-30
 - Section: Projects
 
 This boilerplate showcasing how to combine the Node.js web server Express.js with GraphQL. The server converts the Kentico Kontent Delivery REST API to GraphQL using the Apollo framework and then renders the output using the Pug view engine.
@@ -1883,6 +1924,7 @@ To showcase using the Apollo GraphQL client, the boilerplate is loading the last
 
 - URL: https://ondrej.chrastina.dev/projects/kentico-github-io/
 - Published: 2018-09-10
+- Updated: 2026-09-30
 - Section: Projects
 - Live: https://web.archive.org/web/2023/https://kentico.github.io/
 
@@ -1906,6 +1948,7 @@ This site is written using [Gatsby](https://gatsbyjs.com) as a frontend framewor
 
 - URL: https://ondrej.chrastina.dev/talks/ckeditor-in-drupal-news-in-content-editing-drupalcon-rotterdam-2026/
 - Published: 2026-09-29
+- Updated: 2026-09-30
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/ckeditor-in-drupal-news-in-content-editing-drupalcon-rotterdam-2026.pdf
 
@@ -1946,6 +1989,7 @@ In Chicago I showed CKEditor AI in Drupal days after the 1.8.0 release - the ink
 
 - URL: https://ondrej.chrastina.dev/talks/less-time-fewer-tokens-better-effects-ckeditor-ai-coding-agents/
 - Published: 2026-09-17
+- Updated: 2026-09-30
 - Section: Talks
 - Recording: https://app.zuddl.com/p/a/event/1940c878-402a-4801-9239-b0aad2ff95ed
 
@@ -1976,6 +2020,7 @@ Engineering leads, frontend developers, and platform teams integrating CKEditor 
 
 - URL: https://ondrej.chrastina.dev/talks/ondrej-askin-conference-interview-series/
 - Published: 2026-09-17
+- Updated: 2026-09-30
 - Section: Talks
 - Recording: https://youtube.com/playlist?list=PLZ9F0R17Zg3NafacHVuYqghN3ikNMgoMs
 
@@ -2004,6 +2049,7 @@ New episodes land in the playlist as they are published - this entry grows with 
 
 - URL: https://ondrej.chrastina.dev/talks/editor-types-explained/
 - Published: 2026-09-11
+- Updated: 2026-09-30
 - Section: Talks
 - Recording: https://youtu.be/w2_u4MtA0Lc
 
@@ -2034,6 +2080,7 @@ The closing section generates a complete setup with [CKEditor Builder](https://b
 
 - URL: https://ondrej.chrastina.dev/talks/content-editing-unlocked-t3dd-2026/
 - Published: 2026-08-08
+- Updated: 2026-08-08
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/content-editing-unlocked-t3dd-2026.pdf
 
@@ -2084,6 +2131,7 @@ Or scan them, straight from the closing slide:
 
 - URL: https://ondrej.chrastina.dev/talks/beyond-the-chatbot-engineering-your-proactive-digital-twin/
 - Published: 2026-07-02
+- Updated: 2026-07-17
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/beyond-the-chatbot-engineering-your-proactive-digital-twin.pdf
 
@@ -2117,6 +2165,7 @@ Web Summer Camp 2026, July 2-4 in Opatija, Croatia - running since 2012 with the
 
 - URL: https://ondrej.chrastina.dev/talks/beyond-disjointed-text-boxes-ckeditor-ai-multiroot/
 - Published: 2026-06-25
+- Updated: 2026-07-17
 - Section: Talks
 - Recording: https://app.zuddl.com/p/a/event/ada452e7-dcc8-4faf-8088-7bb02168dbbd
 
@@ -2142,6 +2191,7 @@ CTOs, software architects, product managers, and engineering teams building stru
 
 - URL: https://ondrej.chrastina.dev/talks/the-real-story-behind-ai-in-content-editing-cms-summit-2026/
 - Published: 2026-05-12
+- Updated: 2026-07-17
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/The%20real%20story%20behind%20AI%20in%20content%20editing.pdf
 
@@ -2175,6 +2225,7 @@ Museum für Kommunikation, Frankfurt - ~100 attendees total, high signal, niche 
 
 - URL: https://ondrej.chrastina.dev/talks/sleep-better-on-release-day/
 - Published: 2026-05-07
+- Updated: 2026-09-30
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/Sleep%20Better%20on%20Release%20Day_%20A%20Modern%20Testing%20Strategy%20for%20JavaScript%20SDKs%20and%20Components.pdf
 - Recording: https://www.youtube.com/watch?v=8YTQ5CciGZk
@@ -2209,6 +2260,7 @@ DEVWorld Amsterdam 2026 - one of the bigger stages I've been on. 5,000 attendees
 
 - URL: https://ondrej.chrastina.dev/talks/drupal-in-the-age-of-ai-from-experimentation-to-impact/
 - Published: 2026-04-28
+- Updated: 2026-07-17
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/Drupal%20in%20the%20Age%20of%20AI_%20From%20Experimentation%20to%20Impact.pdf
 
@@ -2242,6 +2294,7 @@ We closed the conference with a dinner alongside Dries Buytaert (Drupal founder)
 
 - URL: https://ondrej.chrastina.dev/talks/extreme-typescript-recursion-inference-type-level-arithmetic/
 - Published: 2026-04-23
+- Updated: 2026-09-30
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/Notum%20Meetup_%20Extreme%20TypeScript_%20Mastering%20Recursion%20and%20Inference%20via%20Type-Level%20Arithmetic.pdf
 
@@ -2273,6 +2326,7 @@ Developers who use TypeScript day-to-day but find themselves copy-pasting generi
 
 - URL: https://ondrej.chrastina.dev/talks/tuxcare-chris-and-ondrej-discuss-ckeditor-ai/
 - Published: 2026-04-10
+- Updated: 2026-05-29
 - Section: Talks
 - Recording: https://www.youtube.com/watch?v=n6MuyIPONfI
 
@@ -2299,6 +2353,7 @@ The conversation started with AI in content creation and quickly turned into a f
 
 - URL: https://ondrej.chrastina.dev/talks/ckeditor-ai-on-your-premises-hook-your-llm-and-register-mcp-tools/
 - Published: 2026-04-09
+- Updated: 2026-09-30
 - Section: Talks
 - Recording: https://app.zuddl.com/p/a/event/e097fef4-d67e-4606-a77d-6a16b7ab6183?utm_campaign=ckeditor_ai_onprem_webinar&utm_source=webinars_page&utm_medium=referral
 
@@ -2328,6 +2383,7 @@ Engineering leads, AI architects, and platform teams who need rich-text AI featu
 
 - URL: https://ondrej.chrastina.dev/talks/ckeditor-in-drupal-better-formatting-to-ai-authoring-drupalcon-2026/
 - Published: 2026-03-25
+- Updated: 2026-09-30
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/CKEditor%20in%20Drupal_%20From%20Better%20Formatting%20to%20AI-Powered%20Authoring%20.pdf
 
@@ -2357,6 +2413,7 @@ DrupalCon Chicago 2026 - presented as a lightning talk during the core conferenc
 
 - URL: https://ondrej.chrastina.dev/talks/enterprise-ai-content-creation-gaps-drupalcon-chicago-2026/
 - Published: 2026-03-25
+- Updated: 2026-05-29
 - Section: Talks
 - Recording: https://events.drupal.org/chicago2026
 
@@ -2387,6 +2444,7 @@ DrupalCon Chicago 2026 - a 4-day event celebrating 25 years of Drupal, with an A
 
 - URL: https://ondrej.chrastina.dev/talks/basf-podcast-why-most-github-repos-fail-and-how-to-fix-them/
 - Published: 2026-03-17
+- Updated: 2026-05-29
 - Section: Talks
 - Recording: https://bas.fm/e/33
 
@@ -2413,6 +2471,7 @@ Bas.fm covers OpenSource, development, and the human side of building software i
 
 - URL: https://ondrej.chrastina.dev/talks/hackmamba-developer-experience-the-new-way/
 - Published: 2026-03-09
+- Updated: 2026-05-29
 - Section: Talks
 - Recording: https://www.youtube.com/watch?v=yqSVm2CCP_A
 
@@ -2436,6 +2495,7 @@ Hackmamba's "Everything Outside Code" series covers the softer side of software:
 
 - URL: https://ondrej.chrastina.dev/talks/ckeditor-ai-overcoming-enterprise-ai-content-creation-challenges/
 - Published: 2026-02-12
+- Updated: 2026-04-27
 - Section: Talks
 - Recording: https://youtu.be/X4huZuM8AiY
 
@@ -2484,6 +2544,7 @@ CIOs, CTOs, engineering managers, technical leads, product managers, AI architec
 
 - URL: https://ondrej.chrastina.dev/talks/tech-talks-daily-ckeditor-reality-of-supporting-developers/
 - Published: 2026-01-29
+- Updated: 2026-05-29
 - Section: Talks
 - Recording: https://techblogwriter.co.uk/ckeditor/
 
@@ -2507,6 +2568,7 @@ Tech Talks Daily with Neil C. Hughes reaches 51,000 monthly listeners across dev
 
 - URL: https://ondrej.chrastina.dev/talks/extreme-typescript-mastering-recursion-and-inference-via-type-level-arithmetic/
 - Published: 2026-01-13
+- Updated: 2026-01-18
 - Section: Talks
 - Slides: https://github.com/Simply007/ts-type-arithmetic/blob/cdb7cfaec98c973494b24915148931a267b74f13/assets/Extreme%20TypeScript_%20Mastering%20Recursion%20and%20Inference%20via%20Type-Level%20Arithmetic.pdf
 
@@ -2522,6 +2584,7 @@ While practically "useless" for business logic, I realized it was the ultimate e
 
 - URL: https://ondrej.chrastina.dev/talks/ai-master-podcast-building-the-future-of-content-editing-with-al/
 - Published: 2025-12-14
+- Updated: 2026-01-18
 - Section: Talks
 - Recording: https://creators.spotify.com/pod/profile/ai-master/episodes/AIMP-07-Ondej-Chrastina-Building-the-Future-of-Content-Editing-with-AI-e3ccqr1
 
@@ -2557,6 +2620,7 @@ To wrap up, we switch to a more personal perspective — continuous learning, st
 
 - URL: https://ondrej.chrastina.dev/talks/ckeditor-ai-meet-your-app-s-new-ai-co-writer/
 - Published: 2025-12-01
+- Updated: 2026-01-24
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/CKEditor%20AI%20Meet%20You%20apps%20new%20AI%20cowriter.pdf
 - Recording: https://www.youtube.com/watch?v=AKYRzwHE-wQ
@@ -2579,6 +2643,7 @@ The agenda of the webinar includes the following:
 
 - URL: https://ondrej.chrastina.dev/talks/empowering-the-typo3-community-introducing-ckeditor-pack-for-enhanced-content-creation/
 - Published: 2025-11-25
+- Updated: 2025-12-23
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/CKEditor%20Pack%20for%20Enhanced%20Content%20Creation.pdf
 
@@ -2603,6 +2668,7 @@ Join me to explore a new community initiative by **T3Planet** and **CKEditor** a
 
 - URL: https://ondrej.chrastina.dev/talks/streamline-your-image-workflow/
 - Published: 2025-10-09
+- Updated: 2026-09-30
 - Section: Talks
 - Recording: https://youtu.be/9VW_gwYS-T4
 
@@ -2633,6 +2699,7 @@ Developers handling rich media in CKEditor, content engineers who own the upload
 
 - URL: https://ondrej.chrastina.dev/talks/add-template-and-mention-plugins-to-existing-project/
 - Published: 2025-09-23
+- Updated: 2026-04-27
 - Section: Talks
 - Recording: https://youtu.be/ZiW2Mu04gR0
 
@@ -2658,6 +2725,7 @@ Developers with a working CKEditor 5 integration who need to extend it, particul
 
 - URL: https://ondrej.chrastina.dev/talks/from-vanilla-js-starter-to-typescript-github-repo/
 - Published: 2025-09-23
+- Updated: 2026-04-27
 - Section: Talks
 - Recording: https://youtu.be/5lGozI_-Ds8
 
@@ -2684,6 +2752,7 @@ Developers comfortable with JS but new to TypeScript, especially those starting 
 
 - URL: https://ondrej.chrastina.dev/talks/spark-team-productivity-with-a-frictionless-unified-ai-writing-stack/
 - Published: 2025-09-15
+- Updated: 2025-12-23
 - Section: Talks
 - Slides: https://ondrej.chrastina.dev/slides/Spark%20Team%20Productivity%20with%20a%20Frictionless,%20Unified%20AI%20Writing%20Stack.pdf
 - Recording: https://www.youtube.com/watch?v=N5DDRzJtBTY&list=PLKzl1AGxt2J3CtQzdUdNRBHS4lw-LIalL&index=1
@@ -2732,6 +2801,7 @@ Join us for this talk to learn more about what you can achieve with the unified 
 
 - URL: https://ondrej.chrastina.dev/talks/building-a-blazing-fast-application-with-gatsby-js/
 - Published: 2019-09-15
+- Updated: 2026-01-18
 - Section: Talks
 
 Overview how Gtabsy source plugin is building the websites, it's speed benefits. And how JamStack in combination with headless CMS can help you to build blazing fast, secure and highly available site. Esp in combination withe Kentico Cloud (now Kontent.ai) headless CMS. Presented on Kentico Connection (Brno) 2019.
