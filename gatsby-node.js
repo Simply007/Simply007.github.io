@@ -353,6 +353,9 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
           sort: { elements: { post_date: { value: DESC } } }
         ) {
           nodes {
+            system {
+              last_modified
+            }
             elements {
               title {
                 value
@@ -385,6 +388,9 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
           sort: { elements: { release_date: { value: DESC } } }
         ) {
           nodes {
+            system {
+              last_modified
+            }
             elements {
               title {
                 value
@@ -423,6 +429,9 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
           sort: { elements: { release_date: { value: DESC } } }
         ) {
           nodes {
+            system {
+              last_modified
+            }
             elements {
               title {
                 value

@@ -59,6 +59,82 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         excludes: ['/style-guide', '/style-guide/*'],
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+            allKontentItemGotcha(
+              filter: { elements: { url_slug: { value: { ne: "" } } } }
+            ) {
+              nodes {
+                system {
+                  last_modified
+                }
+                elements {
+                  url_slug {
+                    value
+                  }
+                }
+              }
+            }
+            allKontentItemProject(
+              filter: { elements: { url_slug: { value: { ne: "" } } } }
+            ) {
+              nodes {
+                system {
+                  last_modified
+                }
+                elements {
+                  url_slug {
+                    value
+                  }
+                }
+              }
+            }
+            allKontentItemTalk(
+              filter: { elements: { url_slug: { value: { ne: "" } } } }
+            ) {
+              nodes {
+                system {
+                  last_modified
+                }
+                elements {
+                  url_slug {
+                    value
+                  }
+                }
+              }
+            }
+          }
+        `,
+        resolvePages: ({
+          allSitePage,
+          allKontentItemGotcha,
+          allKontentItemProject,
+          allKontentItemTalk,
+        }) => {
+          const lastmodByPath = {}
+          const add = (prefix) => (node) => {
+            lastmodByPath[`${prefix}${node.elements.url_slug.value}/`] =
+              node.system.last_modified
+          }
+          allKontentItemGotcha.nodes.forEach(add('/journal/'))
+          allKontentItemProject.nodes.forEach(add('/projects/'))
+          allKontentItemTalk.nodes.forEach(add('/talks/'))
+          return allSitePage.nodes.map((page) => ({
+            ...page,
+            lastmod: lastmodByPath[page.path],
+          }))
+        },
+        serialize: ({ path, lastmod }) => ({ url: path, lastmod }),
       },
     },
     {

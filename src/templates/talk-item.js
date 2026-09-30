@@ -25,6 +25,7 @@ const TalkItem = ({ data: { kontentItemTalk }, location }) => {
           name: elements.title.value,
           description,
           datePublished: elements.release_date.value,
+          dateModified: kontentItemTalk.system.last_modified,
           image: image && image.url,
           url: canonicalUrl,
           mainEntityOfPage: canonicalUrl,
@@ -120,6 +121,7 @@ export const query = graphql`
     ) {
       system {
         id
+        last_modified
       }
       elements {
         title {
