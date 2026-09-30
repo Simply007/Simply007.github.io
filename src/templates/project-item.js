@@ -26,6 +26,7 @@ const ProjectItem = ({ data: { kontentItemProject }, location }) => {
           name: elements.title.value,
           description,
           datePublished: elements.release_date.value,
+          dateModified: kontentItemProject.system.last_modified,
           image: image && image.url,
           codeRepository: elements.source_code_url.value || undefined,
           url: elements.live_url.value || canonicalUrl,
@@ -111,6 +112,7 @@ export const query = graphql`
     ) {
       system {
         id
+        last_modified
       }
       elements {
         title {

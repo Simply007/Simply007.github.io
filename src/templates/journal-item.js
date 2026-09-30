@@ -24,6 +24,7 @@ const JournalItem = ({ data: { kontentItemGotcha }, location }) => {
           headline: elements.title.value,
           description,
           datePublished: elements.post_date.value,
+          dateModified: kontentItemGotcha.system.last_modified,
           image: image && image.url,
           url: `${SITE_URL}${location.pathname}`,
           mainEntityOfPage: `${SITE_URL}${location.pathname}`,
@@ -68,6 +69,7 @@ export const query = graphql`
     ) {
       system {
         id
+        last_modified
       }
       elements {
         title {

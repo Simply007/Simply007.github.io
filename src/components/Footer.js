@@ -19,6 +19,13 @@ const Footer = (props) => {
     }
   )
 
+  // Extend the CMS copyright year into a range ending at the build year
+  const currentYear = new Date().getFullYear()
+  const footerHtml = props.data.elements.footer_text.value.replace(
+    /\b(20\d{2})\b/,
+    (year) => (Number(year) < currentYear ? `${year}–${currentYear}` : year)
+  )
+
   return (
     <footer id="footer" data-kontent-item-id={props.footerItemId}>
       <div className="inner">
@@ -31,7 +38,7 @@ const Footer = (props) => {
         <ul
           className="copyright"
           dangerouslySetInnerHTML={{
-            __html: props.data.elements.footer_text.value,
+            __html: footerHtml,
           }}
           data-kontent-element-codename="footer_text"
         ></ul>
