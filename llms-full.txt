@@ -1950,13 +1950,14 @@ This site is written using [Gatsby](https://gatsbyjs.com) as a frontend framewor
 - Published: 2026-10-21
 - Updated: 2026-11-03
 - Section: Talks
-- Recording: https://hackernoon.com/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing
 
 My interview in HackerNoon's "Meet the Developer Advocate" series: 13 questions on what DevRel means to me, earning developer trust with real projects, docs readable for AI agents, and why architecture transparency is the best developer marketing for enterprise products.
 
 ## About the interview
 
 HackerNoon invited me to its new "Meet the Developer Advocate" series. The format is an interactive interview: a template with 13 questions that you answer by typing or straight into your device mic, and HackerNoon editors then turn the answers into an article. I filled it in after DrupalCon, and it was published on October 21, 2026.
+
+[Read the interview on HackerNoon](https://hackernoon.com/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing)
 
 ## What it covers
 
@@ -1970,7 +1971,7 @@ HackerNoon invited me to its new "Meet the Developer Advocate" series. The forma
 
 ## Ways to read it
 
--   [Full article on HackerNoon](https://hackernoon.com/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing), with a TL;DR at the top
+-   The full article, with a TL;DR at the top
 -   An audio version you can listen to right in the article player
 -   [Lite version](https://hackernoon.com/lite/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing) for a plain, fast read
 -   [Terminal version](https://terminal.hackernoon.com/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing) in HackerNoon's retro terminal reader
