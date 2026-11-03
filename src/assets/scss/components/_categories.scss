@@ -79,3 +79,9 @@
   gap: 0.5em;
   margin-bottom: 1em;
 }
+
+// Message shown when the selected categories match no entries
+.categories-empty {
+  padding: 2em 0 4em 0;
+  text-align: center;
+}

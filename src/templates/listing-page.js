@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import ListingItem from '../components/ListingItem'
 import { pageDescription } from '../utils/seo'
+import { parseCategories, buildSearch } from '../utils/category-filter'
 
 /**
  * Check if there is an intersect in the following Set and array
@@ -31,6 +32,25 @@ const ListingPage = ({
 }) => {
   const [selectedCategories, setSelectedCategories] = useState(new Set())
   const [isCategoriesExpanded, setIsCategoriesExpanded] = useState(false)
+
+  // Read the selection from the URL after hydration (the static HTML has none)
+  useEffect(() => {
+    const fromUrl = parseCategories(location.search)
+    setSelectedCategories(fromUrl)
+    if (fromUrl.size > 0) setIsCategoriesExpanded(true)
+  }, [location.search])
+
+  // Update the selection and mirror it into the URL, without a navigation or scroll jump
+  const updateSelection = (nextCategories) => {
+    setSelectedCategories(nextCategories)
+    if (typeof window === 'undefined') return
+    const search = buildSearch(window.location.search, nextCategories)
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${window.location.pathname}${search}${window.location.hash}`
+    )
+  }
 
   const gotchas = listingData.nodes.filter(
     (node) =>
@@ -75,14 +95,6 @@ const ListingPage = ({
   )
 
   const listingOverview = allItems
-    .filter((item) =>
-      selectedCategories.size === 0
-        ? true
-        : categorySuits(
-            selectedCategories,
-            item.elements.listing_category.value.map((c) => c.codename)
-          )
-    )
     .sort((a, b) => {
       const left = getPostItemValue(a)
       const right = getPostItemValue(b)
@@ -101,17 +113,15 @@ const ListingPage = ({
           selectedCategories.has(category.codename) ? ' toggle' : ''
         }`}
         data-category-codename={category.codename}
-        onClick={() =>
-          setSelectedCategories((selectedCategories) => {
-            if (selectedCategories.has(category.codename)) {
-              const result = new Set(selectedCategories)
-              result.delete(category.codename)
-              return result
-            } else {
-              return new Set(selectedCategories.add(category.codename))
-            }
-          })
-        }
+        onClick={() => {
+          const result = new Set(selectedCategories)
+          if (result.has(category.codename)) {
+            result.delete(category.codename)
+          } else {
+            result.add(category.codename)
+          }
+          updateSelection(result)
+        }}
       >
         {category.name}
       </button>
@@ -121,7 +131,7 @@ const ListingPage = ({
   categoriesComponents.unshift(
     <li key="#ALL">
       <button
-        onClick={() => setSelectedCategories(new Set())}
+        onClick={() => updateSelection(new Set())}
         className={`button${
           selectedCategories.size === 0
             ? ' disabled toggle'
@@ -175,7 +185,19 @@ const ListingPage = ({
             </ul>
           </div>
         )}
-        <section className="tiles">{listingOverview}</section>
+        {listingOverview.length > 0 ? (
+          <section className="tiles">{listingOverview}</section>
+        ) : (
+          <div className="inner categories-empty" role="status">
+            <p>No entries match the selected categories.</p>
+            <button
+              className="button icon fa-times-circle"
+              onClick={() => updateSelection(new Set())}
+            >
+              Show all
+            </button>
+          </div>
+        )}
       </div>
     </Layout>
   )
