@@ -1,6 +1,24 @@
 import React from 'react'
 import { ImageElement, RichTextElement } from '@kontent-ai/gatsby-components'
 import CodeHighlighter from '../components/CodeHighlighter'
+import { itemPath } from '../utils/paths'
+
+// Button to a project or journal post; plain text when the item has no
+// detail page (empty url_slug), instead of a link without an href
+const ContentItemButton = ({ item, iconCode, title }) => {
+  const href = itemPath(item)
+  return (
+    <p>
+      {href ? (
+        <a href={href} className="button">
+          <span className={`icon ${iconCode}`}>{title}</span>
+        </a>
+      ) : (
+        title
+      )}
+    </p>
+  )
+}
 
 const RichText = ({ element }) => (
   <RichTextElement
@@ -58,27 +76,21 @@ const RichText = ({ element }) => (
                 const iconCode =
                   linkedItem.elements.icon.value || 'fa-project-diagram'
                 return (
-                  <p>
-                    <a
-                      href={`/projects/${linkedContentItem.elements.url_slug.value}`}
-                      className="button"
-                    >
-                      <span className={`icon ${iconCode}`}>{title}</span>
-                    </a>
-                  </p>
+                  <ContentItemButton
+                    item={linkedContentItem}
+                    iconCode={iconCode}
+                    title={title}
+                  />
                 )
               }
               case 'kontent_item_gotcha': {
                 const iconCode = linkedItem.elements.icon.value || 'fa-blog'
                 return (
-                  <p>
-                    <a
-                      href={`/journal/${linkedContentItem.elements.url_slug.value}`}
-                      className="button"
-                    >
-                      <span className={`icon ${iconCode}`}>{title}</span>
-                    </a>
-                  </p>
+                  <ContentItemButton
+                    item={linkedContentItem}
+                    iconCode={iconCode}
+                    title={title}
+                  />
                 )
               }
               default: {

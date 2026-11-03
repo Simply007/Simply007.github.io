@@ -10,6 +10,7 @@ const { getKontentItemNodeTypeName } = require('@kontent-ai/gatsby-source')
 const path = require('path')
 const { parsePath } = require('gatsby')
 const fs = require('fs')
+const { pathFor } = require('./src/utils/paths')
 const {
   buildRobotsTxt,
   buildLlmsTxt,
@@ -171,7 +172,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   gotchas.allKontentItemGotcha.nodes.forEach((journalItem) =>
     createPage({
-      path: `/journal/${journalItem.elements.url_slug.value}`,
+      path: pathFor('gotcha', journalItem.elements.url_slug.value),
       component: require.resolve('./src/templates/journal-item.js'),
       context: {
         language: journalItem.preferred_language,
@@ -210,7 +211,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   projects.allKontentItemProject.nodes.forEach((projectItem) =>
     createPage({
-      path: `/projects/${projectItem.elements.url_slug.value}`,
+      path: pathFor('project', projectItem.elements.url_slug.value),
       component: require.resolve('./src/templates/project-item.js'),
       context: {
         language: projectItem.preferred_language,
@@ -249,7 +250,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   talks.allKontentItemTalk.nodes.forEach((talkItem) =>
     createPage({
-      path: `/talks/${talkItem.elements.url_slug.value}`,
+      path: pathFor('talk', talkItem.elements.url_slug.value),
       component: require.resolve('./src/templates/talk-item.js'),
       context: {
         language: talkItem.preferred_language,
@@ -470,9 +471,12 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
   const siteContent = {
     siteTitle: data.kontentItemLayout.elements.title.value,
     siteDescription: data.kontentItemLayout.elements.meta_description.value,
-    journal: data.allKontentItemGotcha.nodes,
-    projects: data.allKontentItemProject.nodes,
-    talks: data.allKontentItemTalk.nodes,
+    // keyed by Kontent type codename, see src/utils/paths.js
+    itemsByType: {
+      gotcha: data.allKontentItemGotcha.nodes,
+      project: data.allKontentItemProject.nodes,
+      talk: data.allKontentItemTalk.nodes,
+    },
   }
 
   fs.writeFileSync('./public/robots.txt', buildRobotsTxt())

@@ -4,6 +4,7 @@ import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 import { SITE_URL, PERSON_ID, stripHtml } from '../utils/seo'
+import { sectionPath } from '../utils/paths'
 
 const ProjectItem = ({ data: { kontentItemProject }, location }) => {
   const elements = kontentItemProject.elements
@@ -39,7 +40,7 @@ const ProjectItem = ({ data: { kontentItemProject }, location }) => {
       <BannerLanding
         title={kontentItemProject.elements.title.value}
         content={kontentItemProject.elements.summary.value}
-        button={{ title: 'Back to projects', to: '/projects' }}
+        button={{ title: 'Back to projects', to: sectionPath('project') }}
         titleCodename="title"
         contentCodename="summary"
         itemId={kontentItemProject.system.id}

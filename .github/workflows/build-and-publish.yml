@@ -25,6 +25,8 @@ jobs:
       with:
         node-version-file: '.nvmrc'
     - run: npm install
+    # unit tests (node:test, tests/**/*.test.js) gate the build and the deploy
+    - run: npm test
     - run: npm run build
     - name: Deploy 🚀
       if: github.ref == 'refs/heads/source'
