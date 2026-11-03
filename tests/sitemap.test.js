@@ -184,3 +184,35 @@ test('a layout-only edit bumps the home page', () => {
   assert.equal(byPath['/'], '2026-12-24T00:00:00.000Z')
   assert.equal(byPath['/talks/'], '2026-11-03T10:00:00.000Z')
 })
+
+// Copilot review on PR #68: language variants sharing a slug
+test('a detail page uses the language variant it renders, not the newest one', () => {
+  const variantItem = (language, lastModified) => ({
+    preferred_language: language,
+    system: {
+      type: 'talk',
+      codename: 'talk_shared',
+      last_modified: lastModified,
+    },
+    elements: {
+      url_slug: { value: 'shared' },
+      channel_purpose: { value: [{ codename: 'website' }] },
+    },
+  })
+  const byPath = Object.fromEntries(
+    resolveSitemapPages({
+      pages: [
+        {
+          path: '/talks/shared/',
+          pageContext: { codename: 'talk_shared', language: 'en-US' },
+        },
+      ],
+      items: [
+        variantItem('en-US', '2026-01-01T00:00:00.000Z'),
+        variantItem('cs-CZ', '2026-06-01T00:00:00.000Z'),
+      ],
+      contentItems: [],
+    }).map((p) => [p.path, p.lastmod])
+  )
+  assert.equal(byPath['/talks/shared/'], '2026-01-01T00:00:00.000Z')
+})

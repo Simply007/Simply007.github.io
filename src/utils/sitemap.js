@@ -19,7 +19,8 @@ const variantKey = (language, codename) => `${language || ''}:${codename}`
 
 /**
  * Pair every built page with a lastmod:
- * - item pages: the item's Kontent last_modified
+ * - item pages: last_modified of the language variant the page renders
+ *   (pageContext language + codename), falling back to the path
  * - listing pages: newest of the listing item itself and the website items it
  *   lists (including items without a slug, which the listing still renders)
  * - other content pages (for example /pwa-series/): their own last_modified
@@ -28,7 +29,7 @@ const variantKey = (language, codename) => `${language || ''}:${codename}`
  * codename, so each page uses its own language variant.
  * @param {Object} args
  * @param {Array} args.pages - allSitePage nodes ({ path, pageContext })
- * @param {Array} args.items - gotcha/project/talk nodes with system.type
+ * @param {Array} args.items - gotcha/project/talk nodes ({ preferred_language, system: { type, codename, last_modified } })
  * @param {Array} args.contentItems - allKontentItem nodes ({ preferred_language, system: { codename, last_modified } })
  * @param {Object} [args.layout] - the layout item every page renders ({ codename, language })
  */
@@ -39,10 +40,16 @@ const resolveSitemapPages = ({
   layout = { codename: 'default_layout', language: 'en-US' },
 }) => {
   const lastmodByPath = {}
+  const lastmodByItemVariant = {}
   const websiteItems = []
   for (const item of items) {
     if (!isWebsite(item)) continue
     websiteItems.push(item)
+    if (item.system.codename) {
+      lastmodByItemVariant[
+        variantKey(item.preferred_language, item.system.codename)
+      ] = item.system.last_modified
+    }
     const path = itemPath(item)
     if (path) {
       lastmodByPath[path] = newest([
@@ -59,10 +66,16 @@ const resolveSitemapPages = ({
   }
 
   const resolved = pages.map((page) => {
+    const context = page.pageContext || {}
+    // a detail page uses the language variant createPages rendered
+    const variant =
+      lastmodByItemVariant[variantKey(context.language, context.codename)]
+    if (variant) {
+      return { ...page, lastmod: variant }
+    }
     if (lastmodByPath[page.path]) {
       return { ...page, lastmod: lastmodByPath[page.path] }
     }
-    const context = page.pageContext || {}
     const own = lastmodByVariant[variantKey(context.language, context.codename)]
     const listTypes = context.listTypes || []
     const listed = websiteItems

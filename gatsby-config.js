@@ -85,8 +85,10 @@ module.exports = {
             }
             allKontentItemGotcha {
               nodes {
+                preferred_language
                 system {
                   type
+                  codename
                   last_modified
                 }
                 elements {
@@ -103,8 +105,10 @@ module.exports = {
             }
             allKontentItemProject {
               nodes {
+                preferred_language
                 system {
                   type
+                  codename
                   last_modified
                 }
                 elements {
@@ -121,8 +125,10 @@ module.exports = {
             }
             allKontentItemTalk {
               nodes {
+                preferred_language
                 system {
                   type
+                  codename
                   last_modified
                 }
                 elements {
