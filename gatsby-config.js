@@ -76,15 +76,14 @@ module.exports = {
             }
             allKontentItem {
               nodes {
+                preferred_language
                 system {
                   codename
                   last_modified
                 }
               }
             }
-            allKontentItemGotcha(
-              filter: { elements: { url_slug: { value: { ne: "" } } } }
-            ) {
+            allKontentItemGotcha {
               nodes {
                 system {
                   type
@@ -102,9 +101,7 @@ module.exports = {
                 }
               }
             }
-            allKontentItemProject(
-              filter: { elements: { url_slug: { value: { ne: "" } } } }
-            ) {
+            allKontentItemProject {
               nodes {
                 system {
                   type
@@ -122,9 +119,7 @@ module.exports = {
                 }
               }
             }
-            allKontentItemTalk(
-              filter: { elements: { url_slug: { value: { ne: "" } } } }
-            ) {
+            allKontentItemTalk {
               nodes {
                 system {
                   type
