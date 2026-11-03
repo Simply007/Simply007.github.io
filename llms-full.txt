@@ -2467,6 +2467,36 @@ Bas.fm covers OpenSource, development, and the human side of building software i
 
 ---
 
+# Tohle není Open Source repo, to je jen dump kódu na GitHubu: Co s tím?
+
+- URL: https://ondrej.chrastina.dev/talks/dump-kodu-na-githubu-frontendisti-brno-2026/
+- Published: 2026-03-11
+- Updated: 2026-11-03
+- Section: Talks
+- Recording: https://www.youtube.com/watch?v=PfCH1V1fz5E
+
+The Czech version of my reusable repositories talk at the Frontendisti Brno March meetup: why a GitHub repository is a product interface for other developers, and which non-functional pieces (README, automation, documentation, meta files) turn a code dump into an open source project.
+
+## What the session covered
+
+"This is not an open source repo, it's just a code dump on GitHub: what now?" The talk is about everything around the code: the non-functional requirements and meta features that decide whether anyone can reuse your repository. It draws on my experience building SDKs, dev tools, starters, and integration packages.
+
+-   **A repository is a product interface**: other developers meet your README before they meet your code.
+-   **README structure**: installation, a getting started example, code samples, links to docs, contact, and license.
+-   **Automation and community files**: templates, contributing guides, and checks that keep a project healthy without manual effort.
+-   **Documentation and best practices**: what to write down so contributors and users do not have to ask.
+
+## The venue
+
+The [Frontendisti Brno March meetup](https://www.meetup.com/frontendisti/events/313506946/), Wednesday March 11, 2026 at AIS Servis in Brno, with 56 attendees. I shared the evening with Vilém Lipold, Martin Brychta (Superkoders), and Lukáš Chylík (AIS Servis). The talk is in Czech; the English version ran at Python Pizza Ostrava a few weeks earlier.
+
+## Resources
+
+-   [Recording on YouTube](https://www.youtube.com/watch?v=PfCH1V1fz5E) (Czech)
+-   [Meetup page](https://www.meetup.com/frontendisti/events/313506946/)
+
+---
+
 # Hackmamba: Developer Experience, the New Way
 
 - URL: https://ondrej.chrastina.dev/talks/hackmamba-developer-experience-the-new-way/
@@ -2488,6 +2518,41 @@ Hackmamba's "Everything Outside Code" series covers the softer side of software:
 ## Resources
 
 -   [Full recording on YouTube](https://www.youtube.com/watch?v=yqSVm2CCP_A)
+
+---
+
+# It's Not Open Source, It's Just Public Code: A Guide to Reusable Repositories
+
+- URL: https://ondrej.chrastina.dev/talks/its-not-open-source-its-just-public-code-python-pizza-ostrava-2026/
+- Published: 2026-02-21
+- Updated: 2026-11-03
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/its-not-open-source-its-just-public-code-python-pizza-ostrava-2026.pdf
+- Recording: https://youtu.be/5AFVEZ9TZUs
+
+A short talk at Python Pizza Ostrava 2026 about the difference between pushing code to GitHub and publishing a repository other developers can actually reuse: the README, the community standards files, templates, and the small meta features that turn public code into open source.
+
+## What the session covered
+
+Public code is not open source yet. A repository becomes reusable when a stranger can find out what it does, install it, try it, and contribute without asking you first. This talk walked through the pieces that make that happen, drawn from years of building SDKs, starters, and integration packages.
+
+-   **The README is 80% of the job**: installation instructions, a screenshot, a getting started example, code samples, links to the detailed docs, contact information, and the license.
+-   **Community standards**: the Markdown meta files (contributing guide, code of conduct, security policy) that GitHub checks for and surfaces to visitors.
+-   **GitHub meta files**: issue and pull request templates that make useful reports the default.
+-   **DEVELOPMENT.md and AI meta files**: how to set up the project locally, and the instruction files that help AI coding agents work with the repository.
+-   **Badges**: small signals of build status, versions, and license that tell a visitor the project is alive.
+
+## The venue
+
+[Python Pizza Ostrava 2026](https://ostrava.python.pizza/), Saturday February 21, 2026 at Impact Hub Ostrava: a one-day community conference of short talks, run by the Czech Python community and streamed live.
+
+## Resources
+
+-   [Slides (PDF)](https://ondrej.chrastina.dev/slides/its-not-open-source-its-just-public-code-python-pizza-ostrava-2026.pdf)
+-   [Full-day livestream on YouTube](https://youtu.be/5AFVEZ9TZUs) (the talk starts in the 12:48 slot)
+-   [Open Source Guidelines Template](https://github.com/Simply007/os-guidelines)
+-   [opensource.guide](https://opensource.guide/)
+-   [GitHub docs: issue and pull request templates](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)
 
 ---
 
@@ -2661,6 +2726,30 @@ As an open-source, community-first effort, the CKEditor Pack represents a long-t
 ## Abstract
 
 Join me to explore a new community initiative by **T3Planet** and **CKEditor** aimed at transforming content editing in TYPO3. In this session, I will demonstrate the open-source **CKEditor Pack**, showcasing how it solves everyday challenges through advanced features like real-time collaboration, improved formatting workflows, and seamless media handling all within the familiar TYPO3 environment. This session is not just a demo, but an invitation: be part of the conversation and discover how you can help shape the future of this project to meet the real needs of the TYPO3 community.
+
+---
+
+# devrelshow Episode 41: Ondřej Chrastina from CKEditor
+
+- URL: https://ondrej.chrastina.dev/talks/devrelshow-41-ondrej-chrastina-from-ckeditor/
+- Published: 2025-11-13
+- Updated: 2026-11-03
+- Section: Talks
+- Recording: https://www.youtube.com/watch?v=lRJLmffQC4M
+
+Guest on Frédéric Harper's devrelshow, episode 41: an hour about Developer Relations, my path into it, and how I was vibe coding demos with AI tools at that time.
+
+## What we talked about
+
+The devrelshow is Frédéric Harper's long-running conversation series with people working in Developer Relations. In episode 41 we talked about the job itself and how the way I build DevRel material was changing.
+
+-   **My story**: from QA and development into Developer Relations, and what DevRel looks like at CKEditor.
+-   **DevRel in practice**: what the work is about day to day, beyond the talks and the videos.
+-   **Vibe coding demos**: the early stage of building demos and showcases with AI coding tools, as I was doing it at the time.
+
+## Resources
+
+-   [Full episode on YouTube](https://www.youtube.com/watch?v=lRJLmffQC4M)
 
 ---
 
