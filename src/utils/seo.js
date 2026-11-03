@@ -48,9 +48,9 @@ const PAGE_DESCRIPTIONS = {
 }
 
 // Full <title> overrides (used verbatim, no " | <site title>" suffix).
-// DRAFT wording, pending Ondřej's approval in #59.
+// Keep them at 60 characters or fewer so search results show them whole (#59).
 const PAGE_TITLES = {
-  '/': 'Ondřej Chrastina | Developer Advocate at CKEditor, DevRel & Speaker',
+  '/': 'Ondřej Chrastina | DevRel Expert and AI Enthusiast',
 }
 
 // pathname arrives with or without trailing slash depending on context
