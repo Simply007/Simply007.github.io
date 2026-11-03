@@ -1,5 +1,6 @@
 import { Link } from 'gatsby'
 import React from 'react'
+import { itemPath } from '../utils/paths'
 
 // Tiles are at most about half the content width: request a resized, modern format
 // image from the Kontent.ai image API instead of the full-size original
@@ -30,9 +31,7 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              <a href={item.elements.url_slug.value}>
-                {item.elements.title.value}
-              </a>
+              <a href={itemPath(item)}>{item.elements.title.value}</a>
             </h3>
             <i className="" data-kontent-element-codename="post_date">
               {new Date(item.elements.post_date.value).toDateString()}
@@ -45,7 +44,7 @@ const ListingItem = ({ item }) => {
             <ul className="actions">
               <li>
                 <LearnMore
-                  to={item.elements.url_slug.value}
+                  to={itemPath(item)}
                   title={item.elements.title.value}
                 />
               </li>
@@ -69,9 +68,7 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              <a href={item.elements.url_slug.value}>
-                {item.elements.title.value}
-              </a>
+              <a href={itemPath(item)}>{item.elements.title.value}</a>
             </h3>
             <i className="" data-kontent-element-codename="release_date">
               {new Date(item.elements.release_date.value).toDateString()}
@@ -84,7 +81,7 @@ const ListingItem = ({ item }) => {
             <ul className="actions">
               <li>
                 <LearnMore
-                  to={item.elements.url_slug.value}
+                  to={itemPath(item)}
                   title={item.elements.title.value}
                 />
               </li>
@@ -108,9 +105,7 @@ const ListingItem = ({ item }) => {
         >
           <header className="major">
             <h3 data-kontent-element-codename="title">
-              <a href={item.elements.url_slug.value}>
-                {item.elements.title.value}
-              </a>
+              <a href={itemPath(item)}>{item.elements.title.value}</a>
             </h3>
             <i className="" data-kontent-element-codename="release_date">
               {new Date(item.elements.release_date.value).toDateString()}
@@ -123,7 +118,7 @@ const ListingItem = ({ item }) => {
             <ul className="actions">
               <li>
                 <LearnMore
-                  to={item.elements.url_slug.value}
+                  to={itemPath(item)}
                   title={item.elements.title.value}
                 />
               </li>
