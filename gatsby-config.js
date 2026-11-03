@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const { SITE_URL, AUTHOR_NAME, stripHtml } = require('./src/utils/seo')
 const { SECTIONS, pathFor } = require('./src/utils/paths')
+const { resolveSitemapPages } = require('./src/utils/sitemap')
 
 module.exports = {
   siteMetadata: {
@@ -70,46 +71,74 @@ module.exports = {
             allSitePage {
               nodes {
                 path
+                pageContext
               }
             }
-            allKontentItemGotcha(
-              filter: { elements: { url_slug: { value: { ne: "" } } } }
-            ) {
+            allKontentItem {
               nodes {
+                preferred_language
                 system {
+                  codename
+                  last_modified
+                }
+              }
+            }
+            allKontentItemGotcha {
+              nodes {
+                preferred_language
+                system {
+                  type
+                  codename
                   last_modified
                 }
                 elements {
                   url_slug {
                     value
                   }
+                  channel_purpose {
+                    value {
+                      codename
+                    }
+                  }
                 }
               }
             }
-            allKontentItemProject(
-              filter: { elements: { url_slug: { value: { ne: "" } } } }
-            ) {
+            allKontentItemProject {
               nodes {
+                preferred_language
                 system {
+                  type
+                  codename
                   last_modified
                 }
                 elements {
                   url_slug {
                     value
                   }
+                  channel_purpose {
+                    value {
+                      codename
+                    }
+                  }
                 }
               }
             }
-            allKontentItemTalk(
-              filter: { elements: { url_slug: { value: { ne: "" } } } }
-            ) {
+            allKontentItemTalk {
               nodes {
+                preferred_language
                 system {
+                  type
+                  codename
                   last_modified
                 }
                 elements {
                   url_slug {
                     value
+                  }
+                  channel_purpose {
+                    value {
+                      codename
+                    }
                   }
                 }
               }
@@ -118,23 +147,20 @@ module.exports = {
         `,
         resolvePages: ({
           allSitePage,
+          allKontentItem,
           allKontentItemGotcha,
           allKontentItemProject,
           allKontentItemTalk,
-        }) => {
-          const lastmodByPath = {}
-          const add = (type) => (node) => {
-            lastmodByPath[pathFor(type, node.elements.url_slug.value)] =
-              node.system.last_modified
-          }
-          allKontentItemGotcha.nodes.forEach(add('gotcha'))
-          allKontentItemProject.nodes.forEach(add('project'))
-          allKontentItemTalk.nodes.forEach(add('talk'))
-          return allSitePage.nodes.map((page) => ({
-            ...page,
-            lastmod: lastmodByPath[page.path],
-          }))
-        },
+        }) =>
+          resolveSitemapPages({
+            pages: allSitePage.nodes,
+            items: [
+              ...allKontentItemGotcha.nodes,
+              ...allKontentItemProject.nodes,
+              ...allKontentItemTalk.nodes,
+            ],
+            contentItems: allKontentItem.nodes,
+          }),
         serialize: ({ path, lastmod }) => ({ url: path, lastmod }),
       },
     },
