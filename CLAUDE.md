@@ -16,7 +16,7 @@ npm run format     # Run Prettier on all .js files
 npm test           # Unit tests (node:test, tests/**/*.test.js), no build needed
 ```
 
-Husky pre-commit hook automatically runs `npm run format`. Tests cover the pure helpers in `src/utils/` and `lib/`; CI does not run them, so run `npm test` before pushing.
+Husky pre-commit hook automatically runs `npm run format`. Tests cover the pure helpers in `src/utils/` and `lib/`; CI (`.github/workflows/build-and-publish.yml`) runs `npm test` before the build, so a failing test blocks the deploy.
 
 **Every fix requires a test** that reproduces the bug (fails before the fix, passes after), in the same commit. Pure logic goes into helpers in `src/utils/` or `lib/`. Components can be rendered in tests with `tests/helpers/render-component.js` (esbuild transforms the JSX, `react-dom/server` renders it, Gatsby's `Link` is stubbed and throws without a destination); see `tests/listing-item.test.js`.
 
