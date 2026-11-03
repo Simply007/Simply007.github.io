@@ -24,6 +24,7 @@ import {
   AUTHOR_PROFILE,
   PERSON_ID,
   WEBSITE_ID,
+  buildSameAs,
 } from '../utils/seo'
 
 class DefaultLayout extends React.Component {
@@ -239,14 +240,13 @@ class DefaultLayout extends React.Component {
               otherData.image.value[0]
             const imageUrl = `${seoImage.url}?w=${ogImageWidth}&format=auto`
 
-            const sameAs = get(
-              footerData,
-              'elements.social_media_accounts.value',
-              []
-            ).map((account) =>
-              account.elements.social_media_type.value[0].elements.account_pattern.value.replace(
-                '%s',
-                account.elements.account_handle.value
+            const sameAs = buildSameAs(
+              get(footerData, 'elements.social_media_accounts.value', []).map(
+                (account) =>
+                  account.elements.social_media_type.value[0].elements.account_pattern.value.replace(
+                    '%s',
+                    account.elements.account_handle.value
+                  )
               )
             )
             const jsonLdBlocks = [

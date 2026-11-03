@@ -35,6 +35,36 @@ const AUTHOR_PROFILE = {
   ],
 }
 
+// Profiles that belong in the Person sameAs but not in the footer icons
+// (Font Awesome 5 has no Bluesky, X or HackerNoon icon). Drupal.org is left out
+// until its profile URL is confirmed.
+const EXTRA_SAME_AS = [
+  'https://x.com/ChrastinaOndrej',
+  'https://bsky.app/profile/simply007-cz.bsky.social',
+  'https://hackernoon.com/u/simply007',
+  'https://ckeditor.com/blog/authors/ondrej-chrastina/',
+]
+
+const sameAsKey = (url) => url.trim().toLowerCase().replace(/\/+$/, '')
+
+/**
+ * Person sameAs: footer social accounts first, then the extra profiles,
+ * deduped case-insensitively and ignoring trailing slashes
+ * @param {Array<String>} footerUrls
+ * @param {Array<String>} extra
+ * @returns {Array<String>}
+ */
+const buildSameAs = (footerUrls = [], extra = EXTRA_SAME_AS) => {
+  const seen = new Set()
+  return [...footerUrls, ...extra].filter((url) => {
+    if (!url) return false
+    const key = sameAsKey(url)
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
 const PAGE_DESCRIPTIONS = {
   '/': 'Ondřej Chrastina, Developer Advocate for CKEditor. Talks, demos, and articles on rich text editing, AI coding agents, and developer experience.',
   [sectionPath('gotcha')]:
@@ -81,6 +111,8 @@ module.exports = {
   PERSON_ID,
   WEBSITE_ID,
   AUTHOR_PROFILE,
+  EXTRA_SAME_AS,
+  buildSameAs,
   PAGE_DESCRIPTIONS,
   pageDescription,
   normalizeText,
