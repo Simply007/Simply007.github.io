@@ -18,6 +18,8 @@ npm test           # Unit tests (node:test, tests/**/*.test.js), no build needed
 
 Husky pre-commit hook automatically runs `npm run format`. Tests cover the pure helpers in `src/utils/` and `lib/`; CI does not run them, so run `npm test` before pushing.
 
+**Every fix requires a test** that reproduces the bug (fails before the fix, passes after), in the same commit. Logic inside React components goes into a pure helper in `src/utils/` or `lib/` so it can be tested with `node:test` (there is no JSX test setup).
+
 ## Environment Setup
 
 Copy `.env.template` to `.env` and configure:

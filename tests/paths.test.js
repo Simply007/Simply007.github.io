@@ -55,3 +55,10 @@ test('itemPath works from __typename and from system.type', () => {
   assert.equal(itemPath(node('kontent_item_listing_page', 'x')), undefined)
   assert.equal(itemPath(node('kontent_item_talk', '')), undefined)
 })
+
+// RichText.js ContentItemButton renders plain text when itemPath is undefined
+// (fix for buttons to project or journal items with an empty url_slug)
+test('itemPath is undefined for project and journal items with an empty slug', () => {
+  assert.equal(itemPath(node('kontent_item_project', '')), undefined)
+  assert.equal(itemPath(node('kontent_item_gotcha', '')), undefined)
+})
