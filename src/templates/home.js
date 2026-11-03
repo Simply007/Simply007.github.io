@@ -4,6 +4,7 @@ import Layout from '../components/layout'
 import Banner from '../components/Banner'
 import LatestItems from '../components/LatestItems'
 import { pageDescription, pageTitle } from '../utils/seo'
+import { sectionPath } from '../utils/paths'
 
 const LATEST_COUNT = 3
 
@@ -29,13 +30,13 @@ const Home = ({ data, location }) => {
         <LatestItems
           title="Latest talks"
           items={latestTalks}
-          listingPath="/talks/"
+          listingPath={sectionPath('talk')}
           listingLabel="All talks"
         />
         <LatestItems
           title="Latest from the journal"
           items={latestJournal}
-          listingPath="/journal/"
+          listingPath={sectionPath('gotcha')}
           listingLabel="All journal posts"
         />
       </div>
