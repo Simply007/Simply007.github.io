@@ -21,6 +21,8 @@ const Banner = (props) => {
       {props.data.elements.hero_image.value.length > 0 && (
         <ImageElement
           image={props.data.elements.hero_image.value[0]}
+          layout="fullWidth"
+          loading="eager"
           style={{
             position: 'absolute',
             left: 0,
@@ -41,6 +43,10 @@ const Banner = (props) => {
           >
             <ImageElement
               image={props.data.elements.profile_photo.value[0]}
+              layout="fixed"
+              width={150}
+              height={150}
+              loading="eager"
               style={{
                 position: 'relative',
                 width: '150px',

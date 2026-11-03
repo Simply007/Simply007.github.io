@@ -11,13 +11,21 @@
 
 	#footer {
 		.copyright {
-			font-size: 0.8em;
+			font-size: max(0.8em, 12px);
 			list-style: none;
 			padding-left: 0;
 
+			// footer_text rich text brings its own <ul>
+			ul {
+				list-style: none;
+				margin: 0;
+				padding-left: 0;
+			}
+
 			li {
 				border-left: solid 1px functions.palette(border);
-				color: functions.palette(fg-light);
+				// fg-light (20% white) is 1.85:1 on bg; 60% passes WCAG AA (about 5.5:1)
+				color: rgba(244, 244, 255, 0.6);
 				display: inline-block;
 				line-height: 1;
 				margin-left: 1em;

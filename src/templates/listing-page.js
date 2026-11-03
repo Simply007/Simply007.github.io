@@ -180,6 +180,8 @@ const ListingPage = ({
               id="categories-list"
               className={`categories${isCategoriesExpanded ? ' expanded' : ' collapsed'}`}
               aria-hidden={!isCategoriesExpanded}
+              // keep the collapsed buttons out of the tab order
+              {...(!isCategoriesExpanded && { inert: '' })}
             >
               {categoriesComponents}
             </ul>

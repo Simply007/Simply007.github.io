@@ -1,6 +1,17 @@
 import { Link } from 'gatsby'
 import React from 'react'
 
+// Tiles are at most about half the content width: request a resized, modern format
+// image from the Kontent.ai image API instead of the full-size original
+const tileImageUrl = (url) => `${url}?w=600&q=60&auto=format`
+
+// "Learn more" alone is not descriptive for screen readers and search engines
+const LearnMore = ({ to, title }) => (
+  <Link className="button next" to={to}>
+    Learn more<span className="visually-hidden"> about {title}</span>
+  </Link>
+)
+
 const ListingItem = ({ item }) => {
   const itemType = item.__typename
 
@@ -13,7 +24,7 @@ const ListingItem = ({ item }) => {
           style={{
             backgroundImage:
               item.elements.image && item.elements.image.value.length > 0
-                ? `url("${item.elements.image.value[0].url}")`
+                ? `url("${tileImageUrl(item.elements.image.value[0].url)}")`
                 : 'initial',
           }}
         >
@@ -33,9 +44,10 @@ const ListingItem = ({ item }) => {
             />
             <ul className="actions">
               <li>
-                <Link className="button next" to={item.elements.url_slug.value}>
-                  Learn more
-                </Link>
+                <LearnMore
+                  to={item.elements.url_slug.value}
+                  title={item.elements.title.value}
+                />
               </li>
             </ul>
           </header>
@@ -50,7 +62,7 @@ const ListingItem = ({ item }) => {
           style={{
             backgroundImage:
               item.elements.image && item.elements.image.value.length > 0
-                ? `url("${item.elements.image.value[0].url}")`
+                ? `url("${tileImageUrl(item.elements.image.value[0].url)}")`
                 : 'initial',
             backgroundOpacity: '0.2',
           }}
@@ -71,9 +83,10 @@ const ListingItem = ({ item }) => {
             />
             <ul className="actions">
               <li>
-                <Link className="button next" to={item.elements.url_slug.value}>
-                  Learn more
-                </Link>
+                <LearnMore
+                  to={item.elements.url_slug.value}
+                  title={item.elements.title.value}
+                />
               </li>
             </ul>
           </header>
@@ -88,7 +101,7 @@ const ListingItem = ({ item }) => {
           style={{
             backgroundImage:
               item.elements.image && item.elements.image.value.length > 0
-                ? `url("${item.elements.image.value[0].url}")`
+                ? `url("${tileImageUrl(item.elements.image.value[0].url)}")`
                 : 'initial',
             backgroundOpacity: '0.2',
           }}
@@ -109,9 +122,10 @@ const ListingItem = ({ item }) => {
             />
             <ul className="actions">
               <li>
-                <Link className="button next" to={item.elements.url_slug.value}>
-                  Learn more
-                </Link>
+                <LearnMore
+                  to={item.elements.url_slug.value}
+                  title={item.elements.title.value}
+                />
               </li>
             </ul>
           </header>

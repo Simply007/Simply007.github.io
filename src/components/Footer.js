@@ -11,6 +11,7 @@ const Footer = (props) => {
           <a
             href={url}
             className={`icon alt ${mediaType.elements.account_icon_code.value}`}
+            aria-label={mediaType.elements.label.value}
           >
             <span className="label">{mediaType.elements.label.value}</span>
           </a>
@@ -23,7 +24,7 @@ const Footer = (props) => {
   const currentYear = new Date().getFullYear()
   const footerHtml = props.data.elements.footer_text.value.replace(
     /\b(20\d{2})\b/,
-    (year) => (Number(year) < currentYear ? `${year}–${currentYear}` : year)
+    (year) => (Number(year) < currentYear ? `${year}-${currentYear}` : year)
   )
 
   return (
@@ -35,13 +36,13 @@ const Footer = (props) => {
         >
           {icons}
         </ul>
-        <ul
+        <div
           className="copyright"
           dangerouslySetInnerHTML={{
             __html: footerHtml,
           }}
           data-kontent-element-codename="footer_text"
-        ></ul>
+        ></div>
       </div>
     </footer>
   )

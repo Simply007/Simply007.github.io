@@ -4,7 +4,6 @@
 @use 'libs/mixins';
 @use 'libs/skel';
 @import '../css/font-awesome.min.css';
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic');
 
 @include meta.load-css("css-grid");
 

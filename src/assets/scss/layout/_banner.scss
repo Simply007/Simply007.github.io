@@ -96,6 +96,11 @@
 				> .actions {
 					font-size: 1.5em;
 				}
+
+				// keep the banner text legible on phones (Lighthouse: 12px minimum)
+				> p {
+					font-size: max(1em, 12px);
+				}
 				
 					font-size: 0.7em;
 					font-weight: functions.font(weight-bold);
@@ -119,15 +124,11 @@
 		&.style5 { &:after { background-color: functions.palette(accent5); } }
 		&.style6 { &:after { background-color: functions.palette(accent6); } }
 
+		// The banner text is the LCP element: it is no longer hidden until JS removes
+		// .is-loading (that held it back for seconds on phones). Only the overlay fades.
 		.body.is-loading & {
 			&:after {
 				opacity: 1.0;
-			}
-
-			> .inner {
-				@include skel.vendor('filter', 'blur(0.125em)');
-				@include skel.vendor('transform', 'translateX(-0.5em)');
-				opacity: 0;
 			}
 		}
 
