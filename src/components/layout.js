@@ -2,6 +2,17 @@ import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
+// Self-hosted Source Sans Pro (font-display: swap), no render-blocking Google Fonts request.
+// Only latin + latin-ext (English and Czech): the other subsets are small enough
+// to be inlined into every page as base64.
+import '@fontsource/source-sans-pro/latin-300.css'
+import '@fontsource/source-sans-pro/latin-ext-300.css'
+import '@fontsource/source-sans-pro/latin-300-italic.css'
+import '@fontsource/source-sans-pro/latin-ext-300-italic.css'
+import '@fontsource/source-sans-pro/latin-600.css'
+import '@fontsource/source-sans-pro/latin-ext-600.css'
+import '@fontsource/source-sans-pro/latin-600-italic.css'
+import '@fontsource/source-sans-pro/latin-ext-600-italic.css'
 import '../assets/scss/main.scss'
 import Header from './Header'
 import Menu from './Menu'
@@ -321,6 +332,11 @@ class DefaultLayout extends React.Component {
                     ]}
                     link={[
                       { rel: 'canonical', href: canonicalUrl },
+                      // Hero and listing images come from the Kontent.ai asset CDN
+                      {
+                        rel: 'preconnect',
+                        href: 'https://assets-eu-01.kc-usercontent.com',
+                      },
                       {
                         rel: 'alternate',
                         type: 'application/rss+xml',

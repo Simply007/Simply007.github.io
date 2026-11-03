@@ -21,6 +21,7 @@
     }
   },
   "dependencies": {
+    "@fontsource/source-sans-pro": "^5.3.0",
     "@kontent-ai/gatsby-components": "^10.0.0",
     "@kontent-ai/gatsby-source": "^10.0.1",
     "@kontent-ai/smart-link": "^3.3.0",

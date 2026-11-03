@@ -8,7 +8,16 @@ const Section = ({ section, isFirst }) => {
         className="image"
       >
         <img
-          src={section.elements.image.value[0].url}
+          src={`${section.elements.image.value[0].url}?w=800&auto=format`}
+          srcSet={[400, 800, 1200]
+            .map(
+              (w) =>
+                `${section.elements.image.value[0].url}?w=${w}&auto=format ${w}w`
+            )
+            .join(', ')}
+          sizes="(max-width: 980px) 100vw, 40vw"
+          loading="lazy"
+          decoding="async"
           alt={
             section.elements.image.value[0].description ||
             section.elements.image.value[0].name
