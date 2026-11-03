@@ -205,8 +205,10 @@
 		}
 	}
 
-// Home page blocks of the newest items: heading, tiles, link to the listing
-.latest-items {
+// Home page blocks of the newest items: heading, tiles, link to the listing.
+// Scoped under #wrapper to outrank the generic `#wrapper > * > * > .inner`
+// padding from layout/_wrapper.scss.
+#wrapper .latest-items {
 	border-top: solid 1px functions.palette(border);
 
 	> .inner {
