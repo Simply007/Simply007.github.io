@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const { SITE_URL, AUTHOR_NAME, stripHtml } = require('./src/utils/seo')
+const { SECTIONS, pathFor } = require('./src/utils/paths')
 
 module.exports = {
   siteMetadata: {
@@ -122,13 +123,13 @@ module.exports = {
           allKontentItemTalk,
         }) => {
           const lastmodByPath = {}
-          const add = (prefix) => (node) => {
-            lastmodByPath[`${prefix}${node.elements.url_slug.value}/`] =
+          const add = (type) => (node) => {
+            lastmodByPath[pathFor(type, node.elements.url_slug.value)] =
               node.system.last_modified
           }
-          allKontentItemGotcha.nodes.forEach(add('/journal/'))
-          allKontentItemProject.nodes.forEach(add('/projects/'))
-          allKontentItemTalk.nodes.forEach(add('/talks/'))
+          allKontentItemGotcha.nodes.forEach(add('gotcha'))
+          allKontentItemProject.nodes.forEach(add('project'))
+          allKontentItemTalk.nodes.forEach(add('talk'))
           return allSitePage.nodes.map((page) => ({
             ...page,
             lastmod: lastmodByPath[page.path],
@@ -248,8 +249,9 @@ module.exports = {
                 allKontentItemTalk,
               },
             }) => {
-              const toFeedItem = (pathPrefix, category) => (node) => {
-                const url = `${site.siteMetadata.siteUrl}${pathPrefix}${node.elements.url_slug.value}/`
+              const toFeedItem = (type) => (node) => {
+                const url = `${site.siteMetadata.siteUrl}${pathFor(type, node.elements.url_slug.value)}`
+                const category = SECTIONS[type].heading
                 return {
                   title: node.elements.title.value,
                   description: stripHtml(node.elements.summary.value),
@@ -261,15 +263,9 @@ module.exports = {
                 }
               }
               return allKontentItemGotcha.nodes
-                .map(toFeedItem('/journal/', 'Journal'))
-                .concat(
-                  allKontentItemProject.nodes.map(
-                    toFeedItem('/projects/', 'Projects')
-                  )
-                )
-                .concat(
-                  allKontentItemTalk.nodes.map(toFeedItem('/talks/', 'Talks'))
-                )
+                .map(toFeedItem('gotcha'))
+                .concat(allKontentItemProject.nodes.map(toFeedItem('project')))
+                .concat(allKontentItemTalk.nodes.map(toFeedItem('talk')))
                 .sort((a, b) => new Date(b.date) - new Date(a.date))
             },
           },

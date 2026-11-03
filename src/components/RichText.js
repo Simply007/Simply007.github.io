@@ -1,6 +1,7 @@
 import React from 'react'
 import { ImageElement, RichTextElement } from '@kontent-ai/gatsby-components'
 import CodeHighlighter from '../components/CodeHighlighter'
+import { itemPath } from '../utils/paths'
 
 const RichText = ({ element }) => (
   <RichTextElement
@@ -59,10 +60,7 @@ const RichText = ({ element }) => (
                   linkedItem.elements.icon.value || 'fa-project-diagram'
                 return (
                   <p>
-                    <a
-                      href={`/projects/${linkedContentItem.elements.url_slug.value}`}
-                      className="button"
-                    >
+                    <a href={itemPath(linkedContentItem)} className="button">
                       <span className={`icon ${iconCode}`}>{title}</span>
                     </a>
                   </p>
@@ -72,10 +70,7 @@ const RichText = ({ element }) => (
                 const iconCode = linkedItem.elements.icon.value || 'fa-blog'
                 return (
                   <p>
-                    <a
-                      href={`/journal/${linkedContentItem.elements.url_slug.value}`}
-                      className="button"
-                    >
+                    <a href={itemPath(linkedContentItem)} className="button">
                       <span className={`icon ${iconCode}`}>{title}</span>
                     </a>
                   </p>

@@ -4,6 +4,7 @@ import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 import { SITE_URL, PERSON_ID, stripHtml } from '../utils/seo'
+import { sectionPath } from '../utils/paths'
 
 const TalkItem = ({ data: { kontentItemTalk }, location }) => {
   const elements = kontentItemTalk.elements
@@ -48,7 +49,7 @@ const TalkItem = ({ data: { kontentItemTalk }, location }) => {
       <BannerLanding
         title={kontentItemTalk.elements.title.value}
         content={kontentItemTalk.elements.summary.value}
-        button={{ title: 'Back to talks', to: '/talks' }}
+        button={{ title: 'Back to talks', to: sectionPath('talk') }}
         titleCodename="title"
         contentCodename="summary"
         itemId={kontentItemTalk.system.id}

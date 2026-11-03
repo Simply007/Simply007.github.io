@@ -4,6 +4,7 @@ import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 import { SITE_URL, PERSON_ID, stripHtml } from '../utils/seo'
+import { sectionPath } from '../utils/paths'
 
 const JournalItem = ({ data: { kontentItemGotcha }, location }) => {
   const elements = kontentItemGotcha.elements
@@ -36,7 +37,7 @@ const JournalItem = ({ data: { kontentItemGotcha }, location }) => {
       <BannerLanding
         title={kontentItemGotcha.elements.title.value}
         content={kontentItemGotcha.elements.summary.value}
-        button={{ title: 'Back to journal', to: '/journal' }}
+        button={{ title: 'Back to journal', to: sectionPath('gotcha') }}
         titleCodename="title"
         contentCodename="summary"
         itemId={kontentItemGotcha.system.id}
