@@ -43,6 +43,7 @@ Copy `.env.template` to `.env` and configure:
 - `src/components/RichText.js` - Rich text rendering with code highlighting and custom element resolvers
 - `src/utils/paths.js` - Single source of truth for section URLs (see below)
 - `src/utils/seo.js` - Site constants, author profile, page descriptions, text normalization for meta tags
+- `src/utils/sitemap.js` - `lastmod` per sitemap URL (`gatsby-plugin-sitemap` `resolvePages`): item pages use their Kontent `last_modified`, listings the newest item they list, home the newest on the site
 - `lib/` - Builders for `robots.txt`, `llms.txt`, `llms-full.txt` and the rich text to markdown export (run in `gatsby-node.js` `onPostBuild`)
 - `src/assets/scss/` - SCSS styling with custom 12-column CSS Grid implementation
 
