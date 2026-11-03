@@ -5,16 +5,19 @@ import Banner from '../components/Banner'
 import LatestItems from '../components/LatestItems'
 import { pageDescription, pageTitle } from '../utils/seo'
 import { sectionPath } from '../utils/paths'
+import { latestReleased } from '../utils/latest'
 
 const LATEST_COUNT = 3
 
-// Upcoming talks (release date after the build) are not "latest" yet
-const notInFuture = (date) => !date || new Date(date) <= new Date()
-
 const Home = ({ data, location }) => {
-  const latestTalks = data.latestTalks.nodes
-    .filter((talk) => notInFuture(talk.elements.release_date.value))
-    .slice(0, LATEST_COUNT)
+  // Upcoming talks (released after the build) are not "latest" yet. The build
+  // time keeps the static HTML and the hydrated page on the same selection.
+  const latestTalks = latestReleased(
+    data.latestTalks.nodes,
+    (talk) => talk.elements.release_date.value,
+    data.site.buildTime,
+    LATEST_COUNT
+  )
   const latestJournal = data.latestJournal.nodes.slice(0, LATEST_COUNT)
 
   return (
@@ -123,6 +126,9 @@ export const query = graphql`
         }
       }
     }
+    site {
+      buildTime
+    }
     latestTalks: allKontentItemTalk(
       filter: {
         preferred_language: { eq: $language }
@@ -134,7 +140,6 @@ export const query = graphql`
         }
       }
       sort: { elements: { release_date: { value: DESC } } }
-      limit: 6
     ) {
       nodes {
         __typename

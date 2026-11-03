@@ -44,7 +44,7 @@ Copy `.env.template` to `.env` and configure:
 - `src/utils/paths.js` - Single source of truth for section URLs (see below)
 - `src/utils/seo.js` - Site constants, author profile, page descriptions, full page title overrides (`PAGE_TITLES`, passed as `seo.fullTitle`, used without the " | <site title>" suffix), text normalization for meta tags
 - `lib/` - Builders for `robots.txt`, `llms.txt`, `llms-full.txt` and the rich text to markdown export (run in `gatsby-node.js` `onPostBuild`)
-- `src/components/LatestItems.js` - Home page blocks with the newest talks and journal posts. Wrap new blocks in a `div`, not a `section`: the template styles every `section` as a flex row
+- `src/components/LatestItems.js` - Home page blocks with the newest talks and journal posts. Selection in `src/utils/latest.js` uses `site.buildTime` as the cutoff, never the browser clock (that would break hydration). Wrap new blocks in a `div`, not a `section`: the template styles every `section` as a flex row
 - `src/assets/scss/` - SCSS styling with custom 12-column CSS Grid implementation
 
 ### URL paths: one source of truth
