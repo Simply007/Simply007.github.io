@@ -1944,6 +1944,39 @@ This site is written using [Gatsby](https://gatsbyjs.com) as a frontend framewor
 
 ---
 
+# An Interview with Ondřej Chrastina: Why Architecture Transparency is the Best Developer Marketing
+
+- URL: https://ondrej.chrastina.dev/talks/hackernoon-interview-architecture-transparency-developer-marketing/
+- Published: 2026-10-21
+- Updated: 2026-11-03
+- Section: Talks
+- Recording: https://hackernoon.com/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing
+
+My interview in HackerNoon's "Meet the Developer Advocate" series: 13 questions on what DevRel means to me, earning developer trust with real projects, docs readable for AI agents, and why architecture transparency is the best developer marketing for enterprise products.
+
+## About the interview
+
+HackerNoon invited me to its new "Meet the Developer Advocate" series. The format is an interactive interview: a template with 13 questions that you answer by typing or straight into your device mic, and HackerNoon editors then turn the answers into an article. I filled it in after DrupalCon, and it was published on October 21, 2026.
+
+## What it covers
+
+-   **DevRel beyond marketing**: earning developers' trust through hands-on value, working on par with the product teams, and why DevRel that only repeats what marketing says is not DevRel.
+-   **Real projects as the middle ground**: showcases built on actual use cases, so developers see how the product is used (and bent) and the feedback I bring back inside stays concrete.
+-   **Many communities**: framework developers, the CMS and DMS platforms that ship CKEditor, and the invisible OEM integrators, met on their terms by contributing back.
+-   **The CKEditor AI on-premises campaign**: built around deployment honesty instead of a glossy launch. For enterprise developers, architecture transparency is the marketing.
+-   **Docs readable for AI agents**: a docs MCP server and an AI best practices skill, because the first integration a developer sees is more and more written by an agent.
+-   **Measuring DevRel**: goal oriented OKRs instead of initiative tracking, with developer enablement first, then advocacy, community and developer marketing.
+-   **Making the developer the hero**: "look what you just shipped" tutorials, and the Ondrej askin' interviews that put the people I meet at conferences in the spotlight.
+
+## Ways to read it
+
+-   [Full article on HackerNoon](https://hackernoon.com/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing), with a TL;DR at the top
+-   An audio version you can listen to right in the article player
+-   [Lite version](https://hackernoon.com/lite/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing) for a plain, fast read
+-   [Terminal version](https://terminal.hackernoon.com/an-interview-with-ondrej-chrastina-why-architecture-transparency-is-the-best-developer-marketing) in HackerNoon's retro terminal reader
+
+---
+
 # CKEditor in Drupal: News in Content Editing
 
 - URL: https://ondrej.chrastina.dev/talks/ckeditor-in-drupal-news-in-content-editing-drupalcon-rotterdam-2026/
