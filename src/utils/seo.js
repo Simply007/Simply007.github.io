@@ -47,6 +47,16 @@ const PAGE_DESCRIPTIONS = {
     'A series by Ondřej Chrastina on building Progressive Web Apps with Angular and a headless CMS, and keeping a perfect Lighthouse score.',
 }
 
+// Full <title> overrides (used verbatim, no " | <site title>" suffix).
+// Keep them at 60 characters or fewer so search results show them whole (#59).
+const PAGE_TITLES = {
+  '/': 'Ondřej Chrastina | DevRel Expert and AI Enthusiast',
+}
+
+// pathname arrives with or without trailing slash depending on context
+const pageTitle = (pathname) =>
+  PAGE_TITLES[pathname] || PAGE_TITLES[pathname.replace(/\/?$/, '/')]
+
 // pathname arrives with or without trailing slash depending on context
 const pageDescription = (pathname) =>
   PAGE_DESCRIPTIONS[pathname] ||
@@ -83,6 +93,8 @@ module.exports = {
   AUTHOR_PROFILE,
   PAGE_DESCRIPTIONS,
   pageDescription,
+  PAGE_TITLES,
+  pageTitle,
   normalizeText,
   stripHtml,
 }
