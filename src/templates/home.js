@@ -2,18 +2,46 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Banner from '../components/Banner'
-import { pageDescription } from '../utils/seo'
+import LatestItems from '../components/LatestItems'
+import { pageDescription, pageTitle } from '../utils/seo'
 
-const Home = ({ data, location }) => (
-  <Layout
-    seo={{
-      path: location.pathname,
-      description: pageDescription(location.pathname),
-    }}
-  >
-    <Banner data={data.kontentItemHomePage} />
-  </Layout>
-)
+const LATEST_COUNT = 3
+
+// Upcoming talks (release date after the build) are not "latest" yet
+const notInFuture = (date) => !date || new Date(date) <= new Date()
+
+const Home = ({ data, location }) => {
+  const latestTalks = data.latestTalks.nodes
+    .filter((talk) => notInFuture(talk.elements.release_date.value))
+    .slice(0, LATEST_COUNT)
+  const latestJournal = data.latestJournal.nodes.slice(0, LATEST_COUNT)
+
+  return (
+    <Layout
+      seo={{
+        path: location.pathname,
+        fullTitle: pageTitle(location.pathname),
+        description: pageDescription(location.pathname),
+      }}
+    >
+      <Banner data={data.kontentItemHomePage} />
+      <div className="latest">
+        <LatestItems
+          title="Latest talks"
+          items={latestTalks}
+          listingPath="/talks/"
+          listingLabel="All talks"
+        />
+        <LatestItems
+          title="Latest from the journal"
+          items={latestJournal}
+          listingPath="/journal/"
+          listingLabel="All journal posts"
+        />
+      </div>
+    </Layout>
+  )
+}
 
 export const query = graphql`
   query HomePageQuery($language: String!, $codename: String!) {
@@ -90,6 +118,86 @@ export const query = graphql`
                 }
               }
             }
+          }
+        }
+      }
+    }
+    latestTalks: allKontentItemTalk(
+      filter: {
+        preferred_language: { eq: $language }
+        elements: {
+          url_slug: { value: { ne: "" } }
+          channel_purpose: {
+            value: { elemMatch: { codename: { eq: "website" } } }
+          }
+        }
+      }
+      sort: { elements: { release_date: { value: DESC } } }
+      limit: 6
+    ) {
+      nodes {
+        __typename
+        system {
+          id
+          codename
+        }
+        elements {
+          title {
+            value
+          }
+          url_slug {
+            value
+          }
+          image {
+            value {
+              url
+            }
+          }
+          summary {
+            value
+          }
+          release_date {
+            value
+          }
+        }
+      }
+    }
+    latestJournal: allKontentItemGotcha(
+      filter: {
+        preferred_language: { eq: $language }
+        elements: {
+          url_slug: { value: { ne: "" } }
+          channel_purpose: {
+            value: { elemMatch: { codename: { eq: "website" } } }
+          }
+        }
+      }
+      sort: { elements: { post_date: { value: DESC } } }
+      limit: 3
+    ) {
+      nodes {
+        __typename
+        system {
+          id
+          codename
+        }
+        elements {
+          title {
+            value
+          }
+          url_slug {
+            value
+          }
+          image {
+            value {
+              url
+            }
+          }
+          summary {
+            value
+          }
+          post_date {
+            value
           }
         }
       }
