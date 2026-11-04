@@ -32,6 +32,16 @@
 				width: 2em;
 			}
 		}
+
+		// icon image from the Kontent social media type (no Font Awesome glyph);
+		// the nbsp keeps the text baseline of the glyph icons
+		&.icon-asset:before {
+			background-image: var(--icon-url);
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: 55%;
+			content: '\00a0';
+		}
 	}
 
 	a.icon {
