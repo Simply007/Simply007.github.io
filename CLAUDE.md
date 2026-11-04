@@ -84,3 +84,5 @@ Footer icons: a social media type with an `account_icon_code` renders the Font A
 ## Deployment
 
 GitHub Actions (`.github/workflows/build-and-publish.yml`) builds on push to `source` branch and deploys to `master` branch for GitHub Pages. Requires `KONTENT_PROJECT_ID` and `KONTENT_LANGUAGE_CODENAMES` secrets.
+
+**After a Kontent content model change** (new type or element), clear the Netlify build cache: in Netlify, Deploys, "Clear cache and deploy site", then "Retry with latest branch commit" on the PR preview. `@kontent-ai/gatsby-source` caches the content types in the Gatsby cache (`loadAllKontentTypesCached`) and never refreshes them, so a cached Netlify build fails with `Cannot query field "<new element>"`. GitHub Actions starts without a cache, so the GitHub Pages build is not affected.
