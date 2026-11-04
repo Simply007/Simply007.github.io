@@ -1,32 +1,50 @@
 const { test } = require('node:test')
 const assert = require('node:assert/strict')
-const { buildSameAs, EXTRA_SAME_AS } = require('../src/utils/seo')
+const { buildSameAs, socialAccountUrl } = require('../src/utils/seo')
 
-test('appends the extra profiles after the footer accounts', () => {
-  const result = buildSameAs(['https://github.com/Simply007'])
-  assert.equal(result[0], 'https://github.com/Simply007')
-  assert.deepEqual(result.slice(1), EXTRA_SAME_AS)
+const account = (handle, pattern) => ({
+  elements: {
+    account_handle: { value: handle },
+    social_media_type: {
+      value: [{ elements: { account_pattern: { value: pattern } } }],
+    },
+  },
+})
+
+test('maps a footer social account through its type pattern', () => {
+  assert.equal(
+    socialAccountUrl(account('simply007', 'https://www.drupal.org/u/%s')),
+    'https://www.drupal.org/u/simply007'
+  )
+})
+
+test('sameAs keeps the footer order', () => {
+  assert.deepEqual(
+    buildSameAs([
+      account('Simply007', 'https://github.com/%s'),
+      account('simply007-cz.bsky.social', 'https://bsky.app/profile/%s'),
+    ]),
+    [
+      'https://github.com/Simply007',
+      'https://bsky.app/profile/simply007-cz.bsky.social',
+    ]
+  )
 })
 
 test('dedupes case-insensitively and ignores trailing slashes', () => {
   assert.deepEqual(
-    buildSameAs(
-      ['https://Dev.to/simply007/', 'https://dev.to/simply007'],
-      ['https://dev.to/Simply007']
-    ),
+    buildSameAs([
+      account('simply007/', 'https://Dev.to/%s'),
+      account('simply007', 'https://dev.to/%s'),
+    ]),
     ['https://Dev.to/simply007/']
   )
 })
 
-test('drops empty values', () => {
-  assert.deepEqual(buildSameAs(['', null, 'https://a.example'], []), [
-    'https://a.example',
-  ])
+test('drops accounts that resolve to an empty URL', () => {
+  assert.deepEqual(buildSameAs([account('', '%s')]), [])
 })
 
-test('extra profiles include Bluesky, HackerNoon, X and the CKEditor author page', () => {
-  const joined = EXTRA_SAME_AS.join(' ')
-  for (const host of ['bsky.app', 'hackernoon.com', 'x.com', 'ckeditor.com']) {
-    assert.ok(joined.includes(host), host)
-  }
+test('no accounts, no sameAs', () => {
+  assert.deepEqual(buildSameAs(), [])
 })
