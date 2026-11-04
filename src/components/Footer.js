@@ -6,11 +6,23 @@ const Footer = (props) => {
       const handle = social_media_account.elements.account_handle.value
       const mediaType = social_media_account.elements.social_media_type.value[0]
       const url = mediaType.elements.account_pattern.value.replace('%s', handle)
+      // Font Awesome 5 has no icon for some profiles (Bluesky, HackerNoon):
+      // their social media type carries an Account Icon asset instead
+      const iconCode = mediaType.elements.account_icon_code.value
+      const iconAsset =
+        !iconCode &&
+        mediaType.elements.account_icon &&
+        mediaType.elements.account_icon.value[0]
       return (
         <li key={url}>
           <a
             href={url}
-            className={`icon alt ${mediaType.elements.account_icon_code.value}`}
+            className={`icon alt ${iconAsset ? 'icon-asset' : iconCode}`}
+            style={
+              iconAsset
+                ? { '--icon-url': `url("${iconAsset.url}")` }
+                : undefined
+            }
             aria-label={mediaType.elements.label.value}
           >
             <span className="label">{mediaType.elements.label.value}</span>
