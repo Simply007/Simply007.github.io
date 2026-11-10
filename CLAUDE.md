@@ -43,7 +43,7 @@ Copy `.env.template` to `.env` and configure:
 - `src/components/RichText.js` - Rich text rendering with code highlighting and custom element resolvers
 - `src/components/RichTextImage.js` - Rich text images, wrapped in `<figure class="rich-text-image">` with a paragraph's bottom margin (Kontent's own figure markup is dropped by the renderer)
 - `src/utils/paths.js` - Single source of truth for section URLs (see below)
-- `src/utils/seo.js` - Site constants, author profile, page descriptions, text normalization for meta tags
+- `src/utils/seo.js` - Site constants, page descriptions, text normalization for meta tags, and the Person JSON-LD builder (see below)
 - `lib/` - Builders for `robots.txt`, `llms.txt`, `llms-full.txt` and the rich text to markdown export (run in `gatsby-node.js` `onPostBuild`)
 - `src/assets/scss/` - SCSS styling with custom 12-column CSS Grid implementation
 
@@ -57,6 +57,17 @@ Copy `.env.template` to `.env` and configure:
 - `SECTIONS[type].heading`: display name (RSS categories, `llms.txt` headings)
 
 It is used for page creation (`gatsby-node.js`), the sitemap and RSS (`gatsby-config.js`), `lib/`, rich text buttons, listing tiles, "Back to" buttons and the page description keys. Always link with the trailing slash: GitHub Pages answers `/talks/<slug>` with a 301. The listing pages' own URLs come from the Kontent navigation items and must match `SECTIONS`.
+
+### Person JSON-LD: CMS only
+
+The Person node (`@id` `https://ondrej.chrastina.dev/#person`, on every page via `layout.js`) is built by `buildPerson()` in `src/utils/seo.js` from Kontent only, never from values in code:
+
+- the **Person** content group of the Layout item `default_layout`: `person_name`, `person_job_title`, `person_description`, `person_photo`, `person_affiliation` (a `link` item: text = organization name, URL), `person_address_locality`, `person_address_country`, `person_knows_about` (`keyword` items)
+- `sameAs` = the footer `social_media_accounts`, in footer order, deduped by `buildSameAs()`. A new profile is a new social media account in the footer.
+
+The first five fields are required: `buildPerson()` throws and the build fails when one is empty. Optional fields are left out of the JSON-LD when empty. The WebSite node reuses `person_description`.
+
+Footer icons: a social media type with an `account_icon_code` renders the Font Awesome 5 glyph. Without one (Bluesky, HackerNoon, the CKEditor blog), `Footer.js` renders its `account_icon` asset as the background of the icon circle (`.icon.icon-asset`, `--icon-url`). Upload those icons as PNG (the Kontent plan rejects SVG), drawn in the palette `bg` color `#242943` on a transparent background.
 
 ### Content Models (from Kontent.ai)
 - Navigation Items (hierarchical, support external URLs)
@@ -74,3 +85,5 @@ It is used for page creation (`gatsby-node.js`), the sitemap and RSS (`gatsby-co
 ## Deployment
 
 GitHub Actions (`.github/workflows/build-and-publish.yml`) builds on push to `source` branch and deploys to `master` branch for GitHub Pages. Requires `KONTENT_PROJECT_ID` and `KONTENT_LANGUAGE_CODENAMES` secrets.
+
+**After a Kontent content model change** (new type or element), clear the Netlify build cache: in Netlify, Deploys, "Clear cache and deploy site", then "Retry with latest branch commit" on the PR preview. `@kontent-ai/gatsby-source` caches the content types in the Gatsby cache (`loadAllKontentTypesCached`) and never refreshes them, so a cached Netlify build fails with `Cannot query field "<new element>"`. GitHub Actions starts without a cache, so the GitHub Pages build is not affected.

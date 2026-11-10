@@ -19,12 +19,7 @@ import Menu from './Menu'
 import Footer from './Footer'
 import SmartLinkWrapper from './SmartLinkWrapper'
 import get from 'lodash.get'
-import {
-  AUTHOR_NAME,
-  AUTHOR_PROFILE,
-  PERSON_ID,
-  WEBSITE_ID,
-} from '../utils/seo'
+import { AUTHOR_NAME, PERSON_ID, WEBSITE_ID, buildPerson } from '../utils/seo'
 
 class DefaultLayout extends React.Component {
   constructor(props) {
@@ -84,6 +79,51 @@ class DefaultLayout extends React.Component {
                   }
                   site_url {
                     value
+                  }
+                  person_name {
+                    value
+                  }
+                  person_job_title {
+                    value
+                  }
+                  person_description {
+                    value
+                  }
+                  person_photo {
+                    value {
+                      url
+                    }
+                  }
+                  person_affiliation {
+                    value {
+                      ... on kontent_item_link {
+                        elements {
+                          text {
+                            value
+                          }
+                          url {
+                            value
+                          }
+                        }
+                      }
+                    }
+                  }
+                  person_address_locality {
+                    value
+                  }
+                  person_address_country {
+                    value
+                  }
+                  person_knows_about {
+                    value {
+                      ... on kontent_item_keyword {
+                        elements {
+                          keyword {
+                            value
+                          }
+                        }
+                      }
+                    }
                   }
                   keywords {
                     value {
@@ -239,15 +279,10 @@ class DefaultLayout extends React.Component {
               otherData.image.value[0]
             const imageUrl = `${seoImage.url}?w=${ogImageWidth}&format=auto`
 
-            const sameAs = get(
-              footerData,
-              'elements.social_media_accounts.value',
-              []
-            ).map((account) =>
-              account.elements.social_media_type.value[0].elements.account_pattern.value.replace(
-                '%s',
-                account.elements.account_handle.value
-              )
+            const person = buildPerson(
+              otherData,
+              get(footerData, 'elements.social_media_accounts.value', []),
+              siteUrl
             )
             const jsonLdBlocks = [
               {
@@ -256,24 +291,11 @@ class DefaultLayout extends React.Component {
                 '@id': WEBSITE_ID,
                 name: defaultTitle,
                 url: `${siteUrl}/`,
-                description: AUTHOR_PROFILE.description,
+                description: person.description,
                 publisher: { '@id': PERSON_ID },
                 author: { '@id': PERSON_ID },
               },
-              {
-                '@context': 'https://schema.org',
-                '@type': 'Person',
-                '@id': PERSON_ID,
-                name: AUTHOR_NAME,
-                url: `${siteUrl}/`,
-                image: AUTHOR_PROFILE.imageUrl,
-                jobTitle: AUTHOR_PROFILE.jobTitle,
-                description: AUTHOR_PROFILE.description,
-                affiliation: AUTHOR_PROFILE.affiliation,
-                address: AUTHOR_PROFILE.address,
-                knowsAbout: AUTHOR_PROFILE.knowsAbout,
-                sameAs,
-              },
+              person,
             ].concat(seo.jsonLd ? [].concat(seo.jsonLd) : [])
             return (
               <div
