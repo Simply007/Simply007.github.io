@@ -1,6 +1,7 @@
 import React from 'react'
-import { ImageElement, RichTextElement } from '@kontent-ai/gatsby-components'
+import { RichTextElement } from '@kontent-ai/gatsby-components'
 import CodeHighlighter from '../components/CodeHighlighter'
+import RichTextImage from './RichTextImage'
 import { itemPath } from '../utils/paths'
 
 // Button to a project or journal post; plain text when the item has no
@@ -106,9 +107,7 @@ const RichText = ({ element }) => (
       }
     }}
     images={element.images}
-    resolveImage={(image) => {
-      return <ImageElement image={image} />
-    }}
+    resolveImage={(image) => <RichTextImage image={image} />}
   />
 )
 

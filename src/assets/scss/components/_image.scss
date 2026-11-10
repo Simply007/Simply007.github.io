@@ -64,6 +64,13 @@
 		}
 	}
 
+	/* Images in rich text content: the same bottom margin as a paragraph, so a heading or
+	   another image right under them does not touch them */
+
+	.rich-text-image {
+		margin: 0 0 functions.size(element-margin) 0;
+	}
+
 	/* QR code images in rich text content: cap at 18.75rem (300px at the 16px root font size) */
 
 	.gatsby-image-wrapper:has(img[alt^="QR code"]) {
