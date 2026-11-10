@@ -911,6 +911,82 @@ List<CTA> transfomedCtas = section
 
 ---
 
+# Pimcore AI Guidepost: Every Door Open for Coding Agents
+
+- URL: https://ondrej.chrastina.dev/projects/pcdd26-pimcore-ai-guidepost/
+- Published: 2026-11-10
+- Updated: 2026-11-10
+- Section: Projects
+- Source code: https://github.com/Simply007/pcdd26-pimcore-ai-guidepost
+
+The companion repository for my "AI Best Practices for Your Product" talk at Pimcore Community Dev Days 2026: a Pimcore skeleton with 44 agent skills, an AGENTS.md map of Pimcore's AI resources served as a Pimcore page, and CKEditor in Pimcore Studio.
+
+## What's inside
+
+A Pimcore 2026.3 skeleton with every door open for coding agents, built as the live demo for my talk "AI Best Practices for Your Product" at Pimcore Community Dev Days 2026. It is both a working agent setup and a map of what the Pimcore ecosystem offers agents today.
+
+-   **A working agent setup:** 40 Pimcore skills (the official `pimcore/skills` and the CORS community skills), 3 CKEditor skills, and one project skill of its own, distilled from the questions I asked as a first-time Pimcore explorer. Readable by Claude Code, Codex, Copilot, Gemini CLI and other agents.
+-   **A map:** an `AGENTS.md` listing docs for LLMs, skills repositories, the Datahub MCP server, the Pimcore Agent and more, with the gaps marked.
+-   **The guidepost as a Pimcore page:** one console command turns the map into the site's Home document, so the guidepost is rendered by the system it maps.
+-   **CKEditor in Pimcore Studio:** through the [CKEditor Studio bundle](https://ondrej.chrastina.dev/projects/pimcore-studio-ckeditor-bundle/), with a blog demo (data objects), a landing page document type with inline editing, and a preflight script for demo day.
+-   **Findings:** what the agent skills covered, where they did not, and where to go next.
+
+![The guidepost served as a Pimcore page: the Pimcore AI Guidepost home document](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/093777d0-9b5c-43fd-a6f6-67736ddc1234/img-guidepost-page.jpg)
+
+![The pcdd26-pimcore-ai-guidepost repository on GitHub](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/71ac76cd-a05f-4428-aab9-bf4174f8eb6a/img-guidepost-repo.jpg)
+
+## Run it
+
+Everything runs in Docker: clone the repository and start it with `docker compose up`. No PHP or Composer needed on your machine. Add a CKEditor license key to `.env.local` and CKEditor AI and real-time collaboration switch on in Studio.
+
+![The vendored and project-local agent skills in the guidepost repository](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/db7b807f-2336-44a4-ad7c-e71357201e55/img-guidepost-skills.jpg)
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/pcdd26-pimcore-ai-guidepost)
+-   [The talk this demo was built for](https://ondrej.chrastina.dev/talks/ai-best-practices-for-your-product-pcdd-2026/)
+-   [The CKEditor Studio bundle it installs](https://ondrej.chrastina.dev/projects/pimcore-studio-ckeditor-bundle/)
+
+---
+
+# CKEditor Studio Bundle: CKEditor in Pimcore Studio
+
+- URL: https://ondrej.chrastina.dev/projects/pimcore-studio-ckeditor-bundle/
+- Published: 2026-11-10
+- Updated: 2026-11-10
+- Section: Projects
+- Source code: https://github.com/Simply007/pimcore-studio-ckeditor-bundle
+
+A community Composer bundle that makes CKEditor the rich text editor in Pimcore Studio: classic and inline editors, one YAML file, optional CKEditor AI and real-time collaboration. A proof of concept built for Pimcore Community Dev Days 2026.
+
+## What it does
+
+A Composer bundle that mounts CKEditor as the rich text editor in Pimcore Studio, the CKEditor counterpart to `pimcore/quill-bundle`. It started as the demo for my Pimcore Community Dev Days 2026 talk and was extracted from the guidepost repository so anyone can install it: `composer require simply007/ckeditor-studio-bundle`.
+
+-   **Classic and inline editors:** classic for data object fields, inline right on the page for document editables, keeping the page's own design.
+-   **One YAML file:** toolbar, editor selection (`ckeditor`, `quill` or Studio's default, so editor bundles can stay enabled side by side) and premium features.
+-   **Open source first:** without a license key it runs the open source CKEditor build. Add a key and CKEditor AI and real-time collaboration switch on, no rebuild, just a cache clear.
+-   **CKEditor AI that sees the whole element:** one docked chat shares the context of every rich text field of the page or object, quick actions work on the selection, and every change arrives as a suggestion you apply or reject.
+
+![Inline CKEditor on a Pimcore landing page document in Studio, with the CKEditor AI chat docked](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/f1a647a7-8cc0-4c54-a479-5cc6286e28df/img-bundle-inline-landing.jpg)
+
+## Status
+
+A proof of concept, built as a showcase for the event. It has not been reviewed or verified by Pimcore, so treat it as a starting point rather than a production-ready integration. Open decisions live in the repository: the next release, how the compiled Studio frontend is shipped, and a proposal for a pluggable rich text editor registry in Studio.
+
+Licensing: the bundle and CKEditor's open source core are GPL-2.0-or-later. Premium features need a CKEditor license key, and Pimcore has its own license (POCL). The README has the details.
+
+![The simply007/ckeditor-studio-bundle package on Packagist](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/d9dc134f-b9f6-438b-b11b-ffd45a6a4441/img-bundle-packagist.jpg)
+
+## Resources
+
+-   [Repository on GitHub](https://github.com/Simply007/pimcore-studio-ckeditor-bundle)
+-   [Package on Packagist](https://packagist.org/packages/simply007/ckeditor-studio-bundle)
+-   [The guidepost, the reference installation](https://github.com/Simply007/pcdd26-pimcore-ai-guidepost)
+-   [The talk it was built for](https://ondrej.chrastina.dev/talks/ai-best-practices-for-your-product-pcdd-2026/)
+
+---
+
 # Trailhead: the CKEditor AI Coding Agents Webinar Demo
 
 - URL: https://ondrej.chrastina.dev/projects/devrel-ckeditor-ai-coding-agents-demo/
@@ -1941,6 +2017,54 @@ There is also a possibility to join the Kentico Github organization right from t
 ![](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/23f002d9-05b9-438b-95cc-3828bdbebd1d/Capture.PNG)
 
 This site is written using [Gatsby](https://gatsbyjs.com) as a frontend framework and [Kentico Kontent](https://kontent.ai) as a data source. It is also listed as one of the [examples on the jamstack.org site](https://jamstack.org/examples).
+
+---
+
+# AI Best Practices for Your Product
+
+- URL: https://ondrej.chrastina.dev/talks/ai-best-practices-for-your-product-pcdd-2026/
+- Published: 2026-11-10
+- Updated: 2026-11-10
+- Section: Talks
+- Slides: https://ondrej.chrastina.dev/slides/ai-best-practices-for-your-product-pcdd-2026.pdf
+
+Conference talk at Pimcore Community Dev Days 2026 in Frankfurt: what CKEditor, Drupal, and TYPO3 teach the coding agents that integrate them, what a first-time explorer found in Pimcore, and why the guardrails belong in the product. With a live demo of the guidepost repository and CKEditor inside Pimcore Studio.
+
+## What the session covered
+
+Developers do not read your docs first anymore: their coding agents do, and their training data is one to two major versions behind. So the question is not whether to support AI agents, it is whether they integrate your product correctly or confidently wrong. This talk walked through how three ecosystems I work with teach the agents that integrate them, then looked at Pimcore through a newcomer's eyes: every practice we saw got a live "Pimcore check".
+
+-   **CKEditor: what we shipped.** Three doors for agents: docs agents can actually read (a markdown twin of every page, `llms.txt` and `llms-full.txt`), a documentation MCP server for version-current answers, and installable agent skills (`npx skills add ckeditor/skills`). Plus what shipping it taught us: measurable agent traffic, a skill-feedback issue template, and a safety rule that whatever an agent reads in the docs is information, never an order.
+-   **Drupal: unify and MCP-ize.** One AI provider layer for 95+ providers, capabilities described once as tools and callable from anywhere, and `ai_best_practices`: skills with evals. My contribution-day merge request for the CKEditor skill moved the final A/B re-run from 56% to 100% correct answers, with 29% less time and 19% lower cost per answer.
+-   **TYPO3: slow on purpose.** Zero AI features in core, maximum agent readiness: `llms.txt` and markdown twins on docs.typo3.org, an `AGENTS.md` in the core monorepo, official skills in a local MCP server. And the smallest version of all of this: skills committed inside one project repository.
+-   **Pimcore, through a newcomer's eyes.** What I found as a first-time explorer (official and community skills, a docs `llms.txt`, the Datahub Simple REST MCP server, the Agent Bundle's guardrails) and where to go next: evals, two skill homes growing together, easier discovery, and a decision trail.
+-   **Live demo: the guidepost.** A Pimcore skeleton with every door open, rendered by the system it maps, plus CKEditor inside Pimcore Studio: CKEditor AI, inline editing on the page, real-time collaboration, all configured from one YAML file.
+-   **Flip the table.** Agent readiness has a second half: what you deny. A true "unsubscribe me from everything" story, and why guardrails belong in the product as hard limits, not in a prompt.
+
+![CKEditor AI inside Pimcore Studio: an Improve writing suggestion shown as a diff on a blog post data object](https://assets-eu-01.kc-usercontent.com:443/6aec6c2a-3010-01c9-8295-4d988333f15d/283e6aa6-44e3-495e-b235-2af318f63da7/img-bundle-ai-suggestion.jpg)
+
+## Takeaways
+
+-   Provide: docs as markdown with `llms.txt` at the root, a docs MCP for live answers, skills with trigger-first descriptions, and evals that prove the skills work.
+-   A skill without evals is a hope. Five small test cases are a great start.
+-   Practices can start anywhere: vendor-led, initiative-led, or inside one project repository.
+-   Enforce: reading is free, writing needs an approval, managing needs a human. Scoped, per-session tokens, retry limits, clear goals.
+-   Keep logs, keep history, and keep a searchable record of what the agent decided, and why.
+
+## The venue
+
+[Pimcore Community Dev Days 2026](https://www.pluswerk.digital/en/about-us/pluswerk-at-events/pimcore-community-dev-days-2026), November 10 in Frankfurt. My first Pimcore event, so I came as an explorer: new to Pimcore, not to content platforms. Building the demo produced two community projects that outlive the talk: the guidepost repository and a CKEditor bundle for Pimcore Studio.
+
+## Resources
+
+-   [Slides (PDF, every link works)](https://ondrej.chrastina.dev/slides/ai-best-practices-for-your-product-pcdd-2026.pdf)
+-   [The guidepost repository (today's demo)](https://github.com/Simply007/pcdd26-pimcore-ai-guidepost) and [its project page](https://ondrej.chrastina.dev/projects/pcdd26-pimcore-ai-guidepost/)
+-   [CKEditor Studio bundle](https://github.com/Simply007/pimcore-studio-ckeditor-bundle) ([on Packagist](https://packagist.org/packages/simply007/ckeditor-studio-bundle)) and [its project page](https://ondrej.chrastina.dev/projects/pimcore-studio-ckeditor-bundle/)
+-   [CKEditor docs for AI coding agents](https://ckeditor.com/docs/ckeditor5/latest/getting-started/ai-coding-agents.html) and [CKEditor agent skills](https://github.com/ckeditor/skills)
+-   [pimcore/skills](https://github.com/pimcore/skills) and [cors-gmbh/pimcore-skills](https://github.com/cors-gmbh/pimcore-skills)
+-   [Drupal ai\_best\_practices](https://git.drupalcode.org/project/ai_best_practices) ([my merge request !105](https://git.drupalcode.org/project/ai_best_practices/-/merge_requests/105))
+-   [Pimcore docs llms.txt report (platform-version#776)](https://github.com/pimcore/platform-version/issues/776)
+-   [Extended CKEditor trial for the room](https://portal.ckeditor.com/signup?campaign=pcdd26)
 
 ---
 
