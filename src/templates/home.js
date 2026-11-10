@@ -7,7 +7,7 @@ import { pageDescription, pageTitle } from '../utils/seo'
 import { sectionPath } from '../utils/paths'
 import { latestReleased } from '../utils/latest'
 
-const LATEST_COUNT = 3
+const LATEST_COUNT = 2
 
 const Home = ({ data, location }) => {
   // Upcoming talks (released after the build) are not "latest" yet. The build
@@ -15,6 +15,12 @@ const Home = ({ data, location }) => {
   const latestTalks = latestReleased(
     data.latestTalks.nodes,
     (talk) => talk.elements.release_date.value,
+    data.site.buildTime,
+    LATEST_COUNT
+  )
+  const latestProjects = latestReleased(
+    data.latestProjects.nodes,
+    (project) => project.elements.release_date.value,
     data.site.buildTime,
     LATEST_COUNT
   )
@@ -35,6 +41,12 @@ const Home = ({ data, location }) => {
           items={latestTalks}
           listingPath={sectionPath('talk')}
           listingLabel="All talks"
+        />
+        <LatestItems
+          title="Latest projects"
+          items={latestProjects}
+          listingPath={sectionPath('project')}
+          listingLabel="All projects"
         />
         <LatestItems
           title="Latest from the journal"
@@ -168,6 +180,45 @@ export const query = graphql`
         }
       }
     }
+    latestProjects: allKontentItemProject(
+      filter: {
+        preferred_language: { eq: $language }
+        elements: {
+          url_slug: { value: { ne: "" } }
+          channel_purpose: {
+            value: { elemMatch: { codename: { eq: "website" } } }
+          }
+        }
+      }
+      sort: { elements: { release_date: { value: DESC } } }
+    ) {
+      nodes {
+        __typename
+        system {
+          id
+          codename
+        }
+        elements {
+          title {
+            value
+          }
+          url_slug {
+            value
+          }
+          image {
+            value {
+              url
+            }
+          }
+          summary {
+            value
+          }
+          release_date {
+            value
+          }
+        }
+      }
+    }
     latestJournal: allKontentItemGotcha(
       filter: {
         preferred_language: { eq: $language }
@@ -179,7 +230,7 @@ export const query = graphql`
         }
       }
       sort: { elements: { post_date: { value: DESC } } }
-      limit: 3
+      limit: 2
     ) {
       nodes {
         __typename
