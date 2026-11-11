@@ -73,9 +73,9 @@ test('every listing highlight position up to 6 has an accent', () => {
   }
 })
 
-test('the See all link in a listing highlight is underlined', () => {
+test('the See all link uses the dotted link underline of the list', () => {
   assert.match(
     rulesFor('#wrapper .listing-highlights .listing-highlight-see-all a'),
-    /border-bottom: solid 1px currentColor/
+    /border-bottom: dotted 1px currentColor/
   )
 })

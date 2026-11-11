@@ -262,9 +262,9 @@ $listing-highlight-accents: (1: accent1, 2: accent2, 3: accent3, 4: accent4, 5: 
 		font-size: 0.9em;
 		margin: 0.5em 0 0 0;
 
-		// Underlined in the accent color, so it reads as a link
+		// The same dotted underline as the item links above, in the accent color
 		a {
-			border-bottom: solid 1px currentColor;
+			border-bottom: dotted 1px currentColor;
 			font-weight: 600;
 			padding-bottom: 1px;
 		}
