@@ -42,20 +42,33 @@ const paddingSelectors = () => {
   return out
 }
 
-// Copilot review on PR #69: the home page block padding lost to the generic
-// wrapper padding (`#wrapper > * > * > .inner`)
-test('home page latest-items padding outranks the generic wrapper inner padding', () => {
-  const selectors = paddingSelectors()
-  const generic = selectors.find((s) => s === '#wrapper > * > * > .inner')
-  assert.ok(generic, 'generic wrapper padding rule exists')
-  const own = selectors.filter(
-    (s) => s.includes('.latest-items') && /\.inner$/.test(s)
+// Listing highlights: the accent stripe sits on the text side. Odd positions
+// show the photo on the left (stripe right), even ones are reversed (stripe
+// left)
+const rulesFor = (selector) =>
+  [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+    .filter(([, selectors]) =>
+      selectors.split(',').some((s) => s.trim() === selector)
+    )
+    .map(([, , body]) => body)
+    .join(';')
+
+test('listing highlights keep the accent stripe on the text side', () => {
+  assert.match(
+    rulesFor('#wrapper .listing-highlights > section:nth-child(odd)'),
+    /border-right-style: solid/
   )
-  assert.ok(own.length > 0, 'latest-items sets its own .inner padding')
-  for (const selector of own) {
-    assert.ok(
-      compare(specificity(selector), specificity(generic)) > 0,
-      `${selector} must be more specific than ${generic}`
+  assert.match(
+    rulesFor('#wrapper .listing-highlights > section:nth-child(even)'),
+    /border-left-style: solid/
+  )
+})
+
+test('every listing highlight position up to 6 has an accent', () => {
+  for (let i = 1; i <= 6; i++) {
+    assert.match(
+      rulesFor(`#wrapper .listing-highlights > .listing-highlight-accent-${i}`),
+      /border-color:/
     )
   }
 })

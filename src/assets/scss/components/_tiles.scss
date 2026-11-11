@@ -205,25 +205,91 @@
 		}
 	}
 
-// Home page blocks of the newest items: heading, tiles, link to the listing.
-// Scoped under #wrapper to outrank the generic `#wrapper > * > * > .inner`
-// padding from layout/_wrapper.scss.
-#wrapper .latest-items {
-	border-top: solid 1px functions.palette(border);
+// Listing highlights (src/components/ListingHighlights.js), the home page
+// sections: one band per highlight, tinted with the accent of its position, a
+// stripe on the text side (odd positions: photo left, stripe right; even
+// positions: the spotlights row is reversed, photo right, stripe left), the
+// newest items as a short list with thumbnails
+$listing-highlight-accents: (1: accent1, 2: accent2, 3: accent3, 4: accent4, 5: accent5, 6: accent6);
 
-	> .inner {
-		margin: 0 auto;
-		max-width: functions.size(inner);
-		padding: 3em 0 1em 0;
-		width: calc(100% - 6em);
+#wrapper .listing-highlights {
+	@each $index, $accent in $listing-highlight-accents {
+		> .listing-highlight-accent-#{$index} {
+			background-color: color.mix(functions.palette($accent), functions.palette(bg-alt), 22%) !important;
+			border-color: functions.palette($accent);
 
-		@include skel.breakpoint(small) {
-			padding: 2em 0 0.5em 0;
-			width: calc(100% - 3em);
+			> .image:before {
+				background: functions.palette($accent);
+				opacity: 0.2;
+				transition: opacity 0.2s ease-in-out;
+				z-index: 1;
+			}
+
+			> .image:hover:before {
+				opacity: 0.1;
+			}
+
+			header.major h2:after {
+				background-color: functions.palette($accent);
+			}
+
+			.listing-highlight-see-all a {
+				color: functions.palette($accent);
+			}
 		}
 	}
 
-	> .inner + .tiles + .inner {
-		padding: 2em 0 3em 0;
+	> section:nth-child(odd) {
+		border-right-style: solid;
+		border-right-width: 6px;
+	}
+
+	> section:nth-child(even) {
+		border-left-style: solid;
+		border-left-width: 6px;
+	}
+
+	> section > .image {
+		overflow: hidden;
+	}
+
+	// Room under the "See all" link before the next band starts
+	> section > .content {
+		padding-bottom: 3em;
+	}
+
+	.listing-highlight-see-all {
+		font-size: 0.9em;
+		margin: 0.5em 0 0 0;
+
+		a {
+			border-bottom: 0;
+			font-weight: 600;
+		}
+	}
+
+	.listing-highlight-items {
+		list-style: none;
+		padding: 0;
+
+		li {
+			display: flex;
+			align-items: center;
+			gap: 1em;
+			padding: 0.75em 0;
+		}
+
+		.listing-highlight-thumb {
+			flex: 0 0 96px;
+			border-bottom: 0;
+
+			img {
+				display: block;
+				width: 96px;
+				height: 60px;
+				object-fit: cover;
+				border-radius: 4px;
+			}
+		}
 	}
 }

@@ -2,29 +2,24 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Banner from '../components/Banner'
-import LatestItems from '../components/LatestItems'
+import ListingHighlights from '../components/ListingHighlights'
 import { pageDescription, pageTitle } from '../utils/seo'
-import { sectionPath } from '../utils/paths'
-import { latestReleased } from '../utils/latest'
-
-const LATEST_COUNT = 2
+import { highlightsFrom } from '../utils/highlights'
 
 const Home = ({ data, location }) => {
-  // Upcoming talks (released after the build) are not "latest" yet. The build
-  // time keeps the static HTML and the hydrated page on the same selection.
-  const latestTalks = latestReleased(
-    data.latestTalks.nodes,
-    (talk) => talk.elements.release_date.value,
-    data.site.buildTime,
-    LATEST_COUNT
+  // Listing highlights come from the home page `sections` linked items in
+  // Kontent. Their items are the newest of the chosen types; upcoming ones
+  // (released after the build) are left out, and the build time keeps the
+  // static HTML and the hydrated page on the same selection.
+  const highlights = highlightsFrom(
+    data.kontentItemHomePage.elements.sections.value,
+    {
+      talk: data.allTalks.nodes,
+      project: data.allProjects.nodes,
+      gotcha: data.allJournal.nodes,
+    },
+    data.site.buildTime
   )
-  const latestProjects = latestReleased(
-    data.latestProjects.nodes,
-    (project) => project.elements.release_date.value,
-    data.site.buildTime,
-    LATEST_COUNT
-  )
-  const latestJournal = data.latestJournal.nodes.slice(0, LATEST_COUNT)
 
   return (
     <Layout
@@ -35,26 +30,7 @@ const Home = ({ data, location }) => {
       }}
     >
       <Banner data={data.kontentItemHomePage} />
-      <div className="latest">
-        <LatestItems
-          title="Latest talks"
-          items={latestTalks}
-          listingPath={sectionPath('talk')}
-          listingLabel="All talks"
-        />
-        <LatestItems
-          title="Latest projects"
-          items={latestProjects}
-          listingPath={sectionPath('project')}
-          listingLabel="All projects"
-        />
-        <LatestItems
-          title="Latest from the journal"
-          items={latestJournal}
-          listingPath={sectionPath('gotcha')}
-          listingLabel="All journal posts"
-        />
-      </div>
+      <ListingHighlights highlights={highlights} />
     </Layout>
   )
 }
@@ -92,6 +68,50 @@ export const query = graphql`
         }
         secondary_text {
           value
+        }
+        sections {
+          value {
+            __typename
+            ... on kontent_item_listing_highlight {
+              system {
+                codename
+              }
+              elements {
+                title {
+                  value
+                }
+                summary {
+                  value
+                }
+                image {
+                  value {
+                    url
+                    description
+                  }
+                }
+                item_types {
+                  value
+                }
+                item_count {
+                  value
+                }
+                link_label {
+                  value
+                }
+                link_target {
+                  value {
+                    ... on kontent_item_navigation_item {
+                      elements {
+                        slug {
+                          value
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
         cta {
           value {
@@ -141,7 +161,7 @@ export const query = graphql`
     site {
       buildTime
     }
-    latestTalks: allKontentItemTalk(
+    allTalks: allKontentItemTalk(
       filter: {
         preferred_language: { eq: $language }
         elements: {
@@ -180,7 +200,7 @@ export const query = graphql`
         }
       }
     }
-    latestProjects: allKontentItemProject(
+    allProjects: allKontentItemProject(
       filter: {
         preferred_language: { eq: $language }
         elements: {
@@ -219,7 +239,7 @@ export const query = graphql`
         }
       }
     }
-    latestJournal: allKontentItemGotcha(
+    allJournal: allKontentItemGotcha(
       filter: {
         preferred_language: { eq: $language }
         elements: {
@@ -230,7 +250,6 @@ export const query = graphql`
         }
       }
       sort: { elements: { post_date: { value: DESC } } }
-      limit: 2
     ) {
       nodes {
         __typename

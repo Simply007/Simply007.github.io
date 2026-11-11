@@ -33,7 +33,9 @@ test('collapses whitespace', () => {
 
 test('stripHtml applies normalization to inline markup', () => {
   assert.equal(
-    stripHtml('<p>When integrating <a href="#">CKEditor 5</a>, it’s tempting</p>'),
+    stripHtml(
+      '<p>When integrating <a href="#">CKEditor 5</a>, it’s tempting</p>'
+    ),
     'When integrating CKEditor 5, it’s tempting'
   )
 })
