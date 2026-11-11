@@ -41,6 +41,7 @@ Copy `.env.template` to `.env` and configure:
 - `src/templates/` - Page templates (home.js, sections-page.js, listing-page.js, journal-item.js, project-item.js, talk-item.js)
 - `src/components/layout.js` - Main layout wrapper (class component with sidebar menu state)
 - `src/components/RichText.js` - Rich text rendering with code highlighting and custom element resolvers
+- `src/components/RichTextImage.js` - Rich text images, wrapped in `<figure class="rich-text-image">` with a paragraph's bottom margin (Kontent's own figure markup is dropped by the renderer)
 - `src/utils/paths.js` - Single source of truth for section URLs (see below)
 - `src/utils/seo.js` - Site constants, author profile, page descriptions, full page title overrides (`PAGE_TITLES`, passed as `seo.fullTitle`, used without the " | <site title>" suffix), text normalization for meta tags
 - `lib/` - Builders for `robots.txt`, `llms.txt`, `llms-full.txt` and the rich text to markdown export (run in `gatsby-node.js` `onPostBuild`)
