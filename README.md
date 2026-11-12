@@ -44,6 +44,7 @@ You could find out the style guide on:
 * [/styleguide/generic](https://ondrej.chrastina.dev/style-guide/generic) - generic page showcase
 * [/styleguide/landing](https://ondrej.chrastina.dev/style-guide/landing) - landing page showcase
 * [/styleguide/sections](https://ondrej.chrastina.dev/style-guide/sections) - sections page showcase
+* [/style-guide/listing-highlights](https://ondrej.chrastina.dev/style-guide/listing-highlights) - listing highlights showcase (the home page sections "I speak", "I Code", "I write" with sample items)
 
 ## Connect to your own project
 

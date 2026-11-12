@@ -67,6 +67,28 @@ exports.createSchemaCustomization = async (api) => {
   })
 
   createTypes(extendedType)
+
+  // Listing highlight (home page sections) declared here as well: the Kontent
+  // source plugin builds its types from a cached list of content types, so a
+  // stale build cache (Netlify keeps one between deploys) would not know the
+  // type and the home page query would fail. Gatsby merges this definition
+  // with the plugin's own when both exist.
+  createTypes(`
+    type kontent_item_listing_highlight_elements {
+      title: kontent_item_text_element_value
+      summary: kontent_item_text_element_value
+      image: kontent_item_asset_element_value
+      item_types: kontent_item_custom_element_value
+      item_count: kontent_item_number_element_value
+      link_label: kontent_item_text_element_value
+      link_target: kontent_item_modular_content_element_value
+    }
+    type kontent_item_listing_highlight implements Node & kontent_item @dontInfer {
+      system: kontent_item_system!
+      elements: kontent_item_listing_highlight_elements
+      preferred_language: String!
+    }
+  `)
 }
 
 exports.createPages = async ({ graphql, actions }) => {

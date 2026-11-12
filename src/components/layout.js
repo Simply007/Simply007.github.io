@@ -228,9 +228,10 @@ class DefaultLayout extends React.Component {
             const seo = this.props.seo || {}
             const siteUrl = get(data, 'site.siteMetadata.siteUrl')
             const defaultTitle = otherData.title.value
-            const title = seo.title
-              ? `${seo.title} | ${defaultTitle}`
-              : defaultTitle
+            // fullTitle is used as is; title gets the site title suffix
+            const title =
+              seo.fullTitle ||
+              (seo.title ? `${seo.title} | ${defaultTitle}` : defaultTitle)
             const description =
               seo.description || otherData.meta_description.value
             const canonicalUrl = `${siteUrl}${seo.path || '/'}`
