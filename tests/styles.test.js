@@ -79,3 +79,11 @@ test('the See all link uses the dotted link underline of the list', () => {
     /border-bottom: dotted 1px currentColor/
   )
 })
+
+test('talk recording embeds keep a 16:9 box with a full-size iframe', () => {
+  assert.match(css, /#wrapper \.video-embed \{[^}]*aspect-ratio: 16\s*\/\s*9/)
+  assert.match(
+    css,
+    /#wrapper \.video-embed iframe \{[^}]*width: 100%;[^}]*height: 100%/
+  )
+})

@@ -5,6 +5,7 @@ import BannerLanding from '../components/BannerLanding'
 import RichText from '../components/RichText'
 import { SITE_URL, PERSON_ID, stripHtml } from '../utils/seo'
 import { sectionPath } from '../utils/paths'
+import { youtubeEmbedUrl } from '../utils/video'
 
 const TalkItem = ({ data: { kontentItemTalk }, location }) => {
   const elements = kontentItemTalk.elements
@@ -12,6 +13,7 @@ const TalkItem = ({ data: { kontentItemTalk }, location }) => {
   const image =
     elements.image.value.length > 0 ? elements.image.value[0] : undefined
   const canonicalUrl = `${SITE_URL}${location.pathname}`
+  const embedUrl = youtubeEmbedUrl(elements.recording_url.value)
   return (
     <Layout
       seo={{
@@ -104,6 +106,25 @@ const TalkItem = ({ data: { kontentItemTalk }, location }) => {
             )}
           </div>
         </section>
+        {embedUrl && (
+          <section>
+            <div
+              className="inner"
+              data-kontent-element-codename="recording_url"
+            >
+              <div className="video-embed">
+                <iframe
+                  src={embedUrl}
+                  title={`Recording: ${elements.title.value}`}
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </section>
+        )}
         <section>
           <div className="inner" data-kontent-element-codename="content">
             <RichText element={kontentItemTalk.elements.content} />
