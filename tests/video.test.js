@@ -24,10 +24,25 @@ test('non-YouTube or malformed recordings get no embed', () => {
     undefined,
     'not a url',
     'https://vimeo.com/123456',
-    'https://www.youtube.com/playlist?list=PLZ9F0R17Zg3NafacHVuYqghN3ikNMgoMs',
+    'https://www.youtube.com/playlist',
+    'https://www.youtube.com/playlist?list=x',
+    'https://evil.example/playlist?list=PLZ9F0R17Zg3NafacHVuYqghN3ikNMgoMs',
     'https://www.youtube.com/watch?v=short',
     'https://evil.example/watch?v=0TcuEyjwlQE',
   ]) {
     assert.equal(youtubeEmbedUrl(url), null, String(url))
+  }
+})
+
+test('playlist URLs map to the videoseries embed URL', () => {
+  for (const url of [
+    'https://youtube.com/playlist?list=PLZ9F0R17Zg3NafacHVuYqghN3ikNMgoMs',
+    'https://www.youtube.com/playlist?list=PLZ9F0R17Zg3NafacHVuYqghN3ikNMgoMs&si=abc',
+  ]) {
+    assert.equal(
+      youtubeEmbedUrl(url),
+      'https://www.youtube-nocookie.com/embed/videoseries?list=PLZ9F0R17Zg3NafacHVuYqghN3ikNMgoMs',
+      url
+    )
   }
 })
