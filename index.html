@@ -15,7 +15,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chrastina.dev/" />
     <meta property="og:site_name" content="chrastina.dev" />
-    <meta property="og:title" content="chrastina.dev | Sites and projects on the domain" />
+    <meta
+      property="og:title"
+      content="chrastina.dev | Sites and projects on the domain"
+    />
     <meta
       property="og:description"
       content="A guidepost to the websites and projects on chrastina.dev."
@@ -37,7 +40,9 @@
             "@id": "https://chrastina.dev/#webpage",
             "url": "https://chrastina.dev/",
             "name": "chrastina.dev | Sites and projects on the domain",
-            "isPartOf": { "@id": "https://chrastina.dev/#website" },
+            "isPartOf": {
+              "@id": "https://chrastina.dev/#website"
+            },
             "mainEntity": {
               "@type": "ItemList",
               "itemListElement": [
@@ -52,6 +57,120 @@
                   "position": 2,
                   "url": "https://dev-relations.com/",
                   "name": "dev-relations.com"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "url": "https://chrastina.dev/ckeditor-shadow-showcase/",
+                  "name": "ckeditor-shadow-showcase"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "url": "https://chrastina.dev/ckeditor5-code-block-syntax-highlight/",
+                  "name": "ckeditor5-code-block-syntax-highlight"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 5,
+                  "url": "https://chrastina.dev/smart-link/",
+                  "name": "smart-link"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 6,
+                  "url": "https://chrastina.dev/os-guidelines/",
+                  "name": "os-guidelines"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 7,
+                  "url": "https://chrastina.dev/kontent-custom-element-samples/",
+                  "name": "kontent-custom-element-samples"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 8,
+                  "url": "https://chrastina.dev/kk_youtube/",
+                  "name": "kk_youtube"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 9,
+                  "url": "https://chrastina.dev/kontent-environments-comparer/",
+                  "name": "kontent-environments-comparer"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 10,
+                  "url": "https://chrastina.dev/kontent-custom-element-toast-ui-editor/",
+                  "name": "kontent-custom-element-toast-ui-editor"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 11,
+                  "url": "https://chrastina.dev/Home/",
+                  "name": "Home"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 12,
+                  "url": "https://chrastina.dev/gatsby-preview-custom-element/",
+                  "name": "gatsby-preview-custom-element"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 13,
+                  "url": "https://chrastina.dev/statiq-starter-kontent-lumen/",
+                  "name": "statiq-starter-kontent-lumen"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 14,
+                  "url": "https://chrastina.dev/kontent-sample-app-total-content-items/",
+                  "name": "kontent-sample-app-total-content-items"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 15,
+                  "url": "https://chrastina.dev/kontent-custom-preview-url/",
+                  "name": "kontent-custom-preview-url"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 16,
+                  "url": "https://chrastina.dev/kontent-statiq-benchmark/",
+                  "name": "kontent-statiq-benchmark"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 17,
+                  "url": "https://chrastina.dev/SimplyUpForGrabs/",
+                  "name": "SimplyUpForGrabs"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 18,
+                  "url": "https://chrastina.dev/kc-custom-element-setup/",
+                  "name": "kc-custom-element-setup"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 19,
+                  "url": "https://chrastina.dev/auction-gallery/",
+                  "name": "auction-gallery"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 20,
+                  "url": "https://chrastina.dev/hacktoberfest-event-brno-2018/",
+                  "name": "hacktoberfest-event-brno-2018"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 21,
+                  "url": "https://chrastina.dev/ReactiveConfPrague2018/",
+                  "name": "ReactiveConfPrague2018"
                 }
               ]
             }
@@ -69,6 +188,7 @@
         --border: #e5e1da;
         --accent: #c2410c;
         --accent-soft: #fff1e8;
+        --on-accent: #ffffff;
       }
       @media (prefers-color-scheme: dark) {
         :root {
@@ -79,6 +199,7 @@
           --border: #2c313a;
           --accent: #fb923c;
           --accent-soft: #2a1d14;
+          --on-accent: #1a1006;
         }
       }
       * {
@@ -94,13 +215,18 @@
         flex-direction: column;
         background: var(--bg);
         color: var(--text);
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
         line-height: 1.6;
       }
       main {
         flex: 1;
         width: 100%;
-        max-width: 44rem;
+        max-width: 52rem;
         margin: 0 auto;
         padding: 4.5rem 1rem 3rem;
       }
@@ -114,7 +240,7 @@
       }
       h1 {
         margin: 0 0 1rem;
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: Georgia, "Times New Roman", serif;
         font-size: clamp(2.4rem, 7vw, 3.4rem);
         line-height: 1.1;
       }
@@ -169,13 +295,127 @@
         font-weight: 650;
       }
       .card-title::after {
-        content: ' →';
+        content: " →";
         color: var(--accent);
       }
       .card-text {
         display: block;
         margin-top: 0.25rem;
         color: var(--muted);
+      }
+      h2 {
+        margin: 0 0 0.75rem;
+        font-size: 1.15rem;
+      }
+      section {
+        margin-top: 3rem;
+      }
+      .section-text {
+        margin: -0.25rem 0 1rem;
+        color: var(--muted);
+      }
+      .section-text a {
+        color: var(--accent);
+      }
+      .featured {
+        display: block;
+        padding: 1.75rem 1.75rem 1.5rem;
+        border-radius: 18px;
+        background: var(--accent);
+        color: var(--on-accent);
+        text-decoration: none;
+        box-shadow: 0 10px 30px -12px var(--accent);
+        transition: transform 0.15s;
+      }
+      .featured:hover,
+      .featured:focus-visible {
+        transform: translateY(-3px);
+      }
+      .featured:focus-visible {
+        outline: 3px solid var(--text);
+        outline-offset: 3px;
+      }
+      .featured-label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.85;
+      }
+      .featured-title {
+        display: block;
+        margin: 0.3rem 0 0.4rem;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.7rem, 5vw, 2.3rem);
+        font-weight: 700;
+        line-height: 1.15;
+        overflow-wrap: anywhere;
+      }
+      .featured-text {
+        display: block;
+        font-size: 1.05rem;
+        opacity: 0.92;
+      }
+      .featured-cta {
+        display: inline-block;
+        margin-top: 1.1rem;
+        padding: 0.45rem 0.95rem;
+        border-radius: 999px;
+        background: var(--on-accent);
+        color: var(--accent);
+        font-weight: 650;
+      }
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+        gap: 0.75rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .project {
+        display: block;
+        height: 100%;
+        padding: 0.85rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--surface);
+        color: inherit;
+        text-decoration: none;
+        transition: border-color 0.15s;
+      }
+      .project:hover,
+      .project:focus-visible {
+        border-color: var(--accent);
+      }
+      .project:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .project-name {
+        display: block;
+        font-weight: 650;
+        overflow-wrap: anywhere;
+      }
+      .project-text {
+        display: -webkit-box;
+        margin-top: 0.2rem;
+        overflow: hidden;
+        color: var(--muted);
+        font-size: 0.9rem;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+      }
+      .tag {
+        margin-left: 0.4rem;
+        padding: 0.05rem 0.45rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.7rem;
+        font-weight: 600;
+        vertical-align: 0.1em;
       }
       footer {
         padding: 1.5rem 1rem;
@@ -191,32 +431,271 @@
       <p class="eyebrow">Landing page</p>
       <h1>chrastina.dev</h1>
       <p class="lead">
-        Welcome to chrastina.dev. This page is a guidepost: pick where you
-        want to go next.
+        Welcome to chrastina.dev. This page is a guidepost: pick where you want
+        to go next.
       </p>
 
-      <ul class="links">
-        <li>
-          <a class="card" href="https://ondrej.chrastina.dev/">
-            <span class="card-label">Main website</span>
-            <span class="card-title">ondrej.chrastina.dev</span>
-            <span class="card-text"
-              >Talks, demo projects and articles on developer relations,
-              content editing and AI.</span
+      <a class="featured" href="https://ondrej.chrastina.dev/">
+        <span class="featured-label">Main website</span>
+        <span class="featured-title">ondrej.chrastina.dev</span>
+        <span class="featured-text"
+          >Talks, demo projects and articles on developer relations, content
+          editing and AI.</span
+        >
+        <span class="featured-cta">Visit the website →</span>
+      </a>
+
+      <section aria-labelledby="sites">
+        <h2 id="sites">Related sites</h2>
+        <ul class="links">
+          <li>
+            <a class="card" href="https://dev-relations.com/">
+              <span class="card-label">Dev Relations</span>
+              <span class="card-title">dev-relations.com</span>
+              <span class="card-text"
+                >A space for developers to share knowledge, learn and
+                connect.</span
+              >
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="projects">
+        <h2 id="projects">Project websites</h2>
+        <p class="section-text">
+          Demos, tools and workshops published with GitHub Pages from the
+          <a href="https://github.com/Simply007">Simply007</a> repositories,
+          most recently updated first.
+        </p>
+        <ul class="projects">
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/ckeditor-shadow-showcase/"
             >
-          </a>
-        </li>
-        <li>
-          <a class="card" href="https://dev-relations.com/">
-            <span class="card-label">Dev Relations</span>
-            <span class="card-title">dev-relations.com</span>
-            <span class="card-text"
-              >A space for developers to share knowledge, learn and
-              connect.</span
+              <span class="project-name">ckeditor-shadow-showcase</span>
+              <span class="project-text"
+                >CKEditor 5 v49 in a Shadow DOM vs. light DOM — three style
+                levels (surroundings, editor theme, content styles),
+                WCAG-audited themes, Salesforce Visualforce recipe</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/ckeditor5-code-block-syntax-highlight/"
             >
-          </a>
-        </li>
-      </ul>
+              <span class="project-name"
+                >ckeditor5-code-block-syntax-highlight</span
+              >
+              <span class="project-text"
+                >Live syntax highlighting for CKEditor 5 code blocks via the CSS
+                Custom Highlight API</span
+              >
+            </a>
+          </li>
+          <li>
+            <a class="project" href="https://chrastina.dev/smart-link/">
+              <span class="project-name"
+                >smart-link<span class="tag">Fork</span></span
+              >
+              <span class="project-text"
+                >Kontent.ai Smart Link SDK can be used to automatically inject
+                smart links to Kontent.ai according to manually specified HTML
+                data attributes on your website. It also lets you connect your
+                website with Live Preview(for faster editing and preview of your
+                content).</span
+              >
+            </a>
+          </li>
+          <li>
+            <a class="project" href="https://chrastina.dev/os-guidelines/">
+              <span class="project-name">os-guidelines</span>
+              <span class="project-text"
+                >Welcome to the General OS Guidelines template! You can find
+                some useful guidelines here that might help you get your OS
+                project right.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/kontent-custom-element-samples/"
+            >
+              <span class="project-name"
+                >kontent-custom-element-samples<span class="tag">Fork</span
+                ><span class="tag">Archived</span></span
+              >
+              <span class="project-text"
+                >Gallery of custom elements for Kentico Kontent</span
+              >
+            </a>
+          </li>
+          <li>
+            <a class="project" href="https://chrastina.dev/kk_youtube/">
+              <span class="project-name"
+                >kk_youtube<span class="tag">Fork</span></span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/kontent-environments-comparer/"
+            >
+              <span class="project-name">kontent-environments-comparer</span>
+              <span class="project-text"
+                >Compares 2 environments of the Kontent.ai CMS.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/kontent-custom-element-toast-ui-editor/"
+            >
+              <span class="project-name"
+                >kontent-custom-element-toast-ui-editor</span
+              >
+              <span class="project-text"
+                >Toast UI editor wrapped as a custom element for
+                Kontent.ai.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a class="project" href="https://chrastina.dev/Home/">
+              <span class="project-name"
+                >Home<span class="tag">Fork</span></span
+              >
+              <span class="project-text"
+                >Welcome to the world of Kentico open source software. This is
+                the home repository where you can get up to speed in minutes.
+                Before you start use any of our software or contribute, read
+                this short guide to save you some time and trouble.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/gatsby-preview-custom-element/"
+            >
+              <span class="project-name">gatsby-preview-custom-element</span>
+              <span class="project-text"
+                >Custom element allows to subscribe for Gatsby preview
+                functionality</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/statiq-starter-kontent-lumen/"
+            >
+              <span class="project-name"
+                >statiq-starter-kontent-lumen<span class="tag">Fork</span></span
+              >
+              <span class="project-text"
+                >Lumen is a minimal, lightweight, and mobile-first starter for
+                creating blogs using Statiq and Kentico Kontent.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/kontent-sample-app-total-content-items/"
+            >
+              <span class="project-name"
+                >kontent-sample-app-total-content-items</span
+              >
+              <span class="project-text"
+                >This tool is able to get the total items count from the Kentico
+                Kontent CaaS.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/kontent-custom-preview-url/"
+            >
+              <span class="project-name">kontent-custom-preview-url</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/kontent-statiq-benchmark/"
+            >
+              <span class="project-name">kontent-statiq-benchmark</span>
+              <span class="project-text"
+                >Benchmark for Kontent and Statiq. Alternation of Gatsby
+                willit.build for Statiq.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a class="project" href="https://chrastina.dev/SimplyUpForGrabs/">
+              <span class="project-name"
+                >SimplyUpForGrabs<span class="tag">Fork</span></span
+              >
+              <span class="project-text">Jump in!</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/kc-custom-element-setup/"
+            >
+              <span class="project-name">kc-custom-element-setup</span>
+              <span class="project-text"
+                >Codebase for workshop, how to create custom element.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a class="project" href="https://chrastina.dev/auction-gallery/">
+              <span class="project-name"
+                >auction-gallery<span class="tag">Fork</span></span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/hacktoberfest-event-brno-2018/"
+            >
+              <span class="project-name"
+                >hacktoberfest-event-brno-2018<span class="tag"
+                  >Fork</span
+                ></span
+              >
+              <span class="project-text"
+                >This repository is used to show beginners, how to contribute to
+                the open source project in the Hacktoberfest Event 2018 held
+                18/10/2018 in Brno in Kentico offices.</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              class="project"
+              href="https://chrastina.dev/ReactiveConfPrague2018/"
+            >
+              <span class="project-name">ReactiveConfPrague2018</span>
+              <span class="project-text"
+                >Repository containing experience from Reactive Conference in
+                Prague held in 2018-10-29</span
+              >
+            </a>
+          </li>
+        </ul>
+      </section>
     </main>
     <footer>© 2026 chrastina.dev</footer>
   </body>

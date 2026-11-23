@@ -2,8 +2,11 @@
 
 The landing page for [chrastina.dev](https://chrastina.dev/). It points visitors to:
 
-- **[ondrej.chrastina.dev](https://ondrej.chrastina.dev/)**, the main website with talks, projects and articles ([source](https://github.com/Simply007/Simply007.github.io))
+- **[ondrej.chrastina.dev](https://ondrej.chrastina.dev/)**, the main website with talks, projects and articles ([source](https://github.com/Simply007/ondrej.chrastina.dev)), shown as the featured card
 - **[dev-relations.com](https://dev-relations.com/)**, a space for developers to share knowledge and connect
+- **Project websites**: every Simply007 repo with GitHub Pages and no custom domain of its own
+
+This repo is the GitHub **user site** (`Simply007.github.io`). GitHub Pages serves every other Simply007 repo with Pages under the user site's domain, so they all live at `https://chrastina.dev/<repo>/`. Until November 2026 the user site was the personal website and they lived at `ondrej.chrastina.dev/<repo>/`; that site now redirects those old URLs here.
 
 ## Why this page exists
 
@@ -38,6 +41,17 @@ python3 -m http.server 8000
 3. Commit and push to `main`. GitHub Pages deploys within a minute or two.
 
 Keep the page about the domain, not about a person: the title, description, Open Graph tags and JSON-LD describe `chrastina.dev` as a guidepost. When you add or remove a site, update both the card in the page and the JSON-LD `ItemList`. The canonical URL stays `https://chrastina.dev/`.
+
+### Project websites
+
+The list is static HTML, ordered by last push, with **Fork** and **Archived** tags, and descriptions taken from GitHub. When a repo turns GitHub Pages on or off, update the list and the `ItemList`. To see which repos have Pages:
+
+```bash
+gh api --paginate 'user/repos?affiliation=owner&per_page=100' \
+  --jq '.[] | select(.has_pages) | .name'
+```
+
+A repo that moves off this domain (gets a custom domain or turns Pages off) also needs its entry removed from `src/utils/legacy-redirects.js` in the [personal website](https://github.com/Simply007/ondrej.chrastina.dev), or the old URL keeps redirecting to a dead page.
 
 ## Hosting and DNS
 
