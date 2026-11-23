@@ -22,6 +22,9 @@ There's no build step. GitHub Pages serves the files as they are.
 | `favicon.svg` | Browser tab icon |
 | `robots.txt` | Allows all crawlers and points to the sitemap |
 | `sitemap.xml` | Lists the one URL with its `lastmod` date |
+| `scripts/update-projects.mjs` | Regenerates the project websites list |
+| `projects-exclude.json` | Repos to leave out of the list |
+| `.github/workflows/update-projects.yml` | Runs the script weekly and commits changes |
 | `CNAME` | Custom domain for GitHub Pages (`chrastina.dev`) |
 | `.nojekyll` | Tells GitHub Pages to skip Jekyll and serve the files as they are |
 
@@ -44,11 +47,16 @@ Keep the page about the domain, not about a person: the title, description, Open
 
 ### Project websites
 
-The list is static HTML, ordered by last push, with **Fork** and **Archived** tags, and descriptions taken from GitHub. When a repo turns GitHub Pages on or off, update the list and the `ItemList`. To see which repos have Pages:
+The list between `<!-- projects:start -->` and `<!-- projects:end -->` in `index.html` is generated, so don't edit it by hand. `scripts/update-projects.mjs` takes every Simply007 repo with GitHub Pages, keeps the ones that answer 200 at `https://chrastina.dev/<repo>/` (a repo with its own custom domain answers with a redirect instead), sorts them by last push and writes them with their GitHub description and **Fork** / **Archived** tags. It also rewrites the JSON-LD `ItemList` (sites off this domain stay first) and, when anything changed, the sitemap `lastmod`.
+
+The workflow `.github/workflows/update-projects.yml` runs it every Monday at 06:00 UTC, on manual dispatch (Actions → Update project websites → Run workflow), and when the script or the exclude list changes. It commits only when the list changed.
+
+To hide a repo, add its name to `projects-exclude.json`, for example `["Home", "SimplyUpForGrabs"]`. To change a description, edit it on the repo in GitHub; the next run picks it up.
+
+Run it locally:
 
 ```bash
-gh api --paginate 'user/repos?affiliation=owner&per_page=100' \
-  --jq '.[] | select(.has_pages) | .name'
+GITHUB_TOKEN=$(gh auth token) node scripts/update-projects.mjs
 ```
 
 A repo that moves off this domain (gets a custom domain or turns Pages off) also needs its entry removed from `src/utils/legacy-redirects.js` in the [personal website](https://github.com/Simply007/ondrej.chrastina.dev), or the old URL keeps redirecting to a dead page.
