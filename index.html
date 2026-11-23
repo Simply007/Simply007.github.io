@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chrastina | Ondřej Chrastina, Developer Advocate</title>
+    <meta
+      name="description"
+      content="chrastina.dev is the home of Ondřej Chrastina, Developer Advocate based in Brno. Find his main website with talks, projects and articles, and Dev Relations."
+    />
+    <link rel="canonical" href="https://chrastina.dev/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="color-scheme" content="light dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chrastina.dev/" />
+    <meta property="og:title" content="Chrastina | Ondřej Chrastina, Developer Advocate" />
+    <meta
+      property="og:description"
+      content="The home of Ondřej Chrastina, Developer Advocate based in Brno. Talks, projects, articles and Dev Relations."
+    />
+    <meta
+      property="og:image"
+      content="https://assets-eu-01.kc-usercontent.com/6aec6c2a-3010-01c9-8295-4d988333f15d/8eff9399-d66c-415f-a343-5c17cad17e63/website-icon.png"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://chrastina.dev/#website",
+            "url": "https://chrastina.dev/",
+            "name": "Chrastina",
+            "inLanguage": "en",
+            "about": { "@id": "https://ondrej.chrastina.dev/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://ondrej.chrastina.dev/#person",
+            "name": "Ondřej Chrastina",
+            "url": "https://ondrej.chrastina.dev/",
+            "jobTitle": "Developer Advocate",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Brno",
+              "addressCountry": "CZ"
+            },
+            "sameAs": ["https://github.com/Simply007"]
+          }
+        ]
+      }
+    </script>
+
+    <style>
+      :root {
+        --bg: #f7f5f2;
+        --surface: #ffffff;
+        --text: #1f2937;
+        --muted: #5b6472;
+        --border: #e5e1da;
+        --accent: #c2410c;
+        --accent-soft: #fff1e8;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #14161a;
+          --surface: #1c1f25;
+          --text: #eceef1;
+          --muted: #a1a8b3;
+          --border: #2c313a;
+          --accent: #fb923c;
+          --accent-soft: #2a1d14;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+      }
+      main {
+        flex: 1;
+        width: 100%;
+        max-width: 44rem;
+        margin: 0 auto;
+        padding: 4.5rem 1rem 3rem;
+      }
+      .eyebrow {
+        margin: 0 0 0.75rem;
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0 0 1rem;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(2.4rem, 7vw, 3.4rem);
+        line-height: 1.1;
+      }
+      .lead {
+        margin: 0 0 2.5rem;
+        color: var(--muted);
+        font-size: 1.15rem;
+      }
+      .links {
+        display: grid;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .card {
+        display: block;
+        padding: 1.25rem 1.4rem;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--surface);
+        color: inherit;
+        text-decoration: none;
+        transition:
+          border-color 0.15s,
+          transform 0.15s;
+      }
+      .card:hover,
+      .card:focus-visible {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .card:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .card-label {
+        display: inline-block;
+        margin-bottom: 0.4rem;
+        padding: 0.1rem 0.55rem;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .card-title {
+        display: block;
+        font-size: 1.25rem;
+        font-weight: 650;
+      }
+      .card-title::after {
+        content: ' →';
+        color: var(--accent);
+      }
+      .card-text {
+        display: block;
+        margin-top: 0.25rem;
+        color: var(--muted);
+      }
+      section {
+        margin-top: 3rem;
+      }
+      h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1.1rem;
+      }
+      section p {
+        margin: 0;
+        color: var(--muted);
+      }
+      section a {
+        color: var(--accent);
+      }
+      footer {
+        padding: 1.5rem 1rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      footer a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">chrastina.dev</p>
+      <h1>Chrastina</h1>
+      <p class="lead">
+        This is the home domain of Ondřej Chrastina, a Developer Advocate based
+        in Brno, Czech Republic. He works on rich text editing, content
+        management, AI coding agents and developer experience.
+      </p>
+
+      <ul class="links">
+        <li>
+          <a class="card" href="https://ondrej.chrastina.dev/">
+            <span class="card-label">Main website</span>
+            <span class="card-title">ondrej.chrastina.dev</span>
+            <span class="card-text"
+              >Talks, demo projects and articles, plus how to get in
+              touch.</span
+            >
+          </a>
+        </li>
+        <li>
+          <a class="card" href="https://dev-relations.com/">
+            <span class="card-label">Dev Relations</span>
+            <span class="card-title">dev-relations.com</span>
+            <span class="card-text"
+              >A space for developers to share knowledge, learn and
+              connect.</span
+            >
+          </a>
+        </li>
+      </ul>
+
+      <section>
+        <h2>Quick links</h2>
+        <p>
+          <a href="https://ondrej.chrastina.dev/talks/">Talks</a> ·
+          <a href="https://ondrej.chrastina.dev/projects/">Projects</a> ·
+          <a href="https://ondrej.chrastina.dev/journal/">Journal</a> ·
+          <a href="https://github.com/Simply007">GitHub</a>
+        </p>
+      </section>
+    </main>
+    <footer>
+      © 2026 Ondřej Chrastina ·
+      <a href="https://ondrej.chrastina.dev/">ondrej.chrastina.dev</a>
+    </footer>
+  </body>
+</html>
