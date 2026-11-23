@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Chrastina | Ondřej Chrastina, Developer Advocate</title>
+    <title>chrastina.dev | Sites and projects on the domain</title>
     <meta
       name="description"
-      content="chrastina.dev is the home of Ondřej Chrastina, Developer Advocate based in Brno. Find his main website with talks, projects and articles, and Dev Relations."
+      content="chrastina.dev is the landing page of the domain: a guidepost to the websites and projects hosted on it and related to it."
     />
     <link rel="canonical" href="https://chrastina.dev/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -14,14 +14,11 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chrastina.dev/" />
-    <meta property="og:title" content="Chrastina | Ondřej Chrastina, Developer Advocate" />
+    <meta property="og:site_name" content="chrastina.dev" />
+    <meta property="og:title" content="chrastina.dev | Sites and projects on the domain" />
     <meta
       property="og:description"
-      content="The home of Ondřej Chrastina, Developer Advocate based in Brno. Talks, projects, articles and Dev Relations."
-    />
-    <meta
-      property="og:image"
-      content="https://assets-eu-01.kc-usercontent.com/6aec6c2a-3010-01c9-8295-4d988333f15d/8eff9399-d66c-415f-a343-5c17cad17e63/website-icon.png"
+      content="A guidepost to the websites and projects on chrastina.dev."
     />
 
     <script type="application/ld+json">
@@ -32,22 +29,32 @@
             "@type": "WebSite",
             "@id": "https://chrastina.dev/#website",
             "url": "https://chrastina.dev/",
-            "name": "Chrastina",
-            "inLanguage": "en",
-            "about": { "@id": "https://ondrej.chrastina.dev/#person" }
+            "name": "chrastina.dev",
+            "inLanguage": "en"
           },
           {
-            "@type": "Person",
-            "@id": "https://ondrej.chrastina.dev/#person",
-            "name": "Ondřej Chrastina",
-            "url": "https://ondrej.chrastina.dev/",
-            "jobTitle": "Developer Advocate",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Brno",
-              "addressCountry": "CZ"
-            },
-            "sameAs": ["https://github.com/Simply007"]
+            "@type": "WebPage",
+            "@id": "https://chrastina.dev/#webpage",
+            "url": "https://chrastina.dev/",
+            "name": "chrastina.dev | Sites and projects on the domain",
+            "isPartOf": { "@id": "https://chrastina.dev/#website" },
+            "mainEntity": {
+              "@type": "ItemList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "url": "https://ondrej.chrastina.dev/",
+                  "name": "ondrej.chrastina.dev"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "url": "https://dev-relations.com/",
+                  "name": "dev-relations.com"
+                }
+              ]
+            }
           }
         ]
       }
@@ -170,20 +177,6 @@
         margin-top: 0.25rem;
         color: var(--muted);
       }
-      section {
-        margin-top: 3rem;
-      }
-      h2 {
-        margin: 0 0 0.5rem;
-        font-size: 1.1rem;
-      }
-      section p {
-        margin: 0;
-        color: var(--muted);
-      }
-      section a {
-        color: var(--accent);
-      }
       footer {
         padding: 1.5rem 1rem;
         border-top: 1px solid var(--border);
@@ -191,19 +184,15 @@
         font-size: 0.9rem;
         text-align: center;
       }
-      footer a {
-        color: inherit;
-      }
     </style>
   </head>
   <body>
     <main>
-      <p class="eyebrow">chrastina.dev</p>
-      <h1>Chrastina</h1>
+      <p class="eyebrow">Landing page</p>
+      <h1>chrastina.dev</h1>
       <p class="lead">
-        This is the home domain of Ondřej Chrastina, a Developer Advocate based
-        in Brno, Czech Republic. He works on rich text editing, content
-        management, AI coding agents and developer experience.
+        Welcome to chrastina.dev. This page is a guidepost: pick where you
+        want to go next.
       </p>
 
       <ul class="links">
@@ -212,8 +201,8 @@
             <span class="card-label">Main website</span>
             <span class="card-title">ondrej.chrastina.dev</span>
             <span class="card-text"
-              >Talks, demo projects and articles, plus how to get in
-              touch.</span
+              >Talks, demo projects and articles on developer relations,
+              content editing and AI.</span
             >
           </a>
         </li>
@@ -228,20 +217,7 @@
           </a>
         </li>
       </ul>
-
-      <section>
-        <h2>Quick links</h2>
-        <p>
-          <a href="https://ondrej.chrastina.dev/talks/">Talks</a> ·
-          <a href="https://ondrej.chrastina.dev/projects/">Projects</a> ·
-          <a href="https://ondrej.chrastina.dev/journal/">Journal</a> ·
-          <a href="https://github.com/Simply007">GitHub</a>
-        </p>
-      </section>
     </main>
-    <footer>
-      © 2026 Ondřej Chrastina ·
-      <a href="https://ondrej.chrastina.dev/">ondrej.chrastina.dev</a>
-    </footer>
+    <footer>© 2026 chrastina.dev</footer>
   </body>
 </html>

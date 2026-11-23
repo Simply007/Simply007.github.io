@@ -37,10 +37,7 @@ python3 -m http.server 8000
 2. If the content changed, set `<lastmod>` in `sitemap.xml` to today's date.
 3. Commit and push to `main`. GitHub Pages deploys within a minute or two.
 
-Keep these consistent with the main website:
-
-- The JSON-LD `Person` uses `@id` `https://ondrej.chrastina.dev/#person`, the same node id the main site uses, so search engines treat both as the same person.
-- The canonical URL stays `https://chrastina.dev/`.
+Keep the page about the domain, not about a person: the title, description, Open Graph tags and JSON-LD describe `chrastina.dev` as a guidepost. When you add or remove a site, update both the card in the page and the JSON-LD `ItemList`. The canonical URL stays `https://chrastina.dev/`.
 
 ## Hosting and DNS
 
